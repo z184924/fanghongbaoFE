@@ -1,0 +1,191 @@
+$a: rgb(194, 55, 55);
+@import url("https://at.alicdn.com/t/font_695612_yjzex4ndxh2maemi.css");
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-width: 1300px;
+  font-size: 10px;
+  color: #000;
+  background-color: #E9ECF3;
+  font-family: "微软雅黑", Arial, sans-serif;
+  overflow: hidden;
+}
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .25s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+.xc-flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+
+iframe {
+  display: block;
+}
+
+.xc-link {
+  color: rgb(68, 102, 165);
+  cursor: pointer;
+  &:hover {
+    color: rgb(35, 69, 131);
+  }
+  &--red {
+    color: #f44;
+    &:hover {
+      color: rgb(255, 109, 109);
+    }
+  }
+  &--lightblue {
+    color: rgb(134, 189, 252);
+    &:hover {
+      color: rgb(179, 214, 255);
+    }
+  }
+}
+body .ii{
+  font-size:inherit;
+}
+
+.xc-rel {
+  position: relative;
+}
+
+.xc-ab {
+  position: absolute;
+}
+
+.xc-flex {
+  display: flex;
+}
+
+.xc-flex-col {
+  display: flex;
+  flex-flow: column;
+}
+
+.xc-flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.xc-flex1 {
+  flex: 1;
+}
+
+.xc-flex2 {
+  flex: 2;
+}
+
+table.xc-table {
+  width: 100%;
+  border-collapse: collapse;
+  td {
+    padding: 8px;
+    transition: all 0.15s; // vertical-align: top;
+  }
+  &.align-top td {
+    vertical-align: top;
+  }
+  &.mini td {
+    padding: 3px;
+  }
+  &.border td {
+    border: solid 1px #ccc;
+  }
+  &.center td {
+    text-align: center;
+  }
+  tr.xc-head td {
+    background-color: #4b77b1;
+    color: #f6f6f6;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  tr.active td {
+    background-color: rgb(48, 172, 55);
+    color: #f6f6f6;
+  }
+  &.hover tr:not(.xc-head) td {
+    cursor: pointer;
+  }
+  &.hover tr:not(.xc-head):hover td {
+    background-color: rgb(171, 223, 174);
+  }
+  &.hover tr.active:hover td {
+    background-color: rgb(31, 150, 37);
+  }
+}
+
+.xc-full {
+  width: 100%;
+  height: 100%;
+}
+
+.xc-text-center {
+  text-align: center;
+}
+
+.xc-ab-full {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.xc-one-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
+div,
+ul,
+li {
+  box-sizing: border-box;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ht10 {
+  height: 10px;
+}
+
+.ht50 {
+  height: 50px;
+}
+
+.ht5 {
+  height: 5px;
+}
+
+.wt10 {
+  width: 10px;
+}
+
+.wt50 {
+  width: 50px;
+}
+
+.wt5 {
+  width: 5px;
+}

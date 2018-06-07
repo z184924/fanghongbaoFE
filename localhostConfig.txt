@@ -1,0 +1,4 @@
+export default {
+  basePath: "http://localhost:7001/"
+}
+//请复制此文件并将后缀改为.js

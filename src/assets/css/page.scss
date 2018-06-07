@@ -1,0 +1,239 @@
+$primary-color-1:#FC5C44;
+$primary-color-2:rgb(236, 162, 152);
+$primary-color-3:rgb(233, 141, 129);
+$primary-color-4:rgb(238, 103, 85);
+$primary-color-5:rgb(255, 246, 246);
+$primary-color-6:rgb(255, 239, 239);
+// 修改默认样式
+body .stage {
+  .el-tree,
+  .el-table,
+  .el-checkbox,
+  .el-dialog__body {
+    color: #000;
+    font-size: 16px;
+  }
+  .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+    background: $primary-color-1;
+    color: #fff;
+  }
+  .el-tree-node__content {
+    height: 36px;
+    font-size: 16px;
+    border-bottom: dotted 1px #aaa;
+  }
+  .el-table__row.current-row td {
+    background: $primary-color-1;
+    color: #fff;
+  }
+  .el-table__row:hover td {
+    background: $primary-color-2;
+  }
+  .el-table__row.current-row:hover td {
+    background: $primary-color-4;
+    color: #fff;
+  }
+  .el-tree-node__content>.el-tree-node__expand-icon {
+    padding: 6px 12px;
+  }
+  .el-table--enable-row-transition .el-table__body td {
+    transition: all .2s;
+  }
+  .el-dialog__header {
+    background: $primary-color-5;
+    transition: all .2s;
+    padding: 8px 20px;
+    height: 40px;
+  }
+  .el-dialog__header:hover {
+    background: $primary-color-6;
+  }
+  .el-dialog__headerbtn {
+    top: 0;
+    right: 0;
+    height: 40px;
+    background-color: $primary-color-1;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+  }
+  .el-dialog__headerbtn .el-dialog__close {
+    color: #fff;
+  }
+  .el-dialog__body {
+    padding: 15px;
+    background: #fdfdfd;
+  }
+  .el-dialog__footer {
+    padding: 15px;
+    padding-top: 0;
+  }
+  .el-button--mini,
+  .el-button--small {
+    border-radius: 0;
+  }
+  .el-menu-item-group__title {
+    height: 0;
+    padding: 0;
+  }
+  .el-menu-item,
+  .el-submenu__title {
+    font-size: 16px;
+  }
+  .el-menu {
+    border-radius: 8px;
+  }
+  .el-submenu__title,
+  .el-menu-item {
+    border-left: solid 4px transparent;
+  }
+  .el-submenu.is-active .el-submenu__title,
+  .el-submenu .el-submenu__title:hover {
+    border-left: solid 4px $primary-color-3;
+    background: $primary-color-5;
+  }
+  ol>li>ol,
+  ol>li>ul,
+  ul>li>ol,
+  ul>li>ul {
+    margin: 2px 0;
+  }
+  .el-upload__input {
+    display: none;
+  }
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: $primary-color-1;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+    display: block;
+  }
+}
+
+/*************
+/* 具体样式
+*************/
+
+.xc1 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  font-size: 14px;
+  &--title {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    text-shadow: #ccc 4px 2px 2px;
+    padding: 0 20px;
+  }
+  &--center {
+    flex: 100% 1 1;
+  }
+  &--control {
+    flex: 100px 0 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: all 0.1s;
+    cursor: pointer;
+    &:hover {
+      background: #f3f3f3;
+    }
+    &.-text {
+      cursor: default;
+      &:hover {
+        background: transparent;
+      }
+    }
+  }
+  &--badge {
+    background: rgb(185, 44, 44);
+    color: #fff;
+    min-width: 22px;
+    font-size: 12px;
+    text-align: center;
+    height: 16px;
+    line-height: 16px;
+    border-radius: 8px;
+  }
+}
+
+.xc2 {
+  &--box {
+    border: solid 1px #aaa;
+    border-radius: 5px;
+    padding: 1.5em;
+    display: flex;
+  }
+  &--title {
+    font-size: 22px;
+    padding: 10px 0;
+  }
+  &--img {
+    display: inline-block;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: #aaa 1px 1px 3px;
+    transition: all 0.2s;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &--add {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: dashed 1px #aaa;
+    color: #666;
+    transition: all 0.2s;
+    cursor: pointer;
+    &:hover {
+      border-color: $primary-color-1;
+    }
+  }
+  &--box-out {
+    display: inline-block;
+  }
+  &--image-upload{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+}
+
+.xc3 {
+  &--form {
+    border: solid 1px #aaa;
+    border-radius: 4px;
+    padding: 10px;
+    width: 800px;
+  }
+  &--title {
+    font-size: 22px;
+    padding: 10px 0;
+  }
+}
