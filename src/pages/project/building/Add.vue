@@ -20,7 +20,7 @@
           <el-input v-model="form.f__jl"></el-input>
         </el-form-item>
         <el-form-item label="地理位置">
-          <el-input v-model="form.f__dlwz" style="width:70%" placeholder="0.000000,0.0000000"></el-input>
+          <el-input v-model="form.f__dlwz" style="width:70%" placeholder="0.0000000,0.0000000"></el-input>
           <el-button type="primary" @click="pickLocation">选择坐标点…</el-button>
           <el-button type="text" @click="pickLocationHelp">如何使用？</el-button>
         </el-form-item>

@@ -1,3 +1,12 @@
+import App from "./App"
+import store from "./store"
+import router from "./router.js"
+import mx from "./mx"
+
+import "./assets/css/element/index.css"
+import "./assets/css/base.scss"
+import "./assets/css/page.scss"
+
 Vue.directive('dialog-drag', {
   bind(el, binding, vnode, oldVnode) {
     const dialogHeaderEl = el.querySelector('.el-dialog__header');
@@ -37,17 +46,6 @@ Vue.directive('dialog-drag', {
     }
   }
 })
-
-
-import App from "./App"
-import store from "./store"
-import router from "./router.js"
-import mx from "./mx"
-
-import "./assets/css/element/index.css"
-import "./assets/css/base.scss"
-import "./assets/css/page.scss"
-
 
 Vue.directive("focus", {
   inserted: function (el) {
