@@ -6,7 +6,8 @@ import ProjectBuilding from "./pages/project/building/Index"
 import ProjectBuildingAdd from "./pages/project/building/Add"
 
 // 系统管理
-import SystemBuilding from "./pages/system/Building"
+import SystemBuilding from "./pages/system/building/Index"
+import SystemInsideUser from "./pages/system/inside-user/Index"
 
 
 
@@ -19,25 +20,26 @@ export default new Router({
       path: "/",
       name: "Index",
       component: Index,
-      meta: {}
     },
     {
       path: "/system/building",
       name: "SystemBuilding",
       component: SystemBuilding,
-      meta: {}
     },
     {
       path: "/project/building",
       name: "ProjectBuilding",
       component: ProjectBuilding,
-      meta: {}
     },
     {
       path: "/project/building/add",
       name: "ProjectBuildingAdd",
       component: ProjectBuildingAdd,
-      meta: {}
+    },
+    {
+      path: "/system/inside-user",
+      name: "SystemInsideUser",
+      component: SystemInsideUser,
     },
 
   ]

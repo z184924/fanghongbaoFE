@@ -6,6 +6,8 @@ import Router from "vue-router";
 import Vuex from "vuex";
 import Ve from "velocity-animate"
 import moment from "moment"
+import clone from "clone"
+
 
 Vue.use(Element, {
   size: "mini"
@@ -18,4 +20,5 @@ window.Vue = Vue;
 window.$ = $;
 window.Ve = Ve;
 window.moment = moment;
+window.clone = clone;
 // 

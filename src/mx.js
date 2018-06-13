@@ -1,9 +1,17 @@
 import FixedTree from "@/components/FixedTree"
+import FixedTable from "@/components/FixedTable"
+import FileBox from "@/components/FileBox"
+import CSelect from "@/components/CSelect"
+import CPanel from "@/components/CPanel"
 
 
 var myMixin = {
   components: {
     FixedTree,
+    FixedTable,
+    CSelect,
+    CPanel,
+    FileBox
   },
   methods: {
 
@@ -136,7 +144,7 @@ var myMixin = {
         })
       });
     },
-    mxBack(){
+    mxBack() {
       window.history.go(-1);
     },
 

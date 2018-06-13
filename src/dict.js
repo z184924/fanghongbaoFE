@@ -11,5 +11,15 @@ export default {
   //   },
   //   // 
   // ],
+  yongjinLeixing:[
+    {
+      label:"固定佣金",
+      value:"固定佣金",
+    },
+    {
+      label:"佣金比例",
+      value:"佣金比例",
+    },
+  ]
 
 }

@@ -19,6 +19,7 @@
           <div class="stage--page-in">
             <!-- <transition name="fade"> -->
             <router-view></router-view>
+            <div style="height:130px"></div>
             <!-- </transition> -->
           </div>
         </div>
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-
+import dict from "./dict.js"
 import localhostConfig from "../localhostConfig.js"
 import AppLogin from "./AppLogin"
 import CHeader from "@/components/CHeader"
@@ -49,6 +50,7 @@ export default {
     return {
       // userType: 0, //0等待 1登录 2业主 3供应商
       // bread: { b1: "", b2: "" }
+
     };
   },
   created() {
@@ -62,13 +64,8 @@ export default {
       this.$store.commit("setWindowHeight", window.innerHeight);
     }
     let loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
-    let dict = JSON.parse(sessionStorage.getItem("dict"));
+
     this.$store.commit("setDict", dict);
-
-
-
-
-
   },
 
   methods: {

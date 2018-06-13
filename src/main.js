@@ -3,12 +3,13 @@ import store from "./store"
 import router from "./router.js"
 import mx from "./mx"
 
+import "./assets/css/amaze-ui/css/amazeui.css"
 import "./assets/css/element/index.css"
 import "./assets/css/base.scss"
 import "./assets/css/page.scss"
 
 Vue.directive('dialog-drag', {
-  bind(el, binding, vnode, oldVnode) {
+  bind(el) {
     const dialogHeaderEl = el.querySelector('.el-dialog__header');
     const dragDom = el.querySelector('.el-dialog');
     dialogHeaderEl.style.cursor = 'move';
@@ -46,6 +47,7 @@ Vue.directive('dialog-drag', {
     }
   }
 })
+Vue.prototype.$ELEMENT = { size: 'small'};
 
 Vue.directive("focus", {
   inserted: function (el) {

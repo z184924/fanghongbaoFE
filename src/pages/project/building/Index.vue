@@ -5,11 +5,10 @@
 </template>
 <script>
 export default {
-  methods:{
-    add(){
-      this.$router.push("/project/building/add")
-    }
+  methods: {
+    add() {
+      this.$router.push("building/add")
+    },
   }
 }
 </script>
-

@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="routePath" @open="handleOpen" @close="handleClose" :unique-opened="true" router>
+  <el-menu :default-active="routePath" @open="handleOpen" @close="handleClose" :unique-opened="true" router class="xc-shadow">
     <el-menu-item index="/">
       <i class="ii i-shouye"></i>
       <span>首页</span>
@@ -54,11 +54,7 @@
         <span>系统管理</span>
       </template>
       <el-menu-item-group>
-        <el-menu-item index="权限管理">
-          <i class="el-icon-arrow-right"></i>
-          <span>权限管理</span>
-        </el-menu-item>
-        <el-menu-item index="内部人员管理">
+        <el-menu-item index="/system/inside-user">
           <i class="el-icon-arrow-right"></i>
           <span>内部人员管理</span>
         </el-menu-item>

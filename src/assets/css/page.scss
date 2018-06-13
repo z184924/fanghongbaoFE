@@ -4,11 +4,11 @@ $primary-color-3:rgb(233, 141, 129);
 $primary-color-4:rgb(238, 103, 85);
 $primary-color-5:rgb(255, 246, 246);
 $primary-color-6:rgb(255, 239, 239);
+$color-test:rgb(23, 95, 124);
 // 修改默认样式
 body .stage {
   .el-tree,
   .el-table,
-  .el-checkbox,
   .el-dialog__body {
     color: #000;
     font-size: 16px;
@@ -67,8 +67,7 @@ body .stage {
   .el-dialog__footer {
     padding: 15px;
     padding-top: 0;
-  }
-  // .el-button--mini,
+  } // .el-button--mini,
   // .el-button--small {
   //   border-radius: 0;
   // }
@@ -123,6 +122,13 @@ body .stage {
     width: 100px;
     height: 100px;
     display: block;
+  }
+  .el-input__inner {
+    background: rgba(255, 255, 255, 0.822);
+  }
+  .el-input.is-active .el-input__inner,
+  .el-input__inner:focus {
+    background: #fff;
   }
 }
 
@@ -182,9 +188,6 @@ body .stage {
 
 .xc2 {
   &--box {
-    border: solid 1px #aaa;
-    border-radius: 5px;
-    padding: 1.5em;
     display: flex;
   }
   &--title {
@@ -218,22 +221,52 @@ body .stage {
   &--box-out {
     display: inline-block;
   }
-  &--image-upload{
+  &--image-upload {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
   }
 }
 
 .xc3 {
-  &--form {
-    border: solid 1px #aaa;
-    border-radius: 4px;
-    padding: 10px;
-    width: 800px;
-  }
+  // width: 800px;
+  // margin: auto;
   &--title {
     font-size: 22px;
     padding: 10px 0;
+  }
+  &--ue {
+    width: 100%;
+  }
+}
+
+$panel-header-height:40px;
+.xc4 {
+  border-radius: 5px;
+  overflow: hidden;
+  background:#fff;
+  box-shadow: #aaa 1px 1px 5px;
+  margin: auto;
+  margin-bottom: 30px;
+  &--header {
+    height: $panel-header-height;
+    line-height: $panel-header-height;
+    padding-left: 15px;
+    padding-right: 7px;
+    color: #f6f6f6;
+    font-size: 16px;
+    display: flex;
+  }
+  &--header-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  &--button-box {
+    display: flex;
+    align-items: center;
+  }
+  &--body {
+    padding: 15px;
   }
 }
