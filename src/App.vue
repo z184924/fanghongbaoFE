@@ -25,9 +25,10 @@
         </div>
       </div>
       <div class="stage--footer">
-        <span> 版权信息 ©&nbsp;</span>
-        <b>xxxxxxxxxxx</b>
-        <span>&nbsp;xxxxxxxxxxxxxxxxx</span>
+        <b>房红包后台管理系统</b>
+        <span>&nbsp;&nbsp;</span>
+        <span> Copyright © </span>
+        <span>&nbsp;房红包（北京）网络科技有限公司</span>
       </div>
     </div>
   </div>
@@ -109,6 +110,7 @@ export default {
     flex: 8px 0 0;
   }
   &--footer {
+    font-size:14px;
     position: relative;
     z-index: 10000;
     display: flex;

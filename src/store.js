@@ -1,7 +1,7 @@
-// import Vue from "vue";
-// import Vuex from "vuex";
+import Vue from "vue";
+import Vuex from "vuex";
 
-// Vue.use(Vuex);
+Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     basePath: "http://111.30.79.43:60033/",

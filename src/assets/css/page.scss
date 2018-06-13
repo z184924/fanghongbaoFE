@@ -4,6 +4,7 @@ $primary-color-3:rgb(233, 141, 129);
 $primary-color-4:rgb(238, 103, 85);
 $primary-color-5:rgb(255, 246, 246);
 $primary-color-6:rgb(255, 239, 239);
+$primary-color-7:rgb(250, 204, 198);
 $color-test:rgb(23, 95, 124);
 // 修改默认样式
 body .stage {
@@ -12,26 +13,23 @@ body .stage {
   .el-dialog__body {
     color: #000;
     font-size: 16px;
-  }
-  .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-    background: $primary-color-1;
-    color: #fff;
-  }
+  } // .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+  //   background: $primary-color-1;
+  //   color: #fff;
+  // }
   .el-tree-node__content {
     height: 36px;
     font-size: 16px;
     border-bottom: dotted 1px #aaa;
   }
   .el-table__row.current-row td {
-    background: $primary-color-1;
-    color: #fff;
+    background: $primary-color-7; // color: #fff;
   }
   .el-table__row:hover td {
-    background: $primary-color-2;
+    background: $primary-color-6;
   }
   .el-table__row.current-row:hover td {
-    background: $primary-color-4;
-    color: #fff;
+    background: $primary-color-7; // color: #fff;
   }
   .el-tree-node__content>.el-tree-node__expand-icon {
     padding: 6px 12px;
@@ -244,7 +242,7 @@ $panel-header-height:40px;
 .xc4 {
   border-radius: 5px;
   overflow: hidden;
-  background:#fff;
+  background: #fff;
   box-shadow: #aaa 1px 1px 5px;
   margin: auto;
   margin-bottom: 30px;
@@ -269,4 +267,14 @@ $panel-header-height:40px;
   &--body {
     padding: 15px;
   }
+}
+
+.xc5 {
+  margin-right: 5px
+}
+
+.xc6 {
+  border-radius: 6px;
+  overflow: hidden;
+  margin-right: 5px
 }

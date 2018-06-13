@@ -1,3 +1,9 @@
+import Vue from "vue";
+import Router from "vue-router";
+Vue.use(Router);
+
+
+
 // 首页
 import Index from "./pages/index/Index"
 
@@ -11,7 +17,6 @@ import SystemInsideUser from "./pages/system/inside-user/Index"
 
 
 
-// Vue.use(Router);
 
 export default new Router({
   routes: [

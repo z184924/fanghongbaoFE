@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="routePath" @open="handleOpen" @close="handleClose" :unique-opened="true" router class="xc-shadow">
+  <el-menu :default-active="routePath" :unique-opened="true" router class="xc-shadow xc5">
     <el-menu-item index="/">
       <i class="ii i-shouye"></i>
       <span>首页</span>

@@ -39,6 +39,7 @@ var myMixin = {
       }
     },
     mxMessage(res) {
+      console.log(res);
       this.$message({
         message: res.message,
         type: res.state
@@ -72,6 +73,22 @@ var myMixin = {
         }
       })
       return list;
+    },
+    mxDictToString(dict, value) {
+      let list = [];
+      if (typeof dict === "string") {
+        list = this.mxDict[dict];
+      } else {
+        list = dict;
+      }
+      let name = "";
+      list.forEach((item, i) => {
+        if (item.value + "" == value + "") {
+          name = item.label;
+        }
+      });
+      return name;
+
     },
 
     xpost(api, data = {}, log = false) {

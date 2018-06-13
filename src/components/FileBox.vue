@@ -14,7 +14,7 @@
             <i class="el-icon-plus avatar-uploader-icon"></i>
           </div> -->
         </div>
-        <el-dialog :visible.sync="isShowAdd" v-dialog-drag :width="dialogWidth" title="新增">
+        <el-dialog :visible.sync="isShowAdd" v-drag :width="dialogWidth" title="新增">
           <!-- <el-form ref="form" :model="form" label-width="5em" v-if="mode=='file'">
             <el-form-item label="标题：" size="medium">
               <el-input v-model="form.title" placeholder="请输入标题"></el-input>

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-dialog-drag title="编辑" :visible.sync="formOpenFlag" width="30%">
+  <el-dialog v-drag title="编辑" :visible.sync="formOpenFlag" width="30%">
     <el-form ref="form" :model="form" label-width="80px" :rules="rules">
       <el-form-item v-for="(value,key,index) in valueFields" :label="value.label" :key="index" :prop="key">
         <el-input v-if="value.type=='string'" v-model="form[key]" :disabled="value.disabledEditFlag"></el-input>

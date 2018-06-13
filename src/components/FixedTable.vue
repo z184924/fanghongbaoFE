@@ -11,13 +11,13 @@
       <el-button type="warning" @click="update" icon="el-icon-edit-outline" v-if="showUpdate">修改</el-button>
       <el-button type="danger" @click="del" icon="el-icon-delete" v-if="showDelete">删除</el-button>
       <slot name="right-control"></slot>
-      <el-button type="default" @click="getData" icon="el-icon-refresh" v-if="showRefresh" circle></el-button>
+      <el-button type="default" @click="getData" icon="el-icon-refresh" v-if="showRefresh" circle title="刷新数据"></el-button>
       <!-- {{rowData}} -->
     </div>
     <div style="height:8px;" v-if="showControl"></div>
     <el-table ref="ft" :data="translateShowData" :row-style="rowStyle" :height="tableHeight" style="width: 100%" highlight-current-row @current-change="handleCurrentChange" @selection-change="handleSelectionChange" border :header-cell-style="headerStyle">
       <el-table-column type="selection" width="50" align="center" v-if="multiSelect"></el-table-column>
-      <el-table-column v-for="(value, key, index) in valueFields" :prop="key" :label="value.label" :key="index" :formatter="formatterHandle" :width="value.width" :align="value.align"></el-table-column>
+      <el-table-column v-for="(value, key, index) in valueFields" :prop="key" :label="value.label" :key="index" :formatter="value.formatter" :width="value.width" :align="value.align"></el-table-column>
       <el-table-column v-if="fileInfo.hasFile" label="附件" width="">
         <template slot-scope="scope">
           <a :href="fileInfo.serverUrl" target="_blank"></a>
@@ -163,6 +163,9 @@ export default {
         return [];
       }
     },
+    map: {
+      default: null
+    },
 
 
     // 字段
@@ -171,10 +174,11 @@ export default {
       primaryKey:是否主键
       label:首行标题名
       width:宽度（可带单位px、%等）
-      type:类型（string，number，select）
+      type:类型（string，number，select）(小写)
       options:选项（[{value:"xxx",text:"xxx"}]）
       disabledEditFlag:编辑或新增时此字段不可编辑
       disabledShowFlag:不显示字段
+      formatter:<Function>格式化
       rule:验证规则（{ required: true, message: "排序号不能为空", trigger: "change" }）
       customRule:自定义验证规则（function(rule, value, callback){callback(new Error('不能大于100'));//--失败--callback();//--成功--}）
       customRuleTrigger:自定义校验规则对应的验证方式（change,blur等）
@@ -190,9 +194,9 @@ export default {
     return {
       loading: false,
       headerStyle: {
-        backgroundColor: "#4b77b1",
-        color: "#f6f6f6",
-        textAlign: "center"
+        backgroundColor: "rgb(236, 162, 152)",
+        color: "#000",
+        // textAlign: "center"
       },
       page: {
         current: 1,
@@ -382,7 +386,13 @@ export default {
         // console.log(param)
         this.xpost(this.getDataUrl, param).then(res => {
           this.page.total = res.records;
-          this.dataList = res.rows;
+          if (this.map) {
+            this.dataList = res.rows.map(o=>{
+              return this.map(o);
+            });
+          } else {
+            this.dataList = res.rows;
+          }
           // console.log(res)
           this.loading = false;
           this.$emit("done", this.dataList);

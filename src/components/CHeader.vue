@@ -2,7 +2,7 @@
   <div class="xc1 xc-shadow">
     <div class="xc1--title">
       <i class="ii i-red-packet" style="color:#e33;font-size:30px;padding-right:20px;"></i>
-      <span>房红包后台管理</span>
+      <span>FHB后台管理</span>
     </div>
     <div class="xc1--center"></div>
     <div class="xc1--control" title="消息">
