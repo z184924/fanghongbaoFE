@@ -6,7 +6,7 @@
       <!-- <el-button slot="button" type="success">保存</el-button> -->
 
       <div class="xc3--form">
-        <el-form ref="form" :model="form" label-width="9em">
+        <el-form ref="form" :model="form" label-width="12em">
 
           <!-- 
         <el-row>
@@ -23,7 +23,8 @@
             <el-input v-model="form.f__lpmc"></el-input>
           </el-form-item>
           <el-form-item label="区域">
-            <el-input v-model="form.f__qy"></el-input>
+            <!-- <el-input v-model="form.f__qy"></el-input> -->
+            <area-picker></area-picker>
           </el-form-item>
           <el-form-item label="楼盘类型">
             <el-checkbox-group v-model="form.f__lplx">
@@ -40,7 +41,7 @@
             <el-input v-model="form.f__dz"></el-input>
           </el-form-item>
           <el-form-item label="百度坐标">
-            <el-input v-model="form.f__dlwz" style="width:70%" placeholder="0.0000000,0.0000000"></el-input>
+            <el-input v-model="form.f__dlwz" style="width:60%" placeholder="0.0000000,0.0000000"></el-input>
             <el-button type="primary" @click="pickLocation">选择坐标点…</el-button>
             <el-button type="text" @click="pickLocationHelp">如何使用？</el-button>
           </el-form-item>
@@ -91,8 +92,12 @@
 </template>
 <script>
 // import uuid from "uuid"
+import AreaPicker from "@/components/AreaPicker"
 
 export default {
+  components:{
+    AreaPicker
+  },
   data() {
     return {
       // ueCs: null,
@@ -205,6 +210,18 @@ export default {
     }
   },
   created() {
+    this.xpost("city/getPropertyTypes").then(res=>{
+      this.listLoupanLeixing=res.map(o=>{
+        return {
+          label:o.propertyType,
+          value:o.propertyTypeId,
+        }
+      })
+      console.log(res);
+    })
+    this.xpost("city/getAreasByCityID").then(res=>{
+      console.log(res);
+    })
 
     // this.ueCsId = uuid.v4();
     // this.ueMdId = uuid.v4();

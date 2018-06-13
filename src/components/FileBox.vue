@@ -118,6 +118,12 @@ export default {
     showAdd() {
       this.isShowAdd = true;
     },
+    handleAvatarSuccess(){
+      
+    },
+    beforeAvatarUpload(){
+
+    },
 
   }
 }

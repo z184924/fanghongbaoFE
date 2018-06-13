@@ -1,8 +1,15 @@
 <template>
   <div class="xc-shadow xc6">
     <fixed-table ref="table" get-data-url="user/listPageUsersByType" :data-param="dataParam" :fields="fields" v-model="selectedRow">
-      <el-button type="default" slot="right-control" icon="el-icon-plus" @click="add">新增用户</el-button>
-      <el-button type="default" slot="right-control" icon="el-icon-edit" @click="edit">编辑用户</el-button>
+      <span slot="left-control">
+        <span>用户类型：</span>
+        <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:150px"></c-select>
+        <el-button type="default" icon="el-icon-search" @click="refreshTable">搜索</el-button>
+      </span>
+      <span slot="right-control" style="margin-right:1em">
+        <el-button type="default" icon="el-icon-plus" @click="add">新增内部用户</el-button>
+        <el-button type="default" icon="el-icon-edit" @click="edit">编辑用户</el-button>
+      </span>
     </fixed-table>
 
     <!-- dialog -->
@@ -11,8 +18,8 @@
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="formAdd.phone"></el-input>
         </el-form-item>
-        <el-form-item label="姓名" prop="username">
-          <el-input v-model="formAdd.username"></el-input>
+        <el-form-item label="姓名" prop="userName">
+          <el-input v-model="formAdd.userName"></el-input>
         </el-form-item>
         <el-form-item label="角色" prop="role">
           <c-select :dict="roleList" v-model="formAdd.role"></c-select>
@@ -21,13 +28,14 @@
       <el-button type="default" slot="footer" @click="isShowAdd=false">取消</el-button>
       <el-button type="primary" slot="footer" @click="doAdd">保存</el-button>
     </el-dialog>
+
     <el-dialog v-drag :visible.sync="isShowEdit" width="400px" title="编辑内部用户">
       <el-form ref="formEdit" :model="formEdit" label-width="6em" :rules="rules">
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="formEdit.phone"></el-input>
         </el-form-item>
-        <el-form-item label="姓名" prop="username">
-          <el-input v-model="formEdit.username"></el-input>
+        <el-form-item label="姓名" prop="userName">
+          <el-input v-model="formEdit.userName"></el-input>
         </el-form-item>
         <el-form-item label="角色" prop="role">
           <c-select :dict="roleList" v-model="formEdit.role"></c-select>
@@ -46,13 +54,32 @@ export default {
     let vue = this;
     return {
       // 表格
+      searchInsiderList: [
+        {
+          label: "全部",
+          value: "",
+        },
+        {
+          label: "内部用户",
+          value: "1",
+        },
+        {
+          label: "外部用户",
+          value: "0",
+        },
+      ],
       selectedRow: {},
       dataParam: {
         isInsider: "",
       },
       fields: {
+        phone: {
+          label: "手机号",
+          // width:"100px",
+          type: "string"
+        },
         account: {
-          label: "登录名/手机号",
+          label: "登录名",
           // width:"100px",
           type: "string"
         },
@@ -95,16 +122,12 @@ export default {
         },
       },
 
-
-
       // dialog
       isShowAdd: false,
       isShowEdit: false,
-
-
       roleList: [],
       rules: {
-        username: [
+        userName: [
           { required: true, message: '请填写姓名', trigger: 'blur' }
         ],
         phone: [
@@ -134,7 +157,7 @@ export default {
       this.$refs.formAdd.validate((valid) => {
         if (valid) {
           this.xpost("user/saveInnerUser", {
-            userName: this.formAdd.username,
+            userName: this.formAdd.userName,
             phone: this.formAdd.phone,
             roleId: this.formAdd.role,
           }).then(res => {
@@ -155,7 +178,7 @@ export default {
         this.isShowEdit = true;
         this.$nextTick(() => {
           this.formEdit.role = this.selectedRow.roleId + "";
-          this.formEdit.username = this.selectedRow.userName + "";
+          this.formEdit.userName = this.selectedRow.userName + "";
           this.formEdit.phone = this.selectedRow.phone + "";
         })
         console.log(this.formEdit);
@@ -167,7 +190,23 @@ export default {
       }
     },
     doEdit() {
-
+      this.$refs.formEdit.validate((valid) => {
+        if (valid) {
+          this.xpost("user/updateInnerUser", {
+            userId: this.selectedRow.userId,
+            userName: this.formEdit.userName,
+            phone: this.formEdit.phone,
+            roleId: this.formEdit.role,
+          }).then(res => {
+            this.mxMessage(res).then(() => {
+              this.isShowEdit = false;
+              this.refreshTable();
+            })
+          })
+        } else {
+          return false;
+        }
+      });
     },
 
 

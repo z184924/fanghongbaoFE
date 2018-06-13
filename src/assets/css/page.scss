@@ -8,15 +8,6 @@ $primary-color-7:rgb(250, 204, 198);
 $color-test:rgb(23, 95, 124);
 // 修改默认样式
 body .stage {
-  .el-tree,
-  .el-table,
-  .el-dialog__body {
-    color: #000;
-    font-size: 16px;
-  } // .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
-  //   background: $primary-color-1;
-  //   color: #fff;
-  // }
   .el-tree-node__content {
     height: 36px;
     font-size: 16px;
@@ -37,28 +28,44 @@ body .stage {
   .el-table--enable-row-transition .el-table__body td {
     transition: all .2s;
   }
+  .el-dialog {
+    border-radius: 4px;
+    overflow: hidden;
+  }
   .el-dialog__header {
-    background: $primary-color-5;
+    background: $primary-color-6;
     transition: all .2s;
     padding: 8px 20px;
     height: 40px;
   }
-  .el-dialog__header:hover {
-    background: $primary-color-6;
-  }
+  // .el-dialog__header:hover {
+  //   background: $primary-color-6;
+  // }
   .el-dialog__headerbtn {
-    top: 0;
-    right: 0;
-    height: 40px;
-    background-color: $primary-color-1;
-    color: #fff;
+    top: 0px;
+    right: 0px;
+    height: 40px; 
+    color: $primary-color-1;
     width: 40px;
-    height: 40px;
+    transition:all 0.2s;
+    border-top-right-radius: 4px;
+  }
+  .el-dialog__headerbtn:hover{
+    background-color: $primary-color-1;
+    color:#fff;
   }
   .el-dialog__headerbtn .el-dialog__close {
+    color: $primary-color-2;
+    transition:all 0.2s;
+    // color: #fff;
+  }
+  .el-dialog__headerbtn:hover .el-dialog__close {
     color: #fff;
+    // color: #fff;
   }
   .el-dialog__body {
+    color: #000;
+    font-size: 16px;
     padding: 15px;
     background: #fdfdfd;
   }
@@ -127,6 +134,11 @@ body .stage {
   .el-input.is-active .el-input__inner,
   .el-input__inner:focus {
     background: #fff;
+  }
+  .el-checkbox.is-bordered {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 

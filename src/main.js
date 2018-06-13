@@ -3,10 +3,10 @@
 import Vue from "vue";
 import Element from "element-ui"
 import $ from "jquery"
-import "./assets/css/animate.css"
+// import "./assets/css/animate.css"
 // import Router from "vue-router";
 // import Vuex from "vuex";
-import Ve from "velocity-animate"
+// import Ve from "velocity-animate"
 import moment from "moment"
 import clone from "clone"
 
@@ -20,7 +20,7 @@ import store from "./store"
 import router from "./router.js"
 import mx from "./mx"
 
-import "./assets/css/amaze-ui/css/amazeui.css"
+// import "./assets/css/amaze-ui/css/amazeui.css"
 import "./assets/css/element/index.css"
 import "./assets/css/base.scss"
 import "./assets/css/page.scss"
@@ -36,7 +36,7 @@ Vue.use(Element, {
 // window.Vuex = Vuex;
 // window.Vue = Vue;
 window.$ = $;
-window.Ve = Ve;
+// window.Ve = Ve;
 window.moment = moment;
 window.clone = clone;
 
