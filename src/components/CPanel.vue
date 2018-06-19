@@ -22,7 +22,7 @@ export default {
     },
     titleColor: {
       type: String,
-      default: "rgb(39, 78, 151)",
+      default: "rgb(199, 73, 54)",
     },
     width: {
       type: String,

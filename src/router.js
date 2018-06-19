@@ -14,6 +14,7 @@ import ProjectBuildingAdd from "./pages/project/building/Add"
 // 系统管理
 import SystemBuilding from "./pages/system/building/Index"
 import SystemInsideUser from "./pages/system/inside-user/Index"
+import SystemCity from "./pages/system/city/Index"
 
 
 
@@ -45,6 +46,11 @@ export default new Router({
       path: "/system/inside-user",
       name: "SystemInsideUser",
       component: SystemInsideUser,
+    },
+    {
+      path: "/system/city",
+      name: "SystemCity",
+      component: SystemCity,
     },
 
   ]

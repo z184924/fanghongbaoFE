@@ -4,8 +4,10 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
+    // 正式环境，修改测试环境请更改localhostConfig.js，并保证端口为17011
     basePath: "http://111.30.79.43:60033/",
     picBasePath: "http://111.30.79.43:60041/",
+    smallPicBasePath: "http://111.30.79.43:60041/",
     menuList: [],
     devMode: false,
     loginInfo: {},

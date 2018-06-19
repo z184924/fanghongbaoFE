@@ -5,13 +5,13 @@
       <span>FHB后台管理</span>
     </div>
     <div class="xc1--center"></div>
-    <div class="xc1--control" title="消息">
+    <div class="xc1--control" title="消息" @click="mxDevAlert">
       <el-badge :value="63" :max="99" class="">
         <i class="ii i-xiaoxi"></i>
         <span style="padding:0 3px;">消息</span>
       </el-badge>
     </div>
-    <div class="xc1--control" title="提醒">
+    <div class="xc1--control" title="提醒" @click="mxDevAlert">
       <el-badge :value="5" :max="99" class="">
         <i class="ii i-tixing"></i>
         <span style="padding:0 3px;">提醒</span>
@@ -21,7 +21,7 @@
       <i class="ii i-quanping"></i>
       <span style="padding:0 3px;">全屏</span>
     </div>
-    <div class="xc1--control" style="color:#a00">
+    <div class="xc1--control" style="color:#a00" @click="mxDevAlert">
       <i class="ii i-zhuxiao"></i>
       <span style="padding:0 3px;">注销</span>
     </div>

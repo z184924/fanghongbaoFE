@@ -66,7 +66,7 @@
           <i class="el-icon-arrow-right"></i>
           <span>楼盘配置</span>
         </el-menu-item>
-        <el-menu-item index="城市配置">
+        <el-menu-item index="/system/city">
           <i class="el-icon-arrow-right"></i>
           <span>城市配置</span>
         </el-menu-item>

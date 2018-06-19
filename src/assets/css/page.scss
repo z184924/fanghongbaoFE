@@ -1,7 +1,7 @@
-$primary-color-1:#FC5C44;
-$primary-color-2:rgb(236, 162, 152);
-$primary-color-3:rgb(233, 141, 129);
-$primary-color-4:rgb(238, 103, 85);
+$primary-color-1:rgb(199, 73, 54);
+$primary-color-2:rgb(190, 131, 123);
+$primary-color-3:rgb(201, 121, 110);
+$primary-color-4:rgb(199, 84, 69);
 $primary-color-5:rgb(255, 246, 246);
 $primary-color-6:rgb(255, 239, 239);
 $primary-color-7:rgb(250, 204, 198);
@@ -37,31 +37,28 @@ body .stage {
     transition: all .2s;
     padding: 8px 20px;
     height: 40px;
-  }
-  // .el-dialog__header:hover {
+  } // .el-dialog__header:hover {
   //   background: $primary-color-6;
   // }
   .el-dialog__headerbtn {
     top: 0px;
     right: 0px;
-    height: 40px; 
+    height: 40px;
     color: $primary-color-1;
     width: 40px;
-    transition:all 0.2s;
+    transition: all 0.2s;
     border-top-right-radius: 4px;
   }
-  .el-dialog__headerbtn:hover{
+  .el-dialog__headerbtn:hover {
     background-color: $primary-color-1;
-    color:#fff;
+    color: #fff;
   }
   .el-dialog__headerbtn .el-dialog__close {
     color: $primary-color-2;
-    transition:all 0.2s;
-    // color: #fff;
+    transition: all 0.2s; // color: #fff;
   }
   .el-dialog__headerbtn:hover .el-dialog__close {
-    color: #fff;
-    // color: #fff;
+    color: #fff; // color: #fff;
   }
   .el-dialog__body {
     color: #000;
@@ -289,4 +286,31 @@ $panel-header-height:40px;
   border-radius: 6px;
   overflow: hidden;
   margin-right: 5px
+}
+
+.xc7 {
+  &--container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+}
+
+.xc8 {
+  height: 400px;
+  overflow: auto;
+  .el-checkbox {
+    display: block;
+    margin-left: 0;
+  }
+}
+
+.xc9 {
+  display: flex;
+  &--label {
+    flex: 3em 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

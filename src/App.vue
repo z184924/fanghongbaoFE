@@ -112,13 +112,12 @@ export default {
   &--footer {
     font-size:14px;
     position: relative;
-    z-index: 10000;
     display: flex;
     flex: 30px 0 0;
     align-items: center;
     text-align: center;
     justify-content: center;
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(185, 177, 177);
   }
 }
 </style>

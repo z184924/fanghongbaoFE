@@ -26,8 +26,11 @@
             <area-picker></area-picker>
           </el-form-item>
           <el-form-item label="楼盘类型">
-            <el-checkbox-group v-model="form.f__lplx">
-              <el-checkbox border :label="o.label" :value="o.value" v-for="(o,i) in listLoupanLeixing" :key="i"></el-checkbox>
+            <c-select :dict="listLoupanLeixing" v-model="form.f__lplx" style="width:200px"></c-select>
+          </el-form-item>
+          <el-form-item label="物业类型">
+            <el-checkbox-group v-model="form.f__wylx">
+              <el-checkbox border :label="o.label" :value="o.value" v-for="(o,i) in listWuyeLeixing" :key="i"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="售价区间">
@@ -44,11 +47,28 @@
             <el-button type="primary" @click="pickLocation">选择坐标点…</el-button>
             <el-button type="text" @click="pickLocationHelp">如何使用？</el-button>
           </el-form-item>
-          <el-form-item label="普通会员佣金">
-            <el-input v-model="form.f__pthyyj"></el-input>
+          <el-form-item label="佣金类型">
+            <!-- <el-input v-model="form.f__yjlx"></el-input> -->
+            <c-select :dict="listYongjinLeixing" v-model="form.f__yjlx" style="width:200px"></c-select>
           </el-form-item>
-          <el-form-item label="VIP会员佣金">
-            <el-input v-model="form.f__viphyyj"></el-input>
+          <el-form-item :label="form.f__yjlx==='固定佣金'?'普通会员佣金':'普通会员佣金比例'">
+            <el-input v-model="form.f__pthyyj" style="width:200px"></el-input>
+            <span v-if="form.f__yjlx==='固定佣金'">元</span>
+            <span v-else>%</span>
+          </el-form-item>
+          <el-form-item :label="form.f__yjlx==='固定佣金'?'VIP会员佣金':'VIP会员佣金比例'">
+            <el-input v-model="form.f__viphyyj" style="width:200px"></el-input>
+            <span v-if="form.f__yjlx==='固定佣金'">元</span>
+            <span v-else>%</span>
+          </el-form-item>
+          <el-form-item label="项目状态">
+            <!-- <el-input v-model="form.f__yjlx"></el-input> -->
+            <c-select :dict="listXiangmuZhuangtai" v-model="form.f__xmzt" style="width:200px"></c-select>
+          </el-form-item>
+          <el-form-item label="是否推荐">
+            <el-radio-group v-model="form.f__sftj">
+              <el-radio border :label="o.value" v-for="(o,i) in listShifouTuijian" :key="i">{{o.label}}</el-radio>
+            </el-radio-group>
           </el-form-item>
           <el-form-item label="专员（多选）">
             <el-select v-model="form.f__zy" multiple style="width:100%">
@@ -79,25 +99,28 @@
       </div>
     </c-panel>
 
-    <c-panel title-color="rgb(124, 23, 23)" title="参数" width="800px">
-      <!-- <el-button type="success" slot="button" size="mini">保存</el-button> -->
-      <file-box v-model="imgList"></file-box>
-    </c-panel>
-    <c-panel title-color="rgb(23, 95, 124)" title="买点" width="800px">
-      <file-box v-model="imgList"></file-box>
-    </c-panel>
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
-      <file-box v-model="imgList"></file-box>
+      <file-box v-model="listZiliaoku"></file-box>
     </c-panel>
     <c-panel title-color="rgb(45, 105, 50)" title="户型图" width="800px">
-      <file-box v-model="imgList"></file-box>
+      <file-box v-model="listHuxingtu"></file-box>
     </c-panel>
     <c-panel title-color="rgb(124, 72, 23)" title="海报" width="800px">
-      <file-box v-model="imgList"></file-box>
+      <file-box v-model="listHaibao"></file-box>
+    </c-panel>
+    <c-panel title-color="rgb(104, 132, 23)" title="佣金详细" width="800px">
+      <file-box v-model="listYongjinXiangxi"></file-box>
+    </c-panel>
+    <c-panel title-color="rgb(124, 23, 23)" title="项目参数" width="800px">
+      <file-box v-model="listXiangmuCanshu"></file-box>
+    </c-panel>
+    <c-panel title-color="rgb(23, 95, 124)" title="项目卖点" width="800px">
+      <file-box v-model="listXiangmuMaidian"></file-box>
     </c-panel>
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
     </div>
+    <div>{{listZiliaoku}}</div>
   </div>
 </template>
 <script>
@@ -114,18 +137,39 @@ export default {
       // ueMd: null,
       // ueCsId: "",
       // ueMdId: "",
-      listLoupanLeixing: [
+      listWuyeLeixing: [],
+      listShifouTuijian: [
         {
-          label: "商铺",
-          value: "商铺"
+          label: "是",
+          value: "是"
         },
         {
-          label: "别墅",
-          value: "别墅"
+          label: "否",
+          value: "否"
+        },
+      ],
+      listYongjinLeixing: [
+        {
+          label: "固定佣金",
+          value: "固定佣金"
         },
         {
-          label: "商品房",
-          value: "商品房"
+          label: "佣金比例",
+          value: "佣金比例"
+        },
+      ],
+      listXiangmuZhuangtai: [
+        {
+          label: "未开盘",
+          value: "未开盘"
+        },
+        {
+          label: "销售中",
+          value: "销售中"
+        },
+        {
+          label: "已售罄",
+          value: "已售罄"
         },
       ],
       listZhuanyuan: [
@@ -178,24 +222,27 @@ export default {
           value: "b"
         },
       ],
+      listLoupanLeixing: [
+        {
+          label: "城市楼盘",
+          value: "城市楼盘"
+        },
+        {
+          label: "康旅地产",
+          value: "康旅地产"
+        },
+      ],
       form: {
-        f__lplx: [],
+        f__wylx: [],
+        f__yjlx: "固定佣金",
+        f__sftj: "是"
       },
-      imgList: [
-        {
-          id: "a111a",
-          imgSrc: "/static/tx.jpg"
-        },
-        {
-          id: "a111a",
-          imgSrc: "/static/tx.jpg"
-        },
-        {
-          id: "a111a",
-          imgSrc: "/static/tx.jpg"
-        },
-
-      ]
+      listZiliaoku: [],
+      listHuxingtu: [],
+      listHaibao: [],
+      listYongjinXiangxi: [],
+      listXiangmuCanshu: [],
+      listXiangmuMaidian: [],
     }
   },
   methods: {
@@ -216,12 +263,11 @@ export default {
     },
     save() {
 
-
     }
   },
   created() {
     this.xpost("city/getPropertyTypes").then(res => {
-      this.listLoupanLeixing = res.map(o => {
+      this.listWuyeLeixing = res.map(o => {
         return {
           label: o.propertyType,
           value: o.propertyTypeId,

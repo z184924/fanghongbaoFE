@@ -29,13 +29,13 @@ export default {
       handler() {
         this.$emit("input", this.selectedValue)
       },
-      deep: true
+      // deep: true
     },
     value: {
       handler() {
         this.selectedValue = this.value;
       },
-      immediate:true
+      // immediate:true
     },
   },
   computed: {
@@ -52,11 +52,14 @@ export default {
     }
   },
   created() {
+    // console.log(this.value);
     if (!this.dict || typeof this.dict === "object") {
       // this.value = [];
       // this.$emit("input", []);
       this.selectedValue=[];
     }
+        this.selectedValue = this.value;
+
   }
 
 }

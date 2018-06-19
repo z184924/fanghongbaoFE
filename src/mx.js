@@ -170,6 +170,11 @@ var myMixin = {
       url += api;
       return url;
     },
+    mxDevAlert(){
+      this.$alert("开发中……","提示",{
+        type:"info"
+      })
+    }
   },
 
   computed: {
