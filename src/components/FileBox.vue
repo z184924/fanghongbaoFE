@@ -1,6 +1,4 @@
 <template>
-  <c-panel :title-color="titleColor" :width="width" :title="title">
-
     <div class="xc2">
       <!-- <div class="xc2--title">{{title}}</div> -->
       <div class="xc2--box-out">
@@ -39,7 +37,6 @@
         </el-dialog>
       </div>
     </div>
-  </c-panel>
 </template>
 <script>
 import uuid from "uuid"
@@ -60,14 +57,6 @@ export default {
     size: {
       type: Number,
       default: 100
-    },
-    titleColor: {
-      type: String,
-      default: "rgb(39, 78, 151)",
-    },
-    width: {
-      type: String,
-      default: "800px",
     },
     value: {
       type: Array,

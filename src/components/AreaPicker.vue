@@ -25,7 +25,7 @@ export default {
           //     value: o.cityId,
           //   }
           // })
-          console.log(res);
+          // console.log(res);
         })
       },
       deep: true
@@ -39,7 +39,7 @@ export default {
           value: o.cityId,
         }
       })
-      console.log(res);
+      // console.log(res);
     })
   }
 }

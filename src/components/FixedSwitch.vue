@@ -24,7 +24,6 @@ export default {
         this.$emit("input", 1);
       }else{
         this.$emit("input", 0);
-          
       }
     }
   }

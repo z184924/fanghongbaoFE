@@ -33,20 +33,16 @@
 </template>
 <script>
 export default {
-
   methods: {
     fullScreen() {
       let docElm = document.documentElement;
       if (docElm.requestFullscreen) {
         docElm.requestFullscreen();
-      }
-      else if (docElm.msRequestFullscreen) {
+      } else if (docElm.msRequestFullscreen) {
         docElm.msRequestFullscreen();
-      }
-      else if (docElm.mozRequestFullScreen) {
+      } else if (docElm.mozRequestFullScreen) {
         docElm.mozRequestFullScreen();
-      }
-      else if (docElm.webkitRequestFullScreen) {
+      } else if (docElm.webkitRequestFullScreen) {
         docElm.webkitRequestFullScreen();
       }
       this.$message({
@@ -55,6 +51,6 @@ export default {
       });
     }
   }
-}
+};
 </script>
 

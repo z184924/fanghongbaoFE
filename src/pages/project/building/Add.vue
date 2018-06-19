@@ -23,7 +23,6 @@
             <el-input v-model="form.f__lpmc"></el-input>
           </el-form-item>
           <el-form-item label="区域">
-            <!-- <el-input v-model="form.f__qy"></el-input> -->
             <area-picker></area-picker>
           </el-form-item>
           <el-form-item label="楼盘类型">
@@ -80,11 +79,22 @@
       </div>
     </c-panel>
 
-    <file-box v-model="imgList" title="参数" title-color="rgb(124, 23, 23)"></file-box>
-    <file-box v-model="imgList" title="买点" title-color="rgb(23, 95, 124)"></file-box>
-    <file-box v-model="imgList" title="资料库" title-color="rgb(83, 45, 105)"></file-box>
-    <file-box v-model="imgList" title="户型图" title-color="rgb(45, 105, 50)"></file-box>
-    <file-box v-model="imgList" title="海报" title-color="rgb(124, 72, 23)"></file-box>
+    <c-panel title-color="rgb(124, 23, 23)" title="参数" width="800px">
+      <!-- <el-button type="success" slot="button" size="mini">保存</el-button> -->
+      <file-box v-model="imgList"></file-box>
+    </c-panel>
+    <c-panel title-color="rgb(23, 95, 124)" title="买点" width="800px">
+      <file-box v-model="imgList"></file-box>
+    </c-panel>
+    <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
+      <file-box v-model="imgList"></file-box>
+    </c-panel>
+    <c-panel title-color="rgb(45, 105, 50)" title="户型图" width="800px">
+      <file-box v-model="imgList"></file-box>
+    </c-panel>
+    <c-panel title-color="rgb(124, 72, 23)" title="海报" width="800px">
+      <file-box v-model="imgList"></file-box>
+    </c-panel>
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
     </div>
@@ -95,7 +105,7 @@
 import AreaPicker from "@/components/AreaPicker"
 
 export default {
-  components:{
+  components: {
     AreaPicker
   },
   data() {
@@ -210,17 +220,17 @@ export default {
     }
   },
   created() {
-    this.xpost("city/getPropertyTypes").then(res=>{
-      this.listLoupanLeixing=res.map(o=>{
+    this.xpost("city/getPropertyTypes").then(res => {
+      this.listLoupanLeixing = res.map(o => {
         return {
-          label:o.propertyType,
-          value:o.propertyTypeId,
+          label: o.propertyType,
+          value: o.propertyTypeId,
         }
       })
-      console.log(res);
+      // console.log(res);
     })
-    this.xpost("city/getAreasByCityID").then(res=>{
-      console.log(res);
+    this.xpost("city/getAreasByCityID").then(res => {
+      // console.log(res);
     })
 
     // this.ueCsId = uuid.v4();
