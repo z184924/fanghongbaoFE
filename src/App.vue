@@ -1,8 +1,8 @@
 
 <template>
   <div>
-    <!-- <app-login v-if="mxLoginInfo.username==''"></app-login> -->
-    <div class="stage">
+    <app-login v-if="!mxLoginInfo.username"></app-login>
+    <div class="stage" v-else>
       <div class="stage--header">
         <c-header></c-header>
       </div>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import dict from "./dict.js"
+// import dict from "./dict.js"
 import localhostConfig from "../localhostConfig.js"
 import AppLogin from "./AppLogin"
 import CHeader from "@/components/CHeader"
@@ -66,7 +66,9 @@ export default {
     }
     let loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
 
-    this.$store.commit("setDict", dict);
+    this.$store.commit("setDict", JSON.parse(localStorage.getItem("dict")));
+    console.log(JSON.parse(localStorage.getItem("loginInfo")));
+    this.$store.commit("login", JSON.parse(localStorage.getItem("loginInfo")));
   },
 
   methods: {
@@ -102,15 +104,15 @@ export default {
     position: absolute;
     left: 0;
     top: 0;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     overflow-y: scroll;
   }
   &--center-gap {
     flex: 8px 0 0;
   }
   &--footer {
-    font-size:14px;
+    font-size: 14px;
     position: relative;
     display: flex;
     flex: 30px 0 0;

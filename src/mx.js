@@ -19,7 +19,6 @@ var myMixin = {
 
     mxLogout() {
       this.$store.commit("logout");
-      this.xpost("logout");
     },
 
 
@@ -171,7 +170,9 @@ var myMixin = {
       return url;
     },
     mxDevAlert(){
-      this.$alert("开发中……","提示",{
+      this.$msgbox({
+        title:"提示",
+        message:"开发中……",
         type:"info"
       })
     }

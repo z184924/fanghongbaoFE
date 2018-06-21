@@ -3,13 +3,18 @@
     <!-- <div class="xc2--title">{{title}}</div> -->
     <div class="xc2--box-out">
       <div class="xc2--box">
-        <img v-for="(o,i) in value" :key="i" :src="$store.state.smallPicBasePath+o" alt="" class="xc2--img" :style="imgStyle" @click="openImg(o)">
+        <transition-group name="el-zoom-in-center">
+          <div v-for="(o,i) in value" :key="i" class="xc2--img-box" :style="imgStyle">
+            <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2--img" @click="openImg(o)">
+            <div class="xc2--close" @click="remove(i)">×</div>
+          </div>
+        </transition-group>
         <el-upload class="avatar-uploader" multiple :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </div>
-     
+
     </div>
   </div>
 </template>
@@ -75,8 +80,16 @@ export default {
     }
   },
   methods: {
-    openImg(src){
-      window.open(this.$store.state.picBasePath + src);
+    remove(i) {
+      this.$confirm("是否删除该图片？", "删除", {
+        type: "warning"
+      }).then(() => {
+        this.value.splice(i, 1);
+        this.$emit("input", this.value);
+      })
+    },
+    openImg(src) {
+      window.open(this.$store.state.picBasePath + src + "");
     },
     showAdd() {
       this.isShowAdd = true;

@@ -3,30 +3,16 @@
     <el-button @click="mxBack">← 返回</el-button>
     <div style="height:30px"></div>
     <c-panel width="800px" title="基本信息">
-      <!-- <el-button slot="button" type="success">保存</el-button> -->
-
       <div class="xc3--form">
         <el-form ref="form" :model="form" label-width="12em">
-
-          <!-- 
-        <el-row>
-          <el-col :span="12">
-
-          </el-col>
-          <el-col :span="12">
-
-          </el-col>
-        </el-row>
-        -->
-
           <el-form-item label="楼盘名称">
-            <el-input v-model="form.f__lpmc"></el-input>
+            <el-input v-model="form.projectName"></el-input>
           </el-form-item>
           <el-form-item label="区域">
-            <area-picker></area-picker>
+            <area-picker v-model="form.f__qy"></area-picker>
           </el-form-item>
           <el-form-item label="楼盘类型">
-            <c-select :dict="listLoupanLeixing" v-model="form.f__lplx" style="width:200px"></c-select>
+            <c-select dict="lplx" v-model="form.projectType" style="width:200px"></c-select>
           </el-form-item>
           <el-form-item label="物业类型">
             <el-checkbox-group v-model="form.f__wylx">
@@ -34,93 +20,86 @@
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="售价区间">
-            <el-input v-model="form.f__sjqj"></el-input>
+            <el-input v-model="form.sellingSection"></el-input>
           </el-form-item>
           <el-form-item label="平均售价">
-            <el-input v-model="form.f__pjsj"></el-input>
+            <el-input v-model="form.sellingAverage"></el-input>
           </el-form-item>
           <el-form-item label="地址">
-            <el-input v-model="form.f__dz"></el-input>
+            <el-input v-model="form.projectAddress"></el-input>
           </el-form-item>
           <el-form-item label="百度坐标">
-            <el-input v-model="form.f__dlwz" style="width:60%" placeholder="0.0000000,0.0000000"></el-input>
+            <el-input v-model="form.projectMapXY" style="width:60%" placeholder="0.0000000,0.0000000"></el-input>
             <el-button type="primary" @click="pickLocation">选择坐标点…</el-button>
             <el-button type="text" @click="pickLocationHelp">如何使用？</el-button>
           </el-form-item>
           <el-form-item label="佣金类型">
-            <!-- <el-input v-model="form.f__yjlx"></el-input> -->
-            <c-select :dict="listYongjinLeixing" v-model="form.f__yjlx" style="width:200px"></c-select>
+            <c-select dict="yjbl" v-model="form.commissionType" style="width:200px"></c-select>
           </el-form-item>
-          <el-form-item :label="form.f__yjlx==='固定佣金'?'普通会员佣金':'普通会员佣金比例'">
+          <el-form-item :label="form.commissionType==='0'?'普通会员佣金':'普通会员佣金比例'">
             <el-input v-model="form.f__pthyyj" style="width:200px"></el-input>
-            <span v-if="form.f__yjlx==='固定佣金'">元</span>
+            <span v-if="form.commissionType==='0'">元</span>
             <span v-else>%</span>
           </el-form-item>
-          <el-form-item :label="form.f__yjlx==='固定佣金'?'VIP会员佣金':'VIP会员佣金比例'">
+          <el-form-item :label="form.commissionType==='0'?'VIP会员佣金':'VIP会员佣金比例'">
             <el-input v-model="form.f__viphyyj" style="width:200px"></el-input>
-            <span v-if="form.f__yjlx==='固定佣金'">元</span>
+            <span v-if="form.commissionType==='0'">元</span>
             <span v-else>%</span>
           </el-form-item>
-          <el-form-item label="项目状态">
-            <!-- <el-input v-model="form.f__yjlx"></el-input> -->
-            <c-select :dict="listXiangmuZhuangtai" v-model="form.f__xmzt" style="width:200px"></c-select>
+          <el-form-item label="楼盘状态">
+            <c-select dict="lpzt" v-model="form.projectStatus" style="width:200px"></c-select>
           </el-form-item>
           <el-form-item label="是否推荐">
-            <el-radio-group v-model="form.f__sftj">
-              <el-radio border :label="o.value" v-for="(o,i) in listShifouTuijian" :key="i">{{o.label}}</el-radio>
-            </el-radio-group>
+            <c-select type="radio" v-model="form.ifRecommend" dict="bool"></c-select>
           </el-form-item>
+          <el-collapse-transition>
+            <div v-if="form.ifRecommend==='1'">
+              <el-form-item label="推荐时间">
+                <el-date-picker v-model="form.recommendTime" value-format="yyyy-MM-dd"></el-date-picker>
+              </el-form-item>
+            </div>
+          </el-collapse-transition>
           <el-form-item label="专员（多选）">
-            <el-select v-model="form.f__zy" multiple style="width:100%">
-              <el-option :label="o.label" :value="o.value" v-for="(o,i) in listZhuanyuan" :key="i"></el-option>
-            </el-select>
+            <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan"></c-select>
           </el-form-item>
           <el-form-item label="项目主管（单选）">
-            <el-select v-model="form.f__xmzg" style="width:100%">
-              <el-option :label="o.label" :value="o.value" v-for="(o,i) in listXiangmuZhuguan" :key="i"></el-option>
-            </el-select>
+            <c-select v-model="form.f__xmzg" :dict="listXiangmuZhuguan"></c-select>
           </el-form-item>
           <el-form-item label="项目经理（多选）">
-            <el-select v-model="form.f__xmjl" multiple style="width:100%">
-              <el-option :label="o.label" :value="o.value" v-for="(o,i) in listXiangmuJingli" :key="i"></el-option>
-            </el-select>
+            <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli"></c-select>
           </el-form-item>
           <el-form-item label="审核人（单选）">
-            <el-select v-model="form.f__shr" style="width:100%">
-              <el-option :label="o.label" :value="o.value" v-for="(o,i) in listShenheren" :key="i"></el-option>
-            </el-select>
+            <c-select v-model="form.f__shr" :dict="listShenheren"></c-select>
           </el-form-item>
           <el-form-item label="区域经理（单选）">
-            <el-select v-model="form.f__qyjl" style="width:100%">
-              <el-option :label="o.label" :value="o.value" v-for="(o,i) in listQuyuJingli" :key="i"></el-option>
-            </el-select>
+            <c-select v-model="form.f__qyjl" :dict="listQuyuJingli"></c-select>
           </el-form-item>
         </el-form>
       </div>
     </c-panel>
 
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
-      <file-box v-model="listZiliaoku"></file-box>
+      <file-box v-model="form.f__listZiliaoku"></file-box>
     </c-panel>
     <c-panel title-color="rgb(45, 105, 50)" title="户型图" width="800px">
-      <file-box v-model="listHuxingtu"></file-box>
+      <file-box v-model="form.f__listHuxingtu"></file-box>
     </c-panel>
     <c-panel title-color="rgb(124, 72, 23)" title="海报" width="800px">
-      <file-box v-model="listHaibao"></file-box>
+      <file-box v-model="form.f__listHaibao"></file-box>
     </c-panel>
     <c-panel title-color="rgb(104, 132, 23)" title="佣金详细" width="800px">
-      <file-box v-model="listYongjinXiangxi"></file-box>
+      <file-box v-model="form.f__listYongjinXiangxi"></file-box>
     </c-panel>
     <c-panel title-color="rgb(124, 23, 23)" title="项目参数" width="800px">
-      <file-box v-model="listXiangmuCanshu"></file-box>
+      <file-box v-model="form.f__listXiangmuCanshu"></file-box>
     </c-panel>
     <c-panel title-color="rgb(23, 95, 124)" title="项目卖点" width="800px">
-      <file-box v-model="listXiangmuMaidian"></file-box>
+      <file-box v-model="form.f__listXiangmuMaidian"></file-box>
     </c-panel>
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
     </div>
-    <div>{{listZiliaoku}}</div>
+    <div>{{form}}</div>
   </div>
 </template>
 <script>
@@ -138,111 +117,28 @@ export default {
       // ueCsId: "",
       // ueMdId: "",
       listWuyeLeixing: [],
-      listShifouTuijian: [
-        {
-          label: "是",
-          value: "是"
-        },
-        {
-          label: "否",
-          value: "否"
-        },
-      ],
-      listYongjinLeixing: [
-        {
-          label: "固定佣金",
-          value: "固定佣金"
-        },
-        {
-          label: "佣金比例",
-          value: "佣金比例"
-        },
-      ],
-      listXiangmuZhuangtai: [
-        {
-          label: "未开盘",
-          value: "未开盘"
-        },
-        {
-          label: "销售中",
-          value: "销售中"
-        },
-        {
-          label: "已售罄",
-          value: "已售罄"
-        },
-      ],
-      listZhuanyuan: [
-        {
-          label: "张三",
-          value: "a"
-        },
-        {
-          label: "李四",
-          value: "b"
-        },
-      ],
-      listXiangmuZhuguan: [
-        {
-          label: "张三",
-          value: "a"
-        },
-        {
-          label: "李四",
-          value: "b"
-        },
-      ],
-      listXiangmuJingli: [
-        {
-          label: "张三",
-          value: "a"
-        },
-        {
-          label: "李四",
-          value: "b"
-        },
-      ],
-      listShenheren: [
-        {
-          label: "张三",
-          value: "a"
-        },
-        {
-          label: "李四",
-          value: "b"
-        },
-      ],
-      listQuyuJingli: [
-        {
-          label: "张三",
-          value: "a"
-        },
-        {
-          label: "李四",
-          value: "b"
-        },
-      ],
-      listLoupanLeixing: [
-        {
-          label: "城市楼盘",
-          value: "城市楼盘"
-        },
-        {
-          label: "康旅地产",
-          value: "康旅地产"
-        },
-      ],
+      listZhuanyuan: ["张三", "李四"],
+      listXiangmuZhuguan: ["张三", "李四"],
+      listXiangmuJingli: ["张三", "李四"],
+      listShenheren: ["张三", "李四"],
+      listQuyuJingli: ["张三", "李四"],
+      listLoupanLeixing: ["城市楼盘", "康旅地产"],
       form: {
         f__wylx: [],
-        f__yjlx: "固定佣金",
-        f__sftj: "是"
+        commissionType: "0",
+        ifRecommend: "1",
+        f__qy: {
+          city: "",
+          area: ""
+        },
+        f__listZiliaoku: [],
+        f__listHuxingtu: [],
+        f__listHaibao: [],
+        f__listYongjinXiangxi: [],
+        f__listXiangmuCanshu: [],
+        f__listXiangmuMaidian: [],
       },
-      listZiliaoku: [],
-      listHuxingtu: [],
-      listHaibao: [],
-      listYongjinXiangxi: [],
-      listXiangmuCanshu: [],
-      listXiangmuMaidian: [],
+
     }
   },
   methods: {
@@ -262,6 +158,47 @@ export default {
       })
     },
     save() {
+
+      // 复制form
+      let data = clone(this.form);
+      for (const key in data) {
+        if (key.indexOf("f__") >= 0) {
+          delete data[key];
+        }
+      }
+      data.cityId = this.form.f__qy.city;
+      data.areaId = this.form.f__qy.area;
+
+      // 佣金
+      if (data.commissionType === "固定佣金") {
+        data.generalCommission = this.form.f__pthyyj;
+        data.vipCommission = this.form.f__viphyyj;
+      } else {
+        data.generalCommissionBL = this.form.f__pthyyj;
+        data.vipCommissionBL = this.form.f__viphyyj;
+      }
+
+      // 推荐时间
+      if (data.ifRecommend !== "1") {
+        data.recommendTime = "";
+      }
+
+      // 用户
+      data.creator = "测试用户***"
+      data.createTime = moment().format("YYYY-MM-DD HH:mm:ss");
+
+      // 图片
+      data.parameterPictures = this.form.f__listXiangmuCanshu.join();
+      data.sellingPointPictures = this.form.f__listXiangmuMaidian.join();
+      data.dataPictures = this.form.f__listZiliaoku.join();
+      data.houseTypePictures = this.form.f__listHuxingtu.join();
+      data.posterPictures = this.form.f__listHaibao.join();
+      data.commissionPictures = this.form.f__listYongjinXiangxi.join();
+
+      console.log(data);
+      this.xpost("projectInfo/saveOrUpdate",data).then(res=>{
+        console.log(res);
+      })
 
     }
   },

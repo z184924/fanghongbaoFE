@@ -21,7 +21,7 @@
       <i class="ii i-quanping"></i>
       <span style="padding:0 3px;">全屏</span>
     </div>
-    <div class="xc1--control" style="color:#a00" @click="mxDevAlert">
+    <div class="xc1--control" style="color:#a00" @click="mxLogout">
       <i class="ii i-zhuxiao"></i>
       <span style="padding:0 3px;">注销</span>
     </div>

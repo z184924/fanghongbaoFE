@@ -96,34 +96,40 @@ export default {
   },
   watch: {
     value() {
-      if (this.value != null) {
-
-        if (this.multiSelect) {
-          // setTimeout(() => {
-
-          // }, 1)
-        } else {
-          // setTimeout(() => {
-          this.$refs.tree.setCurrentKey(this.value[this.fieldId]);
-          this.activeNode = this.$refs.tree.getCurrentNode();
-
-          this.$emit("input", this.activeNode);
-          // }, 100)
-        }
+      if (this.value != null && !this.multiSelect) {
+        this.$refs.tree.setCurrentKey(this.value[this.fieldId]);
+        this.activeNode = this.$refs.tree.getCurrentNode();
+        this.$emit("input", this.activeNode);
       }
     },
     checkedKeys: {
       handler() {
         this.$refs.tree.setCheckedKeys(this.checkedKeys);
-        setTimeout(e => {
-          this.$emit("input", this.$refs.tree.getCheckedNodes());
-        }, 1)
+        this.$nextTick(() => {
+          setTimeout(e => {
+            this.$emit("input", this.$refs.tree.getCheckedNodes());
+          }, 500)
+        })
       },
       deep: true
     }
   },
   methods: {
 
+
+    // renderContent(h, { node, data, store }) {
+    //   return (
+    //     <span class="custom-tree-node">
+    //       <span>{node.label}</span>
+    //       <span>
+    //         <el-button size="mini" type="text" on-click={() => this.append(data)}>Append</el-button>
+    //         <el-button size="mini" type="text" on-click={() => this.remove(node, data)}>Delete</el-button>
+    //       </span>
+    //     </span>);
+    // },
+
+
+    // tree
 
     getChildrenMenu(id, parent) {
       // console.log(this.list)
@@ -148,7 +154,10 @@ export default {
     },
     handleCheckChange(a) {
       this.$emit("input", this.$refs.tree.getCheckedNodes());
+      // console.log(this.$refs.tree.getCheckedNodes());
     }
+
+
   },
   created() {
     // this.getDataTree();

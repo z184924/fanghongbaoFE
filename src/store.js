@@ -18,25 +18,23 @@ export default new Vuex.Store({
   },
   mutations: {
     login(state, info) {
+      if (!info) {
+        info = {};
+      }
       state.loginInfo = info;
-      sessionStorage.setItem("loginInfo", JSON.stringify(info));
+      localStorage.setItem("loginInfo", JSON.stringify(info));
     },
     logout(state) {
-      let info = {
-        username: "",
-        nickname: "",
-        type: 1,
-        token: "",
-      };
+      let info = {};
       state.loginInfo = info;
-      sessionStorage.setItem("loginInfo", JSON.stringify(info));
+      localStorage.setItem("loginInfo", JSON.stringify(info));
     },
     changeBasePath(state, path) {
       state.basePath = path;
     },
     setDict(state, dict) {
       state.dict = dict;
-      sessionStorage.setItem("dict", JSON.stringify(dict));
+      localStorage.setItem("dict", JSON.stringify(dict));
     },
     changeBread(state, b) {
       state.bread1 = b.b1;
