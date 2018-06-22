@@ -341,7 +341,10 @@ $panel-header-height:40px;
   }
 }
 .xc10{
-  .el-icon-delete{
+  .el-icon-delete, & span{
     color:red;
+  }
+  &.el-button{
+    border-color:rgb(255, 195, 195);
   }
 }

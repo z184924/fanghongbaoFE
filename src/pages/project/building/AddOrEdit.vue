@@ -1,7 +1,9 @@
 <template>
   <div class="xc3">
-    <el-button @click="mxBack">← 返回</el-button>
-    <div style="height:30px"></div>
+    <el-tooltip class="item" effect="dark" content="返回" placement="right" :enterable="false">
+      <el-button type="primary" @click="mxBack" icon="el-icon-arrow-left" circle></el-button>
+    </el-tooltip>
+    <!-- <div style="height:30px"></div> -->
     <c-panel width="800px" title="基本信息">
       <div class="xc3--form">
         <el-form ref="form" :model="form" label-width="12em">
@@ -112,10 +114,6 @@ export default {
   },
   data() {
     return {
-      // ueCs: null,
-      // ueMd: null,
-      // ueCsId: "",
-      // ueMdId: "",
       listWuyeLeixing: [],
       listZhuanyuan: ["张三", "李四"],
       listXiangmuZhuguan: ["张三", "李四"],
@@ -195,7 +193,6 @@ export default {
       data.posterPictures = this.form.f__listHaibao.join();
       data.commissionPictures = this.form.f__listYongjinXiangxi.join();
 
-      console.log(data);
       this.xpost("projectInfo/saveOrUpdate", data).then(res => {
         this.mxMessage(res)
       })

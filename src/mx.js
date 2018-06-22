@@ -17,29 +17,22 @@ var myMixin = {
   },
   methods: {
     mxStringify(o) {
-      if (typeof o === "object") {
+      if (kindOf(o) === "object") {
         for (const key in o) {
           o[key] = o[key] + "";
         }
         return o
-      } else if (typeof o === "number") {
+      } else if (kindOf(o) === "number") {
         return o + "";
       } else {
         return o;
       }
     },
-
-
-
     mxLogout() {
       this.$store.commit("logout");
     },
-
-
     mxArrayToString(arr, p) {
-      // console.log(arr)
       if (arr) {
-
         let str = "";
         arr.forEach((item, i) => {
           str += item + " ";
@@ -52,7 +45,6 @@ var myMixin = {
       }
     },
     mxMessage(res) {
-      console.log(res);
       this.$message({
         message: res.message,
         type: res.state
@@ -71,10 +63,9 @@ var myMixin = {
       let a = JSON.parse(str);
       return a;
     },
-
     mxTableMerge(list, field) {
       let node = 0;
-      let nodeName = "123123123123sds21fs21d3f21sd";
+      let nodeName = "---";
       list.forEach((item, i) => {
         if (item[field] == nodeName) {
           list[i].rowspan = 0;
@@ -101,33 +92,19 @@ var myMixin = {
         }
       });
       return name;
-
     },
-
     xpost(api, data = {}, log = false) {
       if (api != "login_login") {
         data.token = this.mxLoginInfo.token;
       }
       let url = this.mxApi(api);
-      // console.log(url);
-      if (log) {
-        console.info(
-          "----------★★★请求开始★★★-----------------"
-        )
-        console.log("请求地址：", url);
-        console.log("发送数据：", data);
-      }
       return new Promise((resolve, reject) => {
-
         let vue = this;
         $.ajax({
           url,
           type: "post",
           data,
           success(res) {
-            if (log) {
-              console.log("收到数据：", res);
-            }
             if (res) {
               if (res.state == "errorToken") {
                 vue.$store.commit("logout");
@@ -151,24 +128,12 @@ var myMixin = {
               }
 
             }
-            if (log) {
-              console.log(
-                `----------★★★请求结束（成功）★★★---------------------`
-              );
-            }
           },
           error(err) {
             vue.$message({
               message: "无法连接服务器，请稍候重试。",
               type: "error"
             });
-            if (log) {
-              console.error("请求错误：", err);
-              console.error(
-                `----------★★★请求结束（失败）★★★------------------`
-              );
-              console.log(" ");
-            }
             reject(err);
           }
         })
@@ -177,7 +142,6 @@ var myMixin = {
     mxBack() {
       window.history.go(-1);
     },
-
     mxApi(api) {
       let url = this.mxBasePath;
       url += api;

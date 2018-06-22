@@ -3,9 +3,7 @@
     <fixed-table ref="table" get-data-url="projectInfo/getGridListJson" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加楼盘</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑楼盘</el-button>
-      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">
-        <span style="color:red">删除楼盘</span>
-      </el-button>
+      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除楼盘</el-button>
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
   </div>
@@ -30,10 +28,43 @@ export default {
           type: "string",
         },
         ptyj: {
-          label: "佣金",
+          label: "普通会员佣金",
           type: "string",
-          formatter(v){
-            console.log(v);
+          formatter(v) {
+            if (v.commissionType === 0) {
+              return v.generalCommission + "元"
+            } else {
+              return v.generalCommissionBL + "%"
+            }
+            // console.log(v);
+          }
+        },
+        vipyj: {
+          label: "VIP佣金",
+          type: "string",
+          formatter(v) {
+            if (v.commissionType === 0) {
+              return v.vipCommission + "元"
+            } else {
+              return v.vipCommissionBL + "%"
+            }
+            // console.log(v);
+          }
+        },
+        ifRecommend: {
+          label: "是否推荐",
+          formatter(r, c, v) {
+            if (v === 0) {
+              return "-"
+            } else {
+              return "√ 是"
+            }
+          }
+        },
+        recommendTime: {
+          label: "推荐时间",
+          formatter(r, c, v) {
+            return moment(v).format("YYYY-MM-DD")
           }
         },
       },
@@ -67,7 +98,9 @@ export default {
     },
     del() {
       if (this.isSelect) {
-        this.$confirm("是否删除该楼盘？", "删除").then(() => {
+        this.$confirm("是否删除该楼盘？", "删除", {
+          type: "warning"
+        }).then(() => {
           this.xpost("projectInfo/delete", {
             projectId: this.selectedRow.projectId
           }).then(res => {

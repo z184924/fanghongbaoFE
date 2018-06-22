@@ -9,6 +9,7 @@ import $ from "jquery"
 // import Ve from "velocity-animate"
 import moment from "moment"
 import clone from "clone"
+import kindOf from "kind-of"
 
 
 
@@ -39,6 +40,7 @@ window.$ = $;
 // window.Ve = Ve;
 window.moment = moment;
 window.clone = clone;
+window.kindOf = kindOf;
 
 Vue.directive('drag', {
   bind(el) {

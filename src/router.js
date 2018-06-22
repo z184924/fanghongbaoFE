@@ -38,7 +38,7 @@ export default new Router({
       component: ProjectBuilding,
     },
     {
-      path: "/project/building/add-or-edit/:type",//add/edit
+      path: "/project/building/add-or-edit/:type", //add/edit
       name: "ProjectBuildingAddOrEdit",
       component: ProjectBuildingAddOrEdit,
     },

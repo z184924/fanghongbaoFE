@@ -16,6 +16,7 @@ export default new Vuex.Store({
     bread2: "轨迹监控",
     windowHeight: 0,
     temp: null,
+    bread:{},
   },
   mutations: {
     login(state, info) {

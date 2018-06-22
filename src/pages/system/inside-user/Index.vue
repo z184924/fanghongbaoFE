@@ -80,17 +80,14 @@ export default {
         },
         account: {
           label: "登录名",
-          // width:"100px",
           type: "string"
         },
         userName: {
           label: "姓名",
-          // width:"100px",
           type: "string"
         },
         isInsider: {
           label: "是否内部用户",
-          // width:"100px",
           type: "string",
           formatter(r, c, v) {
             return v === 1 ? "是" : "-"
@@ -98,7 +95,6 @@ export default {
         },
         isVIP: {
           label: "是否VIP",
-          // width:"100px",
           type: "string",
           formatter(r, c, v) {
             return v === 1 ? "是" : "-"
@@ -106,7 +102,6 @@ export default {
         },
         registerTime: {
           label: "注册时间",
-          // width:"100px",
           type: "string",
           formatter(r, c, v) {
             return moment(v).format("YYYY-MM-DD HH:mm:ss");
@@ -114,7 +109,6 @@ export default {
         },
         roleId: {
           label: "角色名称",
-          // width:"100px",
           type: "string",
           formatter(r, c, v) {
             return vue.mxDictToString(vue.roleList, v);

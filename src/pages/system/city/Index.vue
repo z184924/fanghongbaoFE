@@ -63,7 +63,6 @@ export default {
 
       clearTimeout(this.timerSearchWyy);
       this.timerSearchWyy = setTimeout(() => {
-
         this.xpost("city/getNoBusinessCitys", {
           cityName: this.searchTextWyy
         }).then(res => {
@@ -88,7 +87,6 @@ export default {
               value: o.cityId
             }
           });
-          console.log(this.listYyy);
         })
       }, delay)
     },

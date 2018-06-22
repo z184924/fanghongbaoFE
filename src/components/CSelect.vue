@@ -51,7 +51,7 @@ export default {
     },
     list() {
       if (this.dict) {
-        if (typeof this.dict === "string") {
+        if (kindOf(this.dict) === "string") {
           let a = this.$store.state.dict[this.dict].map(o => {
             return {
               label: o.NAME + "",
@@ -59,25 +59,19 @@ export default {
             }
           });
           return a;
-        } else if (typeof this.dict === "object") {
-          if (this.dict.length > 0) {
-            let a = [];
-            this.dict.forEach(o => {
-              if (typeof o === "object") {
-                a.push(o)
-              } else {
-                a.push({
-                  label: o,
-                  value: o
-                })
-              }
-            })
-            return a;
-          } else {
-            return [];
-
-          }
-
+        } else if (kindOf(this.dict) === "array") {
+          let a = [];
+          this.dict.forEach(o => {
+            if (kindOf(o) === "object") {
+              a.push(o)
+            } else {
+              a.push({
+                label: o,
+                value: o
+              })
+            }
+          })
+          return a;
         } else {
           return [];
         }
@@ -88,7 +82,7 @@ export default {
   },
   created() {
     // console.log(this.value);
-    if (!this.dict || typeof this.dict === "object") {
+    if (!this.dict || kindOf(this.dict) === "object") {
       // this.value = [];
       // this.$emit("input", []);
       this.selectedValue = [];
