@@ -77,7 +77,7 @@
         </el-form>
       </div>
     </c-panel>
-    <div>{{form}}</div>
+    <!-- <div>{{form}}</div> -->
 
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
       <file-box v-model="form.f__listZiliaoku"></file-box>
