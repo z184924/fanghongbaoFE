@@ -14,8 +14,6 @@
 
 export default {
   data() {
-    let vue = this;
-    console.log(vue);
     return {
       fields: {
         projectName: {
