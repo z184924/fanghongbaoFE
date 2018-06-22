@@ -9,7 +9,7 @@ import Index from "./pages/index/Index"
 
 // 项目管理
 import ProjectBuilding from "./pages/project/building/Index"
-import ProjectBuildingAdd from "./pages/project/building/Add"
+import ProjectBuildingAddOrEdit from "./pages/project/building/AddOrEdit"
 
 // 系统管理
 import SystemBuilding from "./pages/system/building/Index"
@@ -38,9 +38,9 @@ export default new Router({
       component: ProjectBuilding,
     },
     {
-      path: "/project/building/add",
-      name: "ProjectBuildingAdd",
-      component: ProjectBuildingAdd,
+      path: "/project/building/add-or-edit/:type",//add/edit
+      name: "ProjectBuildingAddOrEdit",
+      component: ProjectBuildingAddOrEdit,
     },
     {
       path: "/system/inside-user",

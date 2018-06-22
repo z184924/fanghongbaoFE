@@ -77,6 +77,7 @@
         </el-form>
       </div>
     </c-panel>
+    <div>{{form}}</div>
 
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
       <file-box v-model="form.f__listZiliaoku"></file-box>
@@ -99,7 +100,6 @@
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
     </div>
-    <div>{{form}}</div>
   </div>
 </template>
 <script>
@@ -170,7 +170,7 @@ export default {
       data.areaId = this.form.f__qy.area;
 
       // 佣金
-      if (data.commissionType === "固定佣金") {
+      if (data.commissionType === "0") {
         data.generalCommission = this.form.f__pthyyj;
         data.vipCommission = this.form.f__viphyyj;
       } else {
@@ -196,8 +196,8 @@ export default {
       data.commissionPictures = this.form.f__listYongjinXiangxi.join();
 
       console.log(data);
-      this.xpost("projectInfo/saveOrUpdate",data).then(res=>{
-        console.log(res);
+      this.xpost("projectInfo/saveOrUpdate", data).then(res => {
+        this.mxMessage(res)
       })
 
     }
@@ -210,26 +210,31 @@ export default {
           value: o.propertyTypeId,
         }
       })
-      // console.log(res);
-    })
-    this.xpost("city/getAreasByCityID").then(res => {
-      // console.log(res);
+
+      // 编辑：
+      if (this.$route.params.type === "edit") {
+        let temp = this.$store.state.temp;
+        temp = this.mxStringify(temp);
+        if (temp) {
+          this.form = { ...this.form, ...clone(temp) };
+          this.form.f__qy.city = this.form.cityId;
+          this.form.f__qy.area = this.form.areaId;
+          if (this.form.commissionType === "0") {
+            this.form.f__pthyyj = this.form.generalCommission;
+            this.form.f__viphyyj = this.form.vipCommission;
+          } else {
+            this.form.f__pthyyj = this.form.generalCommissionBL;
+            this.form.f__viphyyj = this.form.vipCommissionBL;
+          }
+          console.log(this.form);
+        } else {
+          this.$router.replace("/project/building")
+        }
+      }
     })
 
-    // this.ueCsId = uuid.v4();
-    // this.ueMdId = uuid.v4();
-    // this.$nextTick(() => {
-    //   this.ueCs = null;
-    //   this.ueMd = null;
-    //   this.ueCs = UE.getEditor(this.ueCsId, {
-    //     autoHeightEnabled: false,
-    //     initialFrameHeight: 200
-    //   });
-    //   this.ueMd = UE.getEditor(this.ueMdId, {
-    //     autoHeightEnabled: false,
-    //     initialFrameHeight: 200
-    //   });
-    // })
+
+
   }
 }
 </script>

@@ -15,6 +15,7 @@ export default new Vuex.Store({
     bread1: "首页",
     bread2: "轨迹监控",
     windowHeight: 0,
+    temp: null,
   },
   mutations: {
     login(state, info) {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
     },
     setPicBasePath(state, picBasePath) {
       state.picBasePath = picBasePath;
+    },
+    setTemp(state, temp) {
+      state.temp = temp;
     }
   }
 });

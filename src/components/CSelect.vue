@@ -54,8 +54,8 @@ export default {
         if (typeof this.dict === "string") {
           let a = this.$store.state.dict[this.dict].map(o => {
             return {
-              label: o.NAME,
-              value: o.CODE
+              label: o.NAME + "",
+              value: o.CODE + ""
             }
           });
           return a;

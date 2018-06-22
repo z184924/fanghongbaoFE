@@ -3,6 +3,7 @@ import FixedTable from "@/components/FixedTable"
 import FileBox from "@/components/FileBox"
 import CSelect from "@/components/CSelect"
 import CPanel from "@/components/CPanel"
+import AreaLabel from "@/components/AreaLabel"
 
 
 var myMixin = {
@@ -11,9 +12,22 @@ var myMixin = {
     FixedTable,
     CSelect,
     CPanel,
-    FileBox
+    FileBox,
+    AreaLabel
   },
   methods: {
+    mxStringify(o) {
+      if (typeof o === "object") {
+        for (const key in o) {
+          o[key] = o[key] + "";
+        }
+        return o
+      } else if (typeof o === "number") {
+        return o + "";
+      } else {
+        return o;
+      }
+    },
 
 
 
@@ -169,11 +183,11 @@ var myMixin = {
       url += api;
       return url;
     },
-    mxDevAlert(){
+    mxDevAlert() {
       this.$msgbox({
-        title:"提示",
-        message:"开发中……",
-        type:"info"
+        title: "提示",
+        message: "开发中……",
+        type: "info"
       })
     }
   },

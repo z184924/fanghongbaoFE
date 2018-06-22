@@ -48,11 +48,6 @@ export default {
     // FileView
   },
   props: {
-    // 刷新（改变此值将使表格刷新）
-    refresh: {
-      type: Number,
-      default: 0,
-    },
     // 是否显示控制按钮
     showControl: {
       type: Boolean,
@@ -163,9 +158,6 @@ export default {
         return [];
       }
     },
-    map: {
-      default: null
-    },
 
 
     // 字段
@@ -241,9 +233,6 @@ export default {
     }
   },
   watch: {
-    refresh() {
-      this.getData();
-    },
     dataParam() {
       this.getData();
     },
