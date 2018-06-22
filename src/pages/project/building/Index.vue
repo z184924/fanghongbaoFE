@@ -36,7 +36,6 @@ export default {
             } else {
               return v.generalCommissionBL + "%"
             }
-            // console.log(v);
           }
         },
         vipyj: {
@@ -48,7 +47,6 @@ export default {
             } else {
               return v.vipCommissionBL + "%"
             }
-            // console.log(v);
           }
         },
         ifRecommend: {

@@ -15,6 +15,9 @@
     <!-- dialog -->
     <el-dialog v-drag :visible.sync="isShowAdd" width="400px" title="新增内部用户">
       <el-form ref="formAdd" :model="formAdd" label-width="6em" :rules="rules">
+        <el-form-item label="账号" prop="account">
+          <el-input v-model="formAdd.account"></el-input>
+        </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="formAdd.phone"></el-input>
         </el-form-item>
@@ -31,6 +34,9 @@
 
     <el-dialog v-drag :visible.sync="isShowEdit" width="400px" title="编辑内部用户">
       <el-form ref="formEdit" :model="formEdit" label-width="6em" :rules="rules">
+        <el-form-item label="账号" prop="account">
+          <el-input v-model="formEdit.account"></el-input>
+        </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="formEdit.phone"></el-input>
         </el-form-item>
@@ -121,6 +127,9 @@ export default {
       isShowEdit: false,
       roleList: [],
       rules: {
+        account: [
+          { required: true, message: '请填写账号', trigger: 'blur' }
+        ],
         userName: [
           { required: true, message: '请填写姓名', trigger: 'blur' }
         ],
@@ -150,6 +159,7 @@ export default {
       this.$refs.formAdd.validate((valid) => {
         if (valid) {
           this.xpost("user/saveInnerUser", {
+            account:this.formAdd.account,
             userName: this.formAdd.userName,
             phone: this.formAdd.phone,
             roleId: this.formAdd.role,
@@ -187,6 +197,7 @@ export default {
         if (valid) {
           this.xpost("user/updateInnerUser", {
             userId: this.selectedRow.userId,
+            account:this.formEdit.account,
             userName: this.formEdit.userName,
             phone: this.formEdit.phone,
             roleId: this.formEdit.role,
