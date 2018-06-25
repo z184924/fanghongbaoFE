@@ -5,9 +5,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     // 正式环境，修改测试环境请更改localhostConfig.js，并保证端口为17011
-    basePath: "http://111.30.79.43:60033/",
-    picBasePath: "http://111.30.79.43:60041/",
-    smallPicBasePath: "http://111.30.79.43:60041/",
+    basePath: "http://123.57.32.164:8080/",
+    picBasePath: "http://123.57.32.164:7001/",
+    smallPicBasePath: "http://123.57.32.164:7001/",
     menuList: [],
     devMode: false,
     loginInfo: {},
