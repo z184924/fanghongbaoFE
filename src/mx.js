@@ -4,6 +4,8 @@ import FileBox from "@/components/FileBox"
 import CSelect from "@/components/CSelect"
 import CPanel from "@/components/CPanel"
 import AreaLabel from "@/components/AreaLabel"
+import request from "request"
+import json5 from "json5"
 
 
 var myMixin = {
@@ -100,11 +102,13 @@ var myMixin = {
       let url = this.mxApi(api);
       return new Promise((resolve, reject) => {
         let vue = this;
-        $.ajax({
+        request.post({
           url,
-          type: "post",
-          data,
-          success(res) {
+          form: data
+        }, (err, xhr, res) => {
+          console.log(xhr);
+          if (xhr.statusCode === 200) {
+            res = json5.parse(res);
             if (res) {
               if (res.state == "errorToken") {
                 vue.$store.commit("logout");
@@ -128,15 +132,51 @@ var myMixin = {
               }
 
             }
-          },
-          error(err) {
+          } else {
             vue.$message({
-              message: "无法连接服务器，请稍候重试。",
+              message: `请求失败。（错误代码：${xhr.statusCode}，错误信息：${xhr.statusMessage}）`,
               type: "error"
             });
             reject(err);
           }
         })
+        // $.ajax({
+        //   url,
+        //   type: "post",
+        //   data,
+        //   success(res) {
+        //     if (res) {
+        //       if (res.state == "errorToken") {
+        //         vue.$store.commit("logout");
+        //       }
+        //       if (res.state != "error") {
+        //         if (JSON.stringify(res).indexOf("您访问的页面出现异常") >= 0) {
+        //           reject("error");
+        //           vue.$message({
+        //             message: "服务器应用程序异常（500）",
+        //             type: "error"
+        //           });
+        //         } else {
+        //           resolve(res);
+        //         }
+        //       } else {
+        //         vue.$message({
+        //           message: res.message,
+        //           type: "error"
+        //         });
+        //         reject(res);
+        //       }
+
+        //     }
+        //   },
+        //   error(err) {
+        //     vue.$message({
+        //       message: "无法连接服务器，请稍候重试。",
+        //       type: "error"
+        //     });
+        //     reject(err);
+        //   }
+        // })
       });
     },
     mxBack() {

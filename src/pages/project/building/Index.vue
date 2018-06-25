@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="xc6 xc-shadow">
     <fixed-table ref="table" get-data-url="projectInfo/getGridListJson" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加楼盘</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑楼盘</el-button>
@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-
+import Vue from "vue";
 export default {
   data() {
     return {
@@ -17,7 +17,6 @@ export default {
         projectName: {
           label: "楼盘名称",
           type: "string",
-          // width: "120px"
         },
         sellingAverage: {
           label: "平均售价",
@@ -53,9 +52,9 @@ export default {
           label: "是否推荐",
           formatter(r, c, v) {
             if (v === 0) {
-              return "-"
+              return "☆ 否"
             } else {
-              return "√ 是"
+              return "★ 是"
             }
           }
         },
@@ -114,6 +113,15 @@ export default {
         })
       }
     }
+  },
+  created() {
+    // let a = Vue.extend(CTest);
+    // let c = new a();
+    // c.$mount();
+    // console.log(c);
+    // document.querySelector("body").appendChild(c.$el)
+    // // a.vm=a.$mount();
+    // // a.$mount("body")
   }
 }
 </script>

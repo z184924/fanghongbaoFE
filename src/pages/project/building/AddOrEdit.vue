@@ -7,9 +7,11 @@
     <c-panel width="800px" title="基本信息">
       <div class="xc3--form">
         <el-form ref="form" :model="form" label-width="12em">
-          <el-form-item label="楼盘名称">
-            <el-input v-model="form.projectName"></el-input>
-          </el-form-item>
+          <div class="xc11">
+            <el-form-item label="楼盘名称">
+              <el-input v-model="form.projectName"></el-input>
+            </el-form-item>
+          </div>
           <el-form-item label="区域">
             <area-picker v-model="form.f__qy"></area-picker>
           </el-form-item>

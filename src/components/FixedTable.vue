@@ -376,7 +376,7 @@ export default {
         this.xpost(this.getDataUrl, param).then(res => {
           this.page.total = res.records;
           if (this.map) {
-            this.dataList = res.rows.map(o=>{
+            this.dataList = res.rows.map(o => {
               return this.map(o);
             });
           } else {
@@ -442,4 +442,10 @@ export default {
   }
 }
 </style>
+<style>
+.fixed-table tr {
+  cursor: pointer;
+}
+</style>
+
 
