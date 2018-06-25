@@ -107,6 +107,9 @@ export default {
 
     },
 
+  },
+  created(){
+    console.log(this.value);
   }
 }
 </script>

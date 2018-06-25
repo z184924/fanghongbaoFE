@@ -40,14 +40,14 @@
           <el-form-item label="佣金类型">
             <c-select dict="yjbl" v-model="form.commissionType" style="width:200px"></c-select>
           </el-form-item>
-          <el-form-item :label="form.commissionType==='0'?'普通会员佣金':'普通会员佣金比例'">
+          <el-form-item :label="form.commissionType===0?'普通会员佣金':'普通会员佣金比例'">
             <el-input v-model="form.f__pthyyj" style="width:200px"></el-input>
-            <span v-if="form.commissionType==='0'">元</span>
+            <span v-if="form.commissionType===0">元</span>
             <span v-else>%</span>
           </el-form-item>
-          <el-form-item :label="form.commissionType==='0'?'VIP会员佣金':'VIP会员佣金比例'">
+          <el-form-item :label="form.commissionType===0?'VIP会员佣金':'VIP会员佣金比例'">
             <el-input v-model="form.f__viphyyj" style="width:200px"></el-input>
-            <span v-if="form.commissionType==='0'">元</span>
+            <span v-if="form.commissionType===0">元</span>
             <span v-else>%</span>
           </el-form-item>
           <el-form-item label="楼盘状态">
@@ -57,7 +57,7 @@
             <c-select type="radio" v-model="form.ifRecommend" dict="bool"></c-select>
           </el-form-item>
           <el-collapse-transition>
-            <div v-if="form.ifRecommend==='1'">
+            <div v-if="form.ifRecommend===1">
               <el-form-item label="推荐时间">
                 <el-date-picker v-model="form.recommendTime" value-format="yyyy-MM-dd"></el-date-picker>
               </el-form-item>
@@ -170,7 +170,7 @@ export default {
       data.areaId = this.form.f__qy.area;
 
       // 佣金
-      if (data.commissionType === "0") {
+      if (data.commissionType === 0) {
         data.generalCommission = this.form.f__pthyyj;
         data.vipCommission = this.form.f__viphyyj;
       } else {
@@ -179,7 +179,7 @@ export default {
       }
 
       // 推荐时间
-      if (data.ifRecommend !== "1") {
+      if (data.ifRecommend !== 1) {
         data.recommendTime = "";
       }
 
@@ -213,19 +213,32 @@ export default {
       // 编辑：
       if (this.$route.params.type === "edit") {
         let temp = this.$store.state.temp;
-        temp = this.mxStringify(temp);
+        // temp = this.mxStringify(temp);
         if (temp) {
           this.form = { ...this.form, ...clone(temp) };
           this.form.f__qy.city = this.form.cityId;
           this.form.f__qy.area = this.form.areaId;
-          if (this.form.commissionType === "0") {
+          if (this.form.commissionType === 0) {
             this.form.f__pthyyj = this.form.generalCommission;
             this.form.f__viphyyj = this.form.vipCommission;
           } else {
             this.form.f__pthyyj = this.form.generalCommissionBL;
             this.form.f__viphyyj = this.form.vipCommissionBL;
           }
-          console.log(this.form);
+          // 推荐时间
+          if (this.form.ifRecommend === 1) {
+            this.form.recommendTime = moment(this.form.recommendTime).format("YYYY-MM-DD");
+          } else {
+            this.form.recommendTime = "";
+          }
+
+          // 图片
+          this.form.f__listZiliaoku = this.form.dataPictures.split(",");
+          this.form.f__listHuxingtu = this.form.houseTypePictures.split(",");
+          this.form.f__listHaibao = this.form.posterPictures.split(",");
+          this.form.f__listYongjinXiangxi = this.form.commissionPictures.split(",");
+          this.form.f__listXiangmuCanshu = this.form.parameterPictures.split(",");
+          this.form.f__listXiangmuMaidian = this.form.sellingPointPictures.split(",");
         } else {
           this.$router.replace("/project/building")
         }

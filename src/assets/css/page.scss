@@ -209,14 +209,15 @@ body .stage {
     top: -5px;
     width: 25px;
     height: 25px;
-    background: rgba(245, 49, 49, 0.658);
+    background: #c03030;
     color: #fff;
     font-size: 20px;
     border-radius: 5px;
     transition: all 0.2s;
     cursor: pointer;
     &:hover {
-      background: rgb(255, 105, 105);
+      transform:rotateZ(90deg);
+      background: #d45353;
     }
   }
   &--box {

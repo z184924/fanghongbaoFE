@@ -21,7 +21,9 @@ var myMixin = {
     mxStringify(o) {
       if (kindOf(o) === "object") {
         for (const key in o) {
-          o[key] = o[key] + "";
+          if (o[key] < 100) {
+            o[key] = o[key] + "";
+          }
         }
         return o
       } else if (kindOf(o) === "number") {
@@ -106,7 +108,7 @@ var myMixin = {
           url,
           form: data
         }, (err, xhr, res) => {
-          console.log(xhr);
+          // console.log(xhr);
           if (xhr.statusCode === 200) {
             res = json5.parse(res);
             if (res) {

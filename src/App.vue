@@ -67,7 +67,6 @@ export default {
     let loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
 
     this.$store.commit("setDict", JSON.parse(localStorage.getItem("dict")));
-    console.log(JSON.parse(localStorage.getItem("loginInfo")));
     this.$store.commit("login", JSON.parse(localStorage.getItem("loginInfo")));
   },
 

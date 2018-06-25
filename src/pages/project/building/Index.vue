@@ -83,7 +83,6 @@ export default {
     },
     edit() {
       if (this.isSelect) {
-
         this.$store.commit("setTemp", this.selectedRow);
         this.$router.push("building/add-or-edit/edit")
       } else {

@@ -54,8 +54,8 @@ export default {
         if (kindOf(this.dict) === "string") {
           let a = this.$store.state.dict[this.dict].map(o => {
             return {
-              label: o.NAME + "",
-              value: o.CODE + ""
+              label: o.NAME,
+              value: o.CODE
             }
           });
           return a;
@@ -88,6 +88,7 @@ export default {
       this.selectedValue = [];
     }
     this.selectedValue = this.value;
+    // console.log(this.selectedValue,this.selectedValue*1);
 
   }
 
