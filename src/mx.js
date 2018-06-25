@@ -49,17 +49,20 @@ var myMixin = {
       }
     },
     mxMessage(res) {
-      this.$message({
-        message: res.message,
-        type: res.state
-      });
       return new Promise(resolve => {
-        if (res.state == "success") {
-          resolve();
-        } else {
-          throw new Error("");
-        }
-      })
+        this.$msgbox({
+          title: "提示",
+          message: res.message,
+          type: res.state
+        }).then(() => {
+          if (res.state == "success") {
+            resolve();
+          } else {
+            throw new Error("");
+          }
+        })
+      });
+
 
     },
     mxDeepClone(obj) {

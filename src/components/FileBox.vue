@@ -4,7 +4,7 @@
     <div class="xc2--box-out">
       <div class="xc2--box">
         <transition-group name="el-zoom-in-center">
-          <div v-for="(o,i) in value" :key="i" class="xc2--img-box" :style="imgStyle">
+          <div v-for="(o,i) in list" :key="i" class="xc2--img-box" :style="imgStyle">
             <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2--img" @click="openImg(o)">
             <div class="xc2--close" @click="remove(i)">×</div>
           </div>
@@ -25,10 +25,6 @@ export default {
     title: {
       type: String,
       default: "",
-    },
-    mode: {
-      type: String,
-      default: "image",//file|image
     },
     editable: {
       type: Boolean,
@@ -55,8 +51,17 @@ export default {
     }
   },
   computed: {
+    list() {
+      let a = [];
+      this.value.forEach(o => {
+        if (o) {
+          a.push(o)
+        }
+      })
+      return a;
+    },
     action() {
-      return this.mxApi("projectInfo/saveFile");
+      return this.mxApi("common/saveFile");
     },
     imgStyle() {
       return {
@@ -84,8 +89,9 @@ export default {
       this.$confirm("是否删除该图片？", "删除", {
         type: "warning"
       }).then(() => {
-        this.value.splice(i, 1);
-        this.$emit("input", this.value);
+        let a = clone(this.value);
+        a.splice(i, 1);
+        this.$emit("input", a);
       })
     },
     openImg(src) {
@@ -95,22 +101,26 @@ export default {
       this.isShowAdd = true;
     },
     handleAvatarSuccess(res) {
-      console.log(res);
       if (res.state === 'success') {
-        this.value.push(res.message);
-        this.$emit("input", this.value);
+        let a = clone(this.value);
+        a.push(res.message);
+        this.$emit("input", a);
         // 成功
 
       }
     },
-    beforeAvatarUpload() {
-
+    beforeAvatarUpload(a) {
+      if (a.type.indexOf("image") < 0) {
+        this.$msgbox({
+          type:"error",
+          title:"上传出错",
+          message:"请上传图片。",
+        })
+        return false;
+      }
     },
 
   },
-  created(){
-    console.log(this.value);
-  }
 }
 </script>
 

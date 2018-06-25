@@ -36,6 +36,9 @@ export default new Router({
       path: "/project/building",
       name: "ProjectBuilding",
       component: ProjectBuilding,
+      meta:{
+        keepAlive:true
+      }
     },
     {
       path: "/project/building/add-or-edit/:type", //add/edit

@@ -18,7 +18,10 @@
         <div class="stage--page">
           <div class="stage--page-in">
             <!-- <transition name="fade"> -->
-            <router-view></router-view>
+            <keep-alive>
+              <router-view v-if="$route.meta.keepAlive"></router-view>
+            </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive"></router-view>
             <div style="height:130px"></div>
             <!-- </transition> -->
           </div>

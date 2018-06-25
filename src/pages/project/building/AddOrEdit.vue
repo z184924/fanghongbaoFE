@@ -196,7 +196,9 @@ export default {
       data.commissionPictures = this.form.f__listYongjinXiangxi.join();
 
       this.xpost("projectInfo/saveOrUpdate", data).then(res => {
-        this.mxMessage(res)
+        this.mxMessage(res).then(()=>{
+          this.mxBack();
+        })
       })
 
     }
