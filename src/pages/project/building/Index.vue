@@ -52,7 +52,7 @@ export default {
         ifRecommend: {
           label: "是否推荐",
           formatter(r, c, v) {
-            if (v === 0) {
+            if (v === 1) {
               return vue.YES
             } else {
               return vue.NO
@@ -113,15 +113,6 @@ export default {
         })
       }
     }
-  },
-  created() {
-    // let a = Vue.extend(CTest);
-    // let c = new a();
-    // c.$mount();
-    // console.log(c);
-    // document.querySelector("body").appendChild(c.$el)
-    // // a.vm=a.$mount();
-    // // a.$mount("body")
   }
 }
 </script>
