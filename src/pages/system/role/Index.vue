@@ -3,7 +3,7 @@
     <div class="xc12">
       <div class="xc12--item xc-shadow" :class="{'x-no-user':o.count===0}" v-for="(o,i) in listRole" :key="i" @click="showUser(o)">
         <div class="xc12--title">{{o.roleName}}</div>
-        <div class="xc12--count">人数：{{o.count}}</div>
+        <div class="xc12--count">{{o.count}}人</div>
       </div>
     </div>
     <el-dialog :visible.sync="isShowDialog" v-drag title="用户列表">
