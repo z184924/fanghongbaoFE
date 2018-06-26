@@ -12,6 +12,7 @@
 import Vue from "vue";
 export default {
   data() {
+    let vue=this;
     return {
       fields: {
         projectName: {
@@ -52,9 +53,9 @@ export default {
           label: "是否推荐",
           formatter(r, c, v) {
             if (v === 0) {
-              return "☆ 否"
+              return vue.YES
             } else {
-              return "★ 是"
+              return vue.NO
             }
           }
         },

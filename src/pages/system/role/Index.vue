@@ -21,8 +21,8 @@
           <td>{{o.userName}}</td>
           <td>{{o.phone}}</td>
           <td>{{format(o.registerTime)}}</td>
-          <td>{{o.isInsider === 1?'★ 是':'☆ 否'}}</td>
-          <td>{{o.isVIP === 1?'★ 是':'☆ 否'}}</td>
+          <td>{{o.isInsider === 1?YES:NO}}</td>
+          <td>{{o.isVIP === 1?YES:NO}}</td>
         </tr>
       </table>
     </el-dialog>
@@ -44,18 +44,17 @@ export default {
         this.users = o.users;
         this.isShowDialog = true;
       }
-      console.log(o);
     },
     format(t) {
       return moment(t).format('YYYY-MM-DD');
     }
   },
   created() {
-
     this.xpost("role/getRoles").then(res => {
       this.listRole = res.rows;
       this.listRole.forEach(o => {
-        o.count = ".."
+        o.count = "..";
+        o.users = [];
         this.xpost("user/getUsersByRoleID", {
           roleId: o.roleId,
         }).then(res2 => {
@@ -65,9 +64,6 @@ export default {
         })
       })
     })
-    // this.xpost("user/getUsersByRoleID").then(res=>{
-    //   console.log(res);
-    // })
   }
 }
 </script>

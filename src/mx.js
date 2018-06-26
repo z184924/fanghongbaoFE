@@ -214,6 +214,14 @@ var myMixin = {
     mxDict() {
       return this.$store.state.dict;
     },
+    
+    // const
+    YES() {
+      return "★ 是";
+    },
+    NO() {
+      return "☆ 否";
+    },
   },
 };
 export default myMixin;

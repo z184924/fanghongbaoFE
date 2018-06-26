@@ -96,14 +96,14 @@ export default {
           label: "是否内部用户",
           type: "string",
           formatter(r, c, v) {
-            return v === 1 ? "是" : "-"
+            return v === 1 ? vue.YES : vue.NO
           }
         },
         isVIP: {
           label: "是否VIP",
           type: "string",
           formatter(r, c, v) {
-            return v === 1 ? "是" : "-"
+            return v === 1 ? vue.YES :vue.NO
           }
         },
         registerTime: {
@@ -183,6 +183,7 @@ export default {
           this.formEdit.role = this.selectedRow.roleId + "";
           this.formEdit.userName = this.selectedRow.userName + "";
           this.formEdit.phone = this.selectedRow.phone + "";
+          this.formEdit.account = this.selectedRow.account + "";
         })
         // console.log(this.formEdit);
       } else {
