@@ -58,6 +58,10 @@
           <i class="el-icon-arrow-right"></i>
           <span>内部人员管理</span>
         </el-menu-item>
+        <el-menu-item index="/system/role">
+          <i class="el-icon-arrow-right"></i>
+          <span>角色查询</span>
+        </el-menu-item>
         <el-menu-item index="客户信息映射配置">
           <i class="el-icon-arrow-right"></i>
           <span>客户信息映射配置</span>

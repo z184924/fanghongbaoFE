@@ -13,8 +13,12 @@ import ProjectBuildingAddOrEdit from "./pages/project/building/AddOrEdit"
 
 // 系统管理
 import SystemBuilding from "./pages/system/building/Index"
+
 import SystemInsideUser from "./pages/system/inside-user/Index"
+
 import SystemCity from "./pages/system/city/Index"
+
+import SystemRole from "./pages/system/role/Index"
 
 
 
@@ -36,8 +40,8 @@ export default new Router({
       path: "/project/building",
       name: "ProjectBuilding",
       component: ProjectBuilding,
-      meta:{
-        keepAlive:true
+      meta: {
+        keepAlive: true
       }
     },
     {
@@ -54,6 +58,11 @@ export default new Router({
       path: "/system/city",
       name: "SystemCity",
       component: SystemCity,
+    },
+    {
+      path: "/system/role",
+      name: "SystemRole",
+      component: SystemRole,
     },
 
   ]
