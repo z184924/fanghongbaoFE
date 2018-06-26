@@ -145,6 +145,8 @@ export default {
         }
         this.$store.commit("login", loginInfo);
 
+      }, rej => {
+        console.log(rej);
       })
     }
   }

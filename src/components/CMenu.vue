@@ -34,7 +34,7 @@
           <i class="el-icon-arrow-right"></i>
           <span>楼盘管理</span>
         </el-menu-item>
-        <el-menu-item index="APP轮播图配置">
+        <el-menu-item index="/project/lunbotu">
           <i class="el-icon-arrow-right"></i>
           <span>APP轮播图配置</span>
         </el-menu-item>

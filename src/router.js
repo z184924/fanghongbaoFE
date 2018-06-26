@@ -11,6 +11,8 @@ import Index from "./pages/index/Index"
 import ProjectBuilding from "./pages/project/building/Index"
 import ProjectBuildingAddOrEdit from "./pages/project/building/AddOrEdit"
 
+import ProjectLunbotu from "./pages/project/lunbotu/Index"
+
 // 系统管理
 import SystemBuilding from "./pages/system/building/Index"
 
@@ -41,7 +43,7 @@ export default new Router({
       name: "ProjectBuilding",
       component: ProjectBuilding,
       meta: {
-        keepAlive: true
+        // keepAlive: true
       }
     },
     {
@@ -49,6 +51,16 @@ export default new Router({
       name: "ProjectBuildingAddOrEdit",
       component: ProjectBuildingAddOrEdit,
     },
+    {
+      path: "/project/lunbotu",
+      name: "ProjectLunbotu",
+      component: ProjectLunbotu,
+    },
+
+
+
+
+
     {
       path: "/system/inside-user",
       name: "SystemInsideUser",

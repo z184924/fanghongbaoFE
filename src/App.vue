@@ -60,7 +60,6 @@ export default {
   created() {
     if (window.location.port == "17011") {
       this.$store.commit("setDevMode");
-      this.$store.commit("setPicBasePath", "http://192.168.0.201:60041/")
       this.$store.commit("changeBasePath", localhostConfig.basePath);
     }
     this.$store.commit("setWindowHeight", window.innerHeight);

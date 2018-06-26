@@ -125,8 +125,8 @@ export default {
       listLoupanLeixing: ["城市楼盘", "康旅地产"],
       form: {
         f__wylx: [],
-        commissionType: "0",
-        ifRecommend: "1",
+        commissionType: 0,
+        ifRecommend: 1,
         f__qy: {
           city: "",
           area: ""
@@ -196,7 +196,7 @@ export default {
       data.commissionPictures = this.form.f__listYongjinXiangxi.join();
 
       this.xpost("projectInfo/saveOrUpdate", data).then(res => {
-        this.mxMessage(res).then(()=>{
+        this.mxMessage(res).then(() => {
           this.mxBack();
         })
       })

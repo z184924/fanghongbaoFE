@@ -113,7 +113,14 @@ var myMixin = {
         }, (err, xhr, res) => {
           // console.log(xhr);
           if (xhr.statusCode === 200) {
-            res = json5.parse(res);
+            try {
+              res = json5.parse(res);
+            } catch (error) {
+              vue.$message({
+                message: "服务器应用程序异常（500）",
+                type: "error"
+              });
+            }
             if (res) {
               if (res.state == "errorToken") {
                 vue.$store.commit("logout");
@@ -214,7 +221,7 @@ var myMixin = {
     mxDict() {
       return this.$store.state.dict;
     },
-    
+
     // const
     YES() {
       return "★ 是";

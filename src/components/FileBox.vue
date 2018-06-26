@@ -1,5 +1,5 @@
 <template>
-  <div class="xc2">
+  <div class="xc2" v-loading="loading">
     <!-- <div class="xc2--title">{{title}}</div> -->
     <div class="xc2--box-out">
       <div class="xc2--box">
@@ -14,7 +14,6 @@
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </div>
-
     </div>
   </div>
 </template>
@@ -43,11 +42,13 @@ export default {
   },
   data() {
     return {
+      // loading: false,
+      uploadingCount: 0,
       isShowAdd: false,
       form: {
         title: "",
       },
-      imageUrl: ''
+      imageUrl: ""
     }
   },
   computed: {
@@ -60,8 +61,15 @@ export default {
       })
       return a;
     },
+    loading() {
+      if (this.uploadingCount === 0) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     action() {
-      return this.mxApi("common/saveFile");
+      return "http://123.57.32.164:8080/common/saveFile";
     },
     imgStyle() {
       return {
@@ -89,7 +97,7 @@ export default {
       this.$confirm("是否删除该图片？", "删除", {
         type: "warning"
       }).then(() => {
-        let a = clone(this.value);
+        let a = clone(this.list);
         a.splice(i, 1);
         this.$emit("input", a);
       })
@@ -102,9 +110,13 @@ export default {
     },
     handleAvatarSuccess(res) {
       if (res.state === 'success') {
-        let a = clone(this.value);
+        let a = clone(this.list);
         a.push(res.message);
         this.$emit("input", a);
+        this.uploadingCount--;
+        if (this.uploadingCount < 0) {
+          this.uploadingCount = 0;
+        }
         // 成功
 
       }
@@ -112,11 +124,16 @@ export default {
     beforeAvatarUpload(a) {
       if (a.type.indexOf("image") < 0) {
         this.$msgbox({
-          type:"error",
-          title:"上传出错",
-          message:"请上传图片。",
+          type: "error",
+          title: "上传出错",
+          message: "请上传图片。",
         })
         return false;
+      } else {
+        this.uploadingCount++;
+        setTimeout(() => {
+          this.uploadingCount = 0;
+        }, 8000);
       }
     },
 
