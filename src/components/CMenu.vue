@@ -65,7 +65,7 @@
         </el-menu-item>
         <el-menu-item index="/system/gold">
           <i class="el-icon-arrow-right"></i>
-          <span>金币规划</span>
+          <span>金币规则</span>
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
