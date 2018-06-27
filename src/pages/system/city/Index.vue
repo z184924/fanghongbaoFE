@@ -2,10 +2,10 @@
   <div class="xc7">
     <div class="xc7--container">
       <c-panel title="未运营城市" style="width:360px;margin:0 10px">
-        <el-button slot="button" type="success" @click="mxDevAlert">保存已选</el-button>
         <div class="xc9">
           <span class="xc9--label">搜索：</span>
-          <el-input v-model="searchTextWyy"></el-input>
+          <el-input v-model="searchTextWyy" placeholder="可输入拼音、拼音首字母和汉字"></el-input>
+          <el-button type="text" style="padding:0 0.6em" @click="clearWyy">清空</el-button>
         </div>
         <div style="height:8px"></div>
         <div class="xc8">
@@ -16,12 +16,18 @@
           </el-checkbox-group>
         </div>
       </c-panel>
+      <div class="xc7--btns">
+
+        <el-button type="success" @click="doSave(selectedWyy,1)" :disabled="selectedWyy.length===0">保存已选 →</el-button>
+        <div style="height:8px;"></div>
+        <el-button type="danger" @click="doSave(selectedYyy,0)" :disabled="selectedYyy.length===0">← 删除已选</el-button>
+      </div>
 
       <c-panel title="已运营城市" style="width:360px;margin:0 10px" title-color="#3a6">
-        <el-button slot="button" type="danger" @click="mxDevAlert">删除已选</el-button>
         <div class="xc9">
           <span class="xc9--label">搜索：</span>
-          <el-input v-model="searchTextYyy" style=""></el-input>
+          <el-input v-model="searchTextYyy" style="" placeholder="可输入拼音、拼音首字母和汉字"></el-input>
+          <el-button type="text" style="padding:0 0.6em" @click="clearYyy">清空</el-button>
         </div>
         <div style="height:8px"></div>
         <div class="xc8">
@@ -59,6 +65,25 @@ export default {
     },
   },
   methods: {
+    clearWyy() {
+      this.searchTextWyy = "";
+    },
+    clearYyy() {
+      this.searchTextYyy = "";
+    },
+    doSave(list, state) {
+      this.xpost("city/setBusiness", {
+        cityIDs: list.join(),
+        isDo: state
+      }).then(res => {
+        this.mxMessage(res).then(() => {
+          this.selectedWyy=[];
+          this.selectedYyy=[];
+          this.searchWyy(0);
+          this.searchYyy(0);
+        })
+      })
+    },
     searchWyy(delay = 10) {
 
       clearTimeout(this.timerSearchWyy);
