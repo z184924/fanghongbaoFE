@@ -32,7 +32,7 @@
         </div>
       </div>
       <!-- <div>{{listFile}}</div> -->
-      <el-button type="default" slot="footer" @click="isShowInsert=false">关闭</el-button>
+      <el-button type="default" slot="footer" @click="isShowDetail=false">关闭</el-button>
     </el-dialog>
   </div>
 </template>
