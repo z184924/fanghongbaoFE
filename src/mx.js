@@ -94,8 +94,8 @@ var myMixin = {
       }
       let name = "";
       list.forEach((item, i) => {
-        if (item.value + "" == value + "") {
-          name = item.label;
+        if (item.CODE == value) {
+          name = item.NAME;
         }
       });
       return name;

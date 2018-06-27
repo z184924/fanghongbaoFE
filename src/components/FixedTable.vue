@@ -24,6 +24,7 @@
           <!-- <file-view :serverUrl="fileInfo.serverUrl"></file-view> -->
         </template>
       </el-table-column>
+      <slot name="col"></slot>
     </el-table>
     <div style="height:8px;"></div>
     <div style="text-align:right" v-if="showPage">

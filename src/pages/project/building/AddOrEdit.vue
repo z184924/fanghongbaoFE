@@ -20,7 +20,7 @@
           </el-form-item>
           <el-form-item label="物业类型">
             <el-checkbox-group v-model="form.f__wylx">
-              <el-checkbox border :label="o.label" :value="o.value" v-for="(o,i) in listWuyeLeixing" :key="i"></el-checkbox>
+              <el-checkbox border :label="o.value" v-for="(o,i) in listWuyeLeixing" :key="i">{{o.label}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="售价区间">
@@ -244,6 +244,7 @@ export default {
       data.houseTypePictures = this.form.f__listHuxingtu.join();
       data.posterPictures = this.form.f__listHaibao.join();
       data.commissionPictures = this.form.f__listYongjinXiangxi.join();
+      data.propertyTypeIds=this.form.f__wylx.join();
 
       this.xpost("projectInfo/saveOrUpdate", data).then(res => {
         this.mxMessage(res).then(() => {
@@ -259,6 +260,7 @@ export default {
 
     // 物业类型
     this.xpost("city/getPropertyTypes").then(res => {
+      console.log(res);
       this.listWuyeLeixing = res.map(o => {
         return {
           label: o.propertyType,
@@ -270,9 +272,16 @@ export default {
       let projectId = "";
       if (this.$route.params.type === "edit") {
 
-        let temp = this.$store.state.temp;
-        if (temp) {
-          projectId = temp.projectId;
+        let temp1 = this.$store.state.temp;
+        if (temp1) {
+          projectId = temp1.projectId;
+        } else {
+          this.$router.replace("/project/building")
+        }
+        this.xpost("projectInfo/getFormJson", {
+          projectId
+        }).then(temp => {
+
           this.form = { ...this.form, ...clone(temp) };
           this.form.f__qy.city = this.form.cityId;
           this.form.f__qy.area = this.form.areaId;
@@ -299,9 +308,9 @@ export default {
           this.form.f__listYongjinXiangxi = this.form.commissionPictures ? this.form.commissionPictures.split(",") : [];
           this.form.f__listXiangmuCanshu = this.form.parameterPictures ? this.form.parameterPictures.split(",") : [];
           this.form.f__listXiangmuMaidian = this.form.sellingPointPictures ? this.form.sellingPointPictures.split(",") : [];
-        } else {
-          this.$router.replace("/project/building")
-        }
+
+        })
+
       }
       // 获取用户
       this.listRole.forEach(o => {
@@ -346,9 +355,6 @@ export default {
             }
           })
         })
-
-
-        // console.log(res);
       })
 
     })
