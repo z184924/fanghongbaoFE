@@ -168,6 +168,7 @@ export default {
       width:宽度（可带单位px、%等）
       type:类型（string，number，select）(小写)
       options:选项（[{value:"xxx",text:"xxx"}]）
+      align:对齐方式
       disabledEditFlag:编辑或新增时此字段不可编辑
       disabledShowFlag:不显示字段
       formatter:<Function>格式化
@@ -268,7 +269,7 @@ export default {
             f[key] = ff;
           }
           if (!align) {
-            f[key].align = "left";
+            f[key].align = "center";
           }
         }
       },
@@ -298,6 +299,9 @@ export default {
       let str = JSON.stringify(obj);
       newObj = JSON.parse(str);
       return newObj;
+    },
+    c(a) {
+      console.log(a);
     },
     update() {
       // console.log(this.primaryKey)

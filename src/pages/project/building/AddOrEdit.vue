@@ -179,7 +179,7 @@ export default {
       })
     },
     tableClientSelect(o) {
-      this.selectedClient=o;
+      this.selectedClient = o;
     },
     save() {
 
@@ -230,7 +230,7 @@ export default {
       data.userIds = listUser.join();
 
       //客户信息
-      data.fields=this.selectedClient.map(o=>{
+      data.fields = this.selectedClient.map(o => {
         return o.customerMapId
       }).join();
 
@@ -254,19 +254,7 @@ export default {
     }
   },
   created() {
-    // 获取用户
-    this.listRole.forEach(o => {
-      this.xpost("user/getUsersByRoleID", {
-        roleId: o.roleId
-      }).then(res => {
-        this[o.fieldList] = res.rows.map(user => {
-          return {
-            label: user.userName,
-            value: user.userId
-          }
-        })
-      })
-    })
+
 
 
     // 物业类型
@@ -315,6 +303,36 @@ export default {
           this.$router.replace("/project/building")
         }
       }
+      // 获取用户
+      this.listRole.forEach(o => {
+        this.xpost("user/getUsersByRoleID", {
+          roleId: o.roleId,
+          projectId
+        }).then(res => {
+          this[o.fieldList] = res.rows.map(user => {
+            return {
+              label: user.userName,
+              value: user.userId
+            }
+          })
+
+          // 角色人员
+          if (o.multiple) {
+            // this.form[o.field].forEach(oo => {
+            //   listUser.push(oo);
+            //   listRole.push(o.roleId)
+            // })
+            res.rows.forEach(oo => {
+              this.form[o.field].push(oo.userId)
+            })
+          } else {
+            // listUser.push(this.form[o.field]);
+            // listRole.push(o.roleId)
+            this.form[o.field] = res.rows[0].userId;
+          }
+
+        })
+      })
 
       // 客户信息
       this.xpost("projectInfo/getProjectFieldByProjectID", {

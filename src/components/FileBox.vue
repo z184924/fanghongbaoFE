@@ -7,7 +7,7 @@
           <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2--img" @click="openImg(o)">
           <div v-if="editable" class="xc2--close" @click="remove(i)">×</div>
         </div>
-        <el-upload v-if="editable" class="avatar-uploader" multiple :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+        <el-upload v-if="editable" class="avatar-uploader" :multiple="multiple" :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
@@ -28,6 +28,10 @@ export default {
     title: {
       type: String,
       default: "",
+    },
+    multiple: {
+      type: Boolean,
+      default: true,
     },
     editable: {
       type: Boolean,
@@ -117,6 +121,9 @@ export default {
     handleAvatarSuccess(res) {
       if (res.state === 'success') {
         let a = clone(this.list);
+        if (!this.multiple) {
+          a = [];
+        }
         a.push(res.message);
         this.$emit("input", a);
         this.uploadingCount--;

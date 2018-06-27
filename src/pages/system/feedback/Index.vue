@@ -47,6 +47,7 @@ export default {
         },
         content: {
           label: "内容",
+          align:"left",
           class:"xc15",
           formatter(r, c, v) {
             v=v.replace(/<br>/g," ");

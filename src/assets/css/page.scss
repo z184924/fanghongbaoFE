@@ -101,7 +101,7 @@ body .stage {
   ol>li>ul,
   ul>li>ol,
   ul>li>ul {
-    margin: 2px 0;
+    margin: 0;
   }
   .el-upload__input {
     display: none;
@@ -321,6 +321,9 @@ $panel-header-height:40px;
   overflow: hidden;
   margin-right: 5px;
   background: #fff;
+  &.x-center {
+    margin: auto;
+  }
 }
 
 .xc7 {
@@ -335,7 +338,7 @@ $panel-header-height:40px;
     align-items: center;
     justify-content: center;
     height: 440px;
-    flex-flow:column;
+    flex-flow: column;
   }
 }
 
@@ -404,8 +407,19 @@ $panel-header-height:40px;
     text-align: center;
     color: #e2e2e2;
     font-size: 16px;
-    padding-top: 20px;
+    padding-top: 10px;
   }
+  &--gold {
+    text-align: center;
+    color: #e2e2e2;
+    font-size: 18px;
+    padding-top: 10px;
+    color: #f1c463;
+  }
+  &--edit {
+    display: flex;
+  }
+  &--text {}
 }
 
 .xc13 {

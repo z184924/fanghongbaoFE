@@ -231,6 +231,15 @@ var myMixin = {
             NAME: this.NO,
             CODE: 0
           },
+        ],
+        goldType: [{
+            NAME: "获取金币",
+            CODE: 1
+          },
+          {
+            NAME: "消耗",
+            CODE: -1
+          },
         ]
       }
     },
