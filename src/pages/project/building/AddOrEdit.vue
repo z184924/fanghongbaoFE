@@ -82,7 +82,18 @@
       </div>
     </c-panel>
     <!-- <div>{{form}}</div> -->
+    <c-panel title-color="#3c7c17" title="客户展示信息字段" width="800px">
+      <el-table ref="tableClient" :data="tableClient" border @selection-change="tableClientSelect">
+        <el-table-column type="selection" width="55" align="center">
+        </el-table-column>
+        <el-table-column prop="fieldNotes" label="【字段】">
+        </el-table-column>
+      </el-table>
+    </c-panel>
 
+    <c-panel title-color="#17437c" title="轮播图" width="800px">
+      <file-box v-model="form.f__listLunbotu"></file-box>
+    </c-panel>
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
       <file-box v-model="form.f__listZiliaoku"></file-box>
     </c-panel>
@@ -117,12 +128,19 @@ export default {
   data() {
     return {
       listWuyeLeixing: [],
-      listZhuanyuan: ["张三", "李四"],
-      listXiangmuZhuguan: ["张三", "李四"],
-      listXiangmuJingli: ["张三", "李四"],
-      listShenheren: ["张三", "李四"],
-      listQuyuJingli: ["张三", "李四"],
-      listLoupanLeixing: ["城市楼盘", "康旅地产"],
+      listZhuanyuan: [],
+      listXiangmuZhuguan: [],
+      listXiangmuJingli: [],
+      listShenheren: [],
+      listQuyuJingli: [],
+      listLoupanLeixing: [],
+      listRole: [
+        { roleId: 2, field: "f__zy", fieldList: "listZhuanyuan", multiple: true },
+        { roleId: 3, field: "f__xmzg", fieldList: "listXiangmuZhuguan", multiple: false },
+        { roleId: 4, field: "f__xmjl", fieldList: "listXiangmuJingli", multiple: true },
+        { roleId: 8, field: "f__shr", fieldList: "listShenheren", multiple: false },
+        { roleId: 5, field: "f__qyjl", fieldList: "listQuyuJingli", multiple: false }
+      ],
       form: {
         f__wylx: [],
         commissionType: 0,
@@ -131,6 +149,7 @@ export default {
           city: "",
           area: ""
         },
+        f__listLunbotu: [],
         f__listZiliaoku: [],
         f__listHuxingtu: [],
         f__listHaibao: [],
@@ -138,6 +157,8 @@ export default {
         f__listXiangmuCanshu: [],
         f__listXiangmuMaidian: [],
       },
+      tableClient: [],
+      selectedClient: [],
 
     }
   },
@@ -156,6 +177,9 @@ export default {
           h('p', '4.切换到本页面粘贴进输入框'),
         ]),
       })
+    },
+    tableClientSelect(o) {
+      this.selectedClient=o;
     },
     save() {
 
@@ -187,10 +211,36 @@ export default {
       data.creator = "测试用户***"
       data.createTime = moment().format("YYYY-MM-DD HH:mm:ss");
 
+
+      // 角色人员
+      let listRole = [];
+      let listUser = [];
+      this.listRole.forEach(o => {
+        if (o.multiple) {
+          this.form[o.field].forEach(oo => {
+            listUser.push(oo);
+            listRole.push(o.roleId)
+          })
+        } else {
+          listUser.push(this.form[o.field]);
+          listRole.push(o.roleId)
+        }
+      })
+      data.roleIds = listRole.join();
+      data.userIds = listUser.join();
+
+      //客户信息
+      data.fields=this.selectedClient.map(o=>{
+        return o.customerMapId
+      }).join();
+
+
+
       // 图片
+      data.carouselPictures = this.form.f__listLunbotu.join();
+      data.dataPictures = this.form.f__listZiliaoku.join();
       data.parameterPictures = this.form.f__listXiangmuCanshu.join();
       data.sellingPointPictures = this.form.f__listXiangmuMaidian.join();
-      data.dataPictures = this.form.f__listZiliaoku.join();
       data.houseTypePictures = this.form.f__listHuxingtu.join();
       data.posterPictures = this.form.f__listHaibao.join();
       data.commissionPictures = this.form.f__listYongjinXiangxi.join();
@@ -204,6 +254,22 @@ export default {
     }
   },
   created() {
+    // 获取用户
+    this.listRole.forEach(o => {
+      this.xpost("user/getUsersByRoleID", {
+        roleId: o.roleId
+      }).then(res => {
+        this[o.fieldList] = res.rows.map(user => {
+          return {
+            label: user.userName,
+            value: user.userId
+          }
+        })
+      })
+    })
+
+
+    // 物业类型
     this.xpost("city/getPropertyTypes").then(res => {
       this.listWuyeLeixing = res.map(o => {
         return {
@@ -213,10 +279,12 @@ export default {
       })
 
       // 编辑：
+      let projectId = "";
       if (this.$route.params.type === "edit") {
+
         let temp = this.$store.state.temp;
-        // temp = this.mxStringify(temp);
         if (temp) {
+          projectId = temp.projectId;
           this.form = { ...this.form, ...clone(temp) };
           this.form.f__qy.city = this.form.cityId;
           this.form.f__qy.area = this.form.areaId;
@@ -235,16 +303,36 @@ export default {
           }
 
           // 图片
-          this.form.f__listZiliaoku = this.form.dataPictures.split(",");
-          this.form.f__listHuxingtu = this.form.houseTypePictures.split(",");
-          this.form.f__listHaibao = this.form.posterPictures.split(",");
-          this.form.f__listYongjinXiangxi = this.form.commissionPictures.split(",");
-          this.form.f__listXiangmuCanshu = this.form.parameterPictures.split(",");
-          this.form.f__listXiangmuMaidian = this.form.sellingPointPictures.split(",");
+          // console.log(this.form);
+          this.form.f__listLunbotu = this.form.carouselPictures ? this.form.carouselPictures.split(",") : [];
+          this.form.f__listZiliaoku = this.form.dataPictures ? this.form.dataPictures.split(",") : [];
+          this.form.f__listHuxingtu = this.form.houseTypePictures ? this.form.houseTypePictures.split(",") : [];
+          this.form.f__listHaibao = this.form.posterPictures ? this.form.posterPictures.split(",") : [];
+          this.form.f__listYongjinXiangxi = this.form.commissionPictures ? this.form.commissionPictures.split(",") : [];
+          this.form.f__listXiangmuCanshu = this.form.parameterPictures ? this.form.parameterPictures.split(",") : [];
+          this.form.f__listXiangmuMaidian = this.form.sellingPointPictures ? this.form.sellingPointPictures.split(",") : [];
         } else {
           this.$router.replace("/project/building")
         }
       }
+
+      // 客户信息
+      this.xpost("projectInfo/getProjectFieldByProjectID", {
+        projectId,
+      }).then(res => {
+        this.tableClient = res.rows;
+        this.$nextTick(() => {
+          this.tableClient.forEach(o => {
+            if (o.ifchecked) {
+              this.$refs.tableClient.toggleRowSelection(o, true);
+            }
+          })
+        })
+
+
+        // console.log(res);
+      })
+
     })
 
 

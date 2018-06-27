@@ -21,8 +21,8 @@
           <td>{{o.userName}}</td>
           <td>{{o.phone}}</td>
           <td>{{format(o.registerTime)}}</td>
-          <td>{{o.isInsider === 1?YES:NO}}</td>
-          <td>{{o.isVIP === 1?YES:NO}}</td>
+          <td>{{o.isInsider === 1 ? YES : NO}}</td>
+          <td>{{o.isVIP === 1 ? YES : NO}}</td>
         </tr>
       </table>
     </el-dialog>
@@ -53,7 +53,7 @@ export default {
     this.xpost("role/getRoles").then(res => {
       this.listRole = res.rows;
       this.listRole.forEach(o => {
-        o.count = "..";
+        o.count = 0;
         o.users = [];
         this.xpost("user/getUsersByRoleID", {
           roleId: o.roleId,

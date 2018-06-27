@@ -5,41 +5,15 @@ $primary-color-4:rgb(199, 84, 69);
 $primary-color-5:rgb(255, 246, 246);
 $primary-color-6:rgb(255, 239, 239);
 $primary-color-7:rgb(250, 204, 198);
-$color-test:rgb(23, 95, 124);
+$color-test:#3c7c17;
 // 修改默认样式
-body .stage {
-  .el-tree-node__content {
-    height: 36px;
-    font-size: 16px;
-    border-bottom: dotted 1px #aaa;
-  }
-  .el-table__row.current-row td {
-    background: $primary-color-7; // color: #fff;
-  }
-  .el-table__row:hover td {
-    background: $primary-color-6;
-  }
-  .el-table__row.current-row:hover td {
-    background: $primary-color-7; // color: #fff;
-  }
-  .el-tree-node__content>.el-tree-node__expand-icon {
-    padding: 6px 12px;
-  }
-  .el-table--enable-row-transition .el-table__body td {
-    transition: all .2s;
-  }
-  .el-dialog {
-    border-radius: 4px;
-    overflow: hidden;
-  }
+body {
   .el-dialog__header {
-    background: $primary-color-6;
+    background: $primary-color-5;
     transition: all .2s;
     padding: 8px 20px;
     height: 40px;
-  } // .el-dialog__header:hover {
-  //   background: $primary-color-6;
-  // }
+  }
   .el-dialog__headerbtn {
     top: 0px;
     right: 0px;
@@ -65,6 +39,36 @@ body .stage {
     font-size: 16px;
     padding: 15px;
     background: #fdfdfd;
+  }
+}
+
+body .stage {
+  .el-tree-node__content {
+    height: 36px;
+    font-size: 16px;
+    border-bottom: dotted 1px #aaa;
+  }
+  .el-table__row.current-row td {
+    background: $primary-color-7; // color: #fff;
+  }
+  .el-table__row:hover td {
+    background: $primary-color-6;
+  }
+  .el-table__row.current-row:hover td {
+    background: $primary-color-7; // color: #fff;
+  }
+  .el-tree-node__content>.el-tree-node__expand-icon {
+    padding: 6px 12px;
+  }
+  .el-table--enable-row-transition .el-table__body td {
+    transition: all .2s;
+  }
+  .el-dialog {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .fixed-table .cell {
+    font-size: 14px;
   }
   .el-dialog__footer {
     padding: 15px;
@@ -194,11 +198,12 @@ body .stage {
 }
 
 .xc2 {
-  padding-top:6px;
+  padding-top: 6px;
   &--img-box {
     position: relative;
     display: inline-block;
     margin-right: 10px;
+    margin-bottom: 10px;
     transition: all 0.2s;
   }
   &--close {
@@ -223,6 +228,7 @@ body .stage {
   }
   &--box {
     display: flex;
+    flex-wrap: wrap;
   }
   &--title {
     font-size: 22px;
@@ -391,5 +397,35 @@ $panel-header-height:40px;
     color: #e2e2e2;
     font-size: 16px;
     padding-top: 20px;
+  }
+}
+
+.xc13 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.xc14 {
+  &--title {
+    font-weight: bold;
+    padding: 6px 0;
+  }
+  &--file {
+    border: solid 1px #aaa;
+    padding: 6px;
+    border-radius: 4px;
+  }
+  &--content {
+    padding-left: 4em;
+  }
+}
+
+.xc15 {
+  .cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

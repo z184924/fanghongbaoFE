@@ -221,6 +221,19 @@ var myMixin = {
     mxDict() {
       return this.$store.state.dict;
     },
+    DICT() {
+      return {
+        bool: [{
+            NAME: this.YES,
+            CODE: 1
+          },
+          {
+            NAME: this.NO,
+            CODE: 0
+          },
+        ]
+      }
+    },
 
     // const
     YES() {

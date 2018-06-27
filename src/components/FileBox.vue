@@ -1,20 +1,24 @@
 <template>
   <div class="xc2" v-loading="loading">
-    <!-- <div class="xc2--title">{{title}}</div> -->
     <div class="xc2--box-out">
       <div class="xc2--box">
-        <transition-group name="el-zoom-in-center">
-          <div v-for="(o,i) in list" :key="i" class="xc2--img-box" :style="imgStyle">
-            <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2--img" @click="openImg(o)">
-            <div class="xc2--close" @click="remove(i)">×</div>
-          </div>
-        </transition-group>
-        <el-upload class="avatar-uploader" multiple :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+        <!-- <transition-group name="el-zoom-in-center"> -->
+        <div v-for="(o,i) in list" :key="i" class="xc2--img-box" :style="imgStyle">
+          <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2--img" @click="openImg(o)">
+          <div v-if="editable" class="xc2--close" @click="remove(i)">×</div>
+        </div>
+        <el-upload v-if="editable" class="avatar-uploader" multiple :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
+        <!-- </transition-group> -->
       </div>
     </div>
+    <el-dialog append-to-body :visible.sync="isShowFullImg" fullscreen title="原图预览 (按下Esc关闭)">
+      <div class="xc13" :style="{height:windowHeight-70 + 'px'}">
+        <img :src="activeSrc" alt="">
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -42,9 +46,11 @@ export default {
   },
   data() {
     return {
+      isShowFullImg: false,
       // loading: false,
       uploadingCount: 0,
       isShowAdd: false,
+      activeSrc: "",
       form: {
         title: "",
       },
@@ -52,6 +58,9 @@ export default {
     }
   },
   computed: {
+    windowHeight() {
+      return this.$store.state.windowHeight;
+    },
     list() {
       let a = [];
       this.value.forEach(o => {
@@ -86,10 +95,6 @@ export default {
     },
     dialogWidth() {
       return "200px"
-      // if (this.mode == "file") {
-      // } else {
-      //   return "400px"
-      // }
     }
   },
   methods: {
@@ -103,7 +108,8 @@ export default {
       })
     },
     openImg(src) {
-      window.open(this.$store.state.picBasePath + src + "");
+      this.activeSrc = this.$store.state.picBasePath + src + "";
+      this.isShowFullImg = true;
     },
     showAdd() {
       this.isShowAdd = true;

@@ -81,14 +81,10 @@ export default {
     }
   },
   created() {
-    // console.log(this.value);
     if (!this.dict || kindOf(this.dict) === "object") {
-      // this.value = [];
-      // this.$emit("input", []);
       this.selectedValue = [];
     }
     this.selectedValue = this.value;
-    // console.log(this.selectedValue,this.selectedValue*1);
 
   }
 

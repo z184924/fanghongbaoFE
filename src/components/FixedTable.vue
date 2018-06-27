@@ -17,7 +17,7 @@
     <div style="height:8px;" v-if="showControl"></div>
     <el-table ref="ft" :data="translateShowData" :row-style="rowStyle" :height="tableHeight" style="width: 100%" highlight-current-row @current-change="handleCurrentChange" @selection-change="handleSelectionChange" border :header-cell-style="headerStyle">
       <el-table-column type="selection" width="50" align="center" v-if="multiSelect"></el-table-column>
-      <el-table-column v-for="(value, key, index) in valueFields" :prop="key" :label="value.label" :key="index" :formatter="value.formatter" :width="value.width" :align="value.align"></el-table-column>
+      <el-table-column v-for="(value, key, index) in valueFields" :prop="key" :label="value.label" :key="index" :formatter="value.formatter" :width="value.width" :align="value.align" :class-name="value.class"></el-table-column>
       <el-table-column v-if="fileInfo.hasFile" label="附件" width="">
         <template slot-scope="scope">
           <a :href="fileInfo.serverUrl" target="_blank"></a>

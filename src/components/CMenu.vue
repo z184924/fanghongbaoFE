@@ -4,7 +4,7 @@
       <i class="ii i-shouye"></i>
       <span>首页</span>
     </el-menu-item>
-    <el-submenu index="审批管理">
+    <!-- <el-submenu index="审批管理">
       <template slot="title">
         <i class="ii i-shenpi"></i>
         <span>审批管理</span>
@@ -23,7 +23,7 @@
           <span>审批消息提醒</span>
         </el-menu-item>
       </el-menu-item-group>
-    </el-submenu>
+    </el-submenu> -->
     <el-submenu index="项目管理">
       <template slot="title">
         <i class="ii i-xiangmu"></i>
@@ -38,14 +38,7 @@
           <i class="el-icon-arrow-right"></i>
           <span>APP轮播图配置</span>
         </el-menu-item>
-        <el-menu-item index="房产头条">
-          <i class="el-icon-arrow-right"></i>
-          <span>房产头条</span>
-        </el-menu-item>
-        <el-menu-item index="兑换物品管理">
-          <i class="el-icon-arrow-right"></i>
-          <span>兑换物品管理</span>
-        </el-menu-item>
+        
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="系统管理">
@@ -62,25 +55,17 @@
           <i class="el-icon-arrow-right"></i>
           <span>角色查询</span>
         </el-menu-item>
-        <el-menu-item index="客户信息映射配置">
-          <i class="el-icon-arrow-right"></i>
-          <span>客户信息映射配置</span>
-        </el-menu-item>
-        <el-menu-item index="楼盘状态配置">
-          <i class="el-icon-arrow-right"></i>
-          <span>楼盘配置</span>
-        </el-menu-item>
         <el-menu-item index="/system/city">
           <i class="el-icon-arrow-right"></i>
           <span>城市配置</span>
         </el-menu-item>
-        <el-menu-item index="系统消息推送">
-          <i class="el-icon-arrow-right"></i>
-          <span>系统消息推送</span>
-        </el-menu-item>
-        <el-menu-item index="意见反馈">
+        <el-menu-item index="/system/feedback">
           <i class="el-icon-arrow-right"></i>
           <span>意见反馈</span>
+        </el-menu-item>
+        <el-menu-item index="/system/gold">
+          <i class="el-icon-arrow-right"></i>
+          <span>金币规划</span>
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu>

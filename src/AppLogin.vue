@@ -64,7 +64,6 @@
 </template>
 <script>
 import localhostConfig from "../localhostConfig.js"
-import dictjs from "./dict.js"
 
 export default {
   data() {
@@ -106,49 +105,63 @@ export default {
         localStorage.setItem("username", this.username);
         localStorage.setItem("password", this.password);
       }
-      // this.xpost("login_login", {
-      //   USERNAME: this.username,
-      //   PASSWORD: this.password
-      // }).then(res => {
-      //   //登录成功
-      //   let data = res;
-      //   this.loading = false;
-      //   this.$store.commit("login", {
-      //     username: this.username,
-      //     nickname: data.user.name,
-      //     token: data.token,
-      //     moreInfo: data.user,
-      //   });
-      // }).catch(() => {
-      //   this.loading = false;
-      // });
+      this.xpost("login", {
+        account: this.username,
+        password: this.password
+      }).then(res => {
 
-      this.loginTest();//*********************************免登录
+        // 获取字典
+        this.xpost("dictdetail/findAllData").then(res2 => {
+          let dict = { ...res2, ...this.DICT }
+          console.log(dict);
+          this.$store.commit("setDict", dict);
+          localStorage.setItem("dict", JSON.stringify(dict));
+          this.loading = false;
+          this.$store.commit("login", {
+            username: res.user.account,
+            nickname: res.user.userName,
+            phone: res.user.phone,
+            userId: res.user.userId,
+            token: res.token,
+            moreInfo: res.user,
+          });
+
+        }, rej => {
+          console.log(rej);
+        })
+        //登录成功
+        // console.log(res);
+
+      }).catch(() => {
+        this.loading = false;
+      });
+
+      // this.loginTest();//*********************************免登录
 
 
     },
     changeEnter: function () {
       this.$refs.password.focus();
     },
-    loginTest() {
-      // 获取字典
-      this.xpost("dictdetail/findAllData").then(res => {
-        let dict = { ...res, ...dictjs }
-        console.log(dict);
-        this.$store.commit("setDict", dict);
-        localStorage.setItem("dict", JSON.stringify(dict));
-        let loginInfo = {
-          username: this.username,
-          nickname: this.username,
-          token: "123",
-          moreInfo: {},
-        }
-        this.$store.commit("login", loginInfo);
+    // loginTest() {
+    //   // 获取字典
+    //   this.xpost("dictdetail/findAllData").then(res => {
+    //     let dict = { ...res, ...this.DICT }
+    //     console.log(dict);
+    //     this.$store.commit("setDict", dict);
+    //     localStorage.setItem("dict", JSON.stringify(dict));
+    //     let loginInfo = {
+    //       username: this.username,
+    //       nickname: this.username,
+    //       token: "123",
+    //       moreInfo: {},
+    //     }
+    //     this.$store.commit("login", loginInfo);
 
-      }, rej => {
-        console.log(rej);
-      })
-    }
+    //   }, rej => {
+    //     console.log(rej);
+    //   })
+    // }
   }
 };
 </script>

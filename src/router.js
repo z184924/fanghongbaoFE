@@ -22,7 +22,9 @@ import SystemCity from "./pages/system/city/Index"
 
 import SystemRole from "./pages/system/role/Index"
 
+import SystemFeedback from "./pages/system/feedback/Index"
 
+import SystemGold from "./pages/system/gold/Index"
 
 
 export default new Router({
@@ -75,6 +77,16 @@ export default new Router({
       path: "/system/role",
       name: "SystemRole",
       component: SystemRole,
+    },
+    {
+      path: "/system/feedback",
+      name: "SystemFeedback",
+      component: SystemFeedback,
+    },
+    {
+      path: "/system/gold",
+      name: "SystemGold",
+      component: SystemGold,
     },
 
   ]
