@@ -17,6 +17,8 @@ import ProjectGoldRecord from "./pages/project/gold-record/Index"
 
 import ProjectGoods from "./pages/project/goods/Index"
 
+import ProjectNews from "./pages/project/news/Index"
+
 // 系统管理
 import SystemInsideUser from "./pages/system/inside-user/Index"
 
@@ -64,6 +66,11 @@ export default new Router({
       path: "/project/goods",
       name: "ProjectGoods",
       component: ProjectGoods,
+    },
+    {
+      path: "/project/news",
+      name: "ProjectNews",
+      component: ProjectNews,
     },
 
 
