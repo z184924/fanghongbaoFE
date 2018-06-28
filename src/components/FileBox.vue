@@ -8,8 +8,8 @@
           <div v-if="editable" class="xc2--close" @click="remove(i)">×</div>
         </div>
         <el-upload v-if="editable" class="avatar-uploader" :multiple="multiple" :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <i v-if="multiple || list.length===0" class="el-icon-plus avatar-uploader-icon"></i>
+          <i v-else class="el-icon-refresh avatar-uploader-icon"></i>
         </el-upload>
         <!-- </transition-group> -->
       </div>
@@ -58,7 +58,6 @@ export default {
       form: {
         title: "",
       },
-      imageUrl: ""
     }
   },
   computed: {
