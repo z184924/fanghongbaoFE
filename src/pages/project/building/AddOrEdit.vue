@@ -222,8 +222,10 @@ export default {
             listRole.push(o.roleId)
           })
         } else {
-          listUser.push(this.form[o.field]);
-          listRole.push(o.roleId)
+          if (this.form[o.field]) {
+            listUser.push(this.form[o.field]);
+            listRole.push(o.roleId)
+          }
         }
       })
       data.roleIds = listRole.join();
@@ -244,7 +246,7 @@ export default {
       data.houseTypePictures = this.form.f__listHuxingtu.join();
       data.posterPictures = this.form.f__listHaibao.join();
       data.commissionPictures = this.form.f__listYongjinXiangxi.join();
-      data.propertyTypeIds=this.form.f__wylx.join();
+      data.propertyTypeIds = this.form.f__wylx.join();
 
       this.xpost("projectInfo/saveOrUpdate", data).then(res => {
         this.mxMessage(res).then(() => {
@@ -255,8 +257,6 @@ export default {
     }
   },
   created() {
-
-
 
     // 物业类型
     this.xpost("city/getPropertyTypes").then(res => {
@@ -327,19 +327,16 @@ export default {
 
           // 角色人员
           if (o.multiple) {
-            // this.form[o.field].forEach(oo => {
-            //   listUser.push(oo);
-            //   listRole.push(o.roleId)
-            // })
             res.rows.forEach(oo => {
-              this.form[o.field].push(oo.userId)
+              if (oo.isChecked === 1) {
+                this.form[o.field].push(oo.userId)
+              }
             })
           } else {
-            // listUser.push(this.form[o.field]);
-            // listRole.push(o.roleId)
-            this.form[o.field] = res.rows[0].userId;
+            if (res.rows[0].isChecked === 1) {
+              this.form[o.field] = res.rows[0].userId;
+            }
           }
-
         })
       })
 
@@ -356,7 +353,6 @@ export default {
           })
         })
       })
-
     })
 
 

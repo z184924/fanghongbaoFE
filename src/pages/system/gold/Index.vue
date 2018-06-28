@@ -5,7 +5,7 @@
     </div>
     <div style="flex:10px 0 0"></div>
     <div class="xc-flex1">
-      <p-record></p-record>
+      <p-record :is-show-title="true"></p-record>
     </div>
   </div>
 </template>

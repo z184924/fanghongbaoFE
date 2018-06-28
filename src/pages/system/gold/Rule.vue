@@ -60,7 +60,6 @@ export default {
           }
         })
         this.table.splice(index, 1);
-        // this.table = this.table.splice(index, 1);
       })
     },
     save() {

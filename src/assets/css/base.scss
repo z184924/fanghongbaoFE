@@ -232,6 +232,9 @@ body {
     padding: 15px;
     background: #fdfdfd;
   }
+  .el-dialog__wrapper{
+    overflow: hidden;
+  }
 }
 
 body .stage {

@@ -116,12 +116,9 @@ export default {
             return moment(v).format("YYYY-MM-DD HH:mm:ss");
           }
         },
-        roleId: {
+        roleName: {
           label: "角色名称",
-          type: "string",
-          formatter(r, c, v) {
-            return vue.mxDictToString(vue.roleList, v);
-          }
+          type: "string"
         },
       },
 
