@@ -24,7 +24,6 @@ import mx from "./mx"
 // import "./assets/css/amaze-ui/css/amazeui.css"
 import "./assets/css/element/index.css"
 import "./assets/css/base.scss"
-import "./assets/css/page.scss"
 
 
 

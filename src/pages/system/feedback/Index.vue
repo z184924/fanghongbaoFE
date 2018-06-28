@@ -22,7 +22,6 @@
     <el-dialog :visible.sync="isShowDetail" v-drag title="意见详情">
       <div class="xc14">
         <div class="xc14--title">意见内容：</div>
-        <!-- <el-input type="textarea" :rows="5" v-model="content"></el-input> -->
         <div class="xc14--content" v-html="detailContent"></div>
         <div style="height:10px"></div>
         <div class="xc14--title">相关图片：</div>
@@ -41,16 +40,16 @@ export default {
   data() {
     return {
       fields: {
-        userId: {
+        userName: {
           label: "用户",
-          width: "280px",
+          width: "120px",
         },
         content: {
           label: "内容",
-          align:"left",
-          class:"xc15",
+          align: "left",
+          class: "xc15",
           formatter(r, c, v) {
-            v=v.replace(/<br>/g," ");
+            v = v.replace(/<br>/g, " ");
             return v;
           }
         },
@@ -61,7 +60,6 @@ export default {
             return moment(v).format("YYYY-MM-DD HH:mm:ss")
           }
         }
-
       },
       selectedRow: {},
       isShowInsert: false,
@@ -79,7 +77,7 @@ export default {
     },
     doAdd() {
       this.xpost("projectFeedback/save", {
-        content: this.content.replace(/\n/g,"<br>"),
+        content: this.content.replace(/\n/g, "<br>"),
         fileName: this.listFile.join()
       }).then(res => {
         this.mxMessage(res).then(() => {
@@ -92,11 +90,9 @@ export default {
     },
     detail() {
       if (this.selectedRow.feedbackId) {
-        // console.log(this.selectedRow.content.indexOf(/\r/));
         this.detailContent = this.selectedRow.content;
         this.DetailListFile = this.selectedRow.fileName.split(",");
         this.isShowDetail = true;
-
       } else {
         this.$message({
           type: "info",
@@ -107,10 +103,6 @@ export default {
     del() { },
   },
   created() {
-    // let a="aaaaaaaaaabbbbbbbbbbbccccccccccccccc";
-    // console.log(a.slice(0,3));
-    // console.log(a.length);
-    // console.log(this.mxLoginInfo);
   }
 }
 </script>

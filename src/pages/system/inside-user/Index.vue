@@ -3,7 +3,9 @@
     <fixed-table ref="table" get-data-url="user/listPageUsersByType" :data-param="dataParam" :fields="fields" v-model="selectedRow">
       <span slot="left-control">
         <span>用户类型：</span>
-        <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:150px"></c-select>
+        <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:120px"></c-select>
+        <span style="padding-left:1em">用户名：</span>
+        <el-input style="width:120px" v-model="dataParam.userName"></el-input>
         <el-button type="default" icon="el-icon-search" @click="refreshTable">搜索</el-button>
       </span>
       <span slot="right-control" style="margin-right:1em">
@@ -77,6 +79,7 @@ export default {
       selectedRow: {},
       dataParam: {
         isInsider: "",
+        userName: "",
       },
       fields: {
         phone: {
@@ -103,7 +106,7 @@ export default {
           label: "是否VIP",
           type: "string",
           formatter(r, c, v) {
-            return v === 1 ? vue.YES :vue.NO
+            return v === 1 ? vue.YES : vue.NO
           }
         },
         registerTime: {
@@ -159,7 +162,7 @@ export default {
       this.$refs.formAdd.validate((valid) => {
         if (valid) {
           this.xpost("user/saveInnerUser", {
-            account:this.formAdd.account,
+            account: this.formAdd.account,
             userName: this.formAdd.userName,
             phone: this.formAdd.phone,
             roleId: this.formAdd.role,
@@ -198,7 +201,7 @@ export default {
         if (valid) {
           this.xpost("user/updateInnerUser", {
             userId: this.selectedRow.userId,
-            account:this.formEdit.account,
+            account: this.formEdit.account,
             userName: this.formEdit.userName,
             phone: this.formEdit.phone,
             roleId: this.formEdit.role,

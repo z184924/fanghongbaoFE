@@ -13,9 +13,11 @@ import ProjectBuildingAddOrEdit from "./pages/project/building/AddOrEdit"
 
 import ProjectLunbotu from "./pages/project/lunbotu/Index"
 
-// 系统管理
-import SystemBuilding from "./pages/system/building/Index"
+import ProjectGoldRecord from "./pages/project/gold-record/Index"
 
+import ProjectGoods from "./pages/project/goods/Index"
+
+// 系统管理
 import SystemInsideUser from "./pages/system/inside-user/Index"
 
 import SystemCity from "./pages/system/city/Index"
@@ -36,11 +38,6 @@ export default new Router({
       component: Index,
     },
     {
-      path: "/system/building",
-      name: "SystemBuilding",
-      component: SystemBuilding,
-    },
-    {
       path: "/project/building",
       name: "ProjectBuilding",
       component: ProjectBuilding,
@@ -57,6 +54,16 @@ export default new Router({
       path: "/project/lunbotu",
       name: "ProjectLunbotu",
       component: ProjectLunbotu,
+    },
+    {
+      path: "/project/gold-record",
+      name: "ProjectGoldRecord",
+      component: ProjectGoldRecord,
+    },
+    {
+      path: "/project/goods",
+      name: "ProjectGoods",
+      component: ProjectGoods,
     },
 
 

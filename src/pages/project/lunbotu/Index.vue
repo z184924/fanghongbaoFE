@@ -93,12 +93,19 @@ export default {
     },
     del() {
       // projectCarouselPicture/delete
-      let a = this.selectedRow;
-      if (a.carouselPictureId) {
-        this.xpost("projectCarouselPicture/delete", {
-
-        })
-      }
+      this.$confirm("是否删除？", "删除", {
+        type: "warning"
+      }).then(() => {
+        let a = this.selectedRow;
+        if (a.carouselPictureId) {
+          this.xpost("projectCarouselPicture/delete", {
+            carouselPictureId: a.carouselPictureId
+          }).then(res => {
+            this.$refs.table.getData();
+            this.mxMessage(res)
+          })
+        }
+      })
     },
   },
 

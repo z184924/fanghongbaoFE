@@ -38,7 +38,15 @@
           <i class="el-icon-arrow-right"></i>
           <span>APP轮播图配置</span>
         </el-menu-item>
-        
+        <el-menu-item index="/project/gold-record">
+          <i class="el-icon-arrow-right"></i>
+          <span>用户金币记录</span>
+        </el-menu-item>
+        <el-menu-item index="/project/goods">
+          <i class="el-icon-arrow-right"></i>
+          <span>兑换物品管理</span>
+        </el-menu-item>
+
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="系统管理">
@@ -67,6 +75,7 @@
           <i class="el-icon-arrow-right"></i>
           <span>金币规则</span>
         </el-menu-item>
+
       </el-menu-item-group>
     </el-submenu>
 
