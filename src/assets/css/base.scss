@@ -480,6 +480,9 @@ body .stage {
   &--ue {
     width: 100%;
   }
+  &--minibtn{
+    position: fixed;;
+  }
 }
 
 $panel-header-height:40px;

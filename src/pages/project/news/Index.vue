@@ -3,6 +3,7 @@
     <fixed-table ref="table" get-data-url="projectNews/getProjectNews" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" slot="right-control">新增</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
+      <el-button @click="view" icon="el-icon-view" slot="right-control">查看新闻内容</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
       <el-table-column slot="col" width="150" label="图片" align="center">
         <template slot-scope="scope">
@@ -35,6 +36,13 @@
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
+    <el-dialog :visible.sync="isShowView" v-drag :title="`查看新闻内容 【${selectedRow.newsTitle}】`" width="1200px">
+      <h1 style="text-align:center">{{selectedRow.newsTitle}}</h1>
+      <div v-html="selectedRow.newsContent" style="height:400px;overflow-y:scroll"></div>
+      <div style="text-align:right;padding-top:10px;color:#777;">发布时间：{{dateFormat(selectedRow.createTime)}}</div>
+      <el-button type="default" @click="isShowView=false" slot="footer">关闭</el-button>
+
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -44,6 +52,7 @@ export default {
   data() {
     return {
       isShowEdit: false,
+      isShowView: false,
       fields: {
         newsTitle: {
           label: "新闻标题"
@@ -65,6 +74,9 @@ export default {
     }
   },
   methods: {
+    dateFormat(v) {
+      return moment(v).format("YYYY-MM-DD HH:mm:ss")
+    },
     add() {
       this.isShowEdit = true;
       this.form = {
@@ -80,7 +92,8 @@ export default {
           }
           this.ue = UE.getEditor(this.uuid);
           this.ue.addListener('ready', (editor) => {
-            this.ue.setHeight(260)
+            this.ue.setHeight(200)
+            this.ue.setContent("")
           });
         }, 10)
       })
@@ -120,7 +133,7 @@ export default {
               }
               this.ue = UE.getEditor(this.uuid);
               this.ue.addListener('ready', (editor) => {
-                this.ue.setHeight(260);
+                this.ue.setHeight(200);
                 this.ue.setContent(this.form.newsContent)
               });
             }, 10)
@@ -155,6 +168,11 @@ export default {
         })
       }
     },
+    view() {
+      if (this.selectedRow.newsId) {
+        this.isShowView = true;
+      }
+    }
   },
   created() {
     this.uuid = uuid.v4();
