@@ -358,6 +358,12 @@ body .stage {
     text-shadow: #ccc 4px 2px 2px;
     padding: 0 20px;
   }
+  &--logo{
+    width:50px;
+    height:50px;
+    margin-right:12px;
+    text-shadow:#ccc 2px 2px 2px;
+  }
   &--center {
     flex: 100% 1 1;
   }

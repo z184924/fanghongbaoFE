@@ -125,7 +125,6 @@ export default {
               });
             }, 10)
           })
-          console.log(res);
         })
       } else {
         this.$message({
