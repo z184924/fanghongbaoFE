@@ -64,19 +64,24 @@
             </div>
           </el-collapse-transition>
           <el-form-item label="专员（多选）">
-            <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan"></c-select>
+            <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__zy=[]">清空</el-button>
           </el-form-item>
           <el-form-item label="项目主管（单选）">
-            <c-select v-model="form.f__xmzg" :dict="listXiangmuZhuguan"></c-select>
+            <c-select v-model="form.f__xmzg" :dict="listXiangmuZhuguan" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__xmzg=''">清空</el-button>
           </el-form-item>
           <el-form-item label="项目经理（多选）">
-            <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli"></c-select>
+            <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__xmjl=[]">清空</el-button>
           </el-form-item>
           <el-form-item label="审核人（单选）">
-            <c-select v-model="form.f__shr" :dict="listShenheren"></c-select>
+            <c-select v-model="form.f__shr" :dict="listShenheren" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__shr=''">清空</el-button>
           </el-form-item>
           <el-form-item label="区域经理（单选）">
-            <c-select v-model="form.f__qyjl" :dict="listQuyuJingli"></c-select>
+            <c-select v-model="form.f__qyjl" :dict="listQuyuJingli" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__qyjl=''">清空</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -278,6 +283,14 @@ export default {
         } else {
           this.$router.replace("/project/building")
         }
+        this.xpost("projectInfo/getPropertyTypesByProjectID", {
+          projectId
+        }).then(res => {
+          this.form.f__wylx = res.rows.map(o => {
+            return o.propertyTypeId
+          })
+          // console.log(res);
+        })
         this.xpost("projectInfo/getFormJson", {
           projectId
         }).then(temp => {

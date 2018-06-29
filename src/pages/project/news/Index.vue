@@ -4,6 +4,11 @@
       <el-button @click="add" icon="el-icon-plus" slot="right-control">新增</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
+      <el-table-column slot="col" width="150" label="图片" align="center">
+        <template slot-scope="scope">
+          <img class="xc16 xc-shadow" :src="$store.state.smallPicBasePath + scope.row.newsPic" alt="">
+        </template>
+      </el-table-column>
     </fixed-table>
     <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="1000px">
       <table class="xc-table x-border">
@@ -39,11 +44,17 @@ export default {
     return {
       isShowEdit: false,
       fields: {
-        goodsName: {
-          label: "商品名称"
+        newsTitle:{
+          label:"新闻标题"
         },
-        glodValue: {
-          label: "商品价格"
+        creator: {
+          label: "创建人"
+        },
+        createTime: {
+          label: "上传时间",
+          formatter(r,c,v){
+            return moment(v).format("YYYY-MM-DD")
+          }
         },
       },
       selectedRow: {},
