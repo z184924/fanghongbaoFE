@@ -76,9 +76,16 @@ export default {
         this.lbtSort = a.picSort;
         this.carouselPictureId = a.carouselPictureId;
         this.isShowEdit = true;
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        })
       }
     },
     save() {
+      console.log(this.selectedRow);
+
       this.xpost("projectCarouselPicture/saveOrUpdate", {
         carouselPictureId: this.carouselPictureId,
         picURL: this.lbtListFile.join(),
@@ -90,22 +97,31 @@ export default {
           this.isShowEdit = false;
         })
       })
+
     },
     del() {
       // projectCarouselPicture/delete
-      this.$confirm("是否删除？", "删除", {
-        type: "warning"
-      }).then(() => {
-        let a = this.selectedRow;
-        if (a.carouselPictureId) {
-          this.xpost("projectCarouselPicture/delete", {
-            carouselPictureId: a.carouselPictureId
-          }).then(res => {
-            this.$refs.table.getData();
-            this.mxMessage(res)
-          })
-        }
-      })
+      if (this.selectedRow.carouselPictureId) {
+
+        this.$confirm("是否删除？", "删除", {
+          type: "warning"
+        }).then(() => {
+          let a = this.selectedRow;
+          if (a.carouselPictureId) {
+            this.xpost("projectCarouselPicture/delete", {
+              carouselPictureId: a.carouselPictureId
+            }).then(res => {
+              this.$refs.table.getData();
+              this.mxMessage(res)
+            })
+          }
+        })
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        })
+      }
     },
   },
 

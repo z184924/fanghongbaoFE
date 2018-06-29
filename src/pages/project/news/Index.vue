@@ -31,6 +31,7 @@
           </td>
         </tr>
       </table>
+      <!-- <div>{{form}}</div> -->
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
@@ -44,15 +45,15 @@ export default {
     return {
       isShowEdit: false,
       fields: {
-        newsTitle:{
-          label:"新闻标题"
+        newsTitle: {
+          label: "新闻标题"
         },
         creator: {
           label: "创建人"
         },
         createTime: {
           label: "上传时间",
-          formatter(r,c,v){
+          formatter(r, c, v) {
             return moment(v).format("YYYY-MM-DD")
           }
         },
@@ -74,6 +75,9 @@ export default {
       };
       this.$nextTick().then(() => {
         setTimeout(() => {
+          if (this.ue) {
+            this.ue.destroy();
+          }
           this.ue = UE.getEditor(this.uuid);
           this.ue.addListener('ready', (editor) => {
             this.ue.setHeight(260)
@@ -95,14 +99,66 @@ export default {
         })
       })
     },
-    edit() { },
-    del() { },
+    edit() {
+      if (this.selectedRow.newsId) {
+
+        this.xpost("projectNews/getSingleProjectNews", {
+          newsId: this.selectedRow.newsId
+        }).then(res => {
+          this.form = {
+            newsId: res.newsId,
+            img: [res.newsPic],
+            title: res.newsTitle,
+            newsContent: res.newsContent
+          };
+          this.isShowEdit = true;
+          this.$forceUpdate();
+          this.$nextTick().then(() => {
+            setTimeout(() => {
+              if (this.ue) {
+                this.ue.destroy();
+              }
+              this.ue = UE.getEditor(this.uuid);
+              this.ue.addListener('ready', (editor) => {
+                this.ue.setHeight(260);
+                this.ue.setContent(this.form.newsContent)
+              });
+            }, 10)
+          })
+          console.log(res);
+        })
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        })
+      }
+      // newsId
+    },
+    del() {
+      if (this.selectedRow.newsId) {
+        this.$confirm("是否删除？", "删除", {
+          type: "warning"
+        }).then(() => {
+          this.xpost("projectNews/deleteProjectNews", {
+            newsId: this.selectedRow.newsId
+          }).then(res => {
+            this.mxMessage(res).then(() => {
+              this.$refs.table.getData();
+              this.isShowEdit = false;
+            })
+          })
+        })
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        })
+      }
+    },
   },
   created() {
     this.uuid = uuid.v4();
-    this.$nextTick().then(() => {
-
-    })
   }
 }
 </script>
