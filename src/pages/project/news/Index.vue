@@ -55,6 +55,12 @@ export default {
   methods: {
     add() {
       this.isShowEdit = true;
+      this.form = {
+        newsId: "",
+        newsPic: [],
+        newsTitle: "",
+        newsContent: ""
+      };
       this.$nextTick().then(() => {
         setTimeout(() => {
           this.ue = UE.getEditor(this.uuid);
@@ -67,6 +73,7 @@ export default {
     },
     save() {
       this.xpost("projectNews/saveProjectNews", {
+        newsId: this.form.newsId,
         newsPic: this.form.img.join(),
         newsTitle: this.form.title,
         newsContent: this.ue.getContent()

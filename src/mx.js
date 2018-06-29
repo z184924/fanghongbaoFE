@@ -100,7 +100,7 @@ var myMixin = {
       });
       return name;
     },
-    xpost(api, data = {}, log = false) {
+    xpost(api, data = {}) {
       if (api != "login_login") {
         data.token = this.mxLoginInfo.token;
       }
@@ -112,6 +112,14 @@ var myMixin = {
           form: data
         }, (err, xhr, res) => {
           // console.log(xhr);
+          if (err) {
+            this.$message({
+              message: err,
+              type: "error"
+            });
+            return ;
+          }
+          // console.log(err);
           if (xhr.statusCode === 200) {
             try {
               res = json5.parse(res);
