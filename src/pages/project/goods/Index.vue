@@ -113,8 +113,10 @@ export default {
             }
             this.ue = UE.getEditor(this.uuid);
             this.ue.addListener('ready', (editor) => {
-              this.ue.setHeight(200);
-              this.ue.setContent(this.form.goodsDescription)
+              this.ue.setContent(this.form.goodsDescription);
+              setTimeout(() => {
+                this.ue.setHeight(200);
+              }, 300)
             });
           }, 10)
         })

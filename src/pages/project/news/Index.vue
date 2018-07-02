@@ -39,7 +39,7 @@
           </td>
         </tr>
       </table>
-      <!-- <div>{{form}}</div> -->
+      <!-- <div>{{form.isTop}}</div> -->
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
@@ -57,6 +57,7 @@
 import uuid from "uuid"
 export default {
   data() {
+    let vue = this;
     return {
       isShowEdit: false,
       isShowView: false,
@@ -65,10 +66,19 @@ export default {
           label: "新闻标题"
         },
         creator: {
-          label: "创建人"
+          label: "创建人",
+          width:"120px"
+        },
+        isTop: {
+          label: "是否置顶",
+          width:"100px",
+          formatter(r, c, v) {
+            return v === 1 ? vue.YES : vue.NO
+          }
         },
         createTime: {
           label: "上传时间",
+          width:"120px",
           formatter(r, c, v) {
             return moment(v).format("YYYY-MM-DD")
           }
@@ -87,6 +97,7 @@ export default {
     add() {
       this.isShowEdit = true;
       this.form = {
+        isTop: 0,
         newsId: "",
         newsPic: [],
         newsTitle: "",
@@ -106,19 +117,7 @@ export default {
       })
       // 
     },
-    save() {
-      this.xpost("projectNews/saveProjectNews", {
-        newsId: this.form.newsId,
-        newsPic: this.form.img.join(),
-        newsTitle: this.form.title,
-        newsContent: this.ue.getContent()
-      }).then(res => {
-        this.mxMessage(res).then(() => {
-          this.$refs.table.getData();
-          this.isShowEdit = false;
-        })
-      })
-    },
+
     edit() {
       if (this.selectedRow.newsId) {
 
@@ -130,9 +129,15 @@ export default {
             newsId: res.newsId,
             img: [res.newsPic],
             title: res.newsTitle,
-            istop: res.isTop,
+            isTop: res.isTop,
             newsContent: res.newsContent
           };
+          if (this.form.isTop) {
+            this.form.isTop = 1;
+          } else {
+            this.form.isTop = 0;
+          }
+
           this.isShowEdit = true;
           this.$forceUpdate();
           this.$nextTick().then(() => {
@@ -142,8 +147,10 @@ export default {
               }
               this.ue = UE.getEditor(this.uuid);
               this.ue.addListener('ready', (editor) => {
-                this.ue.setHeight(200);
-                this.ue.setContent(this.form.newsContent)
+                this.ue.setContent(this.form.newsContent);
+                setTimeout(() => {
+                  this.ue.setHeight(200);
+                }, 300)
               });
             }, 10)
           })
@@ -155,6 +162,20 @@ export default {
         })
       }
       // newsId
+    },
+    save() {
+      this.xpost("projectNews/saveProjectNews", {
+        isTop: this.form.isTop,
+        newsId: this.form.newsId,
+        newsPic: this.form.img.join(),
+        newsTitle: this.form.title,
+        newsContent: this.ue.getContent()
+      }).then(res => {
+        this.mxMessage(res).then(() => {
+          this.$refs.table.getData();
+          this.isShowEdit = false;
+        })
+      })
     },
     del() {
       if (this.selectedRow.newsId) {
