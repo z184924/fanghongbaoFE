@@ -4,8 +4,10 @@ import FileBox from "@/components/FileBox"
 import CSelect from "@/components/CSelect"
 import CPanel from "@/components/CPanel"
 import AreaLabel from "@/components/AreaLabel"
-import request from "request"
+// import request from "request"
+import axios from "axios"
 import json5 from "json5"
+import qs from "qs"
 
 
 var myMixin = {
@@ -106,99 +108,157 @@ var myMixin = {
       }
       let url = this.mxApi(api);
       return new Promise((resolve, reject) => {
-        let vue = this;
-        request.post({
+        axios.request({
           url,
-          form: data
-        }, (err, xhr, res) => {
-          // console.log(xhr);
-          if (err) {
-            this.$message({
-              message: err,
-              type: "error"
-            });
-            return ;
-          }
-          // console.log(err);
-          if (xhr.statusCode === 200) {
-            try {
-              res = json5.parse(res);
-            } catch (error) {
-              vue.$message({
-                message: "服务器应用程序异常（500）",
+          method: "post",
+          data: qs.stringify(data)
+        }).then(res => {
+          // console.log(res);
+          if (res.status === 200) {
+            if (res.data.state === "errorToken") {
+              this.$store.commit("logout");
+              reject();
+            } else if (res.data.state === "error") {
+              this.$message({
+                message: "请求格式错误",
                 type: "error"
               });
-            }
-            if (res) {
-              if (res.state == "errorToken") {
-                vue.$store.commit("logout");
-              }
-              if (res.state != "error") {
-                if (JSON.stringify(res).indexOf("您访问的页面出现异常") >= 0) {
-                  reject("error");
-                  vue.$message({
-                    message: "服务器应用程序异常（500）",
-                    type: "error"
-                  });
+              reject();
+            } else {
+              try {
+                let str = json5.stringify(res.data);
+                if (str.indexOf("您访问的页面出现异常") >= 0) {
+                  reject();
                 } else {
-                  resolve(res);
+                  resolve(res.data)
                 }
-              } else {
-                vue.$message({
-                  message: res.message,
+              } catch (error) {
+                this.$message({
+                  message: "服务器应用程序异常（500）",
                   type: "error"
                 });
-                reject(res);
+                reject();
               }
-
             }
           } else {
-            vue.$message({
-              message: `请求失败。（错误代码：${xhr.statusCode}，错误信息：${xhr.statusMessage}）`,
+            this.$message({
+              message: `请求失败。（错误代码：${res.status}，错误信息：${res.statusText}）`,
               type: "error"
             });
-            reject(err);
+            reject();
           }
+        }).catch(err => {
+          this.$message({
+            message: `${api}访问出错。`,
+            type: "error"
+          });
+          // console.log(err);
         })
-        // $.ajax({
-        //   url,
-        //   type: "post",
-        //   data,
-        //   success(res) {
-        //     if (res) {
-        //       if (res.state == "errorToken") {
-        //         vue.$store.commit("logout");
-        //       }
-        //       if (res.state != "error") {
-        //         if (JSON.stringify(res).indexOf("您访问的页面出现异常") >= 0) {
-        //           reject("error");
-        //           vue.$message({
-        //             message: "服务器应用程序异常（500）",
-        //             type: "error"
-        //           });
-        //         } else {
-        //           resolve(res);
-        //         }
-        //       } else {
-        //         vue.$message({
-        //           message: res.message,
-        //           type: "error"
-        //         });
-        //         reject(res);
-        //       }
-
-        //     }
-        //   },
-        //   error(err) {
-        //     vue.$message({
-        //       message: "无法连接服务器，请稍候重试。",
-        //       type: "error"
-        //     });
-        //     reject(err);
-        //   }
-        // })
       });
+
+
+
     },
+    // xpost(api, data = {}) {
+    //   // headers:{'Content-Type':'multipart/form-data'}
+    //   if (api != "login_login") {
+    //     data.token = this.mxLoginInfo.token;
+    //   }
+    //   let url = this.mxApi(api);
+    //   return new Promise((resolve, reject) => {
+    //     let vue = this;
+    //     request.post({
+    //       url,
+    //       form: data
+    //     }, (err, xhr, res) => {
+    //       // console.log(xhr);
+    //       if (err) {
+    //         this.$message({
+    //           message: err,
+    //           type: "error"
+    //         });
+    //         return;
+    //       }
+    //       // console.log(err);
+    //       if (xhr.statusCode === 200) {
+    //         try {
+    //           res = json5.parse(res);
+    //         } catch (error) {
+    //           vue.$message({
+    //             message: "服务器应用程序异常（500）",
+    //             type: "error"
+    //           });
+    //         }
+    //         if (res) {
+    //           if (res.state == "errorToken") {
+    //             vue.$store.commit("logout");
+    //           }
+    //           if (res.state != "error") {
+    //             if (JSON.stringify(res).indexOf("您访问的页面出现异常") >= 0) {
+    //               reject("error");
+    //               vue.$message({
+    //                 message: "服务器应用程序异常（500）",
+    //                 type: "error"
+    //               });
+    //             } else {
+    //               resolve(res);
+    //             }
+    //           } else {
+    //             vue.$message({
+    //               message: res.message,
+    //               type: "error"
+    //             });
+    //             reject(res);
+    //           }
+
+    //         }
+    //       } else {
+    //         vue.$message({
+    //           message: `请求失败。（错误代码：${xhr.statusCode}，错误信息：${xhr.statusMessage}）`,
+    //           type: "error"
+    //         });
+    //         reject(err);
+    //       }
+    //     })
+    //     // $.ajax({
+    //     //   url,
+    //     //   type: "post",
+    //     //   data,
+    //     //   success(res) {
+    //     //     if (res) {
+    //     //       if (res.state == "errorToken") {
+    //     //         vue.$store.commit("logout");
+    //     //       }
+    //     //       if (res.state != "error") {
+    //     //         if (JSON.stringify(res).indexOf("您访问的页面出现异常") >= 0) {
+    //     //           reject("error");
+    //     //           vue.$message({
+    //     //             message: "服务器应用程序异常（500）",
+    //     //             type: "error"
+    //     //           });
+    //     //         } else {
+    //     //           resolve(res);
+    //     //         }
+    //     //       } else {
+    //     //         vue.$message({
+    //     //           message: res.message,
+    //     //           type: "error"
+    //     //         });
+    //     //         reject(res);
+    //     //       }
+
+    //     //     }
+    //     //   },
+    //     //   error(err) {
+    //     //     vue.$message({
+    //     //       message: "无法连接服务器，请稍候重试。",
+    //     //       type: "error"
+    //     //     });
+    //     //     reject(err);
+    //     //   }
+    //     // })
+    //   });
+    // },
     mxBack() {
       window.history.go(-1);
     },

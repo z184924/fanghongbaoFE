@@ -6,7 +6,7 @@
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
-    <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="400px">
+    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
       <el-form ref="form" :model="form" label-width="5em">
         <el-form-item label="商品名称">
           <el-input v-model="form.goodsName"></el-input>
@@ -33,12 +33,12 @@ export default {
     return {
       // ★★★config★★★
       config: {
-        selectUrl:"goodsInfo/getGridListJson",
+        selectUrl: "goodsInfo/getGridListJson",
         editUrl: "goodsInfo/saveOrUpdate",
         deleteUrl: "goodsInfo/delete",
         pk: "goodsId"
       },
-
+      dialogTitle: "编辑",
       isShowEdit: false,
       fields: {
         goodsName: {
@@ -69,12 +69,14 @@ export default {
   methods: {
     add() {
       this.form = {};
+      this.dialogTitle = "新增";
       this.isShowEdit = true;
     },
     edit() {
       let a = this.selectedRow;
       if (a[this.config.pk]) {
         this.form = this.selectedRow;
+        this.dialogTitle = "编辑";
         this.isShowEdit = true;
       } else {
         this.$message({

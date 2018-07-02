@@ -28,7 +28,7 @@
         <tr>
           <td class="xc-text-center">新闻内容</td>
           <td>
-            <div style="width:100%" :id="uuid"></div>
+            <div style="width:100%;" :id="uuid"></div>
           </td>
         </tr>
       </table>
@@ -38,7 +38,7 @@
     </el-dialog>
     <el-dialog :visible.sync="isShowView" v-drag :title="`查看新闻内容 【${selectedRow.newsTitle}】`" width="1200px">
       <h1 style="text-align:center">{{selectedRow.newsTitle}}</h1>
-      <div v-html="selectedRow.newsContent" style="height:400px;overflow-y:scroll"></div>
+      <div v-html="selectedRow.newsContent" style="height:400px;overflow-y:scroll;padding:1em;"></div>
       <div style="text-align:right;padding-top:10px;color:#777;">发布时间：{{dateFormat(selectedRow.createTime)}}</div>
       <el-button type="default" @click="isShowView=false" slot="footer">关闭</el-button>
 
