@@ -41,24 +41,33 @@ export default {
       dialogTitle: "编辑",
       isShowEdit: false,
       fields: {
-        goodsName: {
-          label: "商品名称"
+        x: {
+          label: "x"
         },
-        glodValue: {
-          label: "商品价格"
+        y: {
+          label: "y"
         },
-        goodsDescription: {
-          label: "商品描述"
+        z: {
+          label: "z"
         },
-        createTime: {
-          label: "创建时间",
-          formatter(r, c, v) {
-            return moment(v).format("YYYY-MM-DD")
-          }
-        },
-        conditions: {
-          label: "兑换条件",
-        },
+        // goodsName: {
+        //   label: "商品名称"
+        // },
+        // glodValue: {
+        //   label: "商品价格"
+        // },
+        // goodsDescription: {
+        //   label: "商品描述"
+        // },
+        // createTime: {
+        //   label: "创建时间",
+        //   formatter(r, c, v) {
+        //     return moment(v).format("YYYY-MM-DD")
+        //   }
+        // },
+        // conditions: {
+        //   label: "兑换条件",
+        // },
       },
       form: {
 
