@@ -26,6 +26,13 @@
           </td>
         </tr>
         <tr>
+          <td class="xc-text-center">是否置顶</td>
+          <td>
+            <c-select dict="bool" v-model="form.isTop"></c-select>
+            <!-- <file-box v-model="form.isTop" :multiple="false"></file-box> -->
+          </td>
+        </tr>
+        <tr>
           <td class="xc-text-center">新闻内容</td>
           <td>
             <div style="width:100%;" :id="uuid"></div>
@@ -118,10 +125,12 @@ export default {
         this.xpost("projectNews/getSingleProjectNews", {
           newsId: this.selectedRow.newsId
         }).then(res => {
+          console.log(res);
           this.form = {
             newsId: res.newsId,
             img: [res.newsPic],
             title: res.newsTitle,
+            istop: res.isTop,
             newsContent: res.newsContent
           };
           this.isShowEdit = true;

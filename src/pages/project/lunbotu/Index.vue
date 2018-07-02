@@ -100,7 +100,6 @@ export default {
 
     },
     del() {
-      // projectCarouselPicture/delete
       if (this.selectedRow.carouselPictureId) {
 
         this.$confirm("是否删除？", "删除", {

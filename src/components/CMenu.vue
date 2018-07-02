@@ -46,6 +46,10 @@
           <i class="el-icon-arrow-right"></i>
           <span>兑换物品管理</span>
         </el-menu-item>
+        <el-menu-item index="/project/goods-exchange">
+          <i class="el-icon-arrow-right"></i>
+          <span>物品兑换记录</span>
+        </el-menu-item>
         <el-menu-item index="/project/news">
           <i class="el-icon-arrow-right"></i>
           <span>房产头条</span>

@@ -1,6 +1,6 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="selectUrl" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
@@ -17,7 +17,7 @@
         <el-form-item label="商品描述">
           <el-input v-model="form.goodsDescription"></el-input>
         </el-form-item>
-        <el-form-item label="conditions">
+        <el-form-item label="兑换条件">
           <el-input v-model="form.conditions"></el-input>
         </el-form-item>
       </el-form>
@@ -57,7 +57,7 @@ export default {
           }
         },
         conditions: {
-          label: "conditions",
+          label: "兑换条件",
         },
       },
       form: {

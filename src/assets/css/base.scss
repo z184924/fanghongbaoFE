@@ -116,7 +116,7 @@ table.xc-table {
     padding: 3px;
   }
   &.x-border>tr>td {
-    border: solid 1px #ccc;
+    border: solid 1px #eee;
   }
   &.x-center>tr>td {
     text-align: center;
@@ -216,15 +216,8 @@ body {
     border-top-right-radius: 4px;
   }
   .el-dialog__headerbtn:hover {
-    background-color: $primary-color-1;
-    color: #fff;
-  }
-  .el-dialog__headerbtn .el-dialog__close {
-    color: $primary-color-2;
-    transition: all 0.2s; // color: #fff;
-  }
-  .el-dialog__headerbtn:hover .el-dialog__close {
-    color: #fff; // color: #fff;
+    background-color: $primary-color-7;
+    transition: all 0.2s; 
   }
   .el-dialog__body {
     color: #000;

@@ -120,7 +120,7 @@ var myMixin = {
               reject();
             } else if (res.data.state === "error") {
               this.$message({
-                message: "请求格式错误",
+                message: res.data.message,
                 type: "error"
               });
               reject();
