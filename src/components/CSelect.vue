@@ -9,6 +9,7 @@
 <script>
 export default {
   props: {
+    n: {},
     dict: {
       default: null,//传入字符串时，在dict.js中匹配数组，传入数组时直接使用该数组
     },
@@ -18,7 +19,7 @@ export default {
     },
     value: {
       default() {
-        return [];
+        return "";
       }
     }
   },
@@ -32,13 +33,14 @@ export default {
       handler() {
         this.$emit("input", this.selectedValue)
       },
-      // deep: true
+      deep: true
     },
     value: {
       handler() {
         this.selectedValue = this.value;
       },
-      // immediate:true
+      deep: true,
+      immediate: true
     },
   },
   computed: {
@@ -81,10 +83,35 @@ export default {
     }
   },
   created() {
-    if (!this.dict || kindOf(this.dict) === "object") {
-      this.selectedValue = [];
+    // console.log(this.value,this.type); 
+    // if (!this.dict || kindOf(this.dict) === "object") {
+    //   console.log(55555555555555555555555555);
+    //   this.dict = [];
+    // }
+    // this.selectedValue = this.value;
+    // console.log(this.value, this.n + ".........");
+    let empty = false;
+    if (!this.value) {
+
+      if (kindOf(this.value) === "object") {
+        empty = true;
+      } else if (kindOf(this.value) === "array" && this.value.length === 0) {
+        empty = true;
+      }
+    } else {
+      empty = true;
     }
-    this.selectedValue = this.value;
+    if (empty) {
+      if (this.type === "multiple") {
+        this.selectedValue = [];
+      } else {
+        this.selectedValue = "";
+      }
+    } else {
+      this.selectedValue = this.value;
+    }
+    // this.$emit("input", this.selectedValue);
+    // console.log(this.value, this.selectedValue);
 
   }
 

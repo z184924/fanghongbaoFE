@@ -315,7 +315,8 @@ export default {
           if (this.form.ifRecommend === 1) {
             this.form.recommendTime = moment(this.form.recommendTime).format("YYYY-MM-DD");
           } else {
-            this.form.recommendTime = "";
+            // this.form.ifRecommend = 0;
+            // this.form.recommendTime = "";
           }
 
           // 图片
