@@ -91,7 +91,7 @@ export default {
     // this.selectedValue = this.value;
     // console.log(this.value, this.n + ".........");
     let empty = false;
-    if (!this.value) {
+    if (this.value) {
 
       if (kindOf(this.value) === "object") {
         empty = true;

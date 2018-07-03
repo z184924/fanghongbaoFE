@@ -109,7 +109,14 @@ export default {
         account: this.username,
         password: this.password
       }).then(res => {
-
+        this.$store.commit("login", {
+          username: res.user.account,
+          nickname: res.user.userName,
+          phone: res.user.phone,
+          userId: res.user.userId,
+          token: res.token,
+          moreInfo: res.user,
+        });
         // 获取字典
         this.xpost("dictdetail/findAllData").then(res2 => {
           let dict = { ...res2, ...this.DICT }
@@ -117,14 +124,7 @@ export default {
           this.$store.commit("setDict", dict);
           localStorage.setItem("dict", JSON.stringify(dict));
           this.loading = false;
-          this.$store.commit("login", {
-            username: res.user.account,
-            nickname: res.user.userName,
-            phone: res.user.phone,
-            userId: res.user.userId,
-            token: res.token,
-            moreInfo: res.user,
-          });
+
 
         }, rej => {
           console.log(rej);
