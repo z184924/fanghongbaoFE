@@ -2,6 +2,7 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" get-data-url="projectNews/getProjectNews" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" slot="right-control">新增</el-button>
+      <el-button @click="top" :icon="selectedRow.isTop===0 ? 'el-icon-arrow-up' : 'el-icon-arrow-down'" slot="right-control" v-if="selectedRow.newsId">{{this.selectedRow.isTop===0 ? '置顶' : '取消置顶'}}</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="view" icon="el-icon-view" slot="right-control">查看新闻内容</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
@@ -65,18 +66,18 @@ export default {
         },
         creator: {
           label: "创建人",
-          width:"120px"
+          width: "120px"
         },
         isTop: {
           label: "是否置顶",
-          width:"100px",
+          width: "100px",
           formatter(r, c, v) {
             return v === 1 ? vue.YES : vue.NO
           }
         },
         createTime: {
           label: "上传时间",
-          width:"120px",
+          width: "120px",
           formatter(r, c, v) {
             return moment(v).format("YYYY-MM-DD")
           }
@@ -114,6 +115,28 @@ export default {
         }, 10)
       })
       // 
+    },
+    top() {
+      if (this.selectedRow.newsId) {
+        let savedIsTop = 0;
+        if (this.selectedRow.isTop === 0) {
+          savedIsTop = 1;
+        }
+        this.xpost("projectNews/setProjectNewsIsTop", {
+          newsId: this.selectedRow.newsId,
+          isTop: savedIsTop,
+        }).then(res => {
+          this.mxMessage(res).then(() => {
+            this.$refs.table.getData();
+            this.isShowEdit = false;
+          })
+        })
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        })
+      }
     },
 
     edit() {
