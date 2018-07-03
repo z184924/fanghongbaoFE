@@ -50,7 +50,13 @@ export default {
         },
         picSort: {
           label: "排序号"
-        }
+        },
+        createTime: {
+          label: "创建时间",
+          formatter(r,c,v){
+            return moment(v).format("YYYY-MM-DD HH:mm:ss")
+          }
+        },
       },
       selectedRow: {},
 

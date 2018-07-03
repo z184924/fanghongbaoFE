@@ -271,7 +271,7 @@ export default {
 
     // 物业类型
     this.xpost("city/getPropertyTypes").then(res => {
-      console.log(res);
+      // console.log(res);
       this.listWuyeLeixing = res.map(o => {
         return {
           label: o.propertyType,

@@ -29,7 +29,6 @@
           <td class="xc-text-center">是否置顶</td>
           <td>
             <c-select dict="bool" v-model="form.isTop"></c-select>
-            <!-- <file-box v-model="form.isTop" :multiple="false"></file-box> -->
           </td>
         </tr>
         <tr>
@@ -53,7 +52,6 @@
   </div>
 </template>
 <script>
-// import ue from "u"
 import uuid from "uuid"
 export default {
   data() {
@@ -110,8 +108,8 @@ export default {
           }
           this.ue = UE.getEditor(this.uuid);
           this.ue.addListener('ready', (editor) => {
-            this.ue.setHeight(200)
             this.ue.setContent("")
+            this.ue.setHeight(200)
           });
         }, 10)
       })
@@ -124,7 +122,7 @@ export default {
         this.xpost("projectNews/getSingleProjectNews", {
           newsId: this.selectedRow.newsId
         }).then(res => {
-          console.log(res);
+          // console.log(res);
           this.form = {
             newsId: res.newsId,
             img: [res.newsPic],

@@ -54,6 +54,10 @@
           <i class="el-icon-arrow-right"></i>
           <span>房产头条</span>
         </el-menu-item>
+        <el-menu-item index="/project/approve">
+          <i class="el-icon-arrow-right"></i>
+          <span>审核管理</span>
+        </el-menu-item>
 
       </el-menu-item-group>
     </el-submenu>

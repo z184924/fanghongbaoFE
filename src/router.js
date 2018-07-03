@@ -21,6 +21,8 @@ import ProjectGoodsExchange from "./pages/project/goods-exchange/Index"
 
 import ProjectNews from "./pages/project/news/Index"
 
+import ProjectApprove from "./pages/project/approve/Index"
+
 // 系统管理
 import SystemInsideUser from "./pages/system/inside-user/Index"
 
@@ -78,6 +80,11 @@ export default new Router({
       path: "/project/news",
       name: "ProjectNews",
       component: ProjectNews,
+    },
+    {
+      path: "/project/approve",
+      name: "ProjectApprove",
+      component: ProjectApprove,
     },
 
 

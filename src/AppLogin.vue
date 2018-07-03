@@ -11,7 +11,7 @@
     <div class="xc-title--logo">
       <img src="./assets/img/logo.png" alt="">
     </div>
-    <div class="xc-title">fhb</div>
+    <div class="xc-title">房红包后台管理系统</div>
     <div class="login_box" v-loading="loading">
       <div class="login_in_header"></div>
       <div class="qr_box">
@@ -54,8 +54,8 @@
           <img src="./assets/img/appQR.png" alt="">
         </div>
         <hr>
-        <div class="text-center qr_text">
-          <a href="http://111.30.79.43:60032/static/app/android-debug.apk">下载APP</a>
+        <div class="xc-text-center qr_text">
+          <a style="color:#fff;" href="">下载APP</a>
         </div>
       </div>
     </div>
@@ -143,25 +143,6 @@ export default {
     changeEnter: function () {
       this.$refs.password.focus();
     },
-    // loginTest() {
-    //   // 获取字典
-    //   this.xpost("dictdetail/findAllData").then(res => {
-    //     let dict = { ...res, ...this.DICT }
-    //     console.log(dict);
-    //     this.$store.commit("setDict", dict);
-    //     localStorage.setItem("dict", JSON.stringify(dict));
-    //     let loginInfo = {
-    //       username: this.username,
-    //       nickname: this.username,
-    //       token: "123",
-    //       moreInfo: {},
-    //     }
-    //     this.$store.commit("login", loginInfo);
-
-    //   }, rej => {
-    //     console.log(rej);
-    //   })
-    // }
   }
 };
 </script>
@@ -197,7 +178,7 @@ img {
 }
 .login_box {
   width: 400px;
-  height: 450px;
+  height: 380px;
   border-radius: 10px;
   background: rgba(60, 64, 119, 0.39);
   position: absolute;

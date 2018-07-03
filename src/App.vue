@@ -1,39 +1,41 @@
 
 <template>
   <div>
-    <app-login v-if="!mxLoginInfo.username"></app-login>
-    <div class="stage" v-else>
-      <div class="stage--header">
-        <c-header></c-header>
-      </div>
-      <div class="stage--center-gap"></div>
-      <div class="stage--center-gap"></div>
-      <div class="stage--center">
-        <div class="stage--center-gap"></div>
-        <div class="stage--center-gap"></div>
-        <div class="stage--menu">
-          <c-menu></c-menu>
+    <transition @enter="veEnter" @leave="veLeave" @before-enter="veBeforeEnter" @after-enter="veAfterEnter">
+      <app-login v-if="!mxLoginInfo.username"></app-login>
+      <div class="stage" v-else>
+        <div class="stage--header">
+          <c-header></c-header>
         </div>
         <div class="stage--center-gap"></div>
-        <div class="stage--page">
-          <div class="stage--page-in">
-            <!-- <transition name="fade"> -->
-            <keep-alive>
-              <router-view v-if="$route.meta.keepAlive"></router-view>
-            </keep-alive>
-            <router-view v-if="!$route.meta.keepAlive"></router-view>
-            <div style="height:130px"></div>
-            <!-- </transition> -->
+        <div class="stage--center-gap"></div>
+        <div class="stage--center">
+          <div class="stage--center-gap"></div>
+          <div class="stage--center-gap"></div>
+          <div class="stage--menu">
+            <c-menu></c-menu>
+          </div>
+          <div class="stage--center-gap"></div>
+          <div class="stage--page">
+            <div class="stage--page-in">
+              <!-- <transition name="fade"> -->
+              <keep-alive>
+                <router-view v-if="$route.meta.keepAlive"></router-view>
+              </keep-alive>
+              <router-view v-if="!$route.meta.keepAlive"></router-view>
+              <div style="height:130px"></div>
+              <!-- </transition> -->
+            </div>
           </div>
         </div>
+        <div class="stage--footer">
+          <b>房红包后台管理系统</b>
+          <span>&nbsp;&nbsp;</span>
+          <span> Copyright © </span>
+          <span>&nbsp;房红包（北京）网络科技有限公司</span>
+        </div>
       </div>
-      <div class="stage--footer">
-        <b>房红包后台管理系统</b>
-        <span>&nbsp;&nbsp;</span>
-        <span> Copyright © </span>
-        <span>&nbsp;房红包（北京）网络科技有限公司</span>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -43,6 +45,7 @@ import localhostConfig from "../localhostConfig.js"
 import AppLogin from "./AppLogin"
 import CHeader from "@/components/CHeader"
 import CMenu from "@/components/CMenu"
+import Ve from "velocity-animate"
 
 export default {
   components: {
@@ -57,29 +60,44 @@ export default {
 
     };
   },
+  methods: {
+    veBeforeEnter(el, done) {
+      el.style.opacity = 0;
+      el.style.top = "-30px";
+      el.style.position = "fixed";
+      el.style.height = "90vh";
+    },
+    veEnter(el, done) {
+      Velocity(el, { opacity: 1, top: "0px", height: "100vh" }, { duration: 300, easing: "easeOutCubic", complete: done })
+    },
+    veAfterEnter(el, done) {
+      el.style.position = "unset";
+    },
+    veLeave(el, done) {
+      Velocity(el, { opacity: 0, top: "-30px" }, { duration: 0, complete: done })
+    },
+  },
   created() {
     if (window.location.port == "17011") {
       this.$store.commit("setDevMode");
       this.$store.commit("changeBasePath", localhostConfig.basePath);
     }
-    this.$store.commit("setWindowHeight", window.innerHeight);
     window.onresize = () => {
       this.$store.commit("setWindowHeight", window.innerHeight);
     }
-    let loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
 
+    this.$store.commit("setWindowHeight", window.innerHeight);
     this.$store.commit("setDict", JSON.parse(localStorage.getItem("dict")));
+    let loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
     this.$store.commit("login", JSON.parse(localStorage.getItem("loginInfo")));
   },
 
-  methods: {
-  }
 }
 </script>
 <style lang="scss">
 .stage {
   width: 100vw;
-  height: 100vh !important;
+  height: 100vh;
   display: flex;
   flex-flow: column;
   &--header {
