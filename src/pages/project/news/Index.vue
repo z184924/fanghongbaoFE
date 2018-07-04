@@ -39,7 +39,7 @@
           </td>
         </tr>
       </table>
-      <!-- <div>{{form.isTop}}</div> -->
+      <div>{{form}}</div>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
@@ -48,6 +48,7 @@
       <div v-html="selectedRow.newsContent" style="height:400px;overflow-y:scroll;padding:1em;"></div>
       <div style="text-align:right;padding-top:10px;color:#777;">发布时间：{{dateFormat(selectedRow.createTime)}}</div>
       <el-button type="default" @click="isShowView=false" slot="footer">关闭</el-button>
+      
 
     </el-dialog>
   </div>
@@ -145,7 +146,7 @@ export default {
         this.xpost("projectNews/getSingleProjectNews", {
           newsId: this.selectedRow.newsId
         }).then(res => {
-          // console.log(res);
+          console.log(res);
           this.form = {
             newsId: res.newsId,
             img: [res.newsPic],

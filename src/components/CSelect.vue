@@ -91,16 +91,17 @@ export default {
     // this.selectedValue = this.value;
     // console.log(this.value, this.n + ".........");
     let empty = false;
-    if (this.value) {
 
-      if (kindOf(this.value) === "object") {
-        empty = true;
-      } else if (kindOf(this.value) === "array" && this.value.length === 0) {
-        empty = true;
-      }
-    } else {
+    if (kindOf(this.value) === "object") {
+      empty = true;
+    } else if (kindOf(this.value) === "array" && this.value.length === 0) {
+      empty = true;
+    } else if (this.value === undefined) {
+      empty = true;
+    } else if (this.value === null) {
       empty = true;
     }
+
     if (empty) {
       if (this.type === "multiple") {
         this.selectedValue = [];

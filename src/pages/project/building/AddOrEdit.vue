@@ -102,6 +102,9 @@
       </el-table>
     </c-panel>
 
+    <c-panel title-color="#17437c" title="封面Logo" width="800px">
+      <file-box v-model="form.f__listFengmian" :multiple="false"></file-box>
+    </c-panel>
     <c-panel title-color="#17437c" title="轮播图" width="800px">
       <file-box v-model="form.f__listLunbotu"></file-box>
     </c-panel>
@@ -160,6 +163,7 @@ export default {
           city: "",
           area: ""
         },
+        f__listFengmian: [],
         f__listLunbotu: [],
         f__listZiliaoku: [],
         f__listHuxingtu: [],
@@ -250,6 +254,7 @@ export default {
 
 
       // 图片
+      data.logoPic = this.form.f__listFengmian.join();
       data.carouselPictures = this.form.f__listLunbotu.join();
       data.dataPictures = this.form.f__listZiliaoku.join();
       data.parameterPictures = this.form.f__listXiangmuCanshu.join();
@@ -316,11 +321,12 @@ export default {
             this.form.recommendTime = moment(this.form.recommendTime).format("YYYY-MM-DD");
           } else {
             // this.form.ifRecommend = 0;
-            // this.form.recommendTime = "";
+            this.form.recommendTime = "";
           }
 
           // 图片
           // console.log(this.form);
+          this.form.f__listFengmian = this.form.logoPic ? this.form.logoPic.split(",") : [];
           this.form.f__listLunbotu = this.form.carouselPictures ? this.form.carouselPictures.split(",") : [];
           this.form.f__listZiliaoku = this.form.dataPictures ? this.form.dataPictures.split(",") : [];
           this.form.f__listHuxingtu = this.form.houseTypePictures ? this.form.houseTypePictures.split(",") : [];

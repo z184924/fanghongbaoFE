@@ -1,7 +1,7 @@
 <template>
   <span>
-    <c-select :dict="cityArray" v-model="selectedCity" n="city" style="width:150px"></c-select>
-    <c-select :dict="areaArray" v-model="selectedArea" n="area" style="width:150px" v-if="areaArray.length>0"></c-select>
+    <c-select :dict="cityArray" v-model="selectedCity" style="width:120px"></c-select>
+    <c-select :dict="areaArray" v-model="selectedArea" style="width:150px" v-if="areaArray.length>0"></c-select>
     <el-button type="text" @click="clear" style="padding:0 6px">清空</el-button>
     <!-- <div>{{selectedArea}}</div> -->
   </span>
