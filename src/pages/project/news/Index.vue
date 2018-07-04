@@ -39,7 +39,7 @@
           </td>
         </tr>
       </table>
-      <div>{{form}}</div>
+      <!-- <div>{{form}}</div> -->
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
