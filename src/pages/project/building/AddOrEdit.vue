@@ -102,7 +102,7 @@
       </el-table>
     </c-panel>
 
-    <c-panel title-color="#17437c" title="封面Logo" width="800px">
+    <c-panel title-color="#7c2b17" title="封面Logo" width="800px">
       <file-box v-model="form.f__listFengmian" :multiple="false"></file-box>
     </c-panel>
     <c-panel title-color="#17437c" title="轮播图" width="800px">
@@ -287,13 +287,7 @@ export default {
       // 编辑：
       let projectId = "";
       if (this.$route.params.type === "edit") {
-
-        let temp1 = this.$store.state.temp;
-        if (temp1) {
-          projectId = temp1.projectId;
-        } else {
-          this.$router.replace("/project/building")
-        }
+        projectId = this.$route.params.id;
         this.xpost("projectInfo/getPropertyTypesByProjectID", {
           projectId
         }).then(res => {
@@ -304,9 +298,9 @@ export default {
         })
         this.xpost("projectInfo/getFormJson", {
           projectId
-        }).then(temp => {
+        }).then(form => {
 
-          this.form = { ...this.form, ...clone(temp) };
+          this.form = { ...this.form, ...clone(form) };
           this.form.f__qy.city = this.form.cityId;
           this.form.f__qy.area = this.form.areaId;
           if (this.form.commissionType === 0) {

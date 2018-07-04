@@ -149,7 +149,7 @@ var myMixin = {
           }
         }).catch(err => {
           this.$message({
-            message: `${api}访问出错。`,
+            message: `${api}访问出错。(${err})`,
             type: "error"
           });
           // console.log(err);

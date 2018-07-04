@@ -12,7 +12,7 @@
 import Vue from "vue";
 export default {
   data() {
-    let vue=this;
+    let vue = this;
     return {
       fields: {
         projectName: {
@@ -80,12 +80,13 @@ export default {
   },
   methods: {
     add() {
-      this.$router.push("building/add-or-edit/add")
+      this.$router.push("building/add-or-edit/add/_")
     },
     edit() {
       if (this.isSelect) {
         this.$store.commit("setTemp", this.selectedRow);
-        this.$router.push("building/add-or-edit/edit")
+        // console.log(this.selectedRow);
+        this.$router.push(`building/add-or-edit/edit/${this.selectedRow.projectId}`)
       } else {
         this.$message({
           type: "info",

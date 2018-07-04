@@ -52,7 +52,7 @@ export default new Router({
       }
     },
     {
-      path: "/project/building/add-or-edit/:type", //add/edit
+      path: "/project/building/add-or-edit/:type/:id", //add/edit
       name: "ProjectBuildingAddOrEdit",
       component: ProjectBuildingAddOrEdit,
     },

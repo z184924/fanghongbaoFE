@@ -145,7 +145,7 @@ export default {
         this.uploadingCount++;
         setTimeout(() => {
           this.uploadingCount = 0;
-        }, 8000);
+        }, 30000);
       }
     },
 
