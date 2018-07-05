@@ -17,6 +17,7 @@ export default {
       fields: {
         projectName: {
           label: "楼盘名称",
+          width:"160px",
           type: "string",
         },
         sellingAverage: {
@@ -25,7 +26,9 @@ export default {
         },
         projectAddress: {
           label: "地址",
+          width:"260px",
           type: "string",
+          class: "xc15",
         },
         ptyj: {
           label: "普通会员佣金",

@@ -146,7 +146,7 @@ export default {
         this.xpost("projectNews/getSingleProjectNews", {
           newsId: this.selectedRow.newsId
         }).then(res => {
-          console.log(res);
+          // console.log(res);
           this.form = {
             newsId: res.newsId,
             img: [res.newsPic],
