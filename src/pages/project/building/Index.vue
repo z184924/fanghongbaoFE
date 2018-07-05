@@ -17,7 +17,7 @@ export default {
       fields: {
         projectName: {
           label: "楼盘名称",
-          width:"160px",
+          width:"200px",
           type: "string",
         },
         sellingAverage: {
