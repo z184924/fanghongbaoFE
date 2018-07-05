@@ -1,12 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <div class="xc6--title">金币规则</div>
+    <div class="xc6__title">金币规则</div>
     <fixed-table ref="table" get-data-url="goldRule/getGridListJson" :fields="fields" v-model="selectedRow">
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
     </fixed-table>
     <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="400px">
-      <table class="xc-table x-border">
-        <tr class="x-head">
+      <table class="xc-table xc-table--border">
+        <tr class="xc-table__head">
           <td>动作</td>
           <td>金币值</td>
         </tr>

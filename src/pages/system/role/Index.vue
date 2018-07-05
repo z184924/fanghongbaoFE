@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="xc12">
-      <div class="xc12--item xc-shadow" :class="{'x-no-user':o.count===0}" v-for="(o,i) in listRole" :key="i" @click="showUser(o)">
-        <div class="xc12--title">{{o.roleName}}</div>
-        <div class="xc12--count">{{o.count}}人</div>
+      <div class="xc12__item xc-shadow" :class="{'x-no-user':o.count===0}" v-for="(o,i) in listRole" :key="i" @click="showUser(o)">
+        <div class="xc12__title">{{o.roleName}}</div>
+        <div class="xc12__count">{{o.count}}人</div>
       </div>
     </div>
     <el-dialog :visible.sync="isShowDialog" v-drag title="用户列表">
-      <table class="xc-table x-border">
-        <tr class="x-head">
+      <table class="xc-table xc-table--border">
+        <tr class="xc-table__head">
           <td>账户</td>
           <td>姓名</td>
           <td>电话</td>

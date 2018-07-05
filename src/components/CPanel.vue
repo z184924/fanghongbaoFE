@@ -1,14 +1,14 @@
 <template>
   <div class="xc4" :style="{width}">
-    <div class="xc4--header" :style="{background:titleColor}">
-      <div class="xc4--header-left">
+    <div class="xc4__header" :style="{background:titleColor}">
+      <div class="xc4__header-left">
         <span>{{title}}</span>
       </div>
-      <div class="xc4--button-box">
+      <div class="xc4__button-box">
         <slot name="button"></slot>
       </div>
     </div>
-    <div class="xc4--body">
+    <div class="xc4__body">
       <slot></slot>
     </div>
   </div>

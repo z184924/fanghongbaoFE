@@ -1,11 +1,11 @@
 <template>
   <div class="xc2" v-loading="loading">
-    <div class="xc2--box-out">
-      <div class="xc2--box">
+    <div class="xc2__box-out">
+      <div class="xc2__box">
         <!-- <transition-group name="el-zoom-in-center"> -->
-        <div v-for="(o,i) in list" :key="i" class="xc2--img-box" :style="imgStyle">
-          <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2--img" @click="openImg(o)">
-          <div v-if="editable" class="xc2--close" @click="remove(i)">×</div>
+        <div v-for="(o,i) in list" :key="i" class="xc2__img-box" :style="imgStyle">
+          <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2__img" @click="openImg(o)">
+          <div v-if="editable" class="xc2__close" @click="remove(i)">×</div>
         </div>
         <el-upload v-if="editable" class="avatar-uploader" :multiple="multiple" :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
           <i v-if="multiple || list.length===0" class="el-icon-plus avatar-uploader-icon"></i>

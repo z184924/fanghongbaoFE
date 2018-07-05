@@ -7,11 +7,11 @@
     </fixed-table>
     <el-dialog :visible.sync="isShowInsert" v-drag title="添加意见">
       <div class="xc14">
-        <div class="xc14--title">意见内容：</div>
+        <div class="xc14__title">意见内容：</div>
         <el-input type="textarea" :rows="5" v-model="content"></el-input>
         <div style="height:10px"></div>
-        <div class="xc14--title">相关图片：</div>
-        <div class="xc14--file">
+        <div class="xc14__title">相关图片：</div>
+        <div class="xc14__file">
           <file-box v-model="listFile"></file-box>
         </div>
       </div>
@@ -21,11 +21,11 @@
     </el-dialog>
     <el-dialog :visible.sync="isShowDetail" v-drag title="意见详情">
       <div class="xc14">
-        <div class="xc14--title">意见内容：</div>
-        <div class="xc14--content" v-html="detailContent"></div>
+        <div class="xc14__title">意见内容：</div>
+        <div class="xc14__content" v-html="detailContent"></div>
         <div style="height:10px"></div>
-        <div class="xc14--title">相关图片：</div>
-        <div class="xc14--file">
+        <div class="xc14__title">相关图片：</div>
+        <div class="xc14__file">
           <file-box v-model="DetailListFile" :editable="false" v-if="DetailListFile.length>0"></file-box>
           <div v-else>暂无图片</div>
         </div>

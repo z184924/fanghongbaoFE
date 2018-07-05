@@ -1,6 +1,6 @@
 <template>
   <div class="xc3">
-    <div class="xc3--minibtn">
+    <div class="xc3__minibtn">
       <el-tooltip effect="dark" content="返回" placement="bottom" :enterable="false">
         <el-button type="primary" @click="mxBack" icon="el-icon-arrow-left" circle></el-button>
       </el-tooltip>
@@ -11,7 +11,7 @@
     <div style="height:40px"></div>
     <!-- <div style="height:30px"></div> -->
     <c-panel width="800px" title="基本信息">
-      <div class="xc3--form">
+      <div class="xc3__form">
         <el-form ref="form" :model="form" label-width="12em">
           <div class="xc11">
             <el-form-item label="楼盘名称">

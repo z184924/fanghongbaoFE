@@ -1,9 +1,9 @@
 <template>
   <div class="xc7">
-    <div class="xc7--container">
+    <div class="xc7__container">
       <c-panel title="未运营城市" style="width:360px;margin:0 10px">
         <div class="xc9">
-          <span class="xc9--label">搜索：</span>
+          <span class="xc9__label">搜索：</span>
           <el-input v-model="searchTextWyy" placeholder="可输入拼音、拼音首字母和汉字"></el-input>
           <el-button type="text" style="padding:0 0.6em" @click="clearWyy">清空</el-button>
         </div>
@@ -16,7 +16,7 @@
           </el-checkbox-group>
         </div>
       </c-panel>
-      <div class="xc7--btns">
+      <div class="xc7__btns">
 
         <el-button type="success" @click="doSave(selectedWyy,1)" :disabled="selectedWyy.length===0">保存已选 →</el-button>
         <div style="height:8px;"></div>
@@ -25,7 +25,7 @@
 
       <c-panel title="已运营城市" style="width:360px;margin:0 10px" title-color="#3a6">
         <div class="xc9">
-          <span class="xc9--label">搜索：</span>
+          <span class="xc9__label">搜索：</span>
           <el-input v-model="searchTextYyy" style="" placeholder="可输入拼音、拼音首字母和汉字"></el-input>
           <el-button type="text" style="padding:0 0.6em" @click="clearYyy">清空</el-button>
         </div>

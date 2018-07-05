@@ -1,5 +1,5 @@
 <template>
-  <div class="xc6 xc-shadow x-center" style="width:800px">
+  <div class="xc6 xc-shadow xc6--center" style="width:800px">
     <fixed-table ref="table" get-data-url="projectCarouselPicture/getListJson" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
@@ -12,7 +12,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="600px">
-      <table class="xc-table x-border">
+      <table class="xc-table xc-table--border">
         <tr>
           <td style="width:6em;text-align:center">轮播图类型</td>
           <td>

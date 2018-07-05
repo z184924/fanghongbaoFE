@@ -1,8 +1,9 @@
 <template>
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" get-data-url="projectNews/getProjectNews" :fields="fields" v-model="selectedRow">
+      <el-button type="warning" @click="top" :icon="selectedRow.isTop===0 ? 'el-icon-arrow-up' : 'el-icon-arrow-down'" slot="right-control" v-if="selectedRow.newsId">{{this.selectedRow.isTop===0 ? '置顶' : '取消置顶'}}</el-button>
+      <div slot="right-control" style="padding:0 1em"></div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">新增</el-button>
-      <el-button @click="top" :icon="selectedRow.isTop===0 ? 'el-icon-arrow-up' : 'el-icon-arrow-down'" slot="right-control" v-if="selectedRow.newsId">{{this.selectedRow.isTop===0 ? '置顶' : '取消置顶'}}</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="view" icon="el-icon-view" slot="right-control">查看新闻内容</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
@@ -13,7 +14,7 @@
       </el-table-column>
     </fixed-table>
     <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="1000px">
-      <table class="xc-table x-border">
+      <table class="xc-table xc-table--border">
         <tr>
           <td class="xc-text-center" style="width:7em">新闻标题</td>
           <td>
@@ -48,8 +49,6 @@
       <div v-html="selectedRow.newsContent" style="height:400px;overflow-y:scroll;padding:1em;"></div>
       <div style="text-align:right;padding-top:10px;color:#777;">发布时间：{{dateFormat(selectedRow.createTime)}}</div>
       <el-button type="default" @click="isShowView=false" slot="footer">关闭</el-button>
-      
-
     </el-dialog>
   </div>
 </template>

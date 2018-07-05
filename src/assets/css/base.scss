@@ -50,13 +50,13 @@ iframe {
   &:hover {
     color: rgb(35, 69, 131);
   }
-  &--red {
+  &__red {
     color: #f44;
     &:hover {
       color: rgb(255, 109, 109);
     }
   }
-  &--lightblue {
+  &__lightblue {
     color: rgb(134, 189, 252);
     &:hover {
       color: rgb(179, 214, 255);
@@ -109,36 +109,23 @@ table.xc-table {
     padding: 8px;
     transition: all 0.15s; // vertical-align: top;
   }
-  &.x-align-top>tr>td {
+  &--align-top>tr>td {
     vertical-align: top;
   }
-  &.x-mini>tr>td {
+  &--mini>tr>td {
     padding: 3px;
   }
-  &.x-border>tr>td {
+  &--border>tr>td {
     border: solid 1px #eee;
   }
-  &.x-center>tr>td {
+  &--center>tr>td {
     text-align: center;
   }
-  &>tr.x-head>td {
+  &__head>td {
     background-color: #7c2416;
     color: #f6f6f6;
     font-weight: bold;
     white-space: nowrap;
-  }
-  &>tr.x-active>td {
-    background-color: #c74936;
-    color: #f6f6f6;
-  }
-  &.hover>tr:not(.x-head)>td {
-    cursor: pointer;
-  }
-  &.hover>tr:not(.x-head):hover>td {
-    background-color: #fcd0c9;
-  }
-  &.hover>tr.x-active:hover>td {
-    background-color: #c74936;
   }
 }
 
@@ -217,7 +204,7 @@ body {
   }
   .el-dialog__headerbtn:hover {
     background-color: $primary-color-7;
-    transition: all 0.2s; 
+    transition: all 0.2s;
   }
   .el-dialog__body {
     color: #000;
@@ -342,7 +329,7 @@ body .stage {
   align-items: center;
   background: #fff;
   font-size: 14px;
-  &--title {
+  &__title {
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -351,16 +338,16 @@ body .stage {
     text-shadow: #ccc 4px 2px 2px;
     padding: 0 20px;
   }
-  &--logo{
-    width:50px;
-    height:50px;
-    margin-right:12px;
-    text-shadow:#ccc 2px 2px 2px;
+  &__logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+    text-shadow: #ccc 2px 2px 2px;
   }
-  &--center {
+  &__center {
     flex: 100% 1 1;
   }
-  &--control {
+  &__control {
     flex: 100px 0 0;
     height: 100%;
     display: flex;
@@ -379,7 +366,7 @@ body .stage {
       }
     }
   }
-  &--badge {
+  &__badge {
     background: rgb(185, 44, 44);
     color: #fff;
     min-width: 22px;
@@ -393,14 +380,14 @@ body .stage {
 
 .xc2 {
   padding-top: 6px;
-  &--img-box {
+  &__img-box {
     position: relative;
     display: inline-block;
     margin-right: 10px;
     margin-bottom: 10px;
     transition: all 0.2s;
   }
-  &--close {
+  &__close {
     position: absolute;
     display: flex;
     align-items: center;
@@ -420,15 +407,15 @@ body .stage {
       background: #d45353;
     }
   }
-  &--box {
+  &__box {
     display: flex;
     flex-wrap: wrap;
   }
-  &--title {
+  &__title {
     font-size: 22px;
     padding: 10px 0;
   }
-  &--img {
+  &__img {
     display: block;
     position: relative;
     width: 100%;
@@ -440,7 +427,7 @@ body .stage {
       opacity: 0.8;
     }
   }
-  &--add {
+  &__add {
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -453,10 +440,10 @@ body .stage {
       border-color: $primary-color-1;
     }
   }
-  &--box-out {
+  &__box-out {
     display: inline-block;
   }
-  &--image-upload {
+  &__image-upload {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -466,15 +453,16 @@ body .stage {
 .xc3 {
   // width: 800px;
   // margin: auto;
-  &--title {
+  &__title {
     font-size: 22px;
     padding: 10px 0;
   }
-  &--ue {
+  &__ue {
     width: 100%;
   }
-  &--minibtn{
-    position: fixed;;
+  &__minibtn {
+    position: fixed;
+    ;
   }
 }
 
@@ -486,7 +474,7 @@ $panel-header-height:40px;
   box-shadow: #aaa 1px 1px 5px;
   margin: auto;
   margin-bottom: 30px;
-  &--header {
+  &__header {
     height: $panel-header-height;
     line-height: $panel-header-height;
     padding-left: 15px;
@@ -495,16 +483,16 @@ $panel-header-height:40px;
     font-size: 16px;
     display: flex;
   }
-  &--header-left {
+  &__header-left {
     flex: 1;
     display: flex;
     align-items: center;
   }
-  &--button-box {
+  &__button-box {
     display: flex;
     align-items: center;
   }
-  &--body {
+  &__body {
     padding: 15px;
   }
 }
@@ -518,10 +506,10 @@ $panel-header-height:40px;
   overflow: hidden;
   margin-right: 5px;
   background: #fff;
-  &.x-center {
+  &--center {
     margin: auto;
   }
-  &--title {
+  &__title {
     font-weight: bold;
     color: rgb(199, 154, 7);
     font-size: 20px;
@@ -531,12 +519,12 @@ $panel-header-height:40px;
 }
 
 .xc7 {
-  &--container {
+  &__container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
   }
-  &--btns {
+  &__btns {
     flex: 6em 0 0;
     display: flex;
     align-items: center;
@@ -557,7 +545,7 @@ $panel-header-height:40px;
 
 .xc9 {
   display: flex;
-  &--label {
+  &__label {
     flex: 3em 0 0;
     display: flex;
     align-items: center;
@@ -584,7 +572,7 @@ $panel-header-height:40px;
 .xc12 {
   display: flex;
   flex-wrap: wrap;
-  &--item {
+  &__item {
     flex: 260px 0 0;
     height: 130px;
     background: #ac3727;
@@ -601,13 +589,13 @@ $panel-header-height:40px;
       cursor: default;
     }
   }
-  &--title {
+  &__title {
     text-align: center;
     color: #fff;
     font-size: 30px;
     padding-top: 30px;
   }
-  &--count {
+  &__count {
     text-align: center;
     color: #e2e2e2;
     font-size: 16px;
@@ -623,16 +611,16 @@ $panel-header-height:40px;
 }
 
 .xc14 {
-  &--title {
+  &__title {
     font-weight: bold;
     padding: 6px 0;
   }
-  &--file {
+  &__file {
     border: solid 1px #dcdfe6;
     padding: 6px;
     border-radius: 4px;
   }
-  &--content {
+  &__content {
     padding-left: 4em;
   }
 }
