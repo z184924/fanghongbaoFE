@@ -102,7 +102,7 @@
       </el-table>
     </c-panel>
 
-    <c-panel title-color="#7c2b17" title="封面Logo" width="800px">
+    <c-panel title-color="#7c2b17" title="封面图" width="800px">
       <file-box v-model="form.f__listFengmian" :multiple="false"></file-box>
     </c-panel>
     <c-panel title-color="#17437c" title="轮播图" width="800px">

@@ -24,19 +24,19 @@ export default new Vuex.Store({
         info = {};
       }
       state.loginInfo = info;
-      localStorage.setItem("loginInfo", JSON.stringify(info));
+      sessionStorage.setItem("loginInfo", JSON.stringify(info));
     },
     logout(state) {
       let info = {};
       state.loginInfo = info;
-      localStorage.setItem("loginInfo", JSON.stringify(info));
+      sessionStorage.setItem("loginInfo", JSON.stringify(info));
     },
     changeBasePath(state, path) {
       state.basePath = path;
     },
     setDict(state, dict) {
       state.dict = dict;
-      localStorage.setItem("dict", JSON.stringify(dict));
+      sessionStorage.setItem("dict", JSON.stringify(dict));
     },
     changeBread(state, b) {
       state.bread1 = b.b1;

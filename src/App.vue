@@ -68,7 +68,7 @@ export default {
       el.style.height = "90vh";
     },
     veEnter(el, done) {
-      Velocity(el, { opacity: 1, top: "0px", height: "100vh" }, { duration: 300, easing: "easeOutCubic", complete: done })
+      Velocity(el, { opacity: 1, top: "0px", height: "100vh" }, { duration: 800, easing: "easeOutQuint", complete: done })
     },
     veAfterEnter(el, done) {
       el.style.position = "unset";
@@ -87,9 +87,9 @@ export default {
     }
 
     this.$store.commit("setWindowHeight", window.innerHeight);
-    this.$store.commit("setDict", JSON.parse(localStorage.getItem("dict")));
+    this.$store.commit("setDict", JSON.parse(sessionStorage.getItem("dict")));
     let loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
-    this.$store.commit("login", JSON.parse(localStorage.getItem("loginInfo")));
+    this.$store.commit("login", JSON.parse(sessionStorage.getItem("loginInfo")));
   },
 
 }

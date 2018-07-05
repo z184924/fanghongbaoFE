@@ -122,7 +122,7 @@ export default {
           let dict = { ...res2, ...this.DICT }
           console.log(dict);
           this.$store.commit("setDict", dict);
-          localStorage.setItem("dict", JSON.stringify(dict));
+          sessionStorage.setItem("dict", JSON.stringify(dict));
           this.loading = false;
 
 

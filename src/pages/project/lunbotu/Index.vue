@@ -20,7 +20,7 @@
           </td>
           <td style="width:3em;text-align:center">排序</td>
           <td>
-            <el-input v-model="lbtSort"></el-input>
+            <el-input-number v-model="lbtSort"></el-input-number>
           </td>
         </tr>
         <tr>
