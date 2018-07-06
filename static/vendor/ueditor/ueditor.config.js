@@ -9,8 +9,8 @@
  * 当升级编辑器时，可直接使用旧版配置文件替换新版配置文件,不用担心旧版配置文件中因缺少新功能所需的参数而导致脚本报错。
  **************************提示********************************/
 
-window.UEDITOR_HOME_URL="http://123.57.32.164:8080/ueditor/"
 (function () {
+    // window.UEDITOR_HOME_URL="http://123.57.32.164:7002/";
 
     /**
      * 编辑器资源文件根路径。它所表示的含义是：以编辑器实例化页面为当前路径，指向编辑器资源文件（即dialog等文件夹）的路径。
@@ -21,6 +21,7 @@ window.UEDITOR_HOME_URL="http://123.57.32.164:8080/ueditor/"
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
+    // console.log(URL);
 
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
@@ -31,7 +32,7 @@ window.UEDITOR_HOME_URL="http://123.57.32.164:8080/ueditor/"
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: URL + "jsp/controller.jsp"
+        , serverUrl: "http://123.57.32.164:7002/" + "jsp/controller.jsp"
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         , toolbars: [[
