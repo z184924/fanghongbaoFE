@@ -1,13 +1,5 @@
 <template>
-  <div class="xc-flex">
-    <div class="xc-flex1">
-      <p-rule></p-rule>
-    </div>
-    <div style="flex:10px 0 0"></div>
-    <div class="xc-flex1">
-      <p-record :is-show-title="true"></p-record>
-    </div>
-  </div>
+  <p-rule></p-rule>
 </template>
 <script>
 import PRule from "./Rule"
