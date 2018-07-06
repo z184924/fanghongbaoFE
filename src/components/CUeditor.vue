@@ -25,14 +25,16 @@ export default {
       if (!this.value) {
         this.$emit("input", "");
       }
-      setTimeout(() => {
-        let ifr = document.getElementById(this.uuid);
-        ifr.contentWindow.postMessage({
-          type: "get",
-          id: this.uuid,
-          text: this.value
-        }, "*");
-      }, 100)
+      this.$nextTick(() => {
+        setTimeout(() => {
+          let ifr = document.getElementById(this.uuid);
+          ifr.contentWindow.postMessage({
+            type: "get",
+            id: this.uuid,
+            text: this.value
+          }, "*");
+        }, 100)
+      })
 
     }
   },
@@ -42,7 +44,7 @@ export default {
       if (res.data.id === this.uuid && res.data.type === "put") {
         this.$emit("input", res.data.text);
       }
-      if (res.data.type === "ready") {
+      if (res.data.type === "ready" && res.data.id === this.uuid) {
         this.setContent();
       }
     })
