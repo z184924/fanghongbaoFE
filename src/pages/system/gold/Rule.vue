@@ -1,7 +1,7 @@
 <template>
   <div class="xc6 xc-shadow">
     <!-- <div class="xc6__title">金币规则</div> -->
-    <fixed-table ref="table" get-data-url="goldRule/getGridListJson" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" get-data-url="goldRule/getGridListJson" :fields="fields" v-model="selectedRow" :show-page="false">
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
     </fixed-table>
     <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="400px">

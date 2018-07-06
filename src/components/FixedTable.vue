@@ -370,8 +370,10 @@ export default {
           this.loading = false;
         }, 8000)
         let param = this.clone(this.dataParam);
-        param.page = this.page.current;
-        param.rows = this.page.size;
+        if (this.showPage) {
+          param.page = this.page.current;
+          param.rows = this.page.size;
+        }
         if (this.searchText != "") {
           param[this.searchField] = this.searchText;
         } else {
