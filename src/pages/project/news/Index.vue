@@ -36,7 +36,6 @@
         <tr>
           <td class="xc-text-center">新闻内容</td>
           <td>
-            <!-- <div style="width:100%;" :id="uuid"></div> -->
             <c-ueditor v-model="form.newsContent"></c-ueditor>
           </td>
         </tr>
@@ -54,7 +53,6 @@
   </div>
 </template>
 <script>
-import uuid from "uuid"
 export default {
   data() {
     let vue = this;

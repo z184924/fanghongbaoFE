@@ -29,7 +29,6 @@
         <tr>
           <td>商品描述</td>
           <td>
-            <!-- <div :id="uuid" style="width:100%"></div> -->
             <c-ueditor v-model="form.goodsDescription"></c-ueditor>
           </td>
         </tr>
@@ -46,8 +45,6 @@ export default {
     let vue = this;
     return {
       // ★★★config★★★
-      uuid: "",
-      ue: null,
       config: {
         editUrl: "goodsInfo/saveOrUpdate",
         deleteUrl: "goodsInfo/delete",

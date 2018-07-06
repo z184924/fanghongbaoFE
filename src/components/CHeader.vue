@@ -28,7 +28,7 @@
     </div>
     <div class="xc1__control -text">
       <i class="ii i-yonghu"></i>
-      <span style="padding:0 3px;">管理员</span>
+      <span style="padding:0 3px;">{{mxLoginInfo.nickname}}</span>
     </div>
   </div>
 </template>
