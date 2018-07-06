@@ -81,6 +81,10 @@
             <c-select v-model="form.f__xmzg" :dict="listXiangmuZhuguan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__xmzg=''">清空</el-button>
           </el-form-item>
+          <el-form-item label="案场秘书（多选）">
+            <c-select type="multiple" v-model="form.f__acms" :dict="listAnchang" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__acms=''">清空</el-button>
+          </el-form-item>
           <el-form-item label="项目经理（多选）">
             <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__xmjl=[]">清空</el-button>
@@ -149,6 +153,7 @@ export default {
       listChaosongren: [],
       listZhuanyuan: [],
       listXiangmuZhuguan: [],
+      listAnchang: [],
       listXiangmuJingli: [],
       listShenheren: [],
       listQuyuJingli: [],
@@ -156,6 +161,7 @@ export default {
       listRole: [
         { roleId: 2, field: "f__zy", fieldList: "listZhuanyuan", multiple: true },
         { roleId: 3, field: "f__xmzg", fieldList: "listXiangmuZhuguan", multiple: false },
+        { roleId: 10, field: "f__acms", fieldList: "listAnchang", multiple: true },
         { roleId: 4, field: "f__xmjl", fieldList: "listXiangmuJingli", multiple: true },
         { roleId: 8, field: "f__shr", fieldList: "listShenheren", multiple: false },
         { roleId: 5, field: "f__qyjl", fieldList: "listQuyuJingli", multiple: false }

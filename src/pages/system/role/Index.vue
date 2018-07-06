@@ -21,8 +21,8 @@
           <td>{{o.userName}}</td>
           <td>{{o.phone}}</td>
           <td>{{format(o.registerTime)}}</td>
-          <td>{{o.isInsider === 1 ? YES : NO}}</td>
-          <td>{{o.isVIP === 1 ? YES : NO}}</td>
+          <td>{{boolToString(o.isInsider)}}</td>
+          <td>{{boolToString(o.isVIP)}}</td>
         </tr>
       </table>
     </el-dialog>
@@ -39,6 +39,15 @@ export default {
     }
   },
   methods: {
+    boolToString(b) {
+      if (b === 0) {
+        return this.NO;
+      } else if (b === 1) {
+        return this.YES
+      } else {
+        return ""
+      }
+    },
     showUser(o) {
       if (o.count > 0) {
         this.users = o.users;
