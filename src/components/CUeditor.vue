@@ -1,5 +1,5 @@
 <template>
-  <iframe :id="uuid" :src="`http://192.168.0.201:8082/?id=${uuid}`" frameborder="0" style="width:100%;height:400px"></iframe>
+  <iframe :id="uuid" :src="`http://123.57.32.164:7002/?id=${uuid}`" frameborder="0" style="width:100%;height:400px"></iframe>
 </template>
 <script>
 import uuid from "uuid"
