@@ -25,6 +25,12 @@ import mx from "./mx"
 import "./assets/css/element/index.css"
 import "./assets/css/base.scss"
 
+window.ueContentCallback = cb => {
+  window.addEventListener('message', res => {
+    cb(res)
+  })
+}
+
 
 
 Vue.use(Element, {
@@ -99,5 +105,3 @@ new Vue({
     App
   }
 });
-
-

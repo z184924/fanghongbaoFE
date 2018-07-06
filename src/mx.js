@@ -4,6 +4,8 @@ import FileBox from "@/components/FileBox"
 import CSelect from "@/components/CSelect"
 import CPanel from "@/components/CPanel"
 import AreaLabel from "@/components/AreaLabel"
+import CUeditor from "@/components/CUeditor"
+
 // import request from "request"
 import axios from "axios"
 import json5 from "json5"
@@ -17,7 +19,8 @@ var myMixin = {
     CSelect,
     CPanel,
     FileBox,
-    AreaLabel
+    AreaLabel,
+    CUeditor
   },
   methods: {
     mxStringify(o) {

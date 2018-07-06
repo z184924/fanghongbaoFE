@@ -13,7 +13,7 @@
         </template>
       </el-table-column>
     </fixed-table>
-    <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="1000px">
+    <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="1000px" top="100px">
       <table class="xc-table xc-table--border">
         <tr>
           <td class="xc-text-center" style="width:7em">新闻标题</td>
@@ -36,7 +36,8 @@
         <tr>
           <td class="xc-text-center">新闻内容</td>
           <td>
-            <div style="width:100%;" :id="uuid"></div>
+            <!-- <div style="width:100%;" :id="uuid"></div> -->
+            <c-ueditor v-model="form.newsContent"></c-ueditor>
           </td>
         </tr>
       </table>
@@ -86,7 +87,7 @@ export default {
       selectedRow: {},
       form: {},
       uuid: "",
-      ue: null,
+      // ue: null,
     }
   },
   methods: {
@@ -102,18 +103,18 @@ export default {
         newsTitle: "",
         newsContent: ""
       };
-      this.$nextTick().then(() => {
-        setTimeout(() => {
-          if (this.ue) {
-            this.ue.destroy();
-          }
-          this.ue = UE.getEditor(this.uuid);
-          this.ue.addListener('ready', (editor) => {
-            this.ue.setContent("")
-            this.ue.setHeight(200)
-          });
-        }, 10)
-      })
+      // this.$nextTick().then(() => {
+      //   setTimeout(() => {
+      //     if (this.ue) {
+      //       this.ue.destroy();
+      //     }
+      //     this.ue = UE.getEditor(this.uuid);
+      //     this.ue.addListener('ready', (editor) => {
+      //       this.ue.setContent("")
+      //       this.ue.setHeight(200)
+      //     });
+      //   }, 10)
+      // })
       // 
     },
     top() {
@@ -161,20 +162,20 @@ export default {
 
           this.isShowEdit = true;
           this.$forceUpdate();
-          this.$nextTick().then(() => {
-            setTimeout(() => {
-              if (this.ue) {
-                this.ue.destroy();
-              }
-              this.ue = UE.getEditor(this.uuid);
-              this.ue.addListener('ready', (editor) => {
-                this.ue.setContent(this.form.newsContent);
-                setTimeout(() => {
-                  this.ue.setHeight(200);
-                }, 300)
-              });
-            }, 10)
-          })
+          // this.$nextTick().then(() => {
+          //   setTimeout(() => {
+          //     if (this.ue) {
+          //       this.ue.destroy();
+          //     }
+          //     this.ue = UE.getEditor(this.uuid);
+          //     this.ue.addListener('ready', (editor) => {
+          //       this.ue.setContent(this.form.newsContent);
+          //       setTimeout(() => {
+          //         this.ue.setHeight(200);
+          //       }, 300)
+          //     });
+          //   }, 10)
+          // })
         })
       } else {
         this.$message({
@@ -190,7 +191,7 @@ export default {
         newsId: this.form.newsId,
         newsPic: this.form.img.join(),
         newsTitle: this.form.title,
-        newsContent: this.ue.getContent()
+        newsContent: this.form.newsContent,
       }).then(res => {
         this.mxMessage(res).then(() => {
           this.$refs.table.getData();
