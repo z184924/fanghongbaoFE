@@ -69,6 +69,10 @@
               </el-form-item>
             </div>
           </el-collapse-transition>
+          <el-form-item label="抄送人（多选）">
+            <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__csr=[]">清空</el-button>
+          </el-form-item>
           <el-form-item label="专员（多选）">
             <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__zy=[]">清空</el-button>
@@ -142,6 +146,7 @@ export default {
   data() {
     return {
       listWuyeLeixing: [],
+      listChaosongren: [],
       listZhuanyuan: [],
       listXiangmuZhuguan: [],
       listXiangmuJingli: [],
@@ -246,6 +251,9 @@ export default {
       data.roleIds = listRole.join();
       data.userIds = listUser.join();
 
+      // 抄送人
+      data.copyUserIds = this.form.f__csr.join();
+
       //客户信息
       data.fields = this.selectedClient.map(o => {
         return o.customerMapId
@@ -270,6 +278,28 @@ export default {
         })
       })
 
+    },
+    getChaosongrenList(id) {
+      return new Promise((resolve, reject) => {
+        this.xpost("user/getCopyUsers", {
+          projectId: id
+        }).then(res => {
+          let data = {};
+          data.list = res.rows.map(o => {
+            return {
+              label: o.userName,
+              value: o.userId
+            }
+          })
+          data.selected = [];
+          res.rows.forEach(o => {
+            if (o.isChecked) {
+              data.selected.push(o.userId)
+            }
+          })
+          resolve(data);
+        })
+      })
     }
   },
   created() {
@@ -288,6 +318,10 @@ export default {
       let projectId = "";
       if (this.$route.params.type === "edit") {
         projectId = this.$route.params.id;
+        this.getChaosongrenList(projectId).then(res => {
+          this.listChaosongren = res.list;
+          this.form.f__csr = res.selected;
+        });
         this.xpost("projectInfo/getPropertyTypesByProjectID", {
           projectId
         }).then(res => {
@@ -331,6 +365,11 @@ export default {
 
         })
 
+      } else {
+        this.getChaosongrenList("").then(res => {
+          this.listChaosongren = res.list;
+          this.form.f__csr = [];
+        });
       }
       // 获取用户
       this.listRole.forEach(o => {
