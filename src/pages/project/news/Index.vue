@@ -86,8 +86,6 @@ export default {
       },
       selectedRow: {},
       form: {},
-      uuid: "",
-      // ue: null,
     }
   },
   methods: {
@@ -103,19 +101,6 @@ export default {
         newsTitle: "",
         newsContent: ""
       };
-      // this.$nextTick().then(() => {
-      //   setTimeout(() => {
-      //     if (this.ue) {
-      //       this.ue.destroy();
-      //     }
-      //     this.ue = UE.getEditor(this.uuid);
-      //     this.ue.addListener('ready', (editor) => {
-      //       this.ue.setContent("")
-      //       this.ue.setHeight(200)
-      //     });
-      //   }, 10)
-      // })
-      // 
     },
     top() {
       if (this.selectedRow.newsId) {
@@ -146,7 +131,6 @@ export default {
         this.xpost("projectNews/getSingleProjectNews", {
           newsId: this.selectedRow.newsId
         }).then(res => {
-          // console.log(res);
           this.form = {
             newsId: res.newsId,
             img: [res.newsPic],
@@ -161,21 +145,6 @@ export default {
           }
 
           this.isShowEdit = true;
-          this.$forceUpdate();
-          // this.$nextTick().then(() => {
-          //   setTimeout(() => {
-          //     if (this.ue) {
-          //       this.ue.destroy();
-          //     }
-          //     this.ue = UE.getEditor(this.uuid);
-          //     this.ue.addListener('ready', (editor) => {
-          //       this.ue.setContent(this.form.newsContent);
-          //       setTimeout(() => {
-          //         this.ue.setHeight(200);
-          //       }, 300)
-          //     });
-          //   }, 10)
-          // })
         })
       } else {
         this.$message({
@@ -226,8 +195,5 @@ export default {
       }
     }
   },
-  created() {
-    this.uuid = uuid.v4();
-  }
 }
 </script>

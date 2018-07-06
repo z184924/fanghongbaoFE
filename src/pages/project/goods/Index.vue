@@ -29,7 +29,8 @@
         <tr>
           <td>商品描述</td>
           <td>
-            <div :id="uuid" style="width:100%"></div>
+            <!-- <div :id="uuid" style="width:100%"></div> -->
+            <c-ueditor v-model="form.goodsDescription"></c-ueditor>
           </td>
         </tr>
       </table>
@@ -40,7 +41,6 @@
   </div>
 </template>
 <script>
-import uuid from "uuid"
 export default {
   data() {
     let vue = this;
@@ -87,18 +87,6 @@ export default {
       this.form = {};
       this.dialogTitle = "新增";
       this.isShowEdit = true;
-      this.$nextTick().then(() => {
-        setTimeout(() => {
-          if (this.ue) {
-            this.ue.destroy();
-          }
-          this.ue = UE.getEditor(this.uuid);
-          this.ue.addListener('ready', (editor) => {
-            this.ue.setHeight(200)
-            this.ue.setContent("")
-          });
-        }, 10)
-      })
     },
     edit() {
       let a = this.selectedRow;
@@ -106,20 +94,6 @@ export default {
         this.form = this.selectedRow;
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
-        this.$nextTick().then(() => {
-          setTimeout(() => {
-            if (this.ue) {
-              this.ue.destroy();
-            }
-            this.ue = UE.getEditor(this.uuid);
-            this.ue.addListener('ready', (editor) => {
-              this.ue.setContent(this.form.goodsDescription);
-              setTimeout(() => {
-                this.ue.setHeight(200);
-              }, 300)
-            });
-          }, 10)
-        })
       } else {
         this.$message({
           type: "info",
@@ -128,7 +102,6 @@ export default {
       }
     },
     save() {
-      this.form.goodsDescription = this.ue.getContent();
       this.xpost(this.config.editUrl, this.form).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
@@ -161,9 +134,6 @@ export default {
     },
   },
 
-  created() {
-    this.uuid = uuid.v4();
-  }
 }
 </script>
 
