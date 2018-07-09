@@ -34,6 +34,10 @@ import SystemFeedback from "./pages/system/feedback/Index"
 
 import SystemGold from "./pages/system/gold/Index"
 
+// 审核管理
+import SystemApproveAnchang from "./pages/approve/Anchang"
+
+
 
 export default new Router({
   routes: [
@@ -115,6 +119,14 @@ export default new Router({
       path: "/system/gold",
       name: "SystemGold",
       component: SystemGold,
+    },
+
+
+    // 审核
+    {
+      path: "/approve/anchang",
+      name: "SystemApproveAnchang",
+      component: SystemApproveAnchang,
     },
 
   ]

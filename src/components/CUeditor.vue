@@ -9,7 +9,7 @@ export default {
   },
   watch: {
     value: {
-      handler() {
+      handler(a ,b) {
         this.setContent();
       },
       deep: true,

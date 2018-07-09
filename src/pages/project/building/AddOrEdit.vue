@@ -69,10 +69,7 @@
               </el-form-item>
             </div>
           </el-collapse-transition>
-          <el-form-item label="抄送人（多选）">
-            <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
-            <el-button type="text" @click="form.f__csr=[]">清空</el-button>
-          </el-form-item>
+       
           <el-form-item label="专员（多选）">
             <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__zy=[]">清空</el-button>
@@ -96,6 +93,10 @@
           <el-form-item label="区域经理（单选）">
             <c-select v-model="form.f__qyjl" :dict="listQuyuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__qyjl=''">清空</el-button>
+          </el-form-item>
+             <el-form-item label="抄送人（多选）">
+            <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__csr=[]">清空</el-button>
           </el-form-item>
         </el-form>
       </div>

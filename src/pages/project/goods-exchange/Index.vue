@@ -41,14 +41,35 @@ export default {
       dialogTitle: "编辑",
       isShowEdit: false,
       fields: {
-        x: {
-          label: "x"
+        goodsName: {
+          label: "物品"
         },
-        y: {
-          label: "y"
+        goldValue: {
+          label: "物品金币值"
         },
-        z: {
-          label: "z"
+        userName: {
+          label: "用户"
+        },
+        exchangeDate: {
+          label: "兑换时间",
+          formatter(r, c, v) {
+            return vue.mxDateFormatter(v);
+          }
+        },
+        isPost: {
+          label: "是否邮寄",
+          formatter(r, c, v) {
+            return vue.mxBoolFormatter(v);
+          }
+        },
+        postMan: {
+          label: "收件人"
+        },
+        postDate: {
+          label: "邮寄时间",
+          formatter(r, c, v) {
+            return vue.mxDateFormatter(v);
+          }
         },
         // goodsName: {
         //   label: "商品名称"

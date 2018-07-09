@@ -38,6 +38,7 @@
 <script>
 export default {
   data() {
+    let vue = this;
     return {
       fields: {
         userName: {
@@ -57,7 +58,7 @@ export default {
           label: "反馈时间",
           width: "160px",
           formatter(r, c, v) {
-            return moment(v).format("YYYY-MM-DD HH:mm:ss")
+            return vue.mxDateFormatter(v);
           }
         }
       },

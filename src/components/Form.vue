@@ -53,7 +53,7 @@ export default {
         createTime: {
           label: "创建时间",
           formatter(r, c, v) {
-            return moment(v).format("YYYY-MM-DD")
+            return vue.mxDateFormatter(v);
           }
         },
         conditions: {

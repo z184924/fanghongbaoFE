@@ -61,6 +61,18 @@
 
       </el-menu-item-group>
     </el-submenu>
+    <el-submenu index="审核管理">
+      <template slot="title">
+        <i class="ii i-shenpi"></i>
+        <span>审核管理</span>
+      </template>
+      <el-menu-item-group>
+        <el-menu-item index="/approve/anchang">
+          <i class="el-icon-arrow-right"></i>
+          <span>案场秘书</span>
+        </el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
     <el-submenu index="系统管理">
       <template slot="title">
         <i class="ii i-guanli"></i>

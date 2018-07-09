@@ -99,21 +99,21 @@ export default {
           label: "是否内部用户",
           type: "string",
           formatter(r, c, v) {
-            return v === 1 ? vue.YES : vue.NO
+            return vue.mxBoolFormatter(v);
           }
         },
         isVIP: {
           label: "是否VIP",
           type: "string",
           formatter(r, c, v) {
-            return v === 1 ? vue.YES : vue.NO
+            return vue.mxBoolFormatter(v);
           }
         },
         registerTime: {
           label: "注册时间",
           type: "string",
           formatter(r, c, v) {
-            return moment(v).format("YYYY-MM-DD HH:mm:ss");
+            return vue.mxTimeFormatter(v);
           }
         },
         roleName: {

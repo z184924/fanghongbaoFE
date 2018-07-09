@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <fixed-table v-if="activeTab==='tab1'" ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow" :data-param="param">
+  <div class="xc6 xc-shadow">
+    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
     </fixed-table>
-
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
       <el-form ref="form" :model="form" label-width="5em">
@@ -39,6 +38,9 @@ export default {
         deleteUrl: "goodsInfo/delete",
         pk: "goodsId"
       },
+      tableParam: {
+        customerStatusIds: 10
+      },
       dialogTitle: "编辑",
       isShowEdit: false,
       fields: {
@@ -60,17 +62,11 @@ export default {
         conditions: {
           label: "兑换条件",
         },
-
       },
-      activeTab: "tab1",
       form: {
 
       },
       selectedRow: {},
-      param: {
-        customerStatusIds: 10,
-        ifReception: 1
-      }
     }
   },
   methods: {
@@ -126,7 +122,6 @@ export default {
   },
 
   created() {
-
   }
 }
 </script>

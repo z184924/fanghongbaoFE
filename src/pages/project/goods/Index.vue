@@ -3,7 +3,7 @@
     <fixed-table ref="table" get-data-url="goodsInfo/getGridListJson" :data-param="tableParam" :fields="fields" v-model="selectedRow">
       <div slot="left-control">
         <span>是否有效</span>
-        <c-select dict="bool" v-model="selectedSfyx" style="width:80px"></c-select>
+        <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select>
         <el-button type="text" @click="clearSearch">清空</el-button>
       </div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
@@ -71,7 +71,7 @@ export default {
         ifValid: {
           label: "是否有效",
           formatter(r, c, v) {
-            return v === 1 ? vue.YES : vue.NO
+            return vue.mxBoolFormatter(v);
           }
         },
         glodValue: {
@@ -83,7 +83,7 @@ export default {
         createTime: {
           label: "创建时间",
           formatter(r, c, v) {
-            return moment(v).format("YYYY-MM-DD")
+            return vue.mxDateFormatter(v);
           }
         },
         conditions: {

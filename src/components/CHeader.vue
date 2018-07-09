@@ -26,7 +26,7 @@
       <i class="ii i-zhuxiao"></i>
       <span style="padding:0 3px;">注销</span>
     </div>
-    <div class="xc1__control -text">
+    <div class="xc1__control xc1__control--text">
       <i class="ii i-yonghu"></i>
       <span style="padding:0 3px;">{{mxLoginInfo.nickname}}</span>
     </div>

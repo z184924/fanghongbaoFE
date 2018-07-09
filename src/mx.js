@@ -75,6 +75,21 @@ var myMixin = {
       let a = JSON.parse(str);
       return a;
     },
+    mxDateFormatter(v) {
+      return moment(v).format("YYYY-MM-DD");
+    },
+    mxTimeFormatter(v) {
+      return moment(v).format("YYYY-MM-DD HH:mm:ss");
+    },
+    mxBoolFormatter(v) {
+      if (v === 0) {
+        return this.No;
+      } else if (v === 1) {
+        return this.YES;
+      } else {
+        return "";
+      }
+    },
     mxTableMerge(list, field) {
       let node = 0;
       let nodeName = "---";

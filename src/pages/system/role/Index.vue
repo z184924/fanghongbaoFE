@@ -20,7 +20,7 @@
           <td>{{o.account}}</td>
           <td>{{o.userName}}</td>
           <td>{{o.phone}}</td>
-          <td>{{format(o.registerTime)}}</td>
+          <td>{{mxDateFormatter(o.registerTime)}}</td>
           <td>{{boolToString(o.isInsider)}}</td>
           <td>{{boolToString(o.isVIP)}}</td>
         </tr>
@@ -53,9 +53,6 @@ export default {
         this.users = o.users;
         this.isShowDialog = true;
       }
-    },
-    format(t) {
-      return moment(t).format('YYYY-MM-DD');
     }
   },
   created() {
