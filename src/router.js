@@ -35,7 +35,7 @@ import SystemFeedback from "./pages/system/feedback/Index"
 import SystemGold from "./pages/system/gold/Index"
 
 // 审核管理
-import SystemApproveAnchang from "./pages/approve/Anchang"
+import SystemApproveAnchang from "./pages/approve/anchang/Index"
 
 
 

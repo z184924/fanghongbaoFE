@@ -32,7 +32,7 @@
       </el-pagination>
     </div>
 
-    <fixed-table-form :fields="fields" :form-open-flag.sync="formOpenFlag" @updatedSuccess="getData" :saveOrUpdateDataUrl="saveOrUpdateDataUrl" :rowData="rowData" :getFormDataUrl="getFormDataUrl" :file-info="fileInfo"></fixed-table-form>
+    <!-- <fixed-table-form :fields="fields" :form-open-flag.sync="formOpenFlag" @updatedSuccess="getData" :saveOrUpdateDataUrl="saveOrUpdateDataUrl" :rowData="rowData" :getFormDataUrl="getFormDataUrl" :file-info="fileInfo"></fixed-table-form> -->
   </div>
 </template>
 <script>
@@ -41,11 +41,11 @@
 selected:多选时，选择改变触发，参数为选中的行
 list中的每行对象:__bg:背景色，__color:字体颜色
 */
-import FixedTableForm from "./FixedTableForm";
+// import FixedTableForm from "./FixedTableForm";
 // import FileView from "./FileView";
 export default {
   components: {
-    FixedTableForm,
+    // FixedTableForm,
     // FileView
   },
   props: {
@@ -258,7 +258,7 @@ export default {
     },
     fields: {
       handler() {
-        // 设置每个fields中每项的align值（默认左对齐）
+        // 设置每个fields中每项的align值（默认居中）
         let f = this.fields;
         for (const key in f) {
           let ff = f[key];

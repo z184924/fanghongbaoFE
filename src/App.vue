@@ -3,7 +3,7 @@
   <div>
     <transition @enter="veEnter" @leave="veLeave" @before-enter="veBeforeEnter" @after-enter="veAfterEnter">
       <app-login v-if="!mxLoginInfo.username"></app-login>
-      <div id="stage" class="stage" v-else>
+      <div class="stage" v-else>
         <div class="stage--header">
           <c-header></c-header>
         </div>
