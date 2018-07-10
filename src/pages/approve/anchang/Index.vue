@@ -300,12 +300,12 @@ export default {
           res.f__files = res.checkData ? res.checkData.split(",") : [];
 
           // date转换
-          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : "";
-          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : "";
-          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : "";
-          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : "";
-          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : "";
-          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : "";
+          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : undefined;
+          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : undefined;
+          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : undefined;
+          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : undefined;
+          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : undefined;
+          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
           this.form = res;
         })
         this.dialogTitle = "编辑";
