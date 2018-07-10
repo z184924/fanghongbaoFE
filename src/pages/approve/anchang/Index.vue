@@ -8,46 +8,45 @@
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
       <el-form ref="form" :model="form" label-width="7em" label-position="left">
-
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-panel title="会员信息">
-            <div class="xc18__container">
-              <div class="xc18__item xc18__item--p3">
+            <div class="xc18__container xc18__container--p3">
+              <div class="xc18__item">
                 <el-form-item label="会员手机">
                   <span>{{form.phone}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="会员姓名">
                   <span>{{form.userName}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="会员身份证">
                   <span style="color:red">!暂无</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="会员银行卡">
                   <span style="color:red">!暂无</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="会员开户行">
                   <span style="color:red">!暂无</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="会员支行">
                   <span style="color:red">!暂无</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="VIP开始时间">
                   <span>{{mxTimeFormatter(form.vipStartTime)}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="VIP结束时间">
                   <span>{{mxTimeFormatter(form.vipEndTime)}}</span>
                 </el-form-item>
@@ -56,168 +55,168 @@
 
           </c-panel>
           <c-panel title="客户信息" title-color="#2a447a">
-            <div class="xc18__container">
-              <div class="xc18__item xc18__item--p3">
+            <div class="xc18__container xc18__container--p3">
+              <div class="xc18__item">
                 <el-form-item label="客户姓名">
                   <span>{{form.customerName}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="客户手机">
                   <span>{{form.customerTel}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="客户手机2">
                   <el-input v-model="form.customerTel2"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="身份证">
                   <span>{{form.customerIdNum}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="客户通讯地址">
                   <el-input v-model="form.customerAdress"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="是否本地">
                   <c-select v-model="form.isLocalPerson" dict="bool"></c-select>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="推荐项目">
                   <span>{{form.projectName }}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="产品类型">
                   <span>{{mxDictToString(listWuyeLeixing,form.propertyTypeId) }}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="接待人">
                   <span style="color:red">!暂无</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="排卡日期">
-                  <span>{{form.cardDate}}</span>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.cardDate"></el-date-picker>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="排卡金额">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.cardMoney"></el-date-picker>
+                  <span>{{form.cardMoney}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="认购日期">
                   <el-date-picker value-format="yyyy-MM-dd" v-model="form.subscribeDate"></el-date-picker>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="认购金额">
                   <el-input v-model="form.subscribedMoney"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="齐定日期">
                   <span>{{form.homogeneityDate}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="齐定金额">
                   <el-input v-model="form.homogeneityMoney"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="应结佣金">
                   <el-input v-model="form.sureBalance"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="楼号">
                   <span>{{form.buildingNum}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="单元号">
                   <span>{{form.unitNum}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="房号">
                   <span>{{form.houseNum}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="面积">
                   <span>{{form.houseArea}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="成交单价">
                   <span>{{form.dealSinglePrice}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="成交总价">
                   <span>{{form.dealTotalPrice}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="成交日期">
                   <el-date-picker value-format="yyyy-MM-dd" v-model="form.dealDate"></el-date-picker>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="贷款金额">
                   <el-input v-model="form.loanMoney"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="首付金额">
                   <el-input v-model="form.downMoney"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="付款方式">
                   <el-input v-model="form.payType"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="收据号">
                   <el-input v-model="form.recieptNum"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="POS机号码">
                   <el-input v-model="form.PosNum"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="银行卡后四位">
                   <el-input v-model="form.CardNum"></el-input>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="首付日期">
                   <el-date-picker value-format="yyyy-MM-dd" v-model="form.downPayDate"></el-date-picker>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="草签日期">
                   <el-date-picker value-format="yyyy-MM-dd" v-model="form.initialDate"></el-date-picker>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="网签日期">
                   <el-date-picker value-format="yyyy-MM-dd" v-model="form.netsignDate"></el-date-picker>
                 </el-form-item>
               </div>
-              <div class="xc18__item xc18__item--p3">
+              <div class="xc18__item">
                 <el-form-item label="网签编号">
                   <el-input v-model="form.netSignNum"></el-input>
                 </el-form-item>
@@ -299,6 +298,14 @@ export default {
           customerId: id
         }).then(res => {
           res.f__files = res.checkData ? res.checkData.split(",") : [];
+
+          // date转换
+          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : "";
+          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : "";
+          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : "";
+          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : "";
+          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : "";
+          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : "";
           this.form = res;
         })
         this.dialogTitle = "编辑";

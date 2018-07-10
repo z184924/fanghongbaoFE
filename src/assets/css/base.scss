@@ -636,6 +636,11 @@ body .stage {
     &__container {
       display: flex;
       flex-wrap: wrap;
+      &--p3 {
+        .xc18__item {
+          flex: 33.33% 0 0;
+        }
+      }
     }
     &__item {
       flex: 50% 0 0;
@@ -643,9 +648,6 @@ body .stage {
       // border-left: solid 1px #eee;
       border-bottom: dotted 1px #ddd;
       margin-bottom: 6px;
-      &--p3 {
-        flex: 33.33% 0 0;
-      }
       .el-form-item {
         margin-bottom: 6px;
       }
