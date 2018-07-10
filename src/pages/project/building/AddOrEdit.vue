@@ -1,5 +1,5 @@
 <template>
-  <div class="xc3">
+  <div class="xc3" v-loading="loading">
     <div class="xc3__minibtn">
       <el-tooltip effect="dark" content="返回" placement="bottom" :enterable="false">
         <el-button type="primary" @click="mxBack" icon="el-icon-arrow-left" circle></el-button>
@@ -69,7 +69,7 @@
               </el-form-item>
             </div>
           </el-collapse-transition>
-       
+
           <el-form-item label="专员（多选）">
             <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__zy=[]">清空</el-button>
@@ -94,7 +94,7 @@
             <c-select v-model="form.f__qyjl" :dict="listQuyuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__qyjl=''">清空</el-button>
           </el-form-item>
-             <el-form-item label="抄送人（多选）">
+          <el-form-item label="抄送人（多选）">
             <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__csr=[]">清空</el-button>
           </el-form-item>
@@ -150,6 +150,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       listWuyeLeixing: [],
       listChaosongren: [],
       listZhuanyuan: [],
@@ -310,9 +311,19 @@ export default {
     }
   },
   created() {
+    let p1 = null;
+    let p2 = null;
+    let p3 = null;
+    let p4 = null;
+    let p5 = null;
+    let p6 = null;
+    let p7 = null;
+    let p8 = null;
+    let promiseArray = [];
+    this.loading = true;
 
     // 物业类型
-    this.xpost("city/getPropertyTypes").then(res => {
+    p1 = this.xpost("city/getPropertyTypes").then(res => {
       // console.log(res);
       this.listWuyeLeixing = res.map(o => {
         return {
@@ -329,7 +340,7 @@ export default {
           this.listChaosongren = res.list;
           this.form.f__csr = res.selected;
         });
-        this.xpost("projectInfo/getPropertyTypesByProjectID", {
+        p2 = this.xpost("projectInfo/getPropertyTypesByProjectID", {
           projectId
         }).then(res => {
           this.form.f__wylx = res.rows.map(o => {
@@ -337,7 +348,7 @@ export default {
           })
           // console.log(res);
         })
-        this.xpost("projectInfo/getFormJson", {
+        p3 = this.xpost("projectInfo/getFormJson", {
           projectId
         }).then(form => {
 
@@ -373,14 +384,14 @@ export default {
         })
 
       } else {
-        this.getChaosongrenList("").then(res => {
+        p6 = this.getChaosongrenList("").then(res => {
           this.listChaosongren = res.list;
           this.form.f__csr = [];
         });
       }
       // 获取用户
       this.listRole.forEach(o => {
-        this.xpost("user/getUsersByRoleID", {
+        p4 = this.xpost("user/getUsersByRoleID", {
           roleId: o.roleId,
           projectId
         }).then(res => {
@@ -407,7 +418,7 @@ export default {
       })
 
       // 客户信息
-      this.xpost("projectInfo/getProjectFieldByProjectID", {
+      p5 = this.xpost("projectInfo/getProjectFieldByProjectID", {
         projectId,
       }).then(res => {
         this.tableClient = res.rows;
@@ -418,6 +429,15 @@ export default {
             }
           })
         })
+      })
+      if (this.$route.params.type === "edit") {
+        promiseArray = [p1, p2, p3, p4, p5];
+      } else {
+        promiseArray = [p1, p4, p5, p6];
+      }
+
+      Promise.all(promiseArray).then(() => {
+        this.loading = false;
       })
     })
 

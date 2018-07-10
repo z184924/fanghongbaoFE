@@ -2,7 +2,7 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
-      <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
+      <el-button @click="edit" icon="el-icon-edit" slot="right-control">完善</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
@@ -74,7 +74,7 @@
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="身份证">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.customerIdNum}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
@@ -89,12 +89,12 @@
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="推荐项目">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.projectName }}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="产品类型">
-                  <span style="color:red">!暂无</span>
+                  <span>{{mxDictToString(listWuyeLeixing,form.propertyTypeId) }}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
@@ -109,12 +109,12 @@
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="排卡金额">
-                  <el-input v-model="form.cardMoney"></el-input>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.cardMoney"></el-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="认购日期">
-                  <span>{{form.subscribeDate}}</span>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.subscribeDate"></el-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
@@ -133,18 +133,18 @@
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
-                <el-form-item label="购买项目">
-                  <span style="color:red">!暂无</span>
+                <el-form-item label="应结佣金">
+                  <el-input v-model="form.sureBalance"></el-input>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="楼号">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.buildingNum}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="单元号">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.unitNum}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
@@ -169,7 +169,7 @@
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="成交日期">
-                  <span>{{form.dealDate}}</span>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.dealDate"></el-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
@@ -234,7 +234,8 @@
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save" slot="footer">保存</el-button>
+      <el-button type="primary" @click="save(10)" slot="footer">保存</el-button>
+      <el-button type="primary" @click="pass" slot="footer">保存并通过</el-button>
     </el-dialog>
   </div>
 </template>
@@ -281,6 +282,7 @@ export default {
         f__files: []
       },
       selectedRow: {},
+      listWuyeLeixing: [],
     }
   },
   methods: {
@@ -308,9 +310,16 @@ export default {
         })
       }
     },
-    save() {
+    pass() {
+      this.$confirm("是否保存并通过？", "提示").then(() => {
+        this.save(12);
+      })
+    },
+    save(customerState) {
       let data = clone(this.form);
       data.checkData = data.f__files.join();
+      data.customerOldStatus = 10;
+      data.customerStatusId = customerState;
       delete data.f__files;
       this.xpost(this.config.editUrl, data).then(res => {
         this.$refs.table.getData();
@@ -345,6 +354,15 @@ export default {
   },
 
   created() {
+    this.xpost("city/getPropertyTypes").then(res => {
+      // console.log(res);
+      this.listWuyeLeixing = res.map(o => {
+        return {
+          NAME: o.propertyType,
+          CODE: o.propertyTypeId,
+        }
+      })
+    })
   }
 }
 </script>

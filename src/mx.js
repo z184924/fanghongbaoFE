@@ -115,20 +115,23 @@ var myMixin = {
       })
       return list;
     },
-    mxDictToString(dict, value) {
+    mxDictToString(dict, value = "") {
       let list = [];
       if (typeof dict === "string") {
         list = this.mxDict[dict];
       } else {
         list = dict;
       }
-      let name = "-";
-      list.forEach((item, i) => {
-        if (item.CODE === value) {
-          name = item.NAME;
-        }
-      });
-      return name;
+      let names = [];
+      let values = value.split(",");
+      values.forEach(value => {
+        list.forEach(item => {
+          if (item.CODE + "" === value + "") {
+            names.push(item.NAME);
+          }
+        });
+      })
+      return names.join("、");
     },
     xpost(api, param = {}) {
       let data = clone(param);
@@ -322,6 +325,15 @@ var myMixin = {
     mxWindowHeight() {
       return this.$store.state.windowHeight;
     },
+
+
+    // const
+    YES() {
+      return "★ 是";
+    },
+    NO() {
+      return "☆ 否";
+    },
     DICT() {
       return {
         bool: [{
@@ -343,14 +355,6 @@ var myMixin = {
           },
         ]
       }
-    },
-
-    // const
-    YES() {
-      return "★ 是";
-    },
-    NO() {
-      return "☆ 否";
     },
   },
 };
