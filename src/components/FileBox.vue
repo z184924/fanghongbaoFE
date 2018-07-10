@@ -15,7 +15,7 @@
       </div>
     </div>
     <el-dialog append-to-body :visible.sync="isShowFullImg" fullscreen title="原图预览 (按下Esc关闭)">
-      <div class="xc13" :style="{height:windowHeight-70 + 'px'}">
+      <div class="xc13" :style="{height:mxWindowHeight-70 + 'px'}">
         <img :src="activeSrc" alt="">
       </div>
     </el-dialog>
@@ -61,9 +61,6 @@ export default {
     }
   },
   computed: {
-    windowHeight() {
-      return this.$store.state.windowHeight;
-    },
     list() {
       let a = [];
       this.value.forEach(o => {

@@ -41,7 +41,7 @@ Vue.use(Element, {
 // window.Router = Router;
 // window.Vuex = Vuex;
 // window.Vue = Vue;
-window.$ = $;
+// window.$ = $;
 // window.Ve = Ve;
 window.moment = moment;
 window.clone = clone;

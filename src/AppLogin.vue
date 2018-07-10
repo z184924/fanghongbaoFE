@@ -128,10 +128,14 @@ export default {
 
         }, rej => {
           console.log(rej);
+          this.loading = false;
         })
         //登录成功
         // console.log(res);
 
+      }, rej => {
+        console.log(rej);
+        this.loading = false;
       }).catch(() => {
         this.loading = false;
       });

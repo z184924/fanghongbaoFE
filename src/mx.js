@@ -90,6 +90,15 @@ var myMixin = {
         return "";
       }
     },
+    mxSexFormatter(v) {
+      if (v === 1) {
+        return "男";
+      } else if (v === 2) {
+        return "女";
+      } else {
+        return "";
+      }
+    },
     mxTableMerge(list, field) {
       let node = 0;
       let nodeName = "---";
@@ -112,9 +121,9 @@ var myMixin = {
       } else {
         list = dict;
       }
-      let name = "";
+      let name = "-";
       list.forEach((item, i) => {
-        if (item.CODE == value) {
+        if (item.CODE === value) {
           name = item.NAME;
         }
       });
@@ -146,9 +155,9 @@ var myMixin = {
               try {
                 let str = json5.stringify(res.data);
                 if (str.indexOf("您访问的页面出现异常") >= 0) {
-                  reject();
+                  reject("s");
                 } else {
-                  resolve(res.data)
+                  resolve(res.data);
                 }
               } catch (error) {
                 this.$message({
@@ -170,6 +179,7 @@ var myMixin = {
             message: `${api}访问出错。(${err})`,
             type: "error"
           });
+          reject("s");
           // console.log(err);
         })
       });
@@ -306,6 +316,9 @@ var myMixin = {
     },
     mxDict() {
       return this.$store.state.dict;
+    },
+    mxWindowHeight() {
+      return this.$store.state.windowHeight;
     },
     DICT() {
       return {

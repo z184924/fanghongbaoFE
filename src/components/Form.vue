@@ -74,7 +74,8 @@ export default {
     },
     edit() {
       let a = this.selectedRow;
-      if (a[this.config.pk]) {
+      let id = a[this.config.pk];
+      if (id) {
         this.form = this.selectedRow;
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
