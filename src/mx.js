@@ -10,6 +10,7 @@ import CUeditor from "@/components/CUeditor"
 import axios from "axios"
 import json5 from "json5"
 import qs from "qs"
+import clone from "clone"
 
 
 var myMixin = {
@@ -129,7 +130,8 @@ var myMixin = {
       });
       return name;
     },
-    xpost(api, data = {}) {
+    xpost(api, param = {}) {
+      let data = clone(param);
       if (api != "login_login") {
         data.token = this.mxLoginInfo.token;
       }

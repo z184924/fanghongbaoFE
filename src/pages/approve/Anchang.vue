@@ -1,15 +1,15 @@
 <template>
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
-      <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
+      <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
-      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
+      <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
       <el-form ref="form" :model="form" label-width="7em" label-position="left">
 
-        <div class="xc18" :style="{height:mxWindowHeight-220 + 'px'}">
+        <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-panel title="会员信息">
             <div class="xc18__container">
               <div class="xc18__item xc18__item--p3">
@@ -29,7 +29,7 @@
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="会员银行卡">
-                  <span>{{form.CardNum}}</span>
+                  <span style="color:red">!暂无</span>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
@@ -204,17 +204,17 @@
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="首付日期">
-                  <el-date-picker v-model="form.downPayDate"></el-date-picker>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.downPayDate"></el-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="草签日期">
-                  <el-date-picker v-model="form.initialDate"></el-date-picker>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.initialDate"></el-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
                 <el-form-item label="网签日期">
-                  <el-date-picker v-model="form.netSignNum"></el-date-picker>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.netsignDate"></el-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--p3">
@@ -227,8 +227,9 @@
 
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
-            <file-box v-model="form.files"></file-box>
+            <file-box v-model="form.f__files"></file-box>
           </c-panel>
+          <!-- <div>{{form}}</div> -->
 
         </div>
       </el-form>
@@ -245,8 +246,8 @@ export default {
       // ★★★config★★★
       config: {
         selectUrl: "projectCustomer/getGridListJson",
-        editUrl: "projectCustomer/getCustomerAllInfo",
-        deleteUrl: "goodsInfo/delete",
+        editUrl: "projectCustomer/beMaidCustomer",
+        deleteUrl: "",
         pk: "customerId"
       },
       tableParam: {
@@ -277,7 +278,7 @@ export default {
 
       },
       form: {
-
+        f__files: []
       },
       selectedRow: {},
     }
@@ -292,10 +293,10 @@ export default {
       let a = this.selectedRow;
       let id = a[this.config.pk];
       if (id) {
-        // this.form = this.selectedRow;
         this.xpost("projectCustomer/getCustomerAllInfo", {
           customerId: id
         }).then(res => {
+          res.f__files = res.checkData ? res.checkData.split(",") : [];
           this.form = res;
         })
         this.dialogTitle = "编辑";
@@ -308,7 +309,10 @@ export default {
       }
     },
     save() {
-      this.xpost(this.config.editUrl, this.form).then(res => {
+      let data = clone(this.form);
+      data.checkData = data.f__files.join();
+      delete data.f__files;
+      this.xpost(this.config.editUrl, data).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
