@@ -403,17 +403,16 @@ export default {
           })
 
           // 角色人员
-          if (o.multiple) {
-            res.rows.forEach(oo => {
-              if (oo.isChecked === 1) {
+
+          res.rows.forEach(oo => {
+            if (oo.isChecked === 1) {
+              if (o.multiple) {
                 this.form[o.field].push(oo.userId)
+              } else {
+                this.form[o.field] = oo.userId;
               }
-            })
-          } else {
-            if (res.rows[0].isChecked === 1) {
-              this.form[o.field] = res.rows[0].userId;
             }
-          }
+          })
         })
       })
 
