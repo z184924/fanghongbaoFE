@@ -166,7 +166,7 @@ export default {
         { roleId: 10, field: "f__acms", fieldList: "listAnchang", multiple: true },
         { roleId: 4, field: "f__xmjl", fieldList: "listXiangmuJingli", multiple: true },
         { roleId: 8, field: "f__shr", fieldList: "listShenheren", multiple: false },
-        { roleId: 5, field: "f__qyjl", fieldList: "listQuyuJingli", multiple: false }
+        { roleId: "5,6,7", field: "f__qyjl", fieldList: "listQuyuJingli", multiple: false }
       ],
       form: {
         f__wylx: [],

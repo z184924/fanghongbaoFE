@@ -115,7 +115,7 @@ var myMixin = {
       })
       return list;
     },
-    mxDictToString(dict, value = "") {
+    mxDictToString(dict, v = "") {
       let list = [];
       if (typeof dict === "string") {
         list = this.mxDict[dict];
@@ -123,7 +123,7 @@ var myMixin = {
         list = dict;
       }
       let names = [];
-      let values = value.split(",");
+      let values = (v + "").split(",");
       values.forEach(value => {
         list.forEach(item => {
           if (item.CODE + "" === value + "") {
