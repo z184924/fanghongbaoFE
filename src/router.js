@@ -39,6 +39,7 @@ import SystemApproveAnchang from "./pages/approve/anchang/Index"
 
 import SystemApproveShenhe from "./pages/approve/shenhe/Index"
 
+import SystemApproveCaiwu from "./pages/approve/caiwu/Index"
 
 
 export default new Router({
@@ -134,6 +135,11 @@ export default new Router({
       path: "/approve/shenhe",
       name: "SystemApproveShenhe",
       component: SystemApproveShenhe,
+    },
+    {
+      path: "/approve/caiwu",
+      name: "SystemApproveCaiwu",
+      component: SystemApproveCaiwu,
     },
 
   ]

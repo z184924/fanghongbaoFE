@@ -1,4 +1,4 @@
-$color-test:#2f2a7a;
+$color-test:#417a2a;
 $primary-color-1:#c75836;
 $primary-color-2:#be837b;
 $primary-color-3:#c9796e;
@@ -639,12 +639,11 @@ body .stage {
     }
     &__item {
       flex: 33.33% 0 0;
-      padding: 0em 0.5em 0; // border-top: solid 1px #eee;
-      // border-left: solid 1px #eee;
+      padding: 0em 0.5em 0;
       border-bottom: dotted 1px #ddd;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       .el-form-item {
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
       &--full{
         flex:100% 0 0;

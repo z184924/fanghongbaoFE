@@ -75,9 +75,9 @@
           <i class="el-icon-arrow-right"></i>
           <span>审核人</span>
         </el-menu-item>
-        <el-menu-item index="/approve/shenhe">
+        <el-menu-item index="/approve/caiwu">
           <i class="el-icon-arrow-right"></i>
-          <span>审核人</span>
+          <span>财务结佣</span>
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
