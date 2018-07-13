@@ -10,7 +10,7 @@
       <el-form ref="form" :model="form" label-width="7em" label-position="left">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-panel title="会员信息">
-            <div class="xc18__container xc18__container--p3">
+            <div class="xc18__container">
               <div class="xc18__item">
                 <el-form-item label="会员手机">
                   <span>{{form.phone}}</span>

@@ -71,6 +71,14 @@
           <i class="el-icon-arrow-right"></i>
           <span>案场秘书</span>
         </el-menu-item>
+        <el-menu-item index="/approve/shenhe">
+          <i class="el-icon-arrow-right"></i>
+          <span>审核人</span>
+        </el-menu-item>
+        <el-menu-item index="/approve/shenhe">
+          <i class="el-icon-arrow-right"></i>
+          <span>审核人</span>
+        </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="系统管理">

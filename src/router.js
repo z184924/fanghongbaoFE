@@ -37,6 +37,8 @@ import SystemGold from "./pages/system/gold/Index"
 // 审核管理
 import SystemApproveAnchang from "./pages/approve/anchang/Index"
 
+import SystemApproveShenhe from "./pages/approve/shenhe/Index"
+
 
 
 export default new Router({
@@ -127,6 +129,11 @@ export default new Router({
       path: "/approve/anchang",
       name: "SystemApproveAnchang",
       component: SystemApproveAnchang,
+    },
+    {
+      path: "/approve/shenhe",
+      name: "SystemApproveShenhe",
+      component: SystemApproveShenhe,
     },
 
   ]

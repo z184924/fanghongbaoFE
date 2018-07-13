@@ -98,11 +98,7 @@ export default {
           label: "是否推荐",
           width: "80px",
           formatter(r, c, v) {
-            if (v === 1) {
-              return vue.YES
-            } else {
-              return vue.NO
-            }
+            return vue.mxBoolFormatter(v);
           }
         },
         recommendTime: {

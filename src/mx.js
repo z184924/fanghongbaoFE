@@ -77,14 +77,22 @@ var myMixin = {
       return a;
     },
     mxDateFormatter(v) {
-      return moment(v).format("YYYY-MM-DD");
+      if (v) {
+        return moment(v).format("YYYY-MM-DD");
+      } else {
+        return ""
+      }
     },
     mxTimeFormatter(v) {
-      return moment(v).format("YYYY-MM-DD HH:mm:ss");
+      if (v) {
+        return moment(v).format("YYYY-MM-DD HH:mm:ss");
+      } else {
+        return ""
+      }
     },
     mxBoolFormatter(v) {
       if (v === 0) {
-        return this.No;
+        return this.NO;
       } else if (v === 1) {
         return this.YES;
       } else {
