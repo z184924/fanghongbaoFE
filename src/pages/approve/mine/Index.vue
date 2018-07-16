@@ -2,7 +2,7 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
-      <el-button @click="edit" icon="el-icon-edit" slot="right-control">完善</el-button>
+      <el-button @click="edit" icon="el-icon-edit" slot="right-control">详细</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
@@ -47,29 +47,98 @@
                   <span style="color:red">!暂无</span>
                 </el-form-item>
               </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友奖励金额">
+                  <span>{{form.friendPrize}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="是否付款">
+                  <span>{{mxBoolFormatter(form.payState)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="付款时间">
+                  <span>{{mxDateFormatter(form.payTime)}}</span>
+                </el-form-item>
+              </div>
 
             </div>
           </c-panel>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
-            <div class="xc18__container xc18__container--p3">
+            <div class="xc18__container">
               <div class="xc18__item">
                 <el-form-item label="审核人">
-                  <span>{{mxLoginInfo.nickname}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="审核资料是否通过">
-                  <c-select v-model="form2.isSubscription" dict="bool" type="radio"></c-select>
+                  <span>{{form.Name_shr}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="是否满足结佣条件">
-                  <c-select v-model="form2.isReadyMaid" dict="bool" type="radio"></c-select>
+                  <span>{{mxBoolFormatter(form.isReadyMaid)}}</span>
                 </el-form-item>
               </div>
+              <div class="xc18__item">
+                <el-form-item label="审核资料是否通过">
+                  <span>{{mxBoolFormatter(form.isSubscription)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="客户备注">
+                  <span>{{form.Opinion_shr}}</span>
+                </el-form-item>
+              </div>
+
+            </div>
+          </c-panel>
+          <c-panel title="财务审核信息" title-color="#417a2a">
+            <div class="xc18__container">
+              <div class="xc18__item">
+                <el-form-item label="电商是否到帐">
+                  <span>{{mxBoolFormatter(form.isOnline)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="到账金额">
+                  <span>{{form.onlineMoney}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="到账日期">
+                  <span>{{mxDateFormatter(form.onlineDate)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="服务奖金计提月">
+                  <span>{{mxMonthFormatter(form.serviceMonth)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="是否发放留存">
+                  <span>{{mxBoolFormatter(form.keepState)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="留存发放月">
+                  <span>{{mxMonthFormatter(form.keepMonth)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="尾款金额">
+                  <span>{{form.finalPayment}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="尾款奖励日期">
+                  <span>{{mxDateFormatter(form.finalPaymentPriceDate)}}</span>
+                </el-form-item>
+              </div>
+
               <div class="xc18__item xc18__item--full">
                 <el-form-item label="客户备注">
-                  <el-input v-model="form2.checkOpinion"></el-input>
+                  <span>{{form.remarks}}</span>
+                  <div style="text-align:right;padding-top:6px">
+                    <span>{{form.customerStatusId | state}}</span>
+                  </div>
                 </el-form-item>
               </div>
 
@@ -80,9 +149,7 @@
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭 [Esc]</el-button>
-      <el-button type="primary" @click="save(12)" slot="footer">保存</el-button>
-      <el-button type="primary" @click="pass('保存并通过',16)" slot="footer">保存并通过</el-button>
-      <el-button type="danger" @click="pass('保存并驳回',10)" slot="footer">保存并驳回</el-button>
+      <el-button type="primary" @click="save()" slot="footer">保存</el-button>
     </el-dialog>
   </div>
 </template>
@@ -98,14 +165,14 @@ export default {
       // ★★★config★★★
       config: {
         selectUrl: "projectCustomer/getGridListJson",
-        editUrl: "projectCustomer/reviewerCheckCustomer",
+        editUrl: "projectCustomer/MaidCustomer",
         deleteUrl: "",
         pk: "customerId"
       },
       tableParam: {
         customerStatusIds: 10
       },
-      dialogTitle: "编辑",
+      dialogTitle: "详细",
       isShowEdit: false,
       fields: {
         customerName: {
@@ -135,6 +202,27 @@ export default {
       form2: {},
       selectedRow: {},
       listWuyeLeixing: [],
+      listState: [
+        {
+          label: "部分结佣",
+          value: 22
+        },
+        {
+          label: "已结佣",
+          value: 24
+        },
+      ]
+    }
+  },
+  filters: {
+    state(v) {
+      if (v + "" === "22") {
+        return "部分结佣";
+      } else if (v + "" === "24") {
+        return "已结佣";
+      } else {
+        return "";
+      }
     }
   },
   methods: {
@@ -161,7 +249,7 @@ export default {
           res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
           this.form = res;
         })
-        this.dialogTitle = "编辑";
+        this.dialogTitle = "详细";
         this.isShowEdit = true;
       } else {
         this.$message({
@@ -170,14 +258,13 @@ export default {
         })
       }
     },
-    pass(text, state) {
-      this.$confirm(`是否${text}？`, "提示").then(() => {
-        this.save(state);
-      })
-    },
-    save(customerState) {
+    // pass(text, state) {
+    //   this.$confirm(`是否${text}？`, "提示").then(() => {
+    //     this.save(state);
+    //   })
+    // },
+    save() {
       let data = clone(this.form2);
-      data.customerStatusId = customerState;
       data.customerId = this.mxLoginInfo.userId
       this.xpost(this.config.editUrl, data).then(res => {
         this.$refs.table.getData();

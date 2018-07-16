@@ -90,6 +90,13 @@ var myMixin = {
         return ""
       }
     },
+    mxMonthFormatter(v) {
+      if (v) {
+        return moment(v).format("YYYY-MM");
+      } else {
+        return ""
+      }
+    },
     mxBoolFormatter(v) {
       if (v === 0) {
         return this.NO;

@@ -232,7 +232,7 @@
 
         </div>
       </el-form>
-      <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
+      <el-button type="default" @click="isShowEdit=false" slot="footer">关闭 [Esc]</el-button>
       <el-button type="primary" @click="save(10)" slot="footer">保存</el-button>
       <el-button type="primary" @click="pass" slot="footer">保存并通过</el-button>
     </el-dialog>

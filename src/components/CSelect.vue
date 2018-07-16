@@ -83,13 +83,6 @@ export default {
     }
   },
   created() {
-    // console.log(this.value,this.type); 
-    // if (!this.dict || kindOf(this.dict) === "object") {
-    //   console.log(55555555555555555555555555);
-    //   this.dict = [];
-    // }
-    // this.selectedValue = this.value;
-    // console.log(this.value, this.n + ".........");
     let empty = false;
 
     if (kindOf(this.value) === "object") {
@@ -111,8 +104,6 @@ export default {
     } else {
       this.selectedValue = this.value;
     }
-    // this.$emit("input", this.selectedValue);
-    // console.log(this.value, this.selectedValue);
 
   }
 

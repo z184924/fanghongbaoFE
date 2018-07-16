@@ -79,6 +79,10 @@
           <i class="el-icon-arrow-right"></i>
           <span>财务结佣</span>
         </el-menu-item>
+        <el-menu-item index="/approve/mine">
+          <i class="el-icon-arrow-right"></i>
+          <span>我的已审单据</span>
+        </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="系统管理">

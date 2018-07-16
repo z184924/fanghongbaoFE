@@ -41,6 +41,10 @@ import SystemApproveShenhe from "./pages/approve/shenhe/Index"
 
 import SystemApproveCaiwu from "./pages/approve/caiwu/Index"
 
+import SystemApproveMine from "./pages/approve/mine/Index"
+
+
+
 
 export default new Router({
   routes: [
@@ -140,6 +144,11 @@ export default new Router({
       path: "/approve/caiwu",
       name: "SystemApproveCaiwu",
       component: SystemApproveCaiwu,
+    },
+    {
+      path: "/approve/mine",
+      name: "SystemApproveMine",
+      component: SystemApproveMine,
     },
 
   ]

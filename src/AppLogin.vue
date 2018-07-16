@@ -120,7 +120,7 @@ export default {
         // 获取字典
         this.xpost("dictdetail/findAllData").then(res2 => {
           let dict = { ...res2, ...this.DICT }
-          console.log(dict);
+          // console.log(res2);
           this.$store.commit("setDict", dict);
           sessionStorage.setItem("dict", JSON.stringify(dict));
           this.loading = false;
