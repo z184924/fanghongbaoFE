@@ -90,9 +90,21 @@
             <c-select v-model="form.f__shr" :dict="listShenheren" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__shr=''">清空</el-button>
           </el-form-item>
+          <el-form-item label="营销总监（单选）">
+            <c-select v-model="form.f__yxzj" :dict="listYingxiaoZongjian" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__yxzj=''">清空</el-button>
+          </el-form-item>
           <el-form-item label="区域经理（单选）">
             <c-select v-model="form.f__qyjl" :dict="listQuyuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__qyjl=''">清空</el-button>
+          </el-form-item>
+          <el-form-item label="总经理（单选）">
+            <c-select v-model="form.f__zjl" :dict="listZongjingli" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__zjl=''">清空</el-button>
+          </el-form-item>
+          <el-form-item label="财务（单选）">
+            <c-select v-model="form.f__cw" :dict="listCaiwu" style="width:400px"></c-select>
+            <el-button type="text" @click="form.f__cw=''">清空</el-button>
           </el-form-item>
           <el-form-item label="抄送人（多选）">
             <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
@@ -160,13 +172,19 @@ export default {
       listShenheren: [],
       listQuyuJingli: [],
       listLoupanLeixing: [],
+      listYingxiaoZongjian: [],
+      listZongjingli: [],
+      listCaiwu: [],
       listRole: [
         { roleId: 2, field: "f__zy", fieldList: "listZhuanyuan", multiple: true },
         { roleId: 3, field: "f__xmzg", fieldList: "listXiangmuZhuguan", multiple: false },
         { roleId: 10, field: "f__acms", fieldList: "listAnchang", multiple: true },
         { roleId: 4, field: "f__xmjl", fieldList: "listXiangmuJingli", multiple: true },
         { roleId: 8, field: "f__shr", fieldList: "listShenheren", multiple: false },
-        { roleId: "5,6,7", field: "f__qyjl", fieldList: "listQuyuJingli", multiple: false }
+        { roleId: 5, field: "f__qyjl", fieldList: "listQuyuJingli", multiple: false },
+        { roleId: 6, field: "f__yxzj", fieldList: "listYingxiaoZongjian", multiple: false },
+        { roleId: 7, field: "f__zjl", fieldList: "listZongjingli", multiple: false },
+        { roleId: 9, field: "f__cw", fieldList: "listCaiwu", multiple: false },
       ],
       form: {
         f__wylx: [],
