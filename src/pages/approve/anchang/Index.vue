@@ -294,19 +294,31 @@ export default {
       let a = this.selectedRow;
       let id = a[this.config.pk];
       if (id) {
-        this.xpost("projectCustomer/getCustomerAllInfo", {
+        this.xpost("projectCustomer/getCustomerSupplement", {
           customerId: id
-        }).then(res => {
-          res.f__files = res.checkData ? res.checkData.split(",") : [];
+        }).then(res0 => {
+          // console.log(res);
+          this.xpost("projectCustomer/getCustomerAllInfo", {
+            customerId: id
+          }).then(res => {
+            let dateInit = type => {
+              if (res0[type]) {
+                return this.mxDateFormatter(res0[type]);
+              } else {
+                return undefined;
+              }
+            }
+            res.f__files = res.checkData ? res.checkData.split(",") : [];
 
-          // date转换
-          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : undefined;
-          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : undefined;
-          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : undefined;
-          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : undefined;
-          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : undefined;
-          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
-          this.form = res;
+            // date转换
+            res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : dateInit("cardDate");
+            res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : dateInit("cardDate");
+            res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : dateInit("dealDateInit");
+            res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : dateInit("cardDate");
+            res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : dateInit("cardDate");
+            res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : dateInit("cardDate");
+            this.form = res;
+          })
         })
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
@@ -370,6 +382,7 @@ export default {
         }
       })
     })
+
   }
 }
 </script>
