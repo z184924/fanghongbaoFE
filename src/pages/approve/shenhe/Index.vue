@@ -221,7 +221,7 @@ export default {
         }
       })
     })
-    console.log(this.mxLoginInfo);
+    // console.log(this.mxLoginInfo);
   }
 }
 </script>
