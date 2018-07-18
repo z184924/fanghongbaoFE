@@ -23,22 +23,22 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="会员身份证">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.IdNum}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="会员银行卡">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.bankcardNum}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="会员开户行">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.bankName}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="会员支行">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.bankBranchName}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -98,7 +98,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="接待人">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.Name_jdr }}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -311,12 +311,12 @@ export default {
             res.f__files = res.checkData ? res.checkData.split(",") : [];
 
             // date转换
-            res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : dateInit("cardDate");
-            res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : dateInit("cardDate");
+            res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : dateInit("cardDateInit");
+            res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : dateInit("subscribeDateInit");
             res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : dateInit("dealDateInit");
-            res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : dateInit("cardDate");
-            res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : dateInit("cardDate");
-            res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : dateInit("cardDate");
+            res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : dateInit("_");
+            res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : dateInit("_");
+            res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : dateInit("_");
             this.form = res;
           })
         })

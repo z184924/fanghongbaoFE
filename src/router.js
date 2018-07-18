@@ -44,6 +44,16 @@ import SystemApproveCaiwu from "./pages/approve/caiwu/Index"
 import SystemApproveMine from "./pages/approve/mine/Index"
 
 
+// 审核（服务费）管理
+import SystemApproveSfAnchang from "./pages/approve-sf/anchang/Index"
+
+import SystemApproveSfShenhe from "./pages/approve-sf/shenhe/Index"
+
+import SystemApproveSfCaiwu from "./pages/approve-sf/caiwu/Index"
+
+import SystemApproveSfMine from "./pages/approve-sf/mine/Index"
+
+
 
 
 export default new Router({
@@ -149,6 +159,28 @@ export default new Router({
       path: "/approve/mine",
       name: "SystemApproveMine",
       component: SystemApproveMine,
+    },
+
+    // 审核（服务费）
+    {
+      path: "/approve-sf/anchang",
+      name: "SystemApproveSfAnchang",
+      component: SystemApproveSfAnchang,
+    },
+    {
+      path: "/approve-sf/shenhe",
+      name: "SystemApproveSfShenhe",
+      component: SystemApproveSfShenhe,
+    },
+    {
+      path: "/approve-sf/caiwu",
+      name: "SystemApproveSfCaiwu",
+      component: SystemApproveSfCaiwu,
+    },
+    {
+      path: "/approve-sf/mine",
+      name: "SystemApproveSfMine",
+      component: SystemApproveSfMine,
     },
 
   ]

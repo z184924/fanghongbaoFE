@@ -188,7 +188,7 @@ export default {
     return {
       loading: false,
       headerStyle: {
-        backgroundColor: "rgb(236, 162, 152)",
+        backgroundColor: "#e9a695",
         color: "#000",
         // textAlign: "center"
       },

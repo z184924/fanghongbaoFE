@@ -3,7 +3,7 @@
     <div class="xc1__title">
       <!-- <i class="ii i-red-packet" style="color:#e33;font-size:30px;padding-right:20px;"></i> -->
       <img src="@/assets/img/logo.png" alt="" class="xc1__logo">
-      <span>房红包后台管理系统</span>
+      <span>{{title}}</span>
     </div>
     <div class="xc1__center"></div>
     <div class="xc1__control" title="消息" @click="mxDevAlert">
@@ -34,6 +34,11 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      title: "房红包后台管理系统"
+    }
+  },
   methods: {
     fullScreen() {
       let docElm = document.documentElement;
@@ -50,6 +55,11 @@ export default {
         type: "success",
         message: "按下 ESC 键即可退出全屏模式"
       });
+    }
+  },
+  created() {
+    if (this.mxDevMode) {
+      this.title = "[ 开发环境 ]";
     }
   }
 };

@@ -2,7 +2,7 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
-      <el-button @click="edit" icon="el-icon-edit" slot="right-control">完善</el-button>
+      <el-button @click="edit" icon="el-icon-edit" slot="right-control">详细</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
@@ -49,17 +49,17 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <el-input v-model="form2.friendPrize"></el-input>
+                  <span>{{form.friendPrize}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="是否付款">
-                  <c-select v-model="form2.payState" dict="bool" type="radio"></c-select>
+                  <span>{{mxBoolFormatter(form.payState)}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="付款时间">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime"></el-date-picker>
+                  <span>{{mxDateFormatter(form.payTime)}}</span>
                 </el-form-item>
               </div>
 
@@ -94,52 +94,50 @@
             <div class="xc18__container">
               <div class="xc18__item">
                 <el-form-item label="电商是否到帐">
-                  <c-select v-model="form2.isOnline" dict="bool" type="radio"></c-select>
+                  <span>{{mxBoolFormatter(form.isOnline)}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="到账金额">
-                  <el-input-number v-model="form2.onlineMoney" style="width:160px"></el-input-number>
+                  <span>{{form.onlineMoney}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="到账日期">
-                  <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.onlineDate"></el-date-picker>
+                  <span>{{mxDateFormatter(form.onlineDate)}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="服务奖金计提月">
-                  <el-date-picker v-model="form2.serviceMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月">
-                  </el-date-picker>
+                  <span>{{mxMonthFormatter(form.serviceMonth)}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="是否发放留存">
-                  <c-select v-model="form2.keepState" dict="bool" type="radio"></c-select>
+                  <span>{{mxBoolFormatter(form.keepState)}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="留存发放月">
-                  <el-date-picker v-model="form2.keepMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月">
-                  </el-date-picker>
+                  <span>{{mxMonthFormatter(form.keepMonth)}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="尾款金额">
-                  <el-input-number v-model="form2.finalPayment" style="width:160px"></el-input-number>
+                  <span>{{form.finalPayment}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="尾款奖励日期">
-                  <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.finalPaymentPriceDate"></el-date-picker>
+                  <span>{{mxDateFormatter(form.finalPaymentPriceDate)}}</span>
                 </el-form-item>
               </div>
 
               <div class="xc18__item xc18__item--full">
                 <el-form-item label="客户备注">
-                  <el-input v-model="form2.remarks" type="textarea" :rows="4"></el-input>
+                  <span>{{form.remarks}}</span>
                   <div style="text-align:right;padding-top:6px">
-                    <c-select v-model="form2.customerStatusId" :dict="listState" type="radio"></c-select>
+                    <span>{{form.customerStatusId | state}}</span>
                   </div>
                 </el-form-item>
               </div>
@@ -174,7 +172,7 @@ export default {
       tableParam: {
         customerStatusIds: 10
       },
-      dialogTitle: "编辑",
+      dialogTitle: "详细",
       isShowEdit: false,
       fields: {
         customerName: {
@@ -216,6 +214,17 @@ export default {
       ]
     }
   },
+  filters: {
+    state(v) {
+      if (v + "" === "22") {
+        return "部分结佣";
+      } else if (v + "" === "24") {
+        return "已结佣";
+      } else {
+        return "";
+      }
+    }
+  },
   methods: {
     add() {
       this.form = {};
@@ -240,7 +249,7 @@ export default {
           res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
           this.form = res;
         })
-        this.dialogTitle = "编辑";
+        this.dialogTitle = "详细";
         this.isShowEdit = true;
       } else {
         this.$message({

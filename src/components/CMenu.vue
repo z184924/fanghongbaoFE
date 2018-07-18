@@ -61,10 +61,10 @@
 
       </el-menu-item-group>
     </el-submenu>
-    <el-submenu index="审核管理">
+    <el-submenu index="佣金审核管理">
       <template slot="title">
         <i class="ii i-shenpi"></i>
-        <span>审核管理</span>
+        <span>佣金审核管理</span>
       </template>
       <el-menu-item-group>
         <el-menu-item index="/approve/anchang">
@@ -80,6 +80,30 @@
           <span>财务结佣</span>
         </el-menu-item>
         <el-menu-item index="/approve/mine">
+          <i class="el-icon-arrow-right"></i>
+          <span>我的已审单据</span>
+        </el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="服务费审核管理">
+      <template slot="title">
+        <i class="ii i-shenpi"></i>
+        <span>服务费审核管理</span>
+      </template>
+      <el-menu-item-group>
+        <el-menu-item index="/approve-sf/anchang">
+          <i class="el-icon-arrow-right"></i>
+          <span>案场秘书</span>
+        </el-menu-item>
+        <el-menu-item index="/approve-sf/shenhe">
+          <i class="el-icon-arrow-right"></i>
+          <span>审核人</span>
+        </el-menu-item>
+        <el-menu-item index="/approve-sf/caiwu">
+          <i class="el-icon-arrow-right"></i>
+          <span>财务</span>
+        </el-menu-item>
+        <el-menu-item index="/approve-sf/mine">
           <i class="el-icon-arrow-right"></i>
           <span>我的已审单据</span>
         </el-menu-item>

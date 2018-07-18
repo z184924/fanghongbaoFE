@@ -1,8 +1,8 @@
-$color-test:#417a2a;
-$primary-color-1:#c75836;
-$primary-color-2:#be837b;
-$primary-color-3:#c9796e;
-$primary-color-4:#c75445;
+$color-test:#e9a695;
+$primary-color-1:#c75336;
+$primary-color-2:#be947b;
+$primary-color-3:#c99a6e;
+$primary-color-4:#c76e45;
 $primary-color-5:#fff6f6;
 $primary-color-6:#ffefef;
 $primary-color-7:#faccc6;
@@ -506,11 +506,9 @@ body .stage {
       margin: auto;
     }
     &__title {
-      font-weight: bold;
-      color: rgb(199, 154, 7);
-      font-size: 20px;
-      padding-top: 10px;
-      padding-left: 20px;
+      padding: 0.1em 0.7em;
+      font-size: 24px;
+      color: #854b00;
     }
   }
   .xc7 {
@@ -645,12 +643,13 @@ body .stage {
       .el-form-item {
         margin-bottom: 4px;
       }
-      &--full{
-        flex:100% 0 0;
+      &--full {
+        flex: 100% 0 0;
       }
     }
-    & .el-form-item__label{
-      color:#8f5600;
+    & .el-form-item__label {
+      color: #8f5600;
+      font-weight: bold;
     }
   }
 }

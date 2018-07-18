@@ -2,7 +2,8 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
-      <el-button @click="edit" icon="el-icon-edit" slot="right-control">详细</el-button>
+      <el-button @click="edit" icon="el-icon-document" slot="right-control">详细</el-button>
+      <el-button @click="print" icon="el-icon-document" slot="right-control">打印</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
@@ -226,6 +227,9 @@ export default {
     }
   },
   methods: {
+    print(){
+      window.print();
+    },
     add() {
       this.form = {};
       this.dialogTitle = "新增";
