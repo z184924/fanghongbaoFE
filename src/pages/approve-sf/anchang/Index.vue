@@ -44,7 +44,7 @@ export default {
       config: {
         selectUrl: "serviceInfo/getGridListJson",
         editUrl: "serviceInfo/saveOrUpdate",
-        deleteUrl: "serviceInfo/deleteCustomerByDetailID",
+        deleteUrl: "serviceInfo/______",
         pk: "serviceId"
       },
       dialogTitle: "编辑",
@@ -103,7 +103,7 @@ export default {
       }
     },
     selected() {
-      console.log("row");
+      // console.log("row");
     },
     save() {
       let arrayDate = this.form.f__date.split("-");

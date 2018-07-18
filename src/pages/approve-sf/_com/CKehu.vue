@@ -1,30 +1,20 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
       <div class="xc6__title" slot="left-control">客户明细</div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
-    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-      <el-form ref="form" :model="form" label-width="5em">
-        <el-form-item label="商品名称">
-          <el-input v-model="form.goodsName"></el-input>
-        </el-form-item>
-        <el-form-item label="商品价格">
-          <el-input-number v-model="form.glodValue" style="width:200px"></el-input-number>
-        </el-form-item>
-        <el-form-item label="商品描述">
-          <el-input v-model="form.goodsDescription"></el-input>
-        </el-form-item>
-        <el-form-item label="兑换条件">
-          <el-input v-model="form.conditions"></el-input>
-        </el-form-item>
-      </el-form>
+    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="800px">
+      <fixed-table ref="tableAdd" :multiple="true" :get-data-url="config.selectUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
+      </fixed-table>
+
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭 [Esc]</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
+    <div>{{selectedRowAdd}}</div>
   </div>
 </template>
 <script>
@@ -39,6 +29,7 @@ export default {
       // ★★★config★★★
       config: {
         selectUrl: "serviceInfo/getCustomerDetailsByServiceID",
+        addUrl: "serviceInfo/getCustomersByProjectID",
         editUrl: "goodsInfo/saveOrUpdate",
         deleteUrl: "goodsInfo/delete",
         pk: "goodsId"
@@ -65,11 +56,27 @@ export default {
           label: "兑换条件",
         },
       },
+      fieldsAdd: {
+
+      },
       form: {
 
       },
       selectedRow: {},
+      selectedRowAdd: {},
     }
+  },
+  computed: {
+    param() {
+      return {
+        serviceId: this.serviceId
+      }
+    },
+    paramAdd() {
+      return {
+        serviceId: this.serviceId
+      }
+    },
   },
   methods: {
     add() {
@@ -126,7 +133,9 @@ export default {
 
   created() {
     this.xpost("serviceInfo/getCustomersByProjectID", {
-      projectId: this.projectId
+      projectId: this.projectId,
+      page: 1,
+      rows: 1000
     })
   }
 }

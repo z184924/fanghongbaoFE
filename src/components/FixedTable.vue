@@ -16,7 +16,7 @@
     </div>
     <div style="height:8px;" v-if="showControl"></div>
     <el-table ref="ft" :data="translateShowData" :row-style="rowStyle" :height="tableHeight" style="width: 100%" highlight-current-row @current-change="handleCurrentChange" @selection-change="handleSelectionChange" border :header-cell-style="headerStyle">
-      <el-table-column type="selection" width="50" align="center" v-if="multiSelect"></el-table-column>
+      <el-table-column type="selection" width="50" align="center" v-if="multiple"></el-table-column>
       <el-table-column v-for="(value, key, index) in valueFields" :prop="key" :label="value.label" :key="index" :formatter="value.formatter" :width="value.width" :align="value.align" :class-name="value.class"></el-table-column>
       <el-table-column v-if="fileInfo.hasFile" label="附件" width="">
         <template slot-scope="scope">
@@ -151,7 +151,7 @@ export default {
       }
     },
     // 是否多选
-    multiSelect: {
+    multiple: {
       default: false
     },
     selectedRows: {
@@ -302,7 +302,7 @@ export default {
       return newObj;
     },
     c(a) {
-      console.log(a);
+      // console.log(a);
     },
     update() {
       // console.log(this.primaryKey)
@@ -352,15 +352,20 @@ export default {
       this.getData();
     },
     handleCurrentChange(row) {
-      this.rowData = row;
-      let r = this.clone(row);
-      if (row == null) {
-        r = {};
+      if (!this.multiple) {
+
+        this.rowData = row;
+        let r = this.clone(row);
+        if (row == null) {
+          r = {};
+        }
+        this.$emit("input", r);
       }
-      this.$emit("input", r);
     },
     handleSelectionChange(rows) {
-      this.$emit("selected", rows);
+      if (this.multiple) {
+        this.$emit("input", rows);
+      }
     },
     getData() {
       // console.log(11111);
