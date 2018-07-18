@@ -3,12 +3,12 @@
   <div>
 
     <div class="xc6 xc-shadow">
-      <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow" @selected="selected">
+      <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
         <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
         <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
         <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
       </fixed-table>
-      <!-- <div>{{selectedRow}}</div> -->
+      <!-- <div>{{selectedKehu}}</div> -->
       <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
         <el-form ref="form" :model="form" label-width="5em">
           <el-form-item label="楼盘">
@@ -25,17 +25,29 @@
     </div>
     <div style="height:2em"></div>
     <el-collapse-transition>
-      <div v-if="selectedRow.projectId">
-        <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId"></c-kehu>
+      <div class="xc19" v-if="selectedRow.projectId">
+        <div class="xc19__side">
+          <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
+        </div>
+        <div class="xc-gap"></div>
+        <div class="xc19__side">
+          <el-collapse-transition>
+            <div v-if="selectedKehu.detailId">
+              <c-jiesuan :detail-id="selectedKehu.detailId"></c-jiesuan>
+            </div>
+          </el-collapse-transition>
+        </div>
       </div>
     </el-collapse-transition>
   </div>
 </template>
 <script>
-import CKehu from "../_com/CKehu"
+import CKehu from "./CKehu"
+import CJiesuan from "./CJiesuan"
 export default {
   components: {
-    CKehu
+    CKehu,
+    CJiesuan
   },
   data() {
     let vue = this;
@@ -74,11 +86,7 @@ export default {
         recordIdState: 0
       },
       selectedRow: {},
-    }
-  },
-  watch: {
-    selectedRow() {
-      this.selected();
+      selectedKehu: {},
     }
   },
   methods: {
@@ -101,9 +109,6 @@ export default {
           message: "请选择一行数据"
         })
       }
-    },
-    selected() {
-      // console.log("row");
     },
     save() {
       let arrayDate = this.form.f__date.split("-");

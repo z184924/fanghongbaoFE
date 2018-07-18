@@ -102,7 +102,7 @@ body .ii {
   flex: 2;
 }
 
-table.xc-table {
+.xc-table {
   width: 100%;
   border-collapse: collapse;
   &>tr>td {
@@ -122,8 +122,7 @@ table.xc-table {
     text-align: center;
   }
   &__head>td {
-    background-color: #7c2416;
-    color: #f6f6f6;
+    background-color: #E9A695;
     font-weight: bold;
     white-space: nowrap;
   }
@@ -150,6 +149,10 @@ table.xc-table {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.xc-gap {
+  flex: 10px 0 0;
 }
 
 div,
@@ -651,5 +654,26 @@ body .stage {
       color: #8f5600;
       font-weight: bold;
     }
+  }
+  .xc19 {
+    display: flex;
+    &__side {
+      flex: 1;
+    }
+  }
+  .xc20 {
+    display: flex;
+    padding: 10px 10px 0;
+    &__side {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      &--right {
+        justify-content: flex-end;
+      }
+    }
+  }
+  .xc21 {
+    padding: 8px;
   }
 }

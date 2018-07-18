@@ -2,19 +2,19 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
       <div class="xc6__title" slot="left-control">客户明细</div>
-      <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
-      <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
-      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
+      <el-button @click="add" icon="el-icon-plus" slot="right-control">添加客户</el-button>
+      <!-- <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
+      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除客户</el-button>
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="800px">
-      <fixed-table ref="tableAdd" :multiple="true" :get-data-url="config.selectUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
+      <fixed-table ref="tableAdd" :multiple="true" :get-data-url="config.addUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
       </fixed-table>
 
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭 [Esc]</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
-    <div>{{selectedRowAdd}}</div>
+    <!-- <div>{{selectedRowAdd}}</div> -->
   </div>
 </template>
 <script>
@@ -30,40 +30,66 @@ export default {
       config: {
         selectUrl: "serviceInfo/getCustomerDetailsByServiceID",
         addUrl: "serviceInfo/getCustomersByProjectID",
-        editUrl: "goodsInfo/saveOrUpdate",
-        deleteUrl: "goodsInfo/delete",
-        pk: "goodsId"
+        editUrl: "serviceInfo/saveCustomerDetail",
+        deleteUrl: "serviceInfo/deleteCustomerByDetailID",
+        pk: "detailId"
       },
       dialogTitle: "编辑",
       isShowEdit: false,
       fields: {
-        goodsName: {
-          label: "商品名称"
+        customerName: {
+          label: "客户"
         },
-        glodValue: {
-          label: "商品价格"
+        buildingNum: {
+          label: "楼层"
         },
-        goodsDescription: {
-          label: "商品描述"
-        },
-        createTime: {
-          label: "创建时间",
+        dealDate: {
+          label: "成交日期",
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
         },
-        conditions: {
-          label: "兑换条件",
+        subscribeDate: {
+          label: "认购日期",
+          formatter(r, c, v) {
+            return vue.mxDateFormatter(v);
+          }
         },
       },
       fieldsAdd: {
-
+        customerName: {
+          label: "客户"
+        },
+        buildingNum: {
+          label: "楼层"
+        },
+        dealDate: {
+          label: "成交日期",
+          formatter(r, c, v) {
+            return vue.mxDateFormatter(v);
+          }
+        },
+        subscribeDate: {
+          label: "认购日期",
+          formatter(r, c, v) {
+            return vue.mxDateFormatter(v);
+          }
+        },
       },
       form: {
 
       },
       selectedRow: {},
       selectedRowAdd: {},
+    }
+  },
+  watch: {
+    selectedRow: {
+      handler() {
+        // console.log(this.selectedRow);
+        this.$emit("input", this.selectedRow);
+      },
+      deep: true
     }
   },
   computed: {
@@ -74,15 +100,20 @@ export default {
     },
     paramAdd() {
       return {
-        serviceId: this.serviceId
+        projectId: this.projectId
       }
     },
   },
   methods: {
     add() {
-      this.form = {};
+      this.form = {
+        serviceId: this.serviceId
+      };
       this.dialogTitle = "新增";
       this.isShowEdit = true;
+      this.$nextTick(() => {
+        this.$refs.tableAdd.getData();
+      })
     },
     edit() {
       let a = this.selectedRow;
@@ -99,6 +130,9 @@ export default {
       }
     },
     save() {
+      this.form.customerIds = this.selectedRowAdd.map(o => {
+        return o.customerId
+      }).join();
       this.xpost(this.config.editUrl, this.form).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
@@ -137,6 +171,8 @@ export default {
       page: 1,
       rows: 1000
     })
+    this.$emit("input", {});
+
   }
 }
 </script>
