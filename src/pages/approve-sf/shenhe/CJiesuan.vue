@@ -5,7 +5,7 @@
         <div class="xc6__title">结算明细</div>
       </div>
       <div class="xc20__side xc20__side--right">
-        <el-button type="primary" @click="save" slot="footer">保存</el-button>
+        <!-- <el-button type="primary" @click="save" slot="footer">保存</el-button> -->
         <el-button type="default" @click="getData" icon="el-icon-refresh" circle title="刷新数据"></el-button>
       </div>
     </div>
@@ -22,19 +22,19 @@
         <tr v-for="(o,i) in table" :key="i">
           <td>{{o.roleName}}</td>
           <td>
-            <el-input-number :controls="false" style="width:auto" v-model="o.prize"></el-input-number>
+            {{o.prize}}
           </td>
           <td>
-            <el-input-number :controls="false" style="width:auto" v-model="o.personalTax"></el-input-number>
+            {{o.personalTax}}
           </td>
           <td>
-            <el-input-number :controls="false" style="width:auto" v-model="o.keepValue"></el-input-number>
+            {{o.keepValue}}
           </td>
           <td>
-            <el-input-number :controls="false" style="width:auto" v-model="o.realPrize"></el-input-number>
+            {{o.realPrize}}
           </td>
           <td>
-            <el-input v-model="o.remark"></el-input>
+            {{o.remark}}
           </td>
         </tr>
       </table>

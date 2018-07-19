@@ -24,21 +24,21 @@
       </el-dialog>
     </div>
     <div style="height:2em"></div>
-    <el-collapse-transition>
+    <transition name="el-zoom-in-center">
       <div class="xc19" v-if="selectedRow.projectId">
         <div class="xc19__side">
           <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
         </div>
         <div class="xc-gap"></div>
-        <div class="xc19__side">
-          <el-collapse-transition>
+        <div class="xc19__side xc19__side--long">
+          <transition name="el-zoom-in-center">
             <div v-if="selectedKehu.detailId">
               <c-jiesuan :detail-id="selectedKehu.detailId"></c-jiesuan>
             </div>
-          </el-collapse-transition>
+          </transition>
         </div>
       </div>
-    </el-collapse-transition>
+    </transition>
   </div>
 </template>
 <script>

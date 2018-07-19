@@ -659,6 +659,12 @@ body .stage {
     display: flex;
     &__side {
       flex: 1;
+      &--long {
+        flex: 1.5;
+      }
+      &--short {
+        flex: 0.5;
+      }
     }
   }
   .xc20 {

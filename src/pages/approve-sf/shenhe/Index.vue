@@ -1,96 +1,43 @@
+
 <template>
-  <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
-      <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
-      <el-button @click="edit" icon="el-icon-edit" slot="right-control">完善</el-button>
-      <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
-    </fixed-table>
-    <!-- <div>{{selectedRow}}</div> -->
-    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
-      <el-form ref="form" :model="form" label-width="9em" label-position="left">
-        <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
-          <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
-          <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
-            <div class="xc18__container">
-              <div class="xc18__item">
-                <el-form-item label="手机号">
-                  <span style="color:red">!暂无</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="盟友推荐人">
-                  <span style="color:red">!暂无</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="身份证">
-                  <span>{{form.IdNum}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="会员银行卡">
-                  <span>{{form.bankcardName}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="银行开户行">
-                  <span>{{form.bankName}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="开户支行">
-                  <span>{{form.bankBranchName}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="盟友奖励金额">
-                  <span style="color:red">!暂无</span>
-                </el-form-item>
-              </div>
+  <div>
 
-            </div>
-          </c-panel>
-          <c-panel title="审核人审核信息" title-color="#2f2a7a">
-            <div class="xc18__container xc18__container--p3">
-              <div class="xc18__item">
-                <el-form-item label="审核人">
-                  <span>{{mxLoginInfo.nickname}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="审核资料是否通过">
-                  <c-select v-model="form2.isSubscription" dict="bool" type="radio"></c-select>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="是否满足结佣条件">
-                  <c-select v-model="form2.isReadyMaid" dict="bool" type="radio"></c-select>
-                </el-form-item>
-              </div>
-              <div class="xc18__item xc18__item--full">
-                <el-form-item label="客户备注">
-                  <el-input v-model="form2.checkOpinion"></el-input>
-                </el-form-item>
-              </div>
-
-            </div>
-          </c-panel>
-          <!-- <div>{{form2}}</div> -->
-
+    <div class="xc6 xc-shadow">
+      <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
+        <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
+        <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
+        <el-button @click="submit(10)" type="primary" icon="el-icon-check" slot="right-control">审核通过</el-button>
+        <el-button @click="submit(0)" type="primary" icon="el-icon-close" slot="right-control">驳回</el-button>
+        <el-button @click="get" type="primary" icon="el-icon-close" slot="right-control">123</el-button>
+        <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
+      </fixed-table>
+      <!-- <div>{{selectedKehu}}</div> -->
+    </div>
+    <div style="height:2em"></div>
+    <transition name="el-zoom-in-center">
+      <div class="xc19" v-if="selectedRow.projectId">
+        <div class="xc19__side">
+          <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
         </div>
-      </el-form>
-      <el-button type="default" @click="isShowEdit=false" slot="footer">关闭 [Esc]</el-button>
-      <el-button type="primary" @click="save(12)" slot="footer">保存</el-button>
-      <el-button type="primary" @click="pass('保存并通过',16)" slot="footer">保存并通过</el-button>
-      <el-button type="danger" @click="pass('保存并驳回',10)" slot="footer">保存并驳回</el-button>
-    </el-dialog>
+        <div class="xc-gap"></div>
+        <div class="xc19__side">
+          <transition name="el-zoom-in-center">
+            <div v-if="selectedKehu.detailId">
+              <c-jiesuan :detail-id="selectedKehu.detailId"></c-jiesuan>
+            </div>
+          </transition>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
-import CDetail from "../_com/Detail"
+import CKehu from "./CKehu"
+import CJiesuan from "./CJiesuan"
 export default {
   components: {
-    CDetail
+    CKehu,
+    CJiesuan
   },
   data() {
     let vue = this;
@@ -98,109 +45,56 @@ export default {
       // ★★★config★★★
       config: {
         selectUrl: "serviceInfo/getGridListJson",
-        editUrl: "serviceInfo/checkerCheckInfo",
-        deleteUrl: "",
-        pk: "customerId"
-      },
-      tableParam: {
-        recordIdStates: 8
+        editUrl: "serviceInfo/saveOrUpdate",
+        deleteUrl: "serviceInfo/______",
+        pk: "serviceId"
       },
       dialogTitle: "编辑",
       isShowEdit: false,
+      listBuilding: [],
       fields: {
-        customerName: {
-          label: "客户"
+        projectName: {
+          label: "楼盘名称"
         },
-        customerSex: {
-          label: "客户性别",
+        recordYear: {
+          label: "日期",
           formatter(r, c, v) {
-            return vue.mxSexFormatter(v);
+            return `${r.recordYear}年${r.recordMonth}月`
           }
         },
-        customerTel: {
-          label: "客户电话",
-        },
-        projectName: {
-          label: "楼盘名称",
-          width: "500px"
-        },
         userName: {
-          label: "经纪人"
+          label: "用户"
         },
-
+        recordDate: {
+          label: "记录时间",
+          formatter(r, c, v) {
+            return vue.mxTimeFormatter(v);
+          }
+        },
       },
       form: {
-        f__files: []
+        recordIdState: 8
       },
-      form2: {},
       selectedRow: {},
-      listWuyeLeixing: [],
+      selectedKehu: {},
     }
   },
   methods: {
-    add() {
-      this.form = {};
-      this.dialogTitle = "新增";
-      this.isShowEdit = true;
-    },
-    edit() {
-      let a = this.selectedRow;
-      let id = a[this.config.pk];
+    submit(state) {
+      let name = "通过";
+      if (state === 0) {
+        name = "驳回";
+      }
+      let id = this.selectedRow[this.config.pk];
       if (id) {
-        this.xpost("projectCustomer/getCustomerAllInfo", {
-          customerId: id
-        }).then(res => {
-          res.f__files = res.checkData ? res.checkData.split(",") : [];
-
-          // date转换
-          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : undefined;
-          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : undefined;
-          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : undefined;
-          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : undefined;
-          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : undefined;
-          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
-          this.form = res;
-        })
-        this.dialogTitle = "编辑";
-        this.isShowEdit = true;
-      } else {
-        this.$message({
-          type: "info",
-          message: "请选择一行数据"
-        })
-      }
-    },
-    pass(text, state) {
-      this.$confirm(`是否${text}？`, "提示").then(() => {
-        this.save(state);
-      })
-    },
-    save(customerState) {
-      let data = clone(this.form2);
-      data.customerStatusId = customerState;
-      data.customerId = this.mxLoginInfo.userId
-      this.xpost(this.config.editUrl, data).then(res => {
-        this.$refs.table.getData();
-        this.mxMessage(res).then(() => {
-          this.isShowEdit = false;
-        })
-      })
-
-    },
-    del() {
-      let row = this.selectedRow;
-      if (this.selectedRow[this.config.pk]) {
-        this.$confirm("是否删除？", "删除", {
-          type: "warning"
-        }).then(() => {
-          if (row[this.config.pk]) {
-            let data = {};
-            data[this.config.pk] = row[this.config.pk];
-            this.xpost(this.config.deleteUrl, data).then(res => {
-              this.$refs.table.getData();
-              this.mxMessage(res)
-            })
-          }
+        this.$confirm(`是否${name}？`, "审核").then(() => {
+          this.xpost("serviceInfo/checkerCheckInfo", {
+            serviceId: id,
+            recordIdState: state
+          }).then(res => {
+            this.$refs.table.getData();
+            this.mxMessage(res);
+          })
         })
       } else {
         this.$message({
@@ -209,20 +103,44 @@ export default {
         })
       }
     },
+    get() {
+      let id = this.selectedRow[this.config.pk];
+      this.xpost("serviceInfo/getServiceMoneyHistoryList", {
+        serviceId: id,
+      })
+    }
   },
 
   created() {
-    this.xpost("city/getPropertyTypes").then(res => {
-      // console.log(res);
-      this.listWuyeLeixing = res.map(o => {
-        return {
-          NAME: o.propertyType,
-          CODE: o.propertyTypeId,
-        }
-      })
-    })
-    // console.log(this.mxLoginInfo);
+
   }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
