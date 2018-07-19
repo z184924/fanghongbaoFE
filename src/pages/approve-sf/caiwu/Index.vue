@@ -24,7 +24,7 @@
     <transition name="el-zoom-in-center">
       <div>
         <div class="xc19">
-          <div class="xc19__side">
+          <div class="xc19__side xc19__side--long">
             <transition name="el-zoom-in-center">
               <div v-if="selectedKehu.detailId">
                 <c-jiesuan :detail-id="selectedKehu.detailId" v-model="selectedJiesuan"></c-jiesuan>

@@ -145,7 +145,9 @@ export default {
       }
     },
   },
-
+  beforeDestroy() {
+    this.$emit("input", {});
+  },
   created() {
     this.$emit("input", {});
   }
