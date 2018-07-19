@@ -505,6 +505,9 @@ body .stage {
     overflow: hidden;
     margin-right: 5px;
     background: #fff;
+    &--gold {
+      background: #e9c473;
+    }
     &--center {
       margin: auto;
     }

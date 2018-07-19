@@ -8,27 +8,29 @@
         <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
         <el-button @click="submit(10)" type="primary" icon="el-icon-check" slot="right-control">审核通过</el-button>
         <el-button @click="submit(0)" type="primary" icon="el-icon-close" slot="right-control">驳回</el-button>
-        <el-button @click="get" type="primary" icon="el-icon-close" slot="right-control">123</el-button>
+        <!-- <el-button @click="get" type="primary" icon="el-icon-close" slot="right-control">123</el-button> -->
         <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
       </fixed-table>
       <!-- <div>{{selectedKehu}}</div> -->
     </div>
     <div style="height:2em"></div>
-    <transition name="el-zoom-in-center">
-      <div class="xc19" v-if="selectedRow.projectId">
-        <div class="xc19__side">
-          <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
-        </div>
-        <div class="xc-gap"></div>
-        <div class="xc19__side">
-          <transition name="el-zoom-in-center">
-            <div v-if="selectedKehu.detailId">
-              <c-jiesuan :detail-id="selectedKehu.detailId"></c-jiesuan>
-            </div>
-          </transition>
-        </div>
+    <div class="xc19">
+      <div class="xc19__side">
+        <transition name="el-zoom-in-center">
+          <div v-if="selectedRow.projectId">
+            <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
+          </div>
+        </transition>
       </div>
-    </transition>
+      <div class="xc-gap"></div>
+      <div class="xc19__side">
+        <transition name="el-zoom-in-center">
+          <div v-if="selectedKehu.detailId">
+            <c-jiesuan :detail-id="selectedKehu.detailId"></c-jiesuan>
+          </div>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 <script>

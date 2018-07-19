@@ -164,7 +164,9 @@ export default {
       }
     },
   },
-
+  beforeDestroy() {
+    this.$emit("input", {});
+  },
   created() {
     this.xpost("serviceInfo/getCustomersByProjectID", {
       projectId: this.projectId,
