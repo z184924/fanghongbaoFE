@@ -1,91 +1,121 @@
+
 <template>
-  <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
-      <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
-      <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
-      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
-    </fixed-table>
-    <!-- <div>{{selectedRow}}</div> -->
-    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-      <el-form ref="form" :model="form" label-width="5em">
-        <el-form-item label="商品名称">
-          <el-input v-model="form.goodsName"></el-input>
-        </el-form-item>
-        <el-form-item label="商品价格">
-          <el-input-number v-model="form.glodValue" style="width:200px"></el-input-number>
-        </el-form-item>
-        <el-form-item label="商品描述">
-          <el-input v-model="form.goodsDescription"></el-input>
-        </el-form-item>
-        <el-form-item label="兑换条件">
-          <el-input v-model="form.conditions"></el-input>
-        </el-form-item>
-      </el-form>
-      <el-button type="default" @click="isShowEdit=false" slot="footer">关闭 [Esc]</el-button>
-      <el-button type="primary" @click="save" slot="footer">保存</el-button>
-    </el-dialog>
+  <div>
+
+    <div class="xc6 xc-shadow">
+      <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
+        <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
+        <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
+        <!-- <el-button @click="submit(14)" type="primary" icon="el-icon-check" slot="right-control">审核通过</el-button> -->
+        <!-- <el-button @click="submit(0)" type="primary" icon="el-icon-close" slot="right-control">驳回</el-button> -->
+        <!-- <el-button @click="get" type="primary" icon="el-icon-close" slot="right-control">123</el-button> -->
+        <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
+      </fixed-table>
+      <!-- <div>{{selectedKehu}}</div> -->
+    </div>
+    <div style="height:1.5em"></div>
+    <transition name="el-zoom-in-center">
+      <div v-if="selectedRow.projectId">
+        <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
+
+      </div>
+    </transition>
+    <div style="height:1em"></div>
+    <transition name="el-zoom-in-center">
+      <div>
+        <div class="xc19">
+          <div class="xc19__side xc19__side--long">
+            <transition name="el-zoom-in-center">
+              <div v-if="selectedKehu.detailId">
+                <c-jiesuan :detail-id="selectedKehu.detailId" v-model="selectedJiesuan"></c-jiesuan>
+              </div>
+            </transition>
+          </div>
+          <div class="xc-gap"></div>
+          <div class="xc19__side">
+            <transition name="el-zoom-in-center">
+              <div v-if="selectedJiesuan.accountantId">
+                <c-fafang :accountant-id="selectedJiesuan.accountantId"></c-fafang>
+              </div>
+            </transition>
+          </div>
+        </div>
+        <!-- <div style="height:10px"></div>
+        <div>
+          <transition name="el-zoom-in-center">
+            <div v-if="selectedJiesuan.accountantId">
+              <c-fafang :accountant-id="selectedJiesuan.accountantId"></c-fafang>
+            </div>
+         </transition>
+        </div> -->
+      </div>
+    </transition>
   </div>
 </template>
 <script>
+import CKehu from "./CKehu"
+import CJiesuan from "./CJiesuan"
+import CFafang from "./CFafang"
 export default {
+  components: {
+    CKehu,
+    CJiesuan,
+    CFafang
+  },
   data() {
     let vue = this;
     return {
       // ★★★config★★★
       config: {
-        selectUrl: "serviceInfo/getMyHistoryGridlistPage",
-        editUrl: "goodsInfo/saveOrUpdate",
-        deleteUrl: "goodsInfo/delete",
-        pk: "goodsId"
+        selectUrl: "serviceInfo/getGridListJson",
+        editUrl: "serviceInfo/saveOrUpdate",
+        deleteUrl: "serviceInfo/______",
+        pk: "serviceId"
       },
       dialogTitle: "编辑",
       isShowEdit: false,
+      listBuilding: [],
       fields: {
-        goodsName: {
-          label: "商品名称"
+        projectName: {
+          label: "楼盘名称"
         },
-        glodValue: {
-          label: "商品价格"
-        },
-        goodsDescription: {
-          label: "商品描述"
-        },
-        createTime: {
-          label: "创建时间",
+        recordYear: {
+          label: "日期",
           formatter(r, c, v) {
-            return vue.mxDateFormatter(v);
+            return `${r.recordYear}年${r.recordMonth}月`
           }
         },
-        conditions: {
-          label: "兑换条件",
+        userName: {
+          label: "用户"
+        },
+        recordDate: {
+          label: "记录时间",
+          formatter(r, c, v) {
+            return vue.mxTimeFormatter(v);
+          }
         },
       },
       form: {
-
+        recordIdState: 12
       },
       selectedRow: {},
-    }
-  },
-  computed: {
-    param() {
-      return {
-        recordIdStates:"0"
-      };
+      selectedKehu: {},
+      selectedJiesuan: {},
     }
   },
   methods: {
-    add() {
-      this.form = {};
-      this.dialogTitle = "新增";
-      this.isShowEdit = true;
-    },
-    edit() {
-      let a = this.selectedRow;
-      let id = a[this.config.pk];
+    submit(state) {
+      let id = this.selectedRow[this.config.pk];
       if (id) {
-        this.form = this.selectedRow;
-        this.dialogTitle = "编辑";
-        this.isShowEdit = true;
+        this.$confirm(`是否通过？`, "审核").then(() => {
+          this.xpost("serviceInfo/financeCheckInfo", {
+            serviceId: id,
+            recordIdState: state
+          }).then(res => {
+            this.$refs.table.getData();
+            this.mxMessage(res);
+          })
+        })
       } else {
         this.$message({
           type: "info",
@@ -93,42 +123,44 @@ export default {
         })
       }
     },
-    save() {
-      this.xpost(this.config.editUrl, this.form).then(res => {
-        this.$refs.table.getData();
-        this.mxMessage(res).then(() => {
-          this.isShowEdit = false;
-        })
+    get() {
+      let id = this.selectedRow[this.config.pk];
+      this.xpost("serviceInfo/getServiceMoneyHistoryList", {
+        serviceId: id,
       })
-
-    },
-    del() {
-      let row = this.selectedRow;
-      if (this.selectedRow[this.config.pk]) {
-        this.$confirm("是否删除？", "删除", {
-          type: "warning"
-        }).then(() => {
-          if (row[this.config.pk]) {
-            let data = {};
-            data[this.config.pk] = row[this.config.pk];
-            this.xpost(this.config.deleteUrl, data).then(res => {
-              this.$refs.table.getData();
-              this.mxMessage(res)
-            })
-          }
-        })
-      } else {
-        this.$message({
-          type: "info",
-          message: "请选择一行数据"
-        })
-      }
-    },
+    }
   },
 
   created() {
-
+    console.log(this.mxLoginInfo);
   }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

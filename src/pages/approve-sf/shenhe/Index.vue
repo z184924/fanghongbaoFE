@@ -6,7 +6,7 @@
       <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
         <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
         <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
-        <el-button @click="submit(10)" type="primary" icon="el-icon-check" slot="right-control">审核通过</el-button>
+        <el-button @click="submit(10)" type="primary" icon="el-icon-check" slot="right-control">通过</el-button>
         <el-button @click="submit(0)" type="primary" icon="el-icon-close" slot="right-control">驳回</el-button>
         <!-- <el-button @click="get" type="primary" icon="el-icon-close" slot="right-control">123</el-button> -->
         <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
