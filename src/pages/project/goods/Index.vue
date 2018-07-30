@@ -40,7 +40,7 @@
         <tr>
           <td>商品描述</td>
           <td>
-            <c-ueditor v-model="form.goodsDescription"></c-ueditor>
+            <c-ueditor v-if="isShowEdit" v-model="form.goodsDescription"></c-ueditor>
           </td>
         </tr>
       </table>

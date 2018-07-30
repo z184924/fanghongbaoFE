@@ -109,6 +109,31 @@
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
+    <el-submenu index="消息管理">
+      <template slot="title">
+        <i class="ii i-xiaoxi"></i>
+        <span>消息管理</span>
+      </template>
+      <el-menu-item-group>
+        <el-menu-item index="/system/information/1">
+          <i class="el-icon-arrow-right"></i>
+          <span>楼盘消息</span>
+        </el-menu-item>
+        <el-menu-item index="/system/information/3">
+          <i class="el-icon-arrow-right"></i>
+          <span>系统消息</span>
+        </el-menu-item>
+        <el-menu-item index="/system/information/4">
+          <i class="el-icon-arrow-right"></i>
+          <span>活动消息</span>
+        </el-menu-item>
+        <el-menu-item index="/system/information/2">
+          <i class="el-icon-arrow-right"></i>
+          <span>收支消息</span>
+        </el-menu-item>
+
+      </el-menu-item-group>
+    </el-submenu>
     <el-submenu index="系统管理">
       <template slot="title">
         <i class="ii i-guanli"></i>
