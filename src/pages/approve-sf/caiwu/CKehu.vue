@@ -11,7 +11,7 @@
       <fixed-table ref="tableAdd" :multiple="true" :get-data-url="config.addUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
       </fixed-table>
 
-      <el-button type="default" @click="isShowEdit=false" slot="footer">关闭 [Esc]</el-button>
+      <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
     <!-- <div>{{selectedRowAdd}}</div> -->

@@ -16,7 +16,7 @@
         </div>
       </div>
       <!-- <div>{{listFile}}</div> -->
-      <el-button type="default" slot="footer" @click="isShowInsert=false">关闭 [Esc]</el-button>
+      <el-button type="default" slot="footer" @click="isShowInsert=false">关闭</el-button>
       <el-button type="primary" slot="footer" @click="doAdd">保存</el-button>
     </el-dialog>
     <el-dialog :visible.sync="isShowDetail" v-drag title="意见详情">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <!-- <div>{{listFile}}</div> -->
-      <el-button type="default" slot="footer" @click="isShowDetail=false">关闭 [Esc]</el-button>
+      <el-button type="default" slot="footer" @click="isShowDetail=false">关闭</el-button>
     </el-dialog>
   </div>
 </template>
