@@ -88,7 +88,7 @@ export default {
   watch: {
     $route: {
       handler() {
-        console.log(this.$route.params.type);
+        // console.log(this.$route.params.type);
         if (this.$route.params.type == 2) {
           this.config.selectUrl = "information/getSZGridListJson"
         } else {
