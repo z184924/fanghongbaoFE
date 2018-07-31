@@ -105,7 +105,7 @@ export default {
         localStorage.setItem("username", this.username);
         localStorage.setItem("password", this.password);
       }
-      this.xpost("login", {
+      this.xpost("pcLogin", {
         account: this.username,
         password: this.password
       }).then(res => {
