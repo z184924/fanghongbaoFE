@@ -235,8 +235,11 @@ export default {
     }
   },
   watch: {
-    dataParam() {
-      this.getData();
+    dataParam: {
+      handler() {
+        this.getData();
+      },
+      deep: true
     },
     selectedRows: {
       handler() {

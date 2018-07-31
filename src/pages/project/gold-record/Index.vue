@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+      <div slot="left-control">
+        <span>用户名：</span>
+        <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
+        <el-input v-model="param.userName"></el-input>
+        <el-button type="text" @click="param.userName=''">清空</el-button>
+      </div>
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
@@ -38,6 +44,7 @@ export default {
         deleteUrl: "goodsInfo/delete",
         pk: "goodsId"
       },
+      param: {},
       dialogTitle: "编辑",
       isShowEdit: false,
       fields: {
