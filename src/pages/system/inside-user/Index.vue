@@ -224,12 +224,20 @@ export default {
     this.$nextTick(() => {
 
       this.xpost("role/getRoles").then(res => {
-        this.roleList = res.rows.map(o => {
+        let list = res.rows.map(o => {
           return {
             label: o.roleName,
             value: o.roleId + "",
           }
         })
+        let l = [];
+        list.forEach(o => {
+          if (o.label != "经纪人") {
+            l.push(o);
+          }
+        })
+        this.roleList = l;
+
       })
       this.refreshTable();
     })
