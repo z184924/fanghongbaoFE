@@ -44,7 +44,9 @@ export default {
         deleteUrl: "goodsInfo/delete",
         pk: "goodsId"
       },
-      param: {},
+      param: {
+        userName:""
+      },
       dialogTitle: "编辑",
       isShowEdit: false,
       fields: {

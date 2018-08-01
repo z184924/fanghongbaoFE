@@ -217,7 +217,7 @@
 
     <c-panel title="上传审核资料" title-color="#3d7a2a">
       <div>交款通知单、身份证正反面、收据、POS机小条</div>
-      <file-box v-model="form.f__files" :editable="false"></file-box>
+      <file-box is-window v-model="form.f__files" :editable="false"></file-box>
     </c-panel>
   </div>
 </template>

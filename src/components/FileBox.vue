@@ -33,6 +33,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    isWindow: {
+      type: Boolean,
+      default: false,
+    },
     editable: {
       type: Boolean,
       default: true,
@@ -108,8 +112,12 @@ export default {
       })
     },
     openImg(src) {
-      this.activeSrc = this.$store.state.picBasePath + src + "";
-      this.isShowFullImg = true;
+      if (this.isWindow) {
+        window.open(this.$store.state.picBasePath + src + "");
+      } else {
+        this.activeSrc = this.$store.state.picBasePath + src + "";
+        this.isShowFullImg = true;
+      }
     },
     showAdd() {
       this.isShowAdd = true;

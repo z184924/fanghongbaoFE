@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" get-data-url="projectFeedback/getGridListJson" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" get-data-url="projectFeedback/getGridListJson" :data-param="param" :fields="fields" v-model="selectedRow">
+      <div slot="left-control">
+        <span>用户名：</span>
+        <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
+        <el-input v-model="param.userName"></el-input>
+        <el-button type="text" @click="param.userName=''">清空</el-button>
+      </div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加意见</el-button>
       <el-button @click="detail" icon="el-icon-document" slot="right-control">意见详细</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
@@ -61,6 +67,9 @@ export default {
             return vue.mxDateFormatter(v);
           }
         }
+      },
+      param: {
+        userName:""
       },
       selectedRow: {},
       isShowInsert: false,

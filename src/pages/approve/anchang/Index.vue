@@ -93,7 +93,9 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="产品类型">
-                  <span>{{mxDictToString(listWuyeLeixing,form.propertyTypeId) }}</span>
+                  <!-- <span>{{mxDictToString(listWuyeLeixing,form.propertyTypeId) }}</span> -->
+                  <!-- <el-input v-model="form.propertyTypeId"></el-input> -->
+                  <c-select v-model="form.propertyTypeId" :dict="listWuyeLeixing"></c-select>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -108,7 +110,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="排卡金额">
-                  <span>{{form.cardMoney}}</span>
+                  <!-- <span>{{form.cardMoney}}</span> -->
+                  <el-input-number v-model="form.cardMoney" style="width:100%"></el-input-number>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -123,7 +126,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="齐定日期">
-                  <span>{{form.homogeneityDate}}</span>
+                  <!-- <span>{{form.homogeneityDate}}</span> -->
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.homogeneityDate"></el-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -158,7 +162,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="成交单价">
-                  <span>{{form.dealSinglePrice}}</span>
+                  <!-- <span>{{form.dealSinglePrice}}</span> -->
+                  <el-input-number v-model="form.dealSinglePrice" style="width:100%"></el-input-number>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -226,7 +231,7 @@
 
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
-            <file-box v-model="form.f__files"></file-box>
+            <file-box is-window v-model="form.f__files"></file-box>
           </c-panel>
           <!-- <div>{{form}}</div> -->
 
@@ -317,6 +322,7 @@ export default {
             res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : dateInit("_");
             res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : dateInit("_");
             res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : dateInit("_");
+            res.homogeneityDate = res.homogeneityDate ? this.mxDateFormatter(res.homogeneityDate) : dateInit("_");
             this.form = res;
           })
         })
@@ -377,8 +383,8 @@ export default {
       // console.log(res);
       this.listWuyeLeixing = res.map(o => {
         return {
-          NAME: o.propertyType,
-          CODE: o.propertyTypeId,
+          label: o.propertyType,
+          value: o.propertyTypeId,
         }
       })
     })
