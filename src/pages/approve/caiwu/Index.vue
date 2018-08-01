@@ -143,6 +143,23 @@
                   </div>
                 </el-form-item>
               </div>
+              <div class="xc22">
+                <div class="xc22__title">佣金记录</div>
+                <table class="xc-table xc-table--border">
+                  <tr class="xc-table__head">
+                    <td>序号</td>
+                    <td>佣金金额</td>
+                    <td>付款时间</td>
+                  </tr>
+                  <tr v-for="(o,i) in listYongjin" :key="i">
+                    <td>{{i+1}}</td>
+                    <td>{{o.commissionValue}}</td>
+                    <td>{{mxDateFormatter(o.commissionDate)}}</td>
+                  </tr>
+                </table>
+                <div style="height:10px"></div>
+                <el-button icon="el-icon-plus" @click="isShowAddYongjin=true">新增佣金记录...</el-button>
+              </div>
 
             </div>
           </c-panel>
@@ -152,6 +169,25 @@
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save()" slot="footer">保存</el-button>
+    </el-dialog>
+    <el-dialog v-drag title="新增佣金记录" append-to-body :visible.sync="isShowAddYongjin" width="360px">
+      <table class="xc-table xc-table--border" style="width:100%">
+        <tr>
+          <td>佣金金额</td>
+          <td>
+            <el-input v-model="yongjin.commissionValue"></el-input>
+          </td>
+        </tr>
+        <tr>
+          <td>付款时间</td>
+          <td>
+            <el-date-picker v-model="yongjin.commissionDate" value-format="yyyy-MM-dd" style="width:100%">
+            </el-date-picker>
+          </td>
+        </tr>
+      </table>
+      <el-button slot="footer" @click="isShowAddYongjin=false">关闭</el-button>
+      <el-button slot="footer" type="primary" @click="addYongjin">保存</el-button>
     </el-dialog>
   </div>
 </template>
@@ -204,6 +240,9 @@ export default {
       form2: {},
       selectedRow: {},
       listWuyeLeixing: [],
+      isShowAddYongjin: false,
+      yongjin: {},
+      listYongjin: [],
       listState: [
         {
           label: "部分结佣",
@@ -222,10 +261,34 @@ export default {
       this.dialogTitle = "新增";
       this.isShowEdit = true;
     },
+    addYongjin() {
+      if (this.yongjin.commissionValue && this.yongjin.commissionDate) {
+
+        let id = this.selectedRow[this.config.pk];
+        this.xpost("projectCustomer/saveCommission", {
+          customerId: id,
+          commissionValue: this.yongjin.commissionValue,
+          commissionDate: this.yongjin.commissionDate
+        }).then(res => {
+          this.mxMessage(res).then(() => {
+            this.isShowAddYongjin = false;
+            this.edit();
+          })
+        })
+      } else {
+        this.$message({
+          type: "info",
+          message: "请填写完整"
+        })
+      }
+    },
     edit() {
       let a = this.selectedRow;
       let id = a[this.config.pk];
       if (id) {
+        this.dialogTitle = "编辑";
+        this.isShowEdit = true;
+
         this.xpost("projectCustomer/getCustomerAllInfo", {
           customerId: id
         }).then(res => {
@@ -240,8 +303,13 @@ export default {
           res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
           this.form = res;
         })
-        this.dialogTitle = "编辑";
-        this.isShowEdit = true;
+        // 下方列表
+        this.xpost("projectCustomer/getCommission", {
+          customerId: id
+        }).then(res => {
+          this.listYongjin = res.rows;
+        })
+
       } else {
         this.$message({
           type: "info",
@@ -299,6 +367,8 @@ export default {
         }
       })
     })
+
+
     // console.log(this.mxLoginInfo);
   }
 }

@@ -1,25 +1,30 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+      <div slot="left-control">
+        <span>用户名：</span>
+        <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
+        <el-input v-model="param.userName"></el-input>
+        <el-button type="text" @click="param.userName=''">清空</el-button>
+      </div>
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
-      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
+      <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
       <el-form ref="form" :model="form" label-width="5em">
-        <el-form-item label="商品名称">
-          <el-input v-model="form.goodsName"></el-input>
+        <el-form-item label="是否邮寄">
+          <c-select v-model="form.isPost" dict="bool" type="radio"></c-select>
         </el-form-item>
-        <el-form-item label="商品价格">
-          <el-input-number v-model="form.glodValue" style="width:200px"></el-input-number>
+        <el-form-item label="邮寄人">
+          <el-input v-model="form.postMan"></el-input>
         </el-form-item>
-        <el-form-item label="商品描述">
-          <el-input v-model="form.goodsDescription"></el-input>
+        <el-form-item label="邮寄日期">
+          <el-date-picker style="width:100%" v-model="form.postDate" value-format="yyyy-MM-dd">
+          </el-date-picker>
         </el-form-item>
-        <el-form-item label="兑换条件">
-          <el-input v-model="form.conditions"></el-input>
-        </el-form-item>
+
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
@@ -90,6 +95,9 @@ export default {
         //   label: "兑换条件",
         // },
       },
+      param: {
+        userName: ""
+      },
       form: {
 
       },
@@ -106,6 +114,7 @@ export default {
       let a = this.selectedRow;
       if (a[this.config.pk]) {
         this.form = this.selectedRow;
+        this.form.postDate = this.form.postDate ? moment(this.form.postDate).format("YYYY-MM-DD") : "";
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
       } else {

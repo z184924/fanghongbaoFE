@@ -685,4 +685,17 @@ body .stage {
   .xc21 {
     padding: 8px;
   }
+  .xc22 {
+    margin: auto;
+    margin-top:1em;
+    padding:1em;
+    border:solid 1px #ddd;
+    text-align: center;
+    &__title {
+      // padding: 0.3em 0;
+      padding-bottom:0.6em;
+      color: rgb(126, 40, 6);
+      font-weight: bold;
+    }
+  }
 }
