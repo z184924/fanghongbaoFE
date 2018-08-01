@@ -3,9 +3,10 @@
   <div>
 
     <div class="xc6 xc-shadow">
-      <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
+      <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
         <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
         <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
+        <el-button @click="pass" icon="el-icon-check" slot="right-control" type="primary">提交审核</el-button>
         <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
       </fixed-table>
       <!-- <div>{{selectedKehu}}</div> -->
@@ -89,6 +90,9 @@ export default {
       },
       selectedRow: {},
       selectedKehu: {},
+      param: {
+        recordIdStates: 0
+      },
     }
   },
   methods: {
@@ -146,6 +150,29 @@ export default {
         })
       }
     },
+    pass() {
+      let row = this.selectedRow;
+      if (this.selectedRow[this.config.pk]) {
+        this.$confirm("是否提交审核？", "提交审核", {
+          type: "info"
+        }).then(() => {
+          if (row[this.config.pk]) {
+            let data = {};
+            data[this.config.pk] = row[this.config.pk];
+            data.recordIdState = 2;
+            this.xpost("serviceInfo/secretarySubmitInfo", data).then(res => {
+              this.$refs.table.getData();
+              this.mxMessage(res)
+            })
+          }
+        })
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        })
+      }
+    }
   },
 
   created() {

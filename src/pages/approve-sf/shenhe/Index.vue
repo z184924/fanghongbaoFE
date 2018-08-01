@@ -3,7 +3,7 @@
   <div>
 
     <div class="xc6 xc-shadow">
-      <fixed-table ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow">
+      <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
         <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
         <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
         <el-button @click="submit(10)" type="primary" icon="el-icon-check" slot="right-control">通过</el-button>
@@ -79,6 +79,9 @@ export default {
       },
       selectedRow: {},
       selectedKehu: {},
+      param: {
+        recordIdStates: 8
+      },
     }
   },
   methods: {

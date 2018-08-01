@@ -208,7 +208,7 @@ export default {
         pk: "customerId"
       },
       tableParam: {
-        customerStatusIds: 10
+        customerStatusIds: "20,22"
       },
       dialogTitle: "编辑",
       isShowEdit: false,

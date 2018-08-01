@@ -256,7 +256,7 @@ export default {
         pk: "customerId"
       },
       tableParam: {
-        customerStatusIds: 10
+        customerStatusIds: 11
       },
       dialogTitle: "编辑",
       isShowEdit: false,

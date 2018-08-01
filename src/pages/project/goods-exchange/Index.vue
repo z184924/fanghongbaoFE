@@ -9,6 +9,7 @@
       </div>
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
+      <el-button @click="showDetail" icon="el-icon-document" slot="right-control">详细</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
@@ -29,6 +30,48 @@
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
+    <el-dialog :visible.sync="isShowDetail" v-drag title="详细" width="400px">
+      <table class="xc-table xc-table--border xc-table--center">
+        <tr>
+          <td>物品名称</td>
+          <td>{{detail.goodsName}}</td>
+        </tr>
+        <tr>
+          <td>消耗金币</td>
+          <td>{{detail.goldValue}}</td>
+        </tr>
+        <tr>
+          <td>兑换条件</td>
+          <td>{{detail.conditions}}</td>
+        </tr>
+        <tr>
+          <td>兑换时间</td>
+          <td>{{mxDateFormatter(detail.exchangeDate)}}</td>
+        </tr>
+        <tr>
+          <td>收件人</td>
+          <td>{{detail.recivedMan}}</td>
+        </tr>
+        <tr>
+          <td>收件地址</td>
+          <td>{{detail.recivedAdress}}</td>
+        </tr>
+        <tr>
+          <td>联系电话</td>
+          <td>{{detail.phone}}</td>
+        </tr>
+        <tr>
+          <td>邮寄人</td>
+          <td>{{detail.postMan}}</td>
+        </tr>
+        <tr>
+          <td>邮寄时间</td>
+          <td>{{mxDateFormatter(detail.postDate)}}</td>
+        </tr>
+
+      </table>
+    </el-dialog>
+
   </div>
 </template>
 <script>
@@ -45,6 +88,8 @@ export default {
       },
       dialogTitle: "编辑",
       isShowEdit: false,
+      isShowDetail: false,
+      detail: {},
       fields: {
         goodsName: {
           label: "物品"
@@ -62,13 +107,13 @@ export default {
           }
         },
         isPost: {
-          label: "是否邮寄",
+          label: "邮寄状态",
           formatter(r, c, v) {
             return vue.mxBoolFormatter(v);
           }
         },
         postMan: {
-          label: "收件人"
+          label: "邮寄人"
         },
         postDate: {
           label: "邮寄时间",
@@ -117,6 +162,28 @@ export default {
         this.form.postDate = this.form.postDate ? moment(this.form.postDate).format("YYYY-MM-DD") : "";
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        })
+      }
+    },
+    showDetail() {
+      let id = this.selectedRow[this.config.pk];
+      if (id) {
+        this.form = this.selectedRow;
+        this.isShowDetail = true;
+        this.xpost("goodsExchange/getFormJson", {
+          exchangeId: id,
+        }).then(res => {
+          this.detail = res;
+        })
+
+
+
+        // this.form.postDate = this.form.postDate ? moment(this.form.postDate).format("YYYY-MM-DD") : "";
+        // this.dialogTitle = "编辑";
       } else {
         this.$message({
           type: "info",
