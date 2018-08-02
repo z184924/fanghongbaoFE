@@ -142,10 +142,10 @@
       <file-box v-model="form.f__listYongjinXiangxi"></file-box>
     </c-panel>
     <c-panel title-color="rgb(124, 23, 23)" title="项目参数" width="800px">
-      <file-box v-model="form.f__listXiangmuCanshu"></file-box>
+      <file-box v-model="form.f__listXiangmuCanshu" :multiple="false"></file-box>
     </c-panel>
     <c-panel title-color="rgb(23, 95, 124)" title="项目卖点" width="800px">
-      <file-box v-model="form.f__listXiangmuMaidian"></file-box>
+      <file-box v-model="form.f__listXiangmuMaidian" :multiple="false"></file-box>
     </c-panel>
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
