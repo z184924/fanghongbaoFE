@@ -49,10 +49,6 @@ export default {
           label: "售价升序",
           value: 3,
         },
-        {
-          label: "佣金降序",
-          value: 4,
-        },
         // 
       ],
       selectedOrderType: 1,
