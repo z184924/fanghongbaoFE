@@ -10,7 +10,7 @@
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
-      <el-table-column slot="col" width="150" label="图片" align="center">
+      <el-table-column slot="col-first" width="150" label="图片" align="center">
         <template slot-scope="scope">
           <img class="xc16 xc-shadow" :src="$store.state.smallPicBasePath + scope.row.picURL" alt="">
         </template>
