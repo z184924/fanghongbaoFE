@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" get-data-url="projectNews/getProjectNews" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" get-data-url="projectNews/getProjectNews" :data-param="param" :fields="fields" v-model="selectedRow">
+      <div slot="left-control">
+        <span>新闻标题：</span>
+        <el-input dict="lbt" v-model="param.newsTitle"></el-input>
+        <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
+        <el-button type="text" @click="param.newsTitle=''">清空</el-button>
+      </div>
       <el-button type="warning" @click="top" :icon="selectedRow.isTop===0 ? 'el-icon-arrow-up' : 'el-icon-arrow-down'" slot="right-control" v-if="selectedRow.newsId">{{this.selectedRow.isTop===0 ? '置顶' : '取消置顶'}}</el-button>
       <div slot="right-control" style="padding:0 1em"></div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">新增</el-button>
@@ -59,6 +65,9 @@ export default {
     return {
       isShowEdit: false,
       isShowView: false,
+      param: {
+        newsTitle: "",
+      },
       fields: {
         newsTitle: {
           label: "新闻标题"
@@ -76,9 +85,9 @@ export default {
         },
         createTime: {
           label: "上传时间",
-          width: "120px",
+          width: "240px",
           formatter(r, c, v) {
-            return vue.mxDateFormatter(v);
+            return vue.mxTimeFormatter(v);
           }
         },
       },
