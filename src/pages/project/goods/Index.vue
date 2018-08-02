@@ -2,7 +2,7 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" get-data-url="goodsInfo/getGridListJson" :data-param="tableParam" :fields="fields" v-model="selectedRow">
       <div slot="left-control">
-        <span>是否有效</span>
+        <span>是否有效：</span>
         <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select>
         <el-button type="text" @click="clearSearch">清空</el-button>
       </div>

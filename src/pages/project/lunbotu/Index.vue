@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow xc6--center" style="width:800px">
-    <fixed-table ref="table" get-data-url="projectCarouselPicture/getListJson" :fields="fields" v-model="selectedRow">
+    <fixed-table ref="table" get-data-url="projectCarouselPicture/getListJson" :data-param="param" :fields="fields" v-model="selectedRow">
+      <div slot="left-control">
+        <span>轮播图类型：</span>
+        <c-select dict="lbt" v-model="param.picType"></c-select>
+        <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
+        <el-button type="text" @click="param.picType=''">清空</el-button>
+      </div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
@@ -41,6 +47,9 @@ export default {
     let vue = this;
     return {
       isShowEdit: false,
+      param: {
+        picType: "",
+      },
       fields: {
         picType: {
           label: "轮播图类型",
@@ -53,7 +62,7 @@ export default {
         },
         createTime: {
           label: "创建时间",
-          formatter(r,c,v){
+          formatter(r, c, v) {
             return vue.mxTimeFormatter(v);
           }
         },
