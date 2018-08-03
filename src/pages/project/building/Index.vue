@@ -13,7 +13,13 @@
       <el-button type="text" @click="clearSearch">清空搜索条件</el-button>
     </div>
     <fixed-table ref="table" get-data-url="projectInfo/getGridListJson" :data-param="tableParam" :fields="fields" v-model="selectedRow">
+      <span v-if="selectedRow.projectId" slot="right-control" style="margin-right:12px;">
+        <el-button type="warning" v-if="selectedRow.projectStatus==1" @click="changeState(2)" icon="el-icon-close">下架</el-button>
+        <el-button type="warning" v-else @click="changeState(1)" icon="el-icon-star-on">上架</el-button>
+        <el-button type="warning" v-if="selectedRow.ifRecommend==1" @click="tuijian" icon="el-icon-close">取消推荐</el-button>
+        <el-button type="warning" v-else @click="tuijian" icon="el-icon-star-on">推荐楼盘</el-button>
 
+      </span>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加楼盘</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑楼盘</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除楼盘</el-button>
@@ -88,6 +94,13 @@ export default {
             } else {
               return v.vipCommissionBL + "%"
             }
+          }
+        },
+        projectStatus: {
+          label: "是否上架",
+          width: "80px",
+          formatter(r, c, v) {
+            return vue.mxBoolFormatter(v);
           }
         },
         ifRecommend: {
@@ -166,6 +179,25 @@ export default {
           message: "请先选择楼盘"
         })
       }
+    },
+    changeState(state) {
+      this.xpost("projectInfo/editProjectStatus", {
+        projectId: this.selectedRow.projectId,
+        projectStatus: state
+      }).then(res => {
+        this.mxMessage(res).then(() => {
+          this.$refs.table.getData();
+        });
+      })
+    },
+    tuijian() {
+      this.xpost("projectInfo/editIfRecommend", {
+        projectId: this.selectedRow.projectId,
+      }).then(res => {
+        this.mxMessage(res).then(() => {
+          this.$refs.table.getData();
+        });
+      })
     }
   },
   created() {
