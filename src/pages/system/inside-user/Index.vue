@@ -37,7 +37,8 @@
     <el-dialog v-drag :visible.sync="isShowEdit" width="400px" title="编辑内部用户">
       <el-form ref="formEdit" :model="formEdit" label-width="6em" :rules="rules">
         <el-form-item label="账号" prop="account">
-          <el-input v-model="formEdit.account"></el-input>
+          <!-- <el-input v-model="formEdit.account"></el-input> -->
+          <span>{{formEdit.account}}</span>
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="formEdit.phone"></el-input>
@@ -127,9 +128,9 @@ export default {
       isShowEdit: false,
       roleList: [],
       rules: {
-        account: [
-          { required: true, message: '请填写账号', trigger: 'blur' }
-        ],
+        // account: [
+        //   { required: true, message: '请填写账号', trigger: 'blur' }
+        // ],
         userName: [
           { required: true, message: '请填写姓名', trigger: 'blur' }
         ],
@@ -178,13 +179,21 @@ export default {
     // edit
     edit() {
       if (this.selectedRow.userId) {
-        this.isShowEdit = true;
-        this.$nextTick(() => {
-          this.formEdit.role = this.selectedRow.roleId + "";
-          this.formEdit.userName = this.selectedRow.userName + "";
-          this.formEdit.phone = this.selectedRow.phone + "";
-          this.formEdit.account = this.selectedRow.account + "";
-        })
+        if (this.selectedRow.isInsider == 1) {
+
+          this.isShowEdit = true;
+          this.$nextTick(() => {
+            this.formEdit.role = this.selectedRow.roleId + "";
+            this.formEdit.userName = this.selectedRow.userName + "";
+            this.formEdit.phone = this.selectedRow.phone + "";
+            this.formEdit.account = this.selectedRow.account + "";
+          })
+        } else {
+          this.$message({
+            message: "只能编辑内部用户",
+            type: "info"
+          })
+        }
         // console.log(this.formEdit);
       } else {
         this.$message({
@@ -198,7 +207,7 @@ export default {
         if (valid) {
           this.xpost("user/updateInnerUser", {
             userId: this.selectedRow.userId,
-            account: this.formEdit.account,
+            // account: this.formEdit.account,
             userName: this.formEdit.userName,
             phone: this.formEdit.phone,
             roleId: this.formEdit.role,
