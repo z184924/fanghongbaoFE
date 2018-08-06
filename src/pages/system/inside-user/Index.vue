@@ -128,9 +128,9 @@ export default {
       isShowEdit: false,
       roleList: [],
       rules: {
-        // account: [
-        //   { required: true, message: '请填写账号', trigger: 'blur' }
-        // ],
+        account: [
+          { required: true, message: '请填写账号', trigger: 'blur' }
+        ],
         userName: [
           { required: true, message: '请填写姓名', trigger: 'blur' }
         ],
