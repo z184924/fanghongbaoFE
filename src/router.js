@@ -23,6 +23,8 @@ import ProjectNews from "./pages/project/news/Index"
 
 import ProjectApprove from "./pages/project/approve/Index"
 
+import ProjectTaizhang from "./pages/project/taizhang/Index"
+
 // 系统管理
 import SystemInsideUser from "./pages/system/inside-user/Index"
 
@@ -108,6 +110,11 @@ export default new Router({
       path: "/project/approve",
       name: "ProjectApprove",
       component: ProjectApprove,
+    },
+    {
+      path: "/project/taizhang",
+      name: "ProjectTaizhang",
+      component: ProjectTaizhang,
     },
 
 

@@ -44,12 +44,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span style="color:red">!暂无</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="盟友奖励金额">
-                  <el-input v-model="form2.friendPrize"></el-input>
+                  <el-input v-model="form2.friendPrize" v-if="form.isTimeOut==0"></el-input>
+                  <span v-else>{{form2.friendPrize}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -59,7 +55,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="付款时间">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime"></el-date-picker>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker>
                 </el-form-item>
               </div>
 
@@ -237,7 +233,9 @@ export default {
       form: {
         f__files: []
       },
-      form2: {},
+      form2: {
+        friendPrize: 0
+      },
       selectedRow: {},
       listWuyeLeixing: [],
       isShowAddYongjin: false,

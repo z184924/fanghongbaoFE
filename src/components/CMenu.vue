@@ -34,6 +34,10 @@
           <i class="el-icon-arrow-right"></i>
           <span>楼盘管理</span>
         </el-menu-item>
+        <el-menu-item index="/project/taizhang">
+          <i class="el-icon-arrow-right"></i>
+          <span>台账</span>
+        </el-menu-item>
         <el-menu-item index="/project/lunbotu">
           <i class="el-icon-arrow-right"></i>
           <span>APP轮播图配置</span>

@@ -5,7 +5,7 @@ $primary-color-3:#c99a6e;
 $primary-color-4:#c76e45;
 $primary-color-5:#fff6f6;
 $primary-color-6:#ffefef;
-$primary-color-7:#faccc6;
+$primary-color-7:#fad2c6;
 @import url("https://at.alicdn.com/t/font_695612_s5xt1nqtv1c.css");
 html,
 body {
@@ -118,6 +118,9 @@ body .ii {
   &--border>tr>td {
     border: solid 1px #eee;
   }
+  &--border-black>tr>td {
+    border: solid 1px #333;
+  }
   &--center>tr>td {
     text-align: center;
   }
@@ -125,6 +128,13 @@ body .ii {
     background-color: #E9A695;
     font-weight: bold;
     white-space: nowrap;
+  }
+  &--hover>tr:not(.xc-table__head):hover td {
+    background: $primary-color-7;
+  }
+  &--hover>tr:not(.xc-table__head).active td {
+    background: $primary-color-4;
+    color: #f6f6f6;
   }
 }
 
@@ -614,7 +624,7 @@ body .stage {
     }
     &__content {
       // padding-left: 4em;
-      padding:0.3em;
+      padding: 0.3em;
     }
   }
   .xc15 {
@@ -688,15 +698,27 @@ body .stage {
   }
   .xc22 {
     margin: auto;
-    margin-top:1em;
-    padding:1em;
-    border:solid 1px #ddd;
+    margin-top: 1em;
+    padding: 1em;
+    border: solid 1px #ddd;
     text-align: center;
     &__title {
       // padding: 0.3em 0;
-      padding-bottom:0.6em;
+      padding-bottom: 0.6em;
       color: rgb(126, 40, 6);
       font-weight: bold;
+    }
+  }
+  .xc23 {
+    &__control {
+      text-align: right;
+      padding: 0.6em;
+    }
+    &__table {
+      overflow-x: scroll;
+    }
+    &__page {
+      text-align: right;
     }
   }
 }
