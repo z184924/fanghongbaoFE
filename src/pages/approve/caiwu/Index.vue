@@ -45,7 +45,14 @@
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
                   <el-input v-model="form2.friendPrize" v-if="form.isTimeOut==0"></el-input>
-                  <span v-else>{{form2.friendPrize}}</span>
+                  <div v-else>
+                    <span>{{form2.friendPrize}}</span>
+                    <el-tooltip class="item" effect="dark" content="推荐超过一年，不再给予红包奖励" placement="top">
+                      <span class="el-icon-warning" style="color:red">不可编辑</span>
+                    </el-tooltip>
+                    <br>
+                    <!-- <span style="color:red;font-size:12px">推荐超过一年，不再给予红包奖励</span> -->
+                  </div>
                 </el-form-item>
               </div>
               <div class="xc18__item">
