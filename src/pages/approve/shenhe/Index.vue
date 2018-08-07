@@ -178,7 +178,6 @@ export default {
     save(customerState) {
       let data = clone(this.form2);
       data.customerStatusId = customerState;
-      data.customerId = this.mxLoginInfo.userId
       this.xpost(this.config.editUrl, data).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
