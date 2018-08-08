@@ -716,6 +716,9 @@ body .stage {
     }
     &__table {
       overflow-x: scroll;
+      td{
+        white-space: nowrap;
+      }
     }
     &__page {
       text-align: right;

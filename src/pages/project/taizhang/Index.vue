@@ -1,6 +1,11 @@
 <template>
   <div class="xc23">
     <div class="xc23__control">
+      <span>楼盘：</span>
+      <c-select :dict="listBuilding" v-model="param.projectId" style="width:150px"></c-select>
+      <span style="padding-left:1em;">客户名称：</span>
+      <el-input v-model="param.customerName" style="width:150px"></el-input>
+      <el-button type="text" @click="param={}" style="padding-right:2em">清空</el-button>
       <el-button type="default" @click="getData" icon="el-icon-refresh" circle title="刷新数据"></el-button>
     </div>
     <div class="xc23__table">
@@ -81,82 +86,71 @@
         </tr>
         <tr v-for="(o,i) in list" :key="i" @click="activateRow(i)" :class="{active:o.active}">
           <td>{{i+1}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
-          <td>{{o._____________________________}}</td>
+          <td>{{o.phone}}</td>
+          <td>{{o.IdNumName}}</td>
+          <td>{{o.IdNum}}</td>
+          <td>{{o.bankcardNum}}</td>
+          <td>{{o.bankName}}</td>
+          <td></td>
+          <td>{{mxDateFormatter(o.vipStartTime)}}至{{mxDateFormatter(o.vipEndTime)}}</td>
+          <td>{{o.tUserName}}</td>
+          <td>{{o.customerName}}</td>
+          <td>{{o.customerTel}}</td>
+          <td>{{o.customerTel2}}</td>
+          <td>{{o.customerIdNum}}</td>
+          <td>{{o.customerAdress}}</td>
+          <td>{{o.isLocalPerson}}</td>
+          <td>{{o.projectName}}</td>
+          <td>{{o.propertyTypeId}}</td>
+          <td>{{o.jdr}}</td>
+          <td>{{mxDateFormatter(o.cardDate)}}</td>
+          <td>{{o.cardMoney}}</td>
+          <td>{{mxDateFormatter(o.subscribeDate)}}</td>
+          <td>{{o.subscribedMoney}}</td>
+          <td>{{mxDateFormatter(o.homogeneityDate)}}</td>
+          <td>{{o.homogeneityMoney}}</td>
+          <td>{{o.payProjectName}}</td>
+          <td>{{o.buildingNum}}</td>
+          <td>{{o.unitNum}}</td>
+          <td>{{o.houseNum}}</td>
+          <td>{{o.houseArea}}</td>
+          <td>{{o.dealSinglePrice}}</td>
+          <td>{{o.dealTotalPrice}}</td>
+          <td>{{mxDateFormatter(o.dealDate)}}</td>
+          <td>{{o.loanMoney}}</td>
+          <td>{{o.downMoney}}</td>
+          <td>{{o.payType}}</td>
+          <td>{{o.recieptNum}}</td>
+          <td>{{o.PosNum}}</td>
+          <td>{{o.CardNum}}</td>
+          <td>{{mxDateFormatter(o.downPayDate)}}</td>
+          <td>{{mxDateFormatter(o.initialDate)}}</td>
+          <td>{{mxDateFormatter(o.netsignDate)}}</td>
+          <td>{{o.netSignNum}}</td>
+          <td></td>
+          <td></td>
+          <td>{{o.isSubscription}}</td>
+          <td>{{o.checkOpinionSHR}}</td>
+          <td>{{o.checkStateSHR}}</td>
+          <td>{{o.isReadyMaid}}</td>
+          <td>{{o.checkUserSHR}}</td>
+          <td>{{o.isOnline}}</td>
+          <td>{{o.onlineMoney}}</td>
+          <td>{{mxDateFormatter(o.onlineDate)}}</td>
+          <td>{{o.commissionDateOne}}</td>
+          <td>{{o.commissionValueOne}}</td>
+          <td>{{mxDateFormatter(o.commissionDateTwo)}}</td>
+          <td>{{o.commissionValueTwo}}</td>
+          <td>{{mxDateFormatter(o.commissionDateThree)}}</td>
+          <td>{{o.commissionValueThree}}</td>
+          <td>{{o.friendPrize}}</td>
+          <td>{{o.customerStatus}}</td>
+          <td>{{o.serviceMonth}}</td>
+          <td>{{o.keepState}}</td>
+          <td>{{o.keepMonth}}</td>
+          <td>{{o.finalPayment}}</td>
+          <td>{{mxDateFormatter(o.finalPaymentPriceDate)}}</td>
+          <td>{{o.checkStateCW}}</td>
         </tr>
       </table>
     </div>
@@ -178,15 +172,28 @@ export default {
         total: 0,
         size: 30
       },
+      listBuilding: [],
       list: [],
+      param: {},
+    }
+  },
+  watch: {
+    param: {
+      handler() {
+        this.getData();
+      },
+      deep: true,
     }
   },
   methods: {
     getData() {
       this.xpost("projectData/getStandingBook", {
         page: this.page.current,
-        rows: this.page.size
+        rows: this.page.size,
+        customerName: this.param.customerName,
+        projectId: this.param.projectId
       }).then(res => {
+        this.page.total = res.records;
         this.list = res.rows;
         this.activateRow(-1);
       })
@@ -208,6 +215,18 @@ export default {
 
   },
   created() {
+    this.xpost("projectInfo/getGridListJson", {
+      orderType: 1,
+      page: 1,
+      rows: 10000
+    }).then(res => {
+      this.listBuilding = res.rows.map(o => {
+        return {
+          label: o.projectName,
+          value: o.projectId
+        }
+      })
+    })
     this.getData();
   }
 }

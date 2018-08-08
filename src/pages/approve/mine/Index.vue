@@ -45,11 +45,6 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span style="color:red">!暂无</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="盟友奖励金额">
                   <span>{{form.friendPrize}}</span>
                 </el-form-item>
               </div>
