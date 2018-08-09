@@ -238,7 +238,7 @@
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save(10)" slot="footer">保存</el-button>
+      <el-button type="primary" @click="save(11)" slot="footer">保存</el-button>
       <el-button type="primary" @click="pass" slot="footer">保存并通过</el-button>
     </el-dialog>
   </div>
@@ -343,7 +343,7 @@ export default {
     save(customerState) {
       let data = clone(this.form);
       data.checkData = data.f__files.join();
-      data.customerOldStatus = 10;
+      data.customerOldStatus = 11;
       data.customerStatusId = customerState;
       delete data.f__files;
       this.xpost(this.config.editUrl, data).then(res => {
