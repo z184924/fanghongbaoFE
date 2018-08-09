@@ -173,7 +173,7 @@
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save()" slot="footer">保存</el-button>
     </el-dialog>
-    <el-dialog v-drag title="新增佣金记录" append-to-body :visible.sync="isShowAddYongjin" width="360px">
+    <el-dialog v-drag title="新增佣金记录" append-to-body :visible.sync="isShowAddYongjin" width="360px" top="60vh">
       <table class="xc-table xc-table--border" style="width:100%">
         <tr>
           <td>佣金金额</td>
