@@ -1,5 +1,5 @@
 <template>
-  <div class="xc23">
+  <div class="xc23 xc6 xc-shadow">
     <div class="xc23__control">
       <span>楼盘：</span>
       <c-select :dict="listBuilding" v-model="param.projectId" style="width:150px"></c-select>

@@ -80,9 +80,9 @@
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save(12)" slot="footer">保存</el-button>
-      <el-button type="primary" @click="pass('保存并通过',16)" slot="footer">保存并通过</el-button>
-      <el-button type="danger" @click="pass('保存并驳回',10)" slot="footer">保存并驳回</el-button>
+      <!-- <el-button type="primary" @click="save(12)" slot="footer">保存</el-button> -->
+      <el-button type="primary" @click="pass('通过',16)" slot="footer">通过</el-button>
+      <el-button type="danger" @click="pass('驳回',11)" slot="footer">驳回</el-button>
     </el-dialog>
   </div>
 </template>

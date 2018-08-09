@@ -710,9 +710,10 @@ body .stage {
     }
   }
   .xc23 {
+    padding:10px;
     &__control {
       text-align: right;
-      padding: 0.6em;
+      padding-bottom: 0.6em;
     }
     &__table {
       overflow-x: scroll;
