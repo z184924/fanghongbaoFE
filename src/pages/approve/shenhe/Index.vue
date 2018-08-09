@@ -177,6 +177,7 @@ export default {
     },
     save(customerState) {
       let data = clone(this.form2);
+      data.customerId = this.selectedRow.customerId;
       data.customerStatusId = customerState;
       this.xpost(this.config.editUrl, data).then(res => {
         this.$refs.table.getData();
