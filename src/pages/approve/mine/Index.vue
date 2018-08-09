@@ -160,7 +160,7 @@ export default {
     return {
       // ★★★config★★★
       config: {
-        selectUrl: "projectCustomer/getGridListJson",
+        selectUrl: "projectCustomer/getGridListJsonChecked",
         editUrl: "projectCustomer/MaidCustomer",
         deleteUrl: "",
         pk: "customerId"
