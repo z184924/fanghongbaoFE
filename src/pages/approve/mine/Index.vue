@@ -45,7 +45,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span>{{form.friendPrize}}</span>
+                  <span>{{form.friendPrize}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -95,7 +95,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="到账金额">
-                  <span>{{form.onlineMoney}}</span>
+                  <span>{{form.onlineMoney}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -120,7 +120,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="尾款金额">
-                  <span>{{form.finalPayment}}</span>
+                  <span>{{form.finalPayment}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">

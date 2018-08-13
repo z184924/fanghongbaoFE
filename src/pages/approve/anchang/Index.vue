@@ -111,7 +111,7 @@
               <div class="xc18__item">
                 <el-form-item label="排卡金额">
                   <!-- <span>{{form.cardMoney}}</span> -->
-                  <el-input-number v-model="form.cardMoney" style="width:100%"></el-input-number>
+                  <el-input-number v-model="form.cardMoney" style="width:100%"></el-input-number>元
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -121,7 +121,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="认购金额">
-                  <el-input v-model="form.subscribedMoney"></el-input>
+                  <el-input v-model="form.subscribedMoney"></el-input>元
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -132,7 +132,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="齐定金额">
-                  <el-input v-model="form.homogeneityMoney"></el-input>
+                  <el-input v-model="form.homogeneityMoney"></el-input>元
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -157,18 +157,18 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="面积">
-                  <span>{{form.houseArea}}</span>
+                  <span>{{form.houseArea}}平</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="成交单价">
                   <!-- <span>{{form.dealSinglePrice}}</span> -->
-                  <el-input-number v-model="form.dealSinglePrice" style="width:100%"></el-input-number>
+                  <el-input-number v-model="form.dealSinglePrice" style="width:100%"></el-input-number>元
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="成交总价">
-                  <span>{{form.dealTotalPrice}}</span>
+                  <span>{{form.dealTotalPrice}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -178,12 +178,12 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="贷款金额">
-                  <el-input v-model="form.loanMoney"></el-input>
+                  <el-input v-model="form.loanMoney"></el-input>元
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="首付金额">
-                  <el-input v-model="form.downMoney"></el-input>
+                  <el-input v-model="form.downMoney"></el-input>元
                 </el-form-item>
               </div>
               <div class="xc18__item">

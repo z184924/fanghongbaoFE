@@ -44,9 +44,11 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <el-input v-model="form2.friendPrize" v-if="form.isTimeOut==0"></el-input>
+                  <span v-if="form.isTimeOut==0">
+                    <el-input v-model="form2.friendPrize"></el-input>
+                  </span>
                   <div v-else>
-                    <span>{{form2.friendPrize}}</span>
+                    <span>{{form2.friendPrize}}元</span>
                     <el-tooltip class="item" effect="dark" content="推荐超过一年，不再给予红包奖励" placement="top">
                       <span class="el-icon-warning" style="color:red">不可编辑</span>
                     </el-tooltip>
@@ -102,7 +104,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="到账金额">
-                  <el-input-number v-model="form2.onlineMoney" style="width:160px"></el-input-number>
+                  <el-input-number v-model="form2.onlineMoney" style="width:160px"></el-input-number>元
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -129,7 +131,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="尾款金额">
-                  <el-input-number v-model="form2.finalPayment" style="width:160px"></el-input-number>
+                  <el-input-number v-model="form2.finalPayment" style="width:160px"></el-input-number>元
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -156,7 +158,7 @@
                   </tr>
                   <tr v-for="(o,i) in listYongjin" :key="i">
                     <td>{{i+1}}</td>
-                    <td>{{o.commissionValue}}</td>
+                    <td>{{o.commissionValue}}元</td>
                     <td>{{mxDateFormatter(o.commissionDate)}}</td>
                   </tr>
                 </table>
@@ -179,6 +181,7 @@
           <td>佣金金额</td>
           <td>
             <el-input v-model="yongjin.commissionValue"></el-input>
+            <span>元</span>
           </td>
         </tr>
         <tr>

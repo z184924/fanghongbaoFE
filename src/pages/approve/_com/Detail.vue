@@ -99,7 +99,7 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="排卡金额">
-            <span>{{form.cardMoney}}</span>
+            <span>{{form.cardMoney}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -109,7 +109,7 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="认购金额">
-            <span>{{form.subscribedMoney }}</span>
+            <span>{{form.subscribedMoney }}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -119,7 +119,7 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="齐定金额">
-            <span>{{form.homogeneityMoney}}</span>
+            <span>{{form.homogeneityMoney}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -144,17 +144,17 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="面积">
-            <span>{{form.houseArea}}</span>
+            <span>{{form.houseArea}}平</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
           <el-form-item label="成交单价">
-            <span>{{form.dealSinglePrice}}</span>
+            <span>{{form.dealSinglePrice}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
           <el-form-item label="成交总价">
-            <span>{{form.dealTotalPrice}}</span>
+            <span>{{form.dealTotalPrice}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -164,12 +164,12 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="贷款金额">
-            <span>{{form.loanMoney}}</span>
+            <span>{{form.loanMoney}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
           <el-form-item label="首付金额">
-            <span>{{form.downMoney}}</span>
+            <span>{{form.downMoney}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
