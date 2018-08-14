@@ -54,7 +54,7 @@ export default {
         picType: {
           label: "轮播图类型",
           formatter(r, c, v) {
-            return vue.mxDictToString("lbt", v)
+            return vue.mxDictToString(v, "lbt")
           }
         },
         picSort: {
@@ -69,7 +69,7 @@ export default {
       },
       selectedRow: {},
 
-      lbtListFile: [],
+      lbtListFile: "",
       lbtType: null,
       lbtSort: 0,
       carouselPictureId: "",
@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     add() {
-      this.lbtListFile = [];
+      this.lbtListFile = "";
       this.lbtType = null;
       this.lbtSort = 0;
       this.carouselPictureId = "";
@@ -86,7 +86,7 @@ export default {
     edit() {
       let a = this.selectedRow;
       if (a.carouselPictureId) {
-        this.lbtListFile = [a.picURL];
+        this.lbtListFile = a.picURL;
         this.lbtType = a.picType;
         this.lbtSort = a.picSort;
         this.carouselPictureId = a.carouselPictureId;
@@ -103,7 +103,7 @@ export default {
 
       this.xpost("projectCarouselPicture/saveOrUpdate", {
         carouselPictureId: this.carouselPictureId,
-        picURL: this.lbtListFile.join(),
+        picURL: this.lbtListFile,
         picType: this.lbtType,
         picSort: this.lbtSort
       }).then(res => {

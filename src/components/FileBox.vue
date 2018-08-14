@@ -46,9 +46,9 @@ export default {
       default: 100
     },
     value: {
-      type: Array,
+      type: String,
       default() {
-        return [];
+        return "";
       }
     },
   },
@@ -67,11 +67,15 @@ export default {
   computed: {
     list() {
       let a = [];
-      this.value.forEach(o => {
-        if (o) {
-          a.push(o)
-        }
-      })
+      if (this.value) {
+        console.log(this.value);
+        let list = this.value.split(',');
+        list.forEach(o => {
+          if (o) {
+            a.push(o)
+          }
+        })
+      }
       return a;
     },
     loading() {
@@ -108,7 +112,7 @@ export default {
       }).then(() => {
         let a = clone(this.list);
         a.splice(i, 1);
-        this.$emit("input", a);
+        this.$emit("input", a.join());
       })
     },
     openImg(src) {
@@ -129,7 +133,7 @@ export default {
           a = [];
         }
         a.push(res.message);
-        this.$emit("input", a);
+        this.$emit("input", a.join());
         this.uploadingCount--;
         if (this.uploadingCount < 0) {
           this.uploadingCount = 0;

@@ -99,9 +99,9 @@
           <td>{{o.customerTel2}}</td>
           <td>{{o.customerIdNum}}</td>
           <td>{{o.customerAdress}}</td>
-          <td>{{o.isLocalPerson}}</td>
+          <td>{{mxBoolFormatter(o.isLocalPerson,'本地','外地')}}</td>
           <td>{{o.projectName}}</td>
-          <td>{{o.propertyTypeId}}</td>
+          <td>{{mxDictToString(o.propertyTypeId,'wylx')}}</td>
           <td>{{o.jdr}}</td>
           <td>{{mxDateFormatter(o.cardDate)}}</td>
           <td>{{o.cardMoney}}</td>
@@ -132,12 +132,12 @@
           <td>{{o.isSubscription}}</td>
           <td>{{o.checkOpinionSHR}}</td>
           <td>{{o.checkStateSHR}}</td>
-          <td>{{o.isReadyMaid}}</td>
+          <td>{{mxBoolFormatter(o.isReadyMaid)}}</td>
           <td>{{o.checkUserSHR}}</td>
-          <td>{{o.isOnline}}</td>
+          <td>{{mxBoolFormatter(o.isOnline)}}</td>
           <td>{{o.onlineMoney}}</td>
           <td>{{mxDateFormatter(o.onlineDate)}}</td>
-          <td>{{o.commissionDateOne}}</td>
+          <td>{{mxDateFormatter(o.commissionDateOne)}}</td>
           <td>{{o.commissionValueOne}}</td>
           <td>{{mxDateFormatter(o.commissionDateTwo)}}</td>
           <td>{{o.commissionValueTwo}}</td>
@@ -146,7 +146,7 @@
           <td>{{o.friendPrize}}</td>
           <td>{{o.customerStatus}}</td>
           <td>{{o.serviceMonth}}</td>
-          <td>{{o.keepState}}</td>
+          <td>{{mxBoolFormatter(o.keepState)}}</td>
           <td>{{o.keepMonth}}</td>
           <td>{{o.finalPayment}}</td>
           <td>{{mxDateFormatter(o.finalPaymentPriceDate)}}</td>

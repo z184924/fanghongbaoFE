@@ -74,11 +74,11 @@ export default {
       selectedRow: {},
       isShowInsert: false,
       content: "",
-      listFile: [],
+      listFile: "",
 
       isShowDetail: false,
       detailContent: "",
-      DetailListFile: [],
+      DetailListFile: "",
     }
   },
   methods: {
@@ -88,12 +88,12 @@ export default {
     doAdd() {
       this.xpost("projectFeedback/save", {
         content: this.content.replace(/\n/g, "<br>"),
-        fileName: this.listFile.join()
+        fileName: this.listFile
       }).then(res => {
         this.mxMessage(res).then(() => {
           this.isShowInsert = false;
           this.content = "";
-          this.listFile = [];
+          this.listFile = "";
           this.$refs.table.getData();
         })
       })
@@ -101,7 +101,7 @@ export default {
     detail() {
       if (this.selectedRow.feedbackId) {
         this.detailContent = this.selectedRow.content;
-        this.DetailListFile = this.selectedRow.fileName.split(",");
+        this.DetailListFile = this.selectedRow.fileName;
         this.isShowDetail = true;
       } else {
         this.$message({

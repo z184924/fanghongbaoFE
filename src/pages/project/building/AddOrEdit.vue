@@ -33,7 +33,7 @@
             <el-input v-model="form.sellingSection"></el-input>
           </el-form-item>
           <el-form-item label="平均售价">
-            <el-input v-model="form.sellingAverage"></el-input>元
+            <el-input v-model="form.sellingAverage" style="width:200px"></el-input>元
           </el-form-item>
           <el-form-item label="地址">
             <el-input v-model="form.projectAddress"></el-input>
@@ -113,7 +113,7 @@
         </el-form>
       </div>
     </c-panel>
-    <!-- <div>{{form}}</div> -->
+    <div>{{form}}</div>
     <c-panel title-color="#3c7c17" title="客户展示信息字段" width="800px">
       <el-table ref="tableClient" :data="tableClient" border @selection-change="tableClientSelect">
         <el-table-column type="selection" width="55" align="center">
@@ -124,28 +124,28 @@
     </c-panel>
 
     <c-panel title-color="#7c2b17" title="封面图" width="800px">
-      <file-box v-model="form.f__listFengmian" :multiple="false"></file-box>
+      <file-box v-model="form.logoPic" :multiple="false"></file-box>
     </c-panel>
     <c-panel title-color="#17437c" title="轮播图" width="800px">
-      <file-box v-model="form.f__listLunbotu"></file-box>
+      <file-box v-model="form.carouselPictures"></file-box>
     </c-panel>
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
-      <file-box v-model="form.f__listZiliaoku"></file-box>
+      <file-box v-model="form.dataPictures"></file-box>
     </c-panel>
     <c-panel title-color="rgb(45, 105, 50)" title="户型图" width="800px">
-      <file-box v-model="form.f__listHuxingtu"></file-box>
+      <file-box v-model="form.houseTypePictures"></file-box>
     </c-panel>
     <c-panel title-color="rgb(124, 72, 23)" title="海报" width="800px">
-      <file-box v-model="form.f__listHaibao"></file-box>
+      <file-box v-model="form.posterPictures"></file-box>
     </c-panel>
     <c-panel title-color="rgb(104, 132, 23)" title="佣金详细" width="800px">
-      <file-box v-model="form.f__listYongjinXiangxi"></file-box>
+      <file-box v-model="form.commissionPictures"></file-box>
     </c-panel>
     <c-panel title-color="rgb(124, 23, 23)" title="项目参数" width="800px">
-      <file-box v-model="form.f__listXiangmuCanshu" :multiple="false"></file-box>
+      <file-box v-model="form.parameterPictures" :multiple="false"></file-box>
     </c-panel>
     <c-panel title-color="rgb(23, 95, 124)" title="项目卖点" width="800px">
-      <file-box v-model="form.f__listXiangmuMaidian" :multiple="false"></file-box>
+      <file-box v-model="form.sellingPointPictures" :multiple="false"></file-box>
     </c-panel>
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
@@ -194,14 +194,14 @@ export default {
           city: "",
           area: ""
         },
-        f__listFengmian: [],
-        f__listLunbotu: [],
-        f__listZiliaoku: [],
-        f__listHuxingtu: [],
-        f__listHaibao: [],
-        f__listYongjinXiangxi: [],
-        f__listXiangmuCanshu: [],
-        f__listXiangmuMaidian: [],
+        // f__listFengmian: [],
+        // f__listLunbotu: [],
+        // f__listZiliaoku: [],
+        // f__listHuxingtu: [],
+        // f__listHaibao: [],
+        // f__listYongjinXiangxi: [],
+        // f__listXiangmuCanshu: [],
+        // f__listXiangmuMaidian: [],
       },
       tableClient: [],
       selectedClient: [],
@@ -288,15 +288,15 @@ export default {
 
 
       // 图片
-      data.logoPic = this.form.f__listFengmian.join();
-      data.carouselPictures = this.form.f__listLunbotu.join();
-      data.dataPictures = this.form.f__listZiliaoku.join();
-      data.parameterPictures = this.form.f__listXiangmuCanshu.join();
-      data.sellingPointPictures = this.form.f__listXiangmuMaidian.join();
-      data.houseTypePictures = this.form.f__listHuxingtu.join();
-      data.posterPictures = this.form.f__listHaibao.join();
-      data.commissionPictures = this.form.f__listYongjinXiangxi.join();
-      data.propertyTypeIds = this.form.f__wylx.join();
+      // data.logoPic = this.form.f__listFengmian.join();
+      // data.carouselPictures = this.form.f__listLunbotu.join();
+      // data.dataPictures = this.form.f__listZiliaoku.join();
+      // data.parameterPictures = this.form.f__listXiangmuCanshu.join();
+      // data.sellingPointPictures = this.form.f__listXiangmuMaidian.join();
+      // data.houseTypePictures = this.form.f__listHuxingtu.join();
+      // data.posterPictures = this.form.f__listHaibao.join();
+      // data.commissionPictures = this.form.f__listYongjinXiangxi.join();
+      // data.propertyTypeIds = this.form.f__wylx.join();
 
       this.xpost("projectInfo/saveOrUpdate", data).then(res => {
         this.mxMessage(res).then(() => {
@@ -390,14 +390,14 @@ export default {
 
           // 图片
           // console.log(this.form);
-          this.form.f__listFengmian = this.form.logoPic ? this.form.logoPic.split(",") : [];
-          this.form.f__listLunbotu = this.form.carouselPictures ? this.form.carouselPictures.split(",") : [];
-          this.form.f__listZiliaoku = this.form.dataPictures ? this.form.dataPictures.split(",") : [];
-          this.form.f__listHuxingtu = this.form.houseTypePictures ? this.form.houseTypePictures.split(",") : [];
-          this.form.f__listHaibao = this.form.posterPictures ? this.form.posterPictures.split(",") : [];
-          this.form.f__listYongjinXiangxi = this.form.commissionPictures ? this.form.commissionPictures.split(",") : [];
-          this.form.f__listXiangmuCanshu = this.form.parameterPictures ? this.form.parameterPictures.split(",") : [];
-          this.form.f__listXiangmuMaidian = this.form.sellingPointPictures ? this.form.sellingPointPictures.split(",") : [];
+          // this.form.f__listFengmian = this.form.logoPic ? this.form.logoPic.split(",") : [];
+          // this.form.f__listLunbotu = this.form.carouselPictures ? this.form.carouselPictures.split(",") : [];
+          // this.form.f__listZiliaoku = this.form.dataPictures ? this.form.dataPictures.split(",") : [];
+          // this.form.f__listHuxingtu = this.form.houseTypePictures ? this.form.houseTypePictures.split(",") : [];
+          // this.form.f__listHaibao = this.form.posterPictures ? this.form.posterPictures.split(",") : [];
+          // this.form.f__listYongjinXiangxi = this.form.commissionPictures ? this.form.commissionPictures.split(",") : [];
+          // this.form.f__listXiangmuCanshu = this.form.parameterPictures ? this.form.parameterPictures.split(",") : [];
+          // this.form.f__listXiangmuMaidian = this.form.sellingPointPictures ? this.form.sellingPointPictures.split(",") : [];
 
         })
 

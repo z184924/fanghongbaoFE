@@ -93,7 +93,6 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="产品类型">
-                  <!-- <span>{{mxDictToString(listWuyeLeixing,form.propertyTypeId) }}</span> -->
                   <!-- <el-input v-model="form.propertyTypeId"></el-input> -->
                   <c-select v-model="form.propertyTypeId" :dict="listWuyeLeixing"></c-select>
                 </el-form-item>
@@ -231,7 +230,7 @@
 
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
-            <file-box is-window v-model="form.f__files"></file-box>
+            <file-box is-window v-model="form.checkData"></file-box>
           </c-panel>
           <!-- <div>{{form}}</div> -->
 
@@ -282,9 +281,7 @@ export default {
         },
 
       },
-      form: {
-        f__files: []
-      },
+      form: {},
       selectedRow: {},
       listWuyeLeixing: [],
     }
@@ -313,7 +310,7 @@ export default {
                 return undefined;
               }
             }
-            res.f__files = res.checkData ? res.checkData.split(",") : [];
+            // res.f__files = res.checkData;
 
             // date转换
             res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : dateInit("cardDateInit");
@@ -342,10 +339,10 @@ export default {
     },
     save(customerState) {
       let data = clone(this.form);
-      data.checkData = data.f__files.join();
+      // data.checkData = data.f__files.join();
       data.customerOldStatus = 11;
       data.customerStatusId = customerState;
-      delete data.f__files;
+      // delete data.f__files;
       this.xpost(this.config.editUrl, data).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {

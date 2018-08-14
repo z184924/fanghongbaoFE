@@ -119,11 +119,26 @@ export default {
         });
         // 获取字典
         this.xpost("dictdetail/findAllData").then(res2 => {
-          let dict = { ...res2, ...this.DICT }
-          // console.log(res2);
-          this.$store.commit("setDict", dict);
-          sessionStorage.setItem("dict", JSON.stringify(dict));
-          this.loading = false;
+          this.xpost("city/getPropertyTypes").then(res3 => {
+            // console.log(res);
+
+            let listWuyeLeixing = res3.map(o => {
+              return {
+                NAME: o.propertyType,
+                CODE: o.propertyTypeId,
+              }
+            })
+            let dictWuyeLeixing = {
+              "wylx": listWuyeLeixing
+            }
+
+            let dict = { ...res2, ...this.DICT, ...dictWuyeLeixing }
+            console.log(dict);
+            this.$store.commit("setDict", dict);
+            sessionStorage.setItem("dict", JSON.stringify(dict));
+            this.loading = false;
+          })
+
 
 
         }, rej => {

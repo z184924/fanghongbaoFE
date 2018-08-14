@@ -137,7 +137,7 @@ export default {
         }).then(res => {
           this.form = {
             newsId: res.newsId,
-            img: [res.newsPic],
+            img: res.newsPic,
             title: res.newsTitle,
             isTop: res.isTop,
             newsContent: res.newsContent
@@ -162,7 +162,7 @@ export default {
       this.xpost("projectNews/saveProjectNews", {
         isTop: this.form.isTop,
         newsId: this.form.newsId,
-        newsPic: this.form.img.join(),
+        newsPic: this.form.img,
         newsTitle: this.form.title,
         newsContent: this.form.newsContent,
       }).then(res => {

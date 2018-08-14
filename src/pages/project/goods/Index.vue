@@ -11,12 +11,24 @@
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
-    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="1000px">
+    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="1000px" top="5vh">
       <table class="xc-table xc-table--border">
         <tr>
           <td style="width:5em">商品名称</td>
-          <td>
+          <td colspan="3">
             <el-input v-model="form.goodsName"></el-input>
+          </td>
+        </tr>
+        <tr>
+          <td style="width:5em">logo图</td>
+          <td colspan="3">
+            <file-box v-model="form.logoPic" :multiple="false"></file-box>
+          </td>
+        </tr>
+        <tr>
+          <td style="width:5em">商品图片集</td>
+          <td colspan="3">
+            <file-box v-model="form.goodsPics"></file-box>
           </td>
         </tr>
         <tr>
@@ -24,8 +36,6 @@
           <td>
             <c-select dict="bool" v-model="form.ifValid"></c-select>
           </td>
-        </tr>
-        <tr>
           <td>金币值</td>
           <td>
             <el-input-number v-model="form.glodValue" style="width:200px"></el-input-number>
@@ -33,13 +43,13 @@
         </tr>
         <tr>
           <td>兑换条件</td>
-          <td>
+          <td colspan="3">
             <el-input v-model="form.conditions"></el-input>
           </td>
         </tr>
         <tr>
           <td>商品描述</td>
-          <td>
+          <td colspan="3">
             <c-ueditor v-if="isShowEdit" v-model="form.goodsDescription"></c-ueditor>
           </td>
         </tr>
@@ -132,6 +142,8 @@ export default {
       }
     },
     save() {
+      // this.form.logoPic=this.form.logoPic.join();
+      // this.form.goodsPics=this.form.goodsPics.join();
       this.xpost(this.config.editUrl, this.form).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {

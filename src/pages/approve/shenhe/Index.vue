@@ -14,32 +14,32 @@
             <div class="xc18__container">
               <div class="xc18__item">
                 <el-form-item label="手机号">
-                  <span style="color:red">!暂无</span>
+                  <span style="color:red">{{form.tphone}}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友推荐人">
-                  <span style="color:red">!暂无</span>
+                  <span style="color:red">{{form.tuserName}}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="身份证">
-                  <span>{{form.IdNum}}</span>
+                  <span>{{form.tIdNum}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="会员银行卡">
-                  <span>{{form.bankcardName}}</span>
+                  <span>{{form.tbankcardNum}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="银行开户行">
-                  <span>{{form.bankName}}</span>
+                  <span>{{form.tbankName}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="开户支行">
-                  <span>{{form.bankBranchName}}</span>
+                  <span>{{form.tbankBranchName}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">

@@ -97,11 +97,11 @@ var myMixin = {
         return ""
       }
     },
-    mxBoolFormatter(v) {
+    mxBoolFormatter(v, trueText = this.YES, falseText = this.NO) {
       if (v === 0) {
-        return this.NO;
+        return falseText;
       } else if (v === 1) {
-        return this.YES;
+        return trueText;
       } else {
         return "";
       }
@@ -130,7 +130,7 @@ var myMixin = {
       })
       return list;
     },
-    mxDictToString(dict, v = "") {
+    mxDictToString(v = "", dict) {
       let list = [];
       if (typeof dict === "string") {
         list = this.mxDict[dict];
