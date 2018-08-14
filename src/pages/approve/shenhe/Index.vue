@@ -14,12 +14,12 @@
             <div class="xc18__container">
               <div class="xc18__item">
                 <el-form-item label="手机号">
-                  <span style="color:red">{{form.tphone}}}</span>
+                  <span>{{form.tphone}}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友推荐人">
-                  <span style="color:red">{{form.tuserName}}}</span>
+                  <span>{{form.tuserName}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -44,7 +44,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span style="color:red">!暂无</span>
+                  <span>{{form.friendPrize}}</span>
                 </el-form-item>
               </div>
 
