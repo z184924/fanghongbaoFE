@@ -168,7 +168,7 @@
 
             </div>
           </c-panel>
-          <!-- <div>{{form2}}</div> -->
+          <!-- <div>{{selectedRow}}</div> -->
 
         </div>
       </el-form>
@@ -332,7 +332,7 @@ export default {
     // },
     save() {
       let data = clone(this.form2);
-      // data.customerId = this.mxLoginInfo.userId
+      data.customerId = this.form.customerId;
       this.xpost(this.config.editUrl, data).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
