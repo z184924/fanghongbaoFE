@@ -68,7 +68,6 @@ export default {
     list() {
       let a = [];
       if (this.value) {
-        console.log(this.value);
         let list = this.value.split(',');
         list.forEach(o => {
           if (o) {

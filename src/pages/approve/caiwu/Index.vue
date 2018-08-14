@@ -311,7 +311,7 @@ export default {
           res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
           this.form = res;
         })
-        // 下方列表
+        // 佣金列表
         this.xpost("projectCustomer/getCommission", {
           customerId: id
         }).then(res => {

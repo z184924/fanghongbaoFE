@@ -137,6 +137,23 @@
                   </div>
                 </el-form-item>
               </div>
+              <div class="xc22">
+                <div class="xc22__title">佣金记录</div>
+                <table class="xc-table xc-table--border">
+                  <tr class="xc-table__head">
+                    <td>序号</td>
+                    <td>佣金金额</td>
+                    <td>付款时间</td>
+                  </tr>
+                  <tr v-for="(o,i) in listYongjin" :key="i">
+                    <td>{{i+1}}</td>
+                    <td>{{o.commissionValue}}元</td>
+                    <td>{{mxDateFormatter(o.commissionDate)}}</td>
+                  </tr>
+                </table>
+                <!-- <div style="height:10px"></div> -->
+                <!-- <el-button icon="el-icon-plus" @click="isShowAddYongjin=true">新增佣金记录...</el-button> -->
+              </div>
 
             </div>
           </c-panel>
@@ -170,6 +187,7 @@ export default {
       },
       dialogTitle: "详细",
       isShowEdit: false,
+      listYongjin: [],
       fields: {
         customerName: {
           label: "客户"
@@ -222,7 +240,7 @@ export default {
     }
   },
   methods: {
-    print(){
+    print() {
       window.print();
     },
     add() {
@@ -247,6 +265,13 @@ export default {
           res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : undefined;
           res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
           this.form = res;
+
+          // 佣金列表
+          this.xpost("projectCustomer/getCommission", {
+            customerId: id
+          }).then(res => {
+            this.listYongjin = res.rows;
+          })
         })
         this.dialogTitle = "详细";
         this.isShowEdit = true;
