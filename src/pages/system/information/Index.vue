@@ -78,6 +78,13 @@ export default {
         informationTitle: {
           label: "标题"
         },
+        projectName: {
+          label: "项目名称",
+        },
+        customerName: {
+          label: "客户名称",
+          width: "150px"
+        },
         createUserName: {
           label: "发布人",
           width: "120px"
