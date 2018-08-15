@@ -1,6 +1,6 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table v-if="isShowTable" ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
       <el-button @click="add" icon="el-icon-plus" v-if="$route.params.type!=2" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" v-if="$route.params.type!=2" slot="right-control">编辑</el-button>
       <el-button @click="view" icon="el-icon-view" slot="right-control">查看消息内容</el-button>
@@ -52,17 +52,46 @@ export default {
         deleteUrl: "information/delete",
         pk: "informationId"
       },
+      isShowTable: true,
       isShowView: false,
       listBuilding: [],
       dialogTitle: "编辑",
       isShowEdit: false,
-      fields: {
+      fields: {},
+      fields1: {
         informationTitle: {
           label: "标题"
         },
         userName: {
           label: "发布人",
           width: "120px"
+        },
+        createTime: {
+          label: "创建时间",
+          formatter(r, c, v) {
+            return vue.mxDateFormatter(v);
+          },
+          width: "150px"
+        },
+      },
+      fields2: {
+        informationTitle: {
+          label: "标题"
+        },
+        createUserName: {
+          label: "发布人",
+          width: "120px"
+        },
+        jsrUserName: {
+          label: "接收人",
+          width: "120px"
+        },
+        isRead: {
+          label: "是否已读",
+          formatter(r, c, v) {
+            return vue.mxBoolFormatter(v);
+          },
+          width: "80px"
         },
         createTime: {
           label: "创建时间",
@@ -90,15 +119,26 @@ export default {
       handler() {
         // console.log(this.$route.params.type);
         if (this.$route.params.type == 2) {
-          this.config.selectUrl = "information/getSZGridListJson"
+          this.fields = this.fields2;
+          this.config.selectUrl = "information/getSZGridListJson";
+          this.resetTable();
         } else {
           this.config.selectUrl = "information/getGridListJson"
+          this.fields = this.fields1;
+          this.resetTable();
+
         }
       },
       immediate: true
     }
   },
   methods: {
+    resetTable() {
+      this.isShowTable = false;
+      setTimeout(() => {
+        this.isShowTable = true;
+      }, 1)
+    },
     add() {
       this.form = {
         // informationContent: "sdfsdf"
