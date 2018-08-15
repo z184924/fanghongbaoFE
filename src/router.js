@@ -25,6 +25,8 @@ import ProjectApprove from "./pages/project/approve/Index"
 
 import ProjectTaizhang from "./pages/project/taizhang/Index"
 
+import ProjectXiangmuChaxun from "./pages/project/xiangmu-chaxun/Index"
+
 // 系统管理
 import SystemInsideUser from "./pages/system/inside-user/Index"
 
@@ -115,6 +117,11 @@ export default new Router({
       path: "/project/taizhang",
       name: "ProjectTaizhang",
       component: ProjectTaizhang,
+    },
+    {
+      path: "/project/xiangmu-chaxun",
+      name: "ProjectXiangmuChaxun",
+      component: ProjectXiangmuChaxun,
     },
 
 

@@ -190,7 +190,7 @@ export default {
   },
   methods: {
     getData() {
-      this.xpost("projectData/getStandingBook", {
+      this.xpost("projectData/getProjectInfo", {
         page: this.page.current,
         rows: this.page.size,
         customerName: this.param.customerName,

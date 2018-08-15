@@ -38,6 +38,10 @@
           <i class="el-icon-arrow-right"></i>
           <span>台账</span>
         </el-menu-item>
+        <el-menu-item index="/project/xiangmu-chaxun">
+          <i class="el-icon-arrow-right"></i>
+          <span>项目查询</span>
+        </el-menu-item>
         <el-menu-item index="/project/lunbotu">
           <i class="el-icon-arrow-right"></i>
           <span>APP轮播图配置</span>

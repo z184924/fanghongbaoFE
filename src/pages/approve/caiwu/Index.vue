@@ -131,7 +131,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="尾款金额">
-                  <el-input-number v-model="form2.finalPayment" style="width:160px"></el-input-number>元
+                  <el-input-number v-model="form2.finalPayment" style="width:160px"></el-input-number>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -175,13 +175,12 @@
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
-    <el-dialog v-drag title="新增佣金记录" append-to-body :visible.sync="isShowAddYongjin" width="360px" top="60vh">
+    <el-dialog v-drag title="新增佣金记录" append-to-body :visible.sync="isShowAddYongjin" width="400px" top="60vh">
       <table class="xc-table xc-table--border" style="width:100%">
         <tr>
-          <td>佣金金额</td>
+          <td style="width:8em">佣金金额（元）</td>
           <td>
             <el-input v-model="yongjin.commissionValue"></el-input>
-            <span>元</span>
           </td>
         </tr>
         <tr>
