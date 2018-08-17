@@ -124,7 +124,8 @@ export default {
       }
       // console.log(empty);
       if (empty) {
-        this.value = "";
+        // this.value = "";
+        this.$emit("input", "");
       } else {
         // this.list.forEach(o => {
         //   if (o.value + "" === this.value + "") {
