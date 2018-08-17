@@ -11,7 +11,7 @@
       </fixed-table>
       <!-- <div>{{selectedKehu}}</div> -->
       <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-        <el-form ref="form" :model="form" label-width="5em">
+        <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
           <el-form-item label="楼盘">
             <c-select :dict="listBuilding" v-model="form.projectId"></c-select>
           </el-form-item>
@@ -20,6 +20,7 @@
             </el-date-picker>
           </el-form-item>
         </el-form>
+        <!-- <div>{{form}}</div> -->
         <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
         <el-button type="primary" @click="save" slot="footer">保存</el-button>
       </el-dialog>
@@ -105,10 +106,12 @@ export default {
       let a = this.selectedRow;
       let id = a[this.config.pk];
       if (id) {
-        this.form = this.selectedRow;
-        this.form.f__date = `${this.form.recordYear}-${this.form.recordMonth}`
+        let form = clone(this.selectedRow);
+        form.f__date = moment(`${form.recordYear}-${form.recordMonth}-1`).format("YYYY-MM");
+        this.form = form;
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
+        this.$forceUpdate();
       } else {
         this.$message({
           type: "info",
