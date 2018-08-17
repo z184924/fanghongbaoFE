@@ -199,7 +199,7 @@ li {
 }
 
 // 修改默认样式
-body {
+#stage {
   .el-dialog__header {
     background: $primary-color-5;
     transition: all .2s;
@@ -230,7 +230,7 @@ body {
   }
 }
 
-body .stage {
+#stage {
   .el-tree-node__content {
     height: 36px;
     font-size: 16px;
