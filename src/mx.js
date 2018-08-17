@@ -5,6 +5,7 @@ import CSelect from "@/components/CSelect"
 import CPanel from "@/components/CPanel"
 import AreaLabel from "@/components/AreaLabel"
 import CUeditor from "@/components/CUeditor"
+import CDatePicker from "@/components/CDatePicker"
 
 // import request from "request"
 import axios from "axios"
@@ -21,7 +22,8 @@ var myMixin = {
     CPanel,
     FileBox,
     AreaLabel,
-    CUeditor
+    CUeditor,
+    CDatePicker
   },
   methods: {
     mxStringify(o) {
@@ -163,6 +165,7 @@ var myMixin = {
           // console.log(res);
           if (res.status === 200) {
             if (res.data.state === "errorToken") {
+              console.log(res);
               this.$store.commit("logout");
               reject();
             } else if (res.data.state === "error") {

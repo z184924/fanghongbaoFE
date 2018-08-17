@@ -2,7 +2,7 @@
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
       <div slot="left-control">
-        <span>用户名：</span>
+        <span>姓名：</span>
         <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
         <el-input v-model="param.userName"></el-input>
         <el-button type="text" @click="param.userName=''">清空</el-button>
@@ -12,8 +12,8 @@
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
-    <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-      <el-form ref="form" :model="form" label-width="5em">
+    <el-dialog :visible.sync="isShowEdit" v-drag append-to-body :title="dialogTitle" width="1200px">
+      <!-- <el-form ref="form" :model="form" label-width="5em">
         <el-form-item label="商品名称">
           <el-input v-model="form.goodsName"></el-input>
         </el-form-item>
@@ -26,14 +26,20 @@
         <el-form-item label="兑换条件">
           <el-input v-model="form.conditions"></el-input>
         </el-form-item>
-      </el-form>
-      <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save" slot="footer">保存</el-button>
+      </el-form> -->
+      <c-edit v-if="isShowEdit" :user-id="selectedRow.userId" :vip-start="selectedRow.vipStartTime" :vip-end="selectedRow.vipEndTime"></c-edit>
+
+      <!-- <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
+      <el-button type="primary" @click="save" slot="footer">保存</el-button> -->
     </el-dialog>
   </div>
 </template>
 <script>
+import CEdit from "./Edit"
 export default {
+  components: {
+    CEdit
+  },
   data() {
     let vue = this;
     return {
@@ -42,34 +48,46 @@ export default {
         selectUrl: "user/getlistPagejUsers",
         editUrl: "",
         deleteUrl: "",
-        pk: "goodsId"
+        pk: "userId"
       },
       dialogTitle: "编辑",
       isShowEdit: false,
       fields: {
-        goodsName: {
-          label: "商品名称"
+        userName: {
+          label: "姓名"
         },
-        glodValue: {
-          label: "商品价格"
+        phone: {
+          label: "电话"
         },
-        goodsDescription: {
-          label: "商品描述"
+        roleId: {
+          label: "角色",
+          formatter(r, c, v) {
+            return vue.mxDictToString(v, "roles");
+          }
         },
-        createTime: {
-          label: "创建时间",
+        isVIP: {
+          label: "是否VIP",
+          formatter(r, c, v) {
+            return vue.mxBoolFormatter(v);
+          }
+        },
+        vipStartTime: {
+          label: "VIP开始时间",
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
         },
-        conditions: {
-          label: "兑换条件",
+        vipEndTime: {
+          label: "VIP结束时间",
+          formatter(r, c, v) {
+            return vue.mxDateFormatter(v);
+          }
         },
       },
       form: {
 
       },
-      param:{},
+      param: {},
       selectedRow: {},
     }
   },
@@ -84,7 +102,7 @@ export default {
       let id = a[this.config.pk];
       if (id) {
         this.form = this.selectedRow;
-        this.dialogTitle = "编辑";
+        this.dialogTitle = "VIP配置";
         this.isShowEdit = true;
       } else {
         this.$message({
@@ -126,8 +144,8 @@ export default {
     },
   },
 
-  created() {
-
+  mounted() {
+    console.log(this.$store.state.dict);
   }
 }
 </script>

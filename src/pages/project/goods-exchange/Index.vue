@@ -22,8 +22,9 @@
           <el-input v-model="form.postMan"></el-input>
         </el-form-item>
         <el-form-item label="邮寄日期">
-          <el-date-picker style="width:100%" v-model="form.postDate" value-format="yyyy-MM-dd">
-          </el-date-picker>
+          <!-- <el-date-picker style="width:100%" v-model="form.postDate" value-format="yyyy-MM-dd">
+          </el-date-picker> -->
+          <c-date-picker v-model="form.postDate"></c-date-picker>
         </el-form-item>
 
       </el-form>

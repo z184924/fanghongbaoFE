@@ -110,41 +110,91 @@ export default {
         password: this.password
       }).then(res => {
         this.$store.commit("login", {
-          username: res.user.account,
-          nickname: res.user.userName,
-          phone: res.user.phone,
-          userId: res.user.userId,
+          // username: res.user.account,
+          // nickname: res.user.userName,
+          // phone: res.user.phone,
+          // userId: res.user.userId,
           token: res.token,
-          moreInfo: res.user,
+          // moreInfo: res.user,
         });
+
+
+
+        this.$store.commit("clearDict");
         // 获取字典
-        this.xpost("dictdetail/findAllData").then(res2 => {
-          this.xpost("city/getPropertyTypes").then(res3 => {
-            // console.log(res);
+        this.$store.commit("setDict", this.DICT);
 
-            let listWuyeLeixing = res3.map(o => {
-              return {
-                NAME: o.propertyType,
-                CODE: o.propertyTypeId,
-              }
-            })
-            let dictWuyeLeixing = {
-              "wylx": listWuyeLeixing
+        // 获取字典数据
+        let p1 = this.xpost("dictdetail/findAllData").then(d => {
+          this.$store.commit("setDict", d);
+        })
+
+        // 获取物业类型
+        let p2 = this.xpost("city/getPropertyTypes").then(d => {
+          let list = d.map(o => {
+            return {
+              NAME: o.propertyType,
+              CODE: o.propertyTypeId,
             }
-
-            let dict = { ...res2, ...this.DICT, ...dictWuyeLeixing }
-            console.log(dict);
-            this.$store.commit("setDict", dict);
-            sessionStorage.setItem("dict", JSON.stringify(dict));
-            this.loading = false;
           })
+          let dict = {
+            "wylx": list
+          }
+          this.$store.commit("setDict", dict);
+        })
 
+        // 获取角色
+        let p3 = this.xpost("role/getRoles").then(d => {
+          let list = d.rows.map(o => {
+            return {
+              NAME: o.roleName,
+              CODE: o.roleId,
+            }
+          })
+          let dict = {
+            "roles": list
+          }
+          this.$store.commit("setDict", dict);
+        })
 
+        // VIP规则
+        let p4 = this.xpost("payOrderRequest/getVipRule").then(d => {
+          let list = d.rows.map(o => {
+            return {
+              NAME: o.vipName,
+              CODE: parseInt(o.vipId),
+            }
+          })
+          let dict = {
+            "vipRule": list
+          }
+          this.$store.commit("setDict", dict);
+        })
 
-        }, rej => {
-          console.log(rej);
+        Promise.all([p1, p2, p3, p4]).then(resAll => {
+          this.$store.commit("login", {
+            username: res.user.account,
+            nickname: res.user.userName,
+            phone: res.user.phone,
+            userId: res.user.userId,
+            token: res.token,
+            moreInfo: res.user,
+          });
+          this.loading = false;
+        }).catch(res => {
+          console.log(res);
+          this.$message({
+            message: "加载字典出错",
+            type: "error"
+          })
           this.loading = false;
         })
+
+
+
+
+
+
         //登录成功
         // console.log(res);
 

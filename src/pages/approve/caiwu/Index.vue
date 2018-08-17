@@ -64,7 +64,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="付款时间">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker> -->
+                  <c-date-picker v-model="form2.payTime"></c-date-picker>
                 </el-form-item>
               </div>
 
@@ -109,13 +110,15 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="到账日期">
-                  <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.onlineDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.onlineDate"></el-date-picker> -->
+                  <c-date-picker v-model="form2.onlineDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="服务奖金计提月">
-                  <el-date-picker v-model="form2.serviceMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月">
-                  </el-date-picker>
+                  <!-- <el-date-picker v-model="form2.serviceMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月"> -->
+                  <!-- </el-date-picker> -->
+                  <c-date-picker v-model="form2.serviceMonth"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -125,8 +128,9 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="留存发放月">
-                  <el-date-picker v-model="form2.keepMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月">
-                  </el-date-picker>
+                  <!-- <el-date-picker v-model="form2.keepMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月">
+                  </el-date-picker> -->
+                  <c-date-picker v-model="form2.keepMonth"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -136,7 +140,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="尾款奖励日期">
-                  <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.finalPaymentPriceDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.finalPaymentPriceDate"></el-date-picker> -->
+                  <c-date-picker v-model="form2.finalPaymentPriceDate"></c-date-picker>
                 </el-form-item>
               </div>
 
@@ -186,8 +191,9 @@
         <tr>
           <td>付款时间</td>
           <td>
-            <el-date-picker v-model="yongjin.commissionDate" value-format="yyyy-MM-dd" style="width:100%">
-            </el-date-picker>
+            <!-- <el-date-picker v-model="yongjin.commissionDate" value-format="yyyy-MM-dd" style="width:100%">
+            </el-date-picker> -->
+            <c-date-picker v-model="yongjin.commissionDate"></c-date-picker>
           </td>
         </tr>
       </table>

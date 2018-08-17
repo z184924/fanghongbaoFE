@@ -16,7 +16,7 @@ export default new Vuex.Store({
     bread2: "轨迹监控",
     windowHeight: 0,
     temp: null,
-    bread:{},
+    bread: {},
   },
   mutations: {
     login(state, info) {
@@ -35,8 +35,16 @@ export default new Vuex.Store({
       state.basePath = path;
     },
     setDict(state, dict) {
-      state.dict = dict;
-      sessionStorage.setItem("dict", JSON.stringify(dict));
+      state.dict = {
+        ...state.dict,
+        ...dict
+      };
+      sessionStorage.setItem("dict", JSON.stringify(state.dict));
+      // console.log(state.dict);
+    },
+    clearDict(state) {
+      state.dict = {};
+      // sessionStorage.setItem("dict", JSON.stringify(state.dict));
     },
     changeBread(state, b) {
       state.bread1 = b.b1;

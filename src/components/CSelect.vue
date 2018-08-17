@@ -25,25 +25,50 @@ export default {
   },
   data() {
     return {
-      selectedValue: null
+      // selectedValue: null
     }
   },
-  watch: {
-    selectedValue: {
-      handler() {
-        this.$emit("input", this.selectedValue)
-      },
-      deep: true
-    },
-    value: {
-      handler() {
-        this.selectedValue = this.value;
-      },
-      deep: true,
-      immediate: true
-    },
-  },
+  // watch: {
+  //   selectedValue: {
+  //     handler() {
+  //       this.$emit("input", this.selectedValue)
+  //     },
+  //     deep: true
+  //   },
+  //   value: {
+  //     handler() {
+  //       this.setValue();
+  //     },
+  //     deep: true,
+  //     immediate: true
+  //   },
+  // },
   computed: {
+    selectedValue: {
+      get() {
+        // console.log(123);
+        if (this.multiple) {
+          if (this.value === "") {
+            return [];
+          } else {
+            return this.value.split(",");
+          }
+        } else {
+          return this.value + "";
+        }
+      },
+      set(v) {
+        // console.log(v);
+        if (this.multiple) {
+          this.$emit("input", v.join());
+        } else {
+          this.$emit("input", v + "");
+        }
+        this.setValue();
+        // console.log(this.list);
+        // console.log(this.value);
+      }
+    },
     multiple() {
       if (this.type === "multiple") {
         return true;
@@ -56,20 +81,22 @@ export default {
         if (kindOf(this.dict) === "string") {
           let a = this.$store.state.dict[this.dict].map(o => {
             return {
-              label: o.NAME,
-              value: o.CODE
+              label: o.NAME + "",
+              value: o.CODE + ""
             }
           });
           return a;
         } else if (kindOf(this.dict) === "array") {
           let a = [];
           this.dict.forEach(o => {
+            o.value = o.value + "";
+            o.label = o.label + "";
             if (kindOf(o) === "object") {
               a.push(o)
             } else {
               a.push({
-                label: o,
-                value: o
+                label: o + "",
+                value: o + ""
               })
             }
           })
@@ -82,28 +109,36 @@ export default {
       }
     }
   },
-  created() {
-    let empty = false;
+  methods: {
+    setValue() {
+      let empty = false;
 
-    if (kindOf(this.value) === "object") {
-      empty = true;
-    } else if (kindOf(this.value) === "array" && this.value.length === 0) {
-      empty = true;
-    } else if (this.value === undefined) {
-      empty = true;
-    } else if (this.value === null) {
-      empty = true;
-    }
-
-    if (empty) {
-      if (this.type === "multiple") {
-        this.selectedValue = [];
-      } else {
-        this.selectedValue = "";
+      if (kindOf(this.value) === "object") {
+        empty = true;
+      } else if (kindOf(this.value) === "array" && this.value.length === 0) {
+        empty = true;
+      } else if (this.value === undefined) {
+        empty = true;
+      } else if (this.value === null) {
+        empty = true;
       }
-    } else {
-      this.selectedValue = this.value;
+      // console.log(empty);
+      if (empty) {
+        this.value = "";
+      } else {
+        // this.list.forEach(o => {
+        //   if (o.value + "" === this.value + "") {
+        //     this.value = this.value + "";
+        //   }
+        // })
+        // this.value = this.value + "";
+        // console.log(this.list);
+      }
+      // console.log(this.value);
     }
+  },
+  created() {
+    this.setValue();
 
   }
 

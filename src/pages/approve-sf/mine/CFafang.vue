@@ -13,8 +13,10 @@
           <el-input-number style="width:100%" v-model="form.serviceValue"></el-input-number>
         </el-form-item>
         <el-form-item label="日期">
-          <el-date-picker style="width:100%" v-model="form.serviceDate" value-format="yyyy-MM-dd">
-          </el-date-picker>
+          <!-- <el-date-picker style="width:100%" v-model="form.serviceDate" value-format="yyyy-MM-dd">
+          </el-date-picker> -->
+          <c-date-picker v-model="form.serviceDate"></c-date-picker>
+
         </el-form-item>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
@@ -76,7 +78,7 @@ export default {
       let id = a[this.config.pk];
       if (id) {
         let form = clone(this.selectedRow);
-        form.serviceDate = form.serviceDate ? this.mxDateFormatter(form.serviceDate) : ""
+        // form.serviceDate = form.serviceDate ? this.mxDateFormatter(form.serviceDate) : ""
         this.form = form;
         this.dialogTitle = "编辑";
         this.isShowEdit = true;

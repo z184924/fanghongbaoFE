@@ -15,10 +15,10 @@
       <table class="xc-table xc-table--border-black xc-table--center xc-table--hover">
         <tr class="xc-table__head">
           <td rowspan="2">序号</td>
-          <td colspan="17">案场助理</td>
-          <td colspan="26">案场财务</td>
-          <td colspan="5">公司统计</td>
-          <td colspan="16">公司财务</td>
+          <td colspan="7">会员信息</td>
+          <td colspan="36">客户信息</td>
+          <td colspan="5">审核统计</td>
+          <td colspan="16">财务</td>
           <td rowspan="2">客户问题</td>
         </tr>
         <tr class="xc-table__head">

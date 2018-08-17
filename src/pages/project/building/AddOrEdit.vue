@@ -65,14 +65,15 @@
           <el-collapse-transition>
             <div v-if="form.ifRecommend===1">
               <el-form-item label="推荐时间">
-                <el-date-picker v-model="form.recommendTime" value-format="yyyy-MM-dd"></el-date-picker>
+                <!-- <el-date-picker v-model="form.recommendTime" value-format="yyyy-MM-dd"></el-date-picker> -->
+                <c-date-picker v-model="form.recommendTime"></c-date-picker>
               </el-form-item>
             </div>
           </el-collapse-transition>
 
           <el-form-item label="专员（多选）">
             <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
-            <el-button type="text" @click="form.f__zy=[]">清空</el-button>
+            <el-button type="text" @click="form.f__zy=''">清空</el-button>
           </el-form-item>
           <el-form-item label="项目主管（单选）">
             <c-select v-model="form.f__xmzg" :dict="listXiangmuZhuguan" style="width:400px"></c-select>
@@ -84,7 +85,7 @@
           </el-form-item>
           <el-form-item label="项目经理（多选）">
             <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli" style="width:400px"></c-select>
-            <el-button type="text" @click="form.f__xmjl=[]">清空</el-button>
+            <el-button type="text" @click="form.f__xmjl=''">清空</el-button>
           </el-form-item>
           <el-form-item label="审核人（单选）">
             <c-select v-model="form.f__shr" :dict="listShenheren" style="width:400px"></c-select>
@@ -108,12 +109,12 @@
           </el-form-item>
           <el-form-item label="抄送人（多选）">
             <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
-            <el-button type="text" @click="form.f__csr=[]">清空</el-button>
+            <el-button type="text" @click="form.f__csr=''">清空</el-button>
           </el-form-item>
         </el-form>
       </div>
     </c-panel>
-    <div>{{form}}</div>
+    <!-- <div>{{form}}</div> -->
     <c-panel title-color="#3c7c17" title="客户展示信息字段" width="800px">
       <el-table ref="tableClient" :data="tableClient" border @selection-change="tableClientSelect">
         <el-table-column type="selection" width="55" align="center">
@@ -262,23 +263,25 @@ export default {
       let listRole = [];
       let listUser = [];
       this.listRole.forEach(o => {
-        if (o.multiple) {
-          this.form[o.field].forEach(oo => {
-            listUser.push(oo);
-            listRole.push(o.roleId)
-          })
-        } else {
-          if (this.form[o.field]) {
-            listUser.push(this.form[o.field]);
-            listRole.push(o.roleId)
-          }
-        }
+        listUser.push(this.form[o.field]);
+        listRole.push(o.roleId)
+        // if (o.multiple) {
+        //   this.form[o.field].forEach(oo => {
+        //     listUser.push(oo);
+        //     listRole.push(o.roleId)
+        //   })
+        // } else {
+        //   if (this.form[o.field]) {
+        //     listUser.push(this.form[o.field]);
+        //     listRole.push(o.roleId)
+        //   }
+        // }
       })
       data.roleIds = listRole.join();
       data.userIds = listUser.join();
 
       // 抄送人
-      data.copyUserIds = this.form.f__csr.join();
+      data.copyUserIds = this.form.f__csr;
 
       //客户信息
       data.fields = this.selectedClient.map(o => {
@@ -296,7 +299,9 @@ export default {
       // data.houseTypePictures = this.form.f__listHuxingtu.join();
       // data.posterPictures = this.form.f__listHaibao.join();
       // data.commissionPictures = this.form.f__listYongjinXiangxi.join();
-      // data.propertyTypeIds = this.form.f__wylx.join();
+
+      // 物业类型
+      data.propertyTypeIds = this.form.f__wylx.join();
 
       this.xpost("projectInfo/saveOrUpdate", data).then(res => {
         this.mxMessage(res).then(() => {
@@ -317,12 +322,13 @@ export default {
               value: o.userId
             }
           })
-          data.selected = [];
+          let selected = [];
           res.rows.forEach(o => {
             if (o.isChecked) {
-              data.selected.push(o.userId)
+              selected.push(o.userId)
             }
           })
+          data.selected = selected.join();
           resolve(data);
         })
       })
@@ -424,11 +430,11 @@ export default {
 
           res.rows.forEach(oo => {
             if (oo.isChecked === 1) {
-              if (o.multiple) {
-                this.form[o.field].push(oo.userId)
-              } else {
-                this.form[o.field] = oo.userId;
-              }
+              //   if (o.multiple) {
+              //     this.form[o.field].push(oo.userId)
+              //   } else {
+              //     }
+              this.form[o.field] = oo.userId;
             }
           })
         })

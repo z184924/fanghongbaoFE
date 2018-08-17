@@ -104,7 +104,9 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="排卡日期">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.cardDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.cardDate"></el-date-picker> -->
+                  <c-date-picker v-model="form.cardDate"></c-date-picker>
+
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -115,7 +117,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="认购日期">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.subscribeDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.subscribeDate"></el-date-picker> -->
+                  <c-date-picker v-model="form.subscribeDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -126,7 +129,8 @@
               <div class="xc18__item">
                 <el-form-item label="齐定日期">
                   <!-- <span>{{form.homogeneityDate}}</span> -->
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.homogeneityDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.homogeneityDate"></el-date-picker> -->
+                  <c-date-picker v-model="form.homogeneityDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -172,7 +176,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="成交日期">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.dealDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.dealDate"></el-date-picker> -->
+                  <c-date-picker v-model="form.dealDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -207,17 +212,20 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="首付日期">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.downPayDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.downPayDate"></el-date-picker> -->
+                  <c-date-picker v-model="form.downPayDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="草签日期">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.initialDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.initialDate"></el-date-picker> -->
+                  <c-date-picker v-model="form.initialDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="网签日期">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="form.netsignDate"></el-date-picker>
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.netsignDate"></el-date-picker> -->
+                  <c-date-picker v-model="form.netsignDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">

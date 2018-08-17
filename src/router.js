@@ -30,6 +30,8 @@ import ProjectXiangmuChaxun from "./pages/project/xiangmu-chaxun/Index"
 // 系统管理
 import SystemInsideUser from "./pages/system/inside-user/Index"
 
+import SystemVip from "./pages/system/vip/Index"
+
 import SystemCity from "./pages/system/city/Index"
 
 import SystemRole from "./pages/system/role/Index"
@@ -127,11 +129,16 @@ export default new Router({
 
 
 
-
+    // 系统
     {
       path: "/system/inside-user",
       name: "SystemInsideUser",
       component: SystemInsideUser,
+    },
+    {
+      path: "/system/vip",
+      name: "SystemVip",
+      component: SystemVip,
     },
     {
       path: "/system/city",

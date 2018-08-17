@@ -152,6 +152,10 @@
           <i class="el-icon-arrow-right"></i>
           <span>内部人员管理</span>
         </el-menu-item>
+        <el-menu-item index="/system/vip">
+          <i class="el-icon-arrow-right"></i>
+          <span>用户VIP管理</span>
+        </el-menu-item>
         <el-menu-item index="/system/role">
           <i class="el-icon-arrow-right"></i>
           <span>角色查询</span>
