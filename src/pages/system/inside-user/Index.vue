@@ -6,7 +6,7 @@
         <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:120px"></c-select>
         <span style="padding-left:1em">用户名：</span>
         <el-input style="width:120px" v-model="dataParam.userName"></el-input>
-        <el-button type="default" icon="el-icon-search" @click="refreshTable">搜索</el-button>
+        <el-button type="text" @click="clearSearch">清空</el-button>
       </span>
       <span slot="right-control" style="margin-right:1em">
         <el-button type="default" icon="el-icon-plus" @click="add">新增内部用户</el-button>
@@ -221,6 +221,9 @@ export default {
           return false;
         }
       });
+    },
+    clearSearch() {
+      this.dataParam = {};
     },
 
 
