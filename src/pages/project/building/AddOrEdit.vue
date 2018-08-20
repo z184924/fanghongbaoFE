@@ -114,7 +114,7 @@
         </el-form>
       </div>
     </c-panel>
-    <!-- <div>{{form}}</div> -->
+    <div>{{form}}</div>
     <c-panel title-color="#3c7c17" title="客户展示信息字段" width="800px">
       <el-table ref="tableClient" :data="tableClient" border @selection-change="tableClientSelect">
         <el-table-column type="selection" width="55" align="center">
@@ -410,7 +410,7 @@ export default {
       } else {
         p6 = this.getChaosongrenList("").then(res => {
           this.listChaosongren = res.list;
-          this.form.f__csr = [];
+          this.$set(this.form,"f__csr","");
         });
       }
       // 获取用户

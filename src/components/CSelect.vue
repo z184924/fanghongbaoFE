@@ -51,6 +51,7 @@ export default {
           if (this.value === "") {
             return [];
           } else {
+            console.log(this.value);
             return this.value.split(",");
           }
         } else {
