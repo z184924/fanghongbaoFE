@@ -17,6 +17,7 @@ export default new Vuex.Store({
     windowHeight: 0,
     temp: null,
     bread: {},
+    menu: [],
   },
   mutations: {
     login(state, info) {
@@ -33,6 +34,10 @@ export default new Vuex.Store({
     },
     changeBasePath(state, path) {
       state.basePath = path;
+    },
+    setMenu(state, menu) {
+      state.menu = menu;
+      sessionStorage.setItem("menu", JSON.stringify(menu));
     },
     setDict(state, dict) {
       state.dict = {

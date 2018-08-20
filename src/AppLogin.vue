@@ -171,7 +171,13 @@ export default {
           this.$store.commit("setDict", dict);
         })
 
-        Promise.all([p1, p2, p3, p4]).then(resAll => {
+
+        let p5 = this.xpost("role/getUserMenu").then(res => {
+          this.$store.commit("setMenu", res.rows);
+        });
+
+
+        Promise.all([p1, p2, p3, p4, p5]).then(resAll => {
           this.$store.commit("login", {
             username: res.user.account,
             nickname: res.user.userName,

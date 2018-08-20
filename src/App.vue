@@ -89,8 +89,9 @@ export default {
     this.$store.commit("setWindowHeight", window.innerHeight);
     this.$store.commit("clearDict");
     this.$store.commit("setDict", JSON.parse(sessionStorage.getItem("dict")));
-    let loginInfo = JSON.parse(sessionStorage.getItem("loginInfo"));
+    this.$store.commit("setMenu", JSON.parse(sessionStorage.getItem("menu")));
     this.$store.commit("login", JSON.parse(sessionStorage.getItem("loginInfo")));
+
   },
 
 }

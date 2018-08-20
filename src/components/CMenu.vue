@@ -1,9 +1,9 @@
 <template>
   <el-menu :default-active="routePath" :unique-opened="true" router class="xc-shadow xc5">
-    <el-menu-item index="/">
+    <!-- <el-menu-item index="/">
       <i class="ii i-shouye"></i>
       <span>首页</span>
-    </el-menu-item>
+    </el-menu-item> -->
     <!-- <el-submenu index="审批管理">
       <template slot="title">
         <i class="ii i-shenpi"></i>
@@ -24,7 +24,7 @@
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu> -->
-    <el-submenu index="项目管理">
+    <!-- <el-submenu index="项目管理">
       <template slot="title">
         <i class="ii i-xiangmu"></i>
         <span>项目管理</span>
@@ -62,10 +62,6 @@
           <i class="el-icon-arrow-right"></i>
           <span>房产头条</span>
         </el-menu-item>
-        <!-- <el-menu-item index="/project/approve">
-          <i class="el-icon-arrow-right"></i>
-          <span>审核管理</span>
-        </el-menu-item> -->
 
       </el-menu-item-group>
     </el-submenu>
@@ -174,16 +170,94 @@
         </el-menu-item>
 
       </el-menu-item-group>
+    </el-submenu> -->
+    <!-- <div>{{menu}}</div> -->
+
+    <el-submenu :index="o.menuUrl" v-for="(o,i) in menu" :key="i" v-if="o.children.length>0">
+      <template slot="title">
+        <i class="ii" :class="ico(o.menuName)"></i>
+        <span>{{o.menuName}}</span>
+      </template>
+      <el-menu-item-group>
+        <el-menu-item :index="oo.menuUrl" v-for="(oo,ii) in o.children" :key="ii">
+          <i class="el-icon-arrow-right"></i>
+          <span>{{oo.menuName}}</span>
+        </el-menu-item>
+
+      </el-menu-item-group>
     </el-submenu>
+    <el-menu-item :index="o.menuUrl" v-else>
+      <i class="ii" :class="ico(o.menuName)"></i>
+      <span>{{o.menuName}}</span>
+    </el-menu-item>
 
   </el-menu>
 </template>
 <script>
 export default {
+  watch: {
+    $route: {
+      handler(v) {
+        // console.log(v);
+        if (!this.checkRole(v.path)) {
+          this.$router.replace("/");
+        }
+      },
+      immediate: true
+    }
+  },
   computed: {
     routePath() {
       return this.$route.path;
+    },
+    menu() {
+      let list = this.$store.state.menu;
+      let menu = [];
+      let setMenu = (menu, pid) => {
+        list.forEach(o => {
+          if (o.parentId === pid) {
+            o.children = [];
+            setMenu(o.children, o.menuId);
+            console.log(o);
+            menu.push(o);
+          }
+        })
+      }
+      setMenu(menu, 0);
+      return menu;
     }
+  },
+  methods: {
+    checkRole(path) {
+      let exist = false;
+      let list = this.$store.state.menu;
+      list.forEach(o => {
+        if (path === o.menuUrl) {
+          exist = true;
+        }
+      })
+      return exist;
+    },
+    ico(name) {
+      if (name.indexOf("首页") >= 0) {
+        return "i-shouye"
+      }
+      if (name.indexOf("项目管理") >= 0) {
+        return "i-xiangmu"
+      }
+      if (name.indexOf("佣金审核管理") >= 0) {
+        return "i-shenpi"
+      }
+      if (name.indexOf("服务费审核管理") >= 0) {
+        return "i-shenpi"
+      }
+      if (name.indexOf("系统管理") >= 0) {
+        return "i-guanli"
+      }
+    }
+  },
+  created() {
+    // console.log(this.$store.state.menu);
   }
 }
 </script>
