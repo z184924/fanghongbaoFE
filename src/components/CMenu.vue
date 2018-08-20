@@ -229,7 +229,7 @@ export default {
   methods: {
     checkRole(path) {
       let exist = false;
-      let list = this.$store.state.menu;
+      let list = this.$store.state.menu ? this.$store.state.menu : [];
       list.forEach(o => {
         if (path === o.menuUrl) {
           exist = true;
