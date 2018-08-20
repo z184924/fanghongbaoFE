@@ -218,7 +218,6 @@ export default {
           if (o.parentId === pid) {
             o.children = [];
             setMenu(o.children, o.menuId);
-            console.log(o);
             menu.push(o);
           }
         })
