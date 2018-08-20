@@ -198,7 +198,7 @@ export default {
   watch: {
     $route: {
       handler(v) {
-        // console.log(v);
+        // 如果当前url没有权限，则返回首页
         if (!this.checkRole(v.path)) {
           this.$router.replace("/");
         }
