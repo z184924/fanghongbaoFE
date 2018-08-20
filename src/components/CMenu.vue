@@ -210,11 +210,13 @@ export default {
     routePath() {
       return this.$route.path;
     },
+    list() {
+      return this.$store.state.menu ? this.$store.state.menu : [];
+    },
     menu() {
-      let list = this.$store.state.menu ? this.$store.state.menu : [];
       let menu = [];
       let setMenu = (menu, pid) => {
-        list.forEach(o => {
+        this.list.forEach(o => {
           if (o.parentId === pid) {
             o.children = [];
             setMenu(o.children, o.menuId);
@@ -229,11 +231,15 @@ export default {
   methods: {
     checkRole(path) {
       let exist = false;
-      let list = this.$store.state.menu ? this.$store.state.menu : [];
-      list.forEach(o => {
-        if (path === o.menuUrl) {
+      this.list.forEach(o => {
+        let ap = path.split("/");
+        let am = o.menuUrl.split("/");
+        if (ap[1] === am[1] && ap[2] === am[2]) {
           exist = true;
         }
+        // if (path.indexOf(o.menuUrl) >= 0) {
+        //   exist = true;
+        // }
       })
       return exist;
     },
@@ -249,6 +255,9 @@ export default {
       }
       if (name.indexOf("服务费审核管理") >= 0) {
         return "i-shenpi"
+      }
+      if (name.indexOf("消息管理") >= 0) {
+        return "i-xiaoxi"
       }
       if (name.indexOf("系统管理") >= 0) {
         return "i-guanli"
