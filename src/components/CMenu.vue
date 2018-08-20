@@ -211,7 +211,7 @@ export default {
       return this.$route.path;
     },
     menu() {
-      let list = this.$store.state.menu;
+      let list = this.$store.state.menu || [];
       let menu = [];
       let setMenu = (menu, pid) => {
         list.forEach(o => {
