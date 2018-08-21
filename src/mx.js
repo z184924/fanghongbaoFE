@@ -150,6 +150,11 @@ var myMixin = {
       })
       return names.join("、");
     },
+    mxUeditorText(html) {
+      if(html){
+        return html.replace(/\/ueditor\/jsp\/upload\/image/g, "http://123.57.32.164:7002/ueditor/jsp/upload/image");
+      }
+    },
     xpost(api, param = {}) {
       let data = clone(param);
       if (api != "login_login") {

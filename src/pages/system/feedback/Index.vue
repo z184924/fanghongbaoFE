@@ -28,7 +28,7 @@
     <el-dialog :visible.sync="isShowDetail" v-drag title="意见详情">
       <div class="xc14">
         <div class="xc14__title">意见内容：</div>
-        <div class="xc14__content" v-html="detailContent"></div>
+        <div class="xc14__content" v-html="mxUeditorText(detailContent)"></div>
         <div style="height:10px"></div>
         <div class="xc14__title">相关图片：</div>
         <div class="xc14__file">

@@ -34,7 +34,7 @@
     </el-dialog>
     <el-dialog :visible.sync="isShowView" v-drag :title="`查看消息`" width="1200px">
       <h1 style="text-align:center">{{selectedRow.informationTitle}}</h1>
-      <div v-html="selectedRow.informationContent" style="height:400px;overflow-y:scroll;padding:1em;"></div>
+      <div v-html="mxUeditorText(selectedRow.informationContent)" style="height:400px;overflow-y:scroll;padding:1em;"></div>
       <div style="text-align:right;padding-top:10px;color:#777;">发布时间：{{mxDateFormatter(selectedRow.createTime)}}</div>
       <el-button type="default" @click="isShowView=false" slot="footer">关闭</el-button>
     </el-dialog>
