@@ -113,7 +113,7 @@ export default {
         recommendTime: {
           label: "推荐时间",
           formatter(r, c, v) {
-            return vue.mxDateFormatter(v);
+            return vue.mxTimeFormatter(v);
           }
         },
       },

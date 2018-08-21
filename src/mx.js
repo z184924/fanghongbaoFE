@@ -170,7 +170,7 @@ var myMixin = {
           // console.log(res);
           if (res.status === 200) {
             if (res.data.state === "errorToken") {
-              console.log(res);
+              // console.log(res);
               this.$store.commit("logout");
               reject();
             } else if (res.data.state === "error") {
