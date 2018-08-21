@@ -1,6 +1,6 @@
 <template>
   <div class="xc-flex xc-flex-center" style="height:500px">
-    <span style="color:#aaa;font-size:100px;text-shadow:#ddd 5px 5px 2px">首 页</span>
+    <span style="color:#eef0f3;font-size:100px;text-shadow:#777 -2px -2px 0px">房 红 包</span>
   </div>
 </template>
 <script>
