@@ -28,7 +28,7 @@
         <tr>
           <td style="width:5em">商品图片集</td>
           <td colspan="3">
-            <file-box v-model="form.goodsPics"></file-box>
+            <file-box v-model="form.goodsPics" :multiple="false"></file-box>
           </td>
         </tr>
         <tr>
@@ -47,12 +47,12 @@
             <el-input v-model="form.conditions"></el-input>
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>商品描述</td>
           <td colspan="3">
             <c-ueditor v-if="isShowEdit" v-model="form.goodsDescription"></c-ueditor>
           </td>
-        </tr>
+        </tr> -->
       </table>
 
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
