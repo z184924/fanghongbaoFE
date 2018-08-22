@@ -379,7 +379,7 @@ export default {
           this.form = { ...this.form, ...clone(form) };
           this.form.f__qy.city = this.form.cityId;
           this.form.f__qy.area = this.form.areaId;
-          console.log(this.form.commissionType);
+          // console.log(this.form.commissionType);
           if (this.form.commissionType + "" === "0") {
             this.form.f__pthyyj = this.form.generalCommission;
             this.form.f__viphyyj = this.form.vipCommission;
