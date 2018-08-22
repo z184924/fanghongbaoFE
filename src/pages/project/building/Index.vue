@@ -78,7 +78,7 @@ export default {
           label: "普通会员佣金",
           type: "string",
           formatter(v) {
-            if (v.commissionType === 0) {
+            if (v.commissionType + '' === '0') {
               return v.generalCommission + "元"
             } else {
               return v.generalCommissionBL + "%"
@@ -89,7 +89,7 @@ export default {
           label: "VIP佣金",
           type: "string",
           formatter(v) {
-            if (v.commissionType === 0) {
+            if (v.commissionType + '' === '0') {
               return v.vipCommission + "元"
             } else {
               return v.vipCommissionBL + "%"

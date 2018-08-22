@@ -100,9 +100,9 @@ var myMixin = {
       }
     },
     mxBoolFormatter(v, trueText = this.YES, falseText = this.NO) {
-      if (v === 0) {
+      if (v + '' === '0') {
         return falseText;
-      } else if (v === 1) {
+      } else if (v + '' === '1') {
         return trueText;
       } else {
         return "";
@@ -151,7 +151,7 @@ var myMixin = {
       return names.join("、");
     },
     mxUeditorText(html) {
-      if(html){
+      if (html) {
         return html.replace(/\/ueditor\/jsp\/upload\/image/g, "http://123.57.32.164:7002/ueditor/jsp/upload/image");
       }
     },

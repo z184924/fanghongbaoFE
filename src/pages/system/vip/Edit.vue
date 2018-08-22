@@ -5,7 +5,7 @@
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
-    <!-- <div>{{selectedRow}}</div> -->
+    <div>{{selectedRow}}</div>
     <el-dialog :visible.sync="isShowEdit" v-drag append-to-body :title="dialogTitle" width="400px">
       <el-form ref="form" :model="form" label-width="7em">
         <el-form-item v-if="formType=='add'" label="总金额">
@@ -33,7 +33,7 @@
           <c-select v-model="form.handleType" dict="czd"></c-select>
         </el-form-item>
       </el-form>
-      <!-- <div>{{form}}</div> -->
+      <div>{{form}}</div>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>

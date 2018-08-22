@@ -46,14 +46,14 @@
           <el-form-item label="佣金类型">
             <c-select dict="yjbl" v-model="form.commissionType" style="width:200px"></c-select>
           </el-form-item>
-          <el-form-item :label="form.commissionType===0?'普通会员佣金':'普通会员佣金比例'">
+          <el-form-item :label="form.commissionType+''==='0'?'普通会员佣金':'普通会员佣金比例'">
             <el-input v-model="form.f__pthyyj" style="width:200px"></el-input>
-            <span v-if="form.commissionType===0">元</span>
+            <span v-if="form.commissionType+''==='0'">元</span>
             <span v-else>%</span>
           </el-form-item>
-          <el-form-item :label="form.commissionType===0?'VIP会员佣金':'VIP会员佣金比例'">
+          <el-form-item :label="form.commissionType+''==='0'?'VIP会员佣金':'VIP会员佣金比例'">
             <el-input v-model="form.f__viphyyj" style="width:200px"></el-input>
-            <span v-if="form.commissionType===0">元</span>
+            <span v-if="form.commissionType+''==='0'">元</span>
             <span v-else>%</span>
           </el-form-item>
           <el-form-item label="楼盘状态">
@@ -63,7 +63,7 @@
             <c-select type="radio" v-model="form.ifRecommend" dict="bool"></c-select>
           </el-form-item>
           <el-collapse-transition>
-            <div v-if="form.ifRecommend===1">
+            <div v-if="form.ifRecommend+''==='1'">
               <el-form-item label="推荐时间">
                 <!-- <el-date-picker v-model="form.recommendTime" value-format="yyyy-MM-dd"></el-date-picker> -->
                 <c-date-picker v-model="form.recommendTime"></c-date-picker>
@@ -114,7 +114,7 @@
         </el-form>
       </div>
     </c-panel>
-    <!-- <div>{{form}}</div> -->
+    <div>{{form}}</div>
     <c-panel title-color="#3c7c17" title="客户展示信息字段" width="800px">
       <el-table ref="tableClient" :data="tableClient" border @selection-change="tableClientSelect">
         <el-table-column type="selection" width="55" align="center">
@@ -241,7 +241,7 @@ export default {
       data.areaId = this.form.f__qy.area;
 
       // 佣金
-      if (data.commissionType === 0) {
+      if (data.commissionType + '' === "0") {
         data.generalCommission = this.form.f__pthyyj;
         data.vipCommission = this.form.f__viphyyj;
       } else {
@@ -250,7 +250,7 @@ export default {
       }
 
       // 推荐时间
-      if (data.ifRecommend !== 1) {
+      if (data.ifRecommend + '' !== "1") {
         data.recommendTime = "";
       }
 
@@ -379,7 +379,8 @@ export default {
           this.form = { ...this.form, ...clone(form) };
           this.form.f__qy.city = this.form.cityId;
           this.form.f__qy.area = this.form.areaId;
-          if (this.form.commissionType === 0) {
+          console.log(this.form.commissionType);
+          if (this.form.commissionType + "" === "0") {
             this.form.f__pthyyj = this.form.generalCommission;
             this.form.f__viphyyj = this.form.vipCommission;
           } else {
@@ -387,7 +388,7 @@ export default {
             this.form.f__viphyyj = this.form.vipCommissionBL;
           }
           // 推荐时间
-          if (this.form.ifRecommend === 1) {
+          if (this.form.ifRecommend + "" === "1") {
             this.form.recommendTime = moment(this.form.recommendTime).format("YYYY-MM-DD");
           } else {
             // this.form.ifRecommend = 0;
@@ -410,7 +411,7 @@ export default {
       } else {
         p6 = this.getChaosongrenList("").then(res => {
           this.listChaosongren = res.list;
-          this.$set(this.form,"f__csr","");
+          this.$set(this.form, "f__csr", "");
         });
       }
       // 获取用户

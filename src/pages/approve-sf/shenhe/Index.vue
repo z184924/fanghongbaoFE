@@ -87,7 +87,7 @@ export default {
   methods: {
     submit(state) {
       let name = "通过";
-      if (state === 0) {
+      if (state + '' === '0') {
         name = "驳回";
       }
       let id = this.selectedRow[this.config.pk];

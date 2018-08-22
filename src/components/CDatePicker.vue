@@ -11,23 +11,20 @@ export default {
     dateValue: {
       get() {
         // console.log(this.value);
+        let date = "";
         if (this.value) {
-          return moment(this.value).format("YYYY-MM-DD")
-        } else {
-          return "";
+          date = moment(this.value).format("YYYY-MM-DD");
         }
+        this.$emit("input", date);
+        return date;
       },
       set(v) {
         this.$emit("input", v);
       }
     }
   },
-  created() {
-    if (this.value) {
-      this.$emit("input", moment(this.value).format("YYYY-MM-DD"));
-    } else {
-      this.$emit("input", "");
-    }
+  created(){
+    // console.log(this.value);
   }
 }
 </script>

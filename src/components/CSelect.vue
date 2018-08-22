@@ -18,7 +18,7 @@ export default {
       default: "",
     },
     value: {
-      type: String|Number,
+      type: String | Number,
       default() {
         return "";
       }
@@ -56,6 +56,7 @@ export default {
             return this.value.split(",");
           }
         } else {
+          this.$emit("input", this.value + "");
           return this.value + "";
         }
       },

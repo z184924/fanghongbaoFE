@@ -41,7 +41,7 @@ export default {
         value: {
           label: "金币数值",
           formatter(r, c, v) {
-            if (v === 0) {
+            if (v + '' === '0') {
               return "-"
             } else {
               return v;

@@ -109,7 +109,7 @@ export default {
     top() {
       if (this.selectedRow.newsId) {
         let savedIsTop = 0;
-        if (this.selectedRow.isTop === 0) {
+        if (this.selectedRow.isTop + '' === '0') {
           savedIsTop = 1;
         }
         this.xpost("projectNews/setProjectNewsIsTop", {

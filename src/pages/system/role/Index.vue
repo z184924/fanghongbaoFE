@@ -40,9 +40,9 @@ export default {
   },
   methods: {
     boolToString(b) {
-      if (b === 0) {
+      if (b + '' === '0') {
         return this.NO;
-      } else if (b === 1) {
+      } else if (b + '' === '1') {
         return this.YES
       } else {
         return ""
