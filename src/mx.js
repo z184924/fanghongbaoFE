@@ -152,7 +152,8 @@ var myMixin = {
     },
     mxUeditorText(html) {
       if (html) {
-        return html.replace(/\/ueditor\/jsp\/upload\/image/g, "http://123.57.32.164:7002/ueditor/jsp/upload/image");
+        // return html.replace(/\/ueditor\/jsp\/upload\/image/g, "http://123.57.32.164:7002/ueditor/jsp/upload/image");
+        return html;
       }
     },
     xpost(api, param = {}) {
