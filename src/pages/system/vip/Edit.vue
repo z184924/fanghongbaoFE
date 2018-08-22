@@ -136,8 +136,12 @@ export default {
       }
     },
     save() {
-      this.form.parentVipStartTime = moment(this.vipStart).format("YYYY-MM-DD") + " 00:00:00";
-      this.form.parentVipEndTime = moment(this.vipEnd).format("YYYY-MM-DD") + " 00:00:00";
+      if (this.vipStart) {
+        this.form.parentVipStartTime = moment(this.vipStart).format("YYYY-MM-DD") + " 00:00:00";
+      }
+      if (this.vipEnd) {
+        this.form.parentVipEndTime = moment(this.vipEnd).format("YYYY-MM-DD") + " 00:00:00";
+      }
       this.form.userId = this.userId;
       this.xpost(this.config.editUrl, this.form).then(res => {
         this.$refs.table.getData();

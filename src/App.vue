@@ -12,7 +12,7 @@
         <div class="stage--center">
           <div class="stage--center-gap"></div>
           <div class="stage--center-gap"></div>
-          <div class="stage--menu">
+          <div class="stage--menu" v-if="menu.length>0">
             <c-menu></c-menu>
           </div>
           <div class="stage--center-gap"></div>
@@ -23,6 +23,7 @@
                 <router-view v-if="$route.meta.keepAlive"></router-view>
               </keep-alive>
               <router-view v-if="!$route.meta.keepAlive"></router-view>
+              <div style="text-align:center;color:blue" v-if="menu.length==0">当前无权限</div>
               <div style="height:130px"></div>
               <!-- </transition> -->
             </div>
@@ -59,6 +60,11 @@ export default {
       // bread: { b1: "", b2: "" }
 
     };
+  },
+  computed: {
+    menu() {
+      return this.$store.state.menu ? this.$store.state.menu : [];
+    }
   },
   methods: {
     veBeforeEnter(el, done) {
