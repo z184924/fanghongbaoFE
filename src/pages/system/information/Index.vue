@@ -24,7 +24,7 @@
         <tr v-else>
           <td>角色</td>
           <td>
-            <c-select type="multiple" dict="roles" v-model="form.objectId"></c-select>
+            <c-select type="multiple" :dict="role" v-model="form.objectId"></c-select>
           </td>
         </tr>
         <tr>
@@ -125,7 +125,21 @@ export default {
       return {
         infoType: this.$route.params.type
       };
-    }
+    },
+    role() {
+      let dictRole = this.$store.state.dict.roles;
+      // console.log(dictRole);
+      let list = [];
+      dictRole.forEach(o => {
+        if (o.NAME != "经纪人") {
+          let oo = {};
+          oo.label = o.NAME;
+          oo.value = o.CODE;
+          list.push(oo);
+        }
+      })
+      return list;
+    },
   },
   watch: {
     $route: {
