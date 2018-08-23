@@ -15,10 +15,16 @@
             <el-input v-model="form.informationTitle"></el-input>
           </td>
         </tr>
-        <tr>
+        <tr v-if="param.infoType+''!='5'">
           <td>楼盘</td>
           <td>
             <c-select :dict="listBuilding" v-model="form.objectId"></c-select>
+          </td>
+        </tr>
+        <tr v-else>
+          <td>角色</td>
+          <td>
+            <c-select type="multiple" dict="roles" v-model="form.objectId"></c-select>
           </td>
         </tr>
         <tr>
