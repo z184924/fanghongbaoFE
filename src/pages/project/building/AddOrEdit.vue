@@ -33,7 +33,8 @@
             <el-input v-model="form.sellingSection"></el-input>
           </el-form-item>
           <el-form-item label="平均售价">
-            <el-input v-model="form.sellingAverage" style="width:200px"></el-input>元
+            <el-input v-model="form.sellingAverage" style="width:200px"></el-input>
+            <span>元</span>
           </el-form-item>
           <el-form-item label="地址">
             <el-input v-model="form.projectAddress"></el-input>
