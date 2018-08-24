@@ -143,12 +143,8 @@ export default {
       },
 
       // 新增
-      formAdd: {
-        // role: null
-      },
-      formEdit: {
-        // role: null
-      },
+      formAdd: {},
+      formEdit: {},
 
     }
   },
