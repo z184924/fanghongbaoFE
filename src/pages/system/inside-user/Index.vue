@@ -144,10 +144,10 @@ export default {
 
       // 新增
       formAdd: {
-        role: null
+        // role: null
       },
       formEdit: {
-        role: null
+        // role: null
       },
 
     }

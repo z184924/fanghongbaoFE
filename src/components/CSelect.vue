@@ -56,8 +56,12 @@ export default {
             return this.value.split(",");
           }
         } else {
-          this.$emit("input", this.value + "");
-          return this.value + "";
+          let v = "";
+          if (this.value !== undefined && this.value !== null) {
+            v = this.value + ""
+          }
+          this.$emit("input", v);
+          return v;
         }
       },
       set(v) {
