@@ -153,7 +153,7 @@ export default {
       this.isShowAdd = true;
     },
     doAdd() {
-      this.$refs.formAdd.validate((valid) => {
+      this.$refs.formAdd.validate(valid => {
         if (valid) {
           this.xpost("user/saveInnerUser", {
             account: this.formAdd.account,
