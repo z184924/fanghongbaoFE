@@ -2,7 +2,7 @@
 
 import Vue from "vue";
 import Element from "element-ui"
-import $ from "jquery"
+// import $ from "jquery"
 // import "./assets/css/animate.css"
 // import Router from "vue-router";
 // import Vuex from "vuex";
