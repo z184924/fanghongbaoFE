@@ -13,14 +13,17 @@
       <table class="xc-table xc-table--border xc-table--center">
         <tr class="xc-table__head">
           <td>结算对象</td>
+          <td style="width:4em">姓名</td>
           <td>服务奖金</td>
           <td>个税</td>
           <td>留存</td>
           <td>实际服务奖金</td>
           <td>备注</td>
+          <td>操作</td>
         </tr>
         <tr v-for="(o,i) in table" :key="i">
           <td>{{o.roleName}}</td>
+          <td>{{o.userName}}</td>
           <td>
             <el-input-number :controls="false" style="width:auto" v-model="o.prize"></el-input-number>
           </td>
@@ -36,6 +39,9 @@
           <td>
             <el-input v-model="o.remark"></el-input>
           </td>
+          <td>
+            <el-button @click="showCustom(o)">客户</el-button>
+          </td>
         </tr>
       </table>
     </div>
@@ -45,7 +51,7 @@
 <script>
 export default {
   props: {
-    detailId: {}
+    serviceId: {}
   },
   data() {
     return {
@@ -60,7 +66,7 @@ export default {
     }
   },
   watch: {
-    detailId() {
+    serviceId() {
       this.getData();
     }
   },
@@ -109,13 +115,15 @@ export default {
       }
     },
     getData() {
+      this.$emit("input", {});
       this.xpost("serviceInfo/getUserAccountantByDetailID", {
-        detailId: this.detailId,
-        page: 1,
-        rows: 1000
+        serviceId: this.serviceId,
       }).then(res => {
         this.table = clone(res.rows);
       })
+    },
+    showCustom(o) {
+      this.$emit("input", o);
     }
   },
   created() {

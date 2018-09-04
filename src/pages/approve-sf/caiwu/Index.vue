@@ -16,14 +16,13 @@
     <div style="height:1.5em"></div>
     <transition name="el-zoom-in-center">
       <div v-if="selectedRow.projectId">
-        <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
-
+        <c-jiesuan :service-id="selectedRow.serviceId" v-model="selectedMingxi"></c-jiesuan>
       </div>
     </transition>
     <div style="height:1em"></div>
     <transition name="el-zoom-in-center">
       <div>
-        <div class="xc19">
+        <!-- <div class="xc19">
           <div class="xc19__side xc19__side--long">
             <transition name="el-zoom-in-center">
               <div v-if="selectedKehu.detailId">
@@ -36,6 +35,23 @@
             <transition name="el-zoom-in-center">
               <div v-if="selectedJiesuan.accountantId">
                 <c-fafang :accountant-id="selectedJiesuan.accountantId"></c-fafang>
+              </div>
+            </transition>
+          </div>
+        </div> -->
+        <div class="xc19">
+          <div class="xc19__side xc19__side--long">
+            <transition name="el-zoom-in-center">
+              <div v-if="selectedMingxi.accountantId">
+                <c-kehu :project-id="selectedRow.projectId" :accountant-id="selectedMingxi.accountantId"></c-kehu>
+              </div>
+            </transition>
+          </div>
+          <div class="xc-gap"></div>
+          <div class="xc19__side">
+            <transition name="el-zoom-in-center">
+              <div v-if="selectedMingxi.accountantId">
+                <c-fafang :accountant-id="selectedMingxi.accountantId"></c-fafang>
               </div>
             </transition>
           </div>
@@ -101,6 +117,7 @@ export default {
       selectedRow: {},
       selectedKehu: {},
       selectedJiesuan: {},
+      selectedMingxi: {},
       param: {
         recordIdStates: 12
       },

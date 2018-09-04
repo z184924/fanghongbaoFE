@@ -199,7 +199,7 @@ export default {
       }
     },
     doEdit() {
-      this.$refs.formEdit.validate((valid) => {
+      this.$refs.formEdit.validate(valid => {
         if (valid) {
           this.xpost("user/updateInnerUser", {
             userId: this.selectedRow.userId,

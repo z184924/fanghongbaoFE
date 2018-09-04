@@ -9,7 +9,7 @@
         <el-button @click="pass" icon="el-icon-check" slot="right-control" type="primary">提交审核</el-button>
         <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
       </fixed-table>
-      <!-- <div>{{selectedKehu}}</div> -->
+      <!-- <div>{{selectedMingxi}}</div> -->
       <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
         <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
           <el-form-item label="楼盘">
@@ -27,18 +27,18 @@
     </div>
     <div style="height:2em"></div>
     <div class="xc19">
-      <div class="xc19__side">
+      <div class="xc19__side xc19__side--long">
         <transition name="el-zoom-in-center">
           <div v-if="selectedRow.projectId">
-            <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" v-model="selectedKehu"></c-kehu>
+            <c-jiesuan :service-id="selectedRow.serviceId" v-model="selectedMingxi"></c-jiesuan>
           </div>
         </transition>
       </div>
       <div class="xc-gap"></div>
-      <div class="xc19__side xc19__side--long">
+      <div class="xc19__side">
         <transition name="el-zoom-in-center">
-          <div v-if="selectedKehu.detailId">
-            <c-jiesuan :detail-id="selectedKehu.detailId"></c-jiesuan>
+          <div v-if="selectedMingxi.accountantId && selectedRow.projectId">
+            <c-kehu :project-id="selectedRow.projectId" :accountant-id="selectedMingxi.accountantId"></c-kehu>
           </div>
         </transition>
       </div>
@@ -91,6 +91,7 @@ export default {
       },
       selectedRow: {},
       selectedKehu: {},
+      selectedMingxi: {},
       param: {
         recordIdStates: 0
       },

@@ -14,7 +14,7 @@
       <!-- <div>{{selectedKehu}}</div> -->
     </div>
     <div style="height:2em"></div>
-    <div class="xc19">
+    <!-- <div class="xc19">
       <div class="xc19__side">
         <transition name="el-zoom-in-center">
           <div v-if="selectedRow.projectId">
@@ -27,6 +27,23 @@
         <transition name="el-zoom-in-center">
           <div v-if="selectedKehu.detailId">
             <c-jiesuan :detail-id="selectedKehu.detailId"></c-jiesuan>
+          </div>
+        </transition>
+      </div>
+    </div> -->
+    <div class="xc19">
+      <div class="xc19__side xc19__side--long">
+        <transition name="el-zoom-in-center">
+          <div v-if="selectedRow.projectId">
+            <c-jiesuan :service-id="selectedRow.serviceId" v-model="selectedMingxi"></c-jiesuan>
+          </div>
+        </transition>
+      </div>
+      <div class="xc-gap"></div>
+      <div class="xc19__side">
+        <transition name="el-zoom-in-center">
+          <div v-if="selectedMingxi.accountantId && selectedRow.projectId">
+            <c-kehu :project-id="selectedRow.projectId" :accountant-id="selectedMingxi.accountantId"></c-kehu>
           </div>
         </transition>
       </div>
@@ -79,6 +96,7 @@ export default {
       },
       selectedRow: {},
       selectedKehu: {},
+      selectedMingxi:{},
       param: {
         recordIdStates: 8
       },
