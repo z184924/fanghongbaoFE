@@ -14,7 +14,7 @@
             <div class="xc18__container">
               <div class="xc18__item">
                 <el-form-item label="手机号">
-                  <span>{{form.tphone}}}</span>
+                  <span>{{form.tphone}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
