@@ -8,7 +8,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
-      <el-form ref="form" :model="form" label-width="9em" label-position="left">
+      <el-form ref="form" :model="form" label-width="9em" label-position="right">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
           <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
