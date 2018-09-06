@@ -111,7 +111,7 @@ var myMixin = {
     mxSexFormatter(v) {
       if (v === 1) {
         return "男";
-      } else if (v === 2) {
+      } else if (v === 0) {
         return "女";
       } else {
         return "";
