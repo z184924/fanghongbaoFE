@@ -100,7 +100,6 @@ export default {
           this.isShowEdit = false;
         })
       })
-
     },
     del() {
       let row = this.selectedRow;

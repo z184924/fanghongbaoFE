@@ -26,7 +26,6 @@
           </el-date-picker> -->
           <c-date-picker v-model="form.postDate"></c-date-picker>
         </el-form-item>
-
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>

@@ -12,47 +12,47 @@
     <!-- <div style="height:30px"></div> -->
     <c-panel width="800px" title="基本信息">
       <div class="xc3__form">
-        <el-form ref="form" :model="form" label-width="12em">
+        <el-form ref="form" :model="form" :rules="rules" label-width="12em">
           <div class="xc11">
-            <el-form-item label="楼盘名称">
+            <el-form-item label="楼盘名称" prop="projectName">
               <el-input v-model="form.projectName"></el-input>
             </el-form-item>
           </div>
-          <el-form-item label="区域">
+          <el-form-item label="区域" prop="f__qy">
             <area-picker v-model="form.f__qy"></area-picker>
           </el-form-item>
-          <el-form-item label="楼盘类型">
+          <el-form-item label="楼盘类型" prop="projectType">
             <c-select dict="lplx" v-model="form.projectType" style="width:200px"></c-select>
           </el-form-item>
-          <el-form-item label="物业类型">
+          <el-form-item label="物业类型" prop="f__wylx">
             <el-checkbox-group v-model="form.f__wylx">
               <el-checkbox border :label="o.value" v-for="(o,i) in listWuyeLeixing" :key="i">{{o.label}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item label="售价区间">
+          <el-form-item label="售价区间" prop="sellingSection">
             <el-input v-model="form.sellingSection"></el-input>
           </el-form-item>
-          <el-form-item label="平均售价">
+          <el-form-item label="平均售价" prop="sellingAverage">
             <el-input v-model="form.sellingAverage" style="width:200px"></el-input>
             <span>元</span>
           </el-form-item>
-          <el-form-item label="地址">
+          <el-form-item label="地址" prop="projectAddress">
             <el-input v-model="form.projectAddress"></el-input>
           </el-form-item>
-          <el-form-item label="百度坐标">
+          <el-form-item label="百度坐标" prop="projectMapXY">
             <el-input v-model="form.projectMapXY" style="width:60%" placeholder="0.0000000,0.0000000"></el-input>
             <el-button type="primary" @click="pickLocation">选择坐标点…</el-button>
             <el-button type="text" @click="pickLocationHelp">如何使用？</el-button>
           </el-form-item>
-          <el-form-item label="佣金类型">
+          <el-form-item label="佣金类型" prop="commissionType">
             <c-select dict="yjbl" v-model="form.commissionType" style="width:200px"></c-select>
           </el-form-item>
-          <el-form-item :label="form.commissionType+''==='0'?'普通会员佣金':'普通会员佣金比例'">
+          <el-form-item :label="form.commissionType+''==='0'?'普通会员佣金':'普通会员佣金比例'" prop="f__pthyyj">
             <el-input v-model="form.f__pthyyj" style="width:200px"></el-input>
             <span v-if="form.commissionType+''==='0'">元</span>
             <span v-else>%</span>
           </el-form-item>
-          <el-form-item :label="form.commissionType+''==='0'?'VIP会员佣金':'VIP会员佣金比例'">
+          <el-form-item :label="form.commissionType+''==='0'?'VIP会员佣金':'VIP会员佣金比例'" prop="f__viphyyj">
             <el-input v-model="form.f__viphyyj" style="width:200px"></el-input>
             <span v-if="form.commissionType+''==='0'">元</span>
             <span v-else>%</span>
@@ -164,6 +164,27 @@ export default {
     AreaPicker
   },
   data() {
+    var areaValidate = (rule, value, callback) => {
+      // if (value === '') {
+      //   callback(new Error('请输入密码'));
+      // } else {
+      //   if (this.ruleForm2.checkPass !== '') {
+      //     this.$refs.ruleForm2.validateField('checkPass');
+      //   }
+      //   callback();
+      // }
+      if (value) {
+        if (value.city && value.area) {
+          callback();
+        } else {
+          callback(new Error('不能为空'));
+          return false;
+        }
+      } else {
+        callback(new Error('不能为空'));
+        return false;
+      }
+    };
     return {
       loading: false,
       listWuyeLeixing: [],
@@ -190,6 +211,15 @@ export default {
         { roleId: 9, field: "f__cw", fieldList: "listCaiwu", multiple: false },
       ],
       form: {
+        projectName: "",
+        projectType: "",
+        sellingSection: "",
+        sellingAverage: "",
+        projectAddress: "",
+        projectMapXY: "",
+        commissionType: "",
+        f__pthyyj: "",
+        f__viphyyj: "",
         f__wylx: [],
         commissionType: 0,
         ifRecommend: 1,
@@ -197,16 +227,16 @@ export default {
           city: "",
           area: ""
         },
-        f__zy:"",
-        f__xmzg:"",
-        f__acms:"",
-        f__xmjl:"",
-        f__shr:"",
-        f__yxzj:"",
-        f__qyjl:"",
-        f__zjl:"",
-        f__cw:"",
-        f__csr:"",
+        f__zy: "",
+        f__xmzg: "",
+        f__acms: "",
+        f__xmjl: "",
+        f__shr: "",
+        f__yxzj: "",
+        f__qyjl: "",
+        f__zjl: "",
+        f__cw: "",
+        f__csr: "",
         // f__listFengmian: [],
         // f__listLunbotu: [],
         // f__listZiliaoku: [],
@@ -215,6 +245,43 @@ export default {
         // f__listYongjinXiangxi: [],
         // f__listXiangmuCanshu: [],
         // f__listXiangmuMaidian: [],
+      },
+      rules: {
+        projectName: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__qy: [
+          { validator: areaValidate, message: '不能为空', trigger: 'change' }
+          // { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        projectAddress: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        projectType: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__wylx: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        sellingSection: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        sellingAverage: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        projectMapXY: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        commissionType: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__pthyyj: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__viphyyj: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+
       },
       tableClient: [],
       selectedClient: [],
@@ -242,85 +309,100 @@ export default {
     },
     save() {
 
-      // 复制form
-      let data = clone(this.form);
-      for (const key in data) {
-        if (key.indexOf("f__") >= 0) {
-          delete data[key];
+
+
+
+
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          // alert('submit!');
+
+
+          // 复制form
+          let data = clone(this.form);
+          for (const key in data) {
+            if (key.indexOf("f__") >= 0) {
+              delete data[key];
+            }
+          }
+          data.cityId = this.form.f__qy.city;
+          data.areaId = this.form.f__qy.area;
+
+          // 佣金
+          if (data.commissionType + '' === "0") {
+            data.generalCommission = this.form.f__pthyyj;
+            data.vipCommission = this.form.f__viphyyj;
+          } else {
+            data.generalCommissionBL = this.form.f__pthyyj;
+            data.vipCommissionBL = this.form.f__viphyyj;
+          }
+
+          // 推荐时间
+          if (data.ifRecommend + '' !== "1") {
+            data.recommendTime = "";
+          }
+
+          // 用户
+          data.creator = "测试用户***"
+          data.createTime = moment().format("YYYY-MM-DD HH:mm:ss");
+
+
+          // 角色人员
+          let listRole = [];
+          let listUser = [];
+          this.listRole.forEach(o => {
+            listUser.push(this.form[o.field]);
+            listRole.push(o.roleId)
+            // if (o.multiple) {
+            //   this.form[o.field].forEach(oo => {
+            //     listUser.push(oo);
+            //     listRole.push(o.roleId)
+            //   })
+            // } else {
+            //   if (this.form[o.field]) {
+            //     listUser.push(this.form[o.field]);
+            //     listRole.push(o.roleId)
+            //   }
+            // }
+          })
+          data.roleIds = listRole.join();
+          data.userIds = listUser.join();
+
+          // 抄送人
+          data.copyUserIds = this.form.f__csr;
+
+          //客户信息
+          data.fields = this.selectedClient.map(o => {
+            return o.customerMapId
+          }).join();
+
+
+
+          // 图片
+          // data.logoPic = this.form.f__listFengmian.join();
+          // data.carouselPictures = this.form.f__listLunbotu.join();
+          // data.dataPictures = this.form.f__listZiliaoku.join();
+          // data.parameterPictures = this.form.f__listXiangmuCanshu.join();
+          // data.sellingPointPictures = this.form.f__listXiangmuMaidian.join();
+          // data.houseTypePictures = this.form.f__listHuxingtu.join();
+          // data.posterPictures = this.form.f__listHaibao.join();
+          // data.commissionPictures = this.form.f__listYongjinXiangxi.join();
+
+          // 物业类型
+          data.propertyTypeIds = this.form.f__wylx.join();
+
+          this.xpost("projectInfo/saveOrUpdate", data).then(res => {
+            this.mxMessage(res).then(() => {
+              this.mxBack();
+            })
+          })
+        } else {
+          this.$message({
+            type: "warning",
+            message: "请填写完整"
+          })
         }
-      }
-      data.cityId = this.form.f__qy.city;
-      data.areaId = this.form.f__qy.area;
-
-      // 佣金
-      if (data.commissionType + '' === "0") {
-        data.generalCommission = this.form.f__pthyyj;
-        data.vipCommission = this.form.f__viphyyj;
-      } else {
-        data.generalCommissionBL = this.form.f__pthyyj;
-        data.vipCommissionBL = this.form.f__viphyyj;
-      }
-
-      // 推荐时间
-      if (data.ifRecommend + '' !== "1") {
-        data.recommendTime = "";
-      }
-
-      // 用户
-      data.creator = "测试用户***"
-      data.createTime = moment().format("YYYY-MM-DD HH:mm:ss");
-
-
-      // 角色人员
-      let listRole = [];
-      let listUser = [];
-      this.listRole.forEach(o => {
-        listUser.push(this.form[o.field]);
-        listRole.push(o.roleId)
-        // if (o.multiple) {
-        //   this.form[o.field].forEach(oo => {
-        //     listUser.push(oo);
-        //     listRole.push(o.roleId)
-        //   })
-        // } else {
-        //   if (this.form[o.field]) {
-        //     listUser.push(this.form[o.field]);
-        //     listRole.push(o.roleId)
-        //   }
-        // }
-      })
-      data.roleIds = listRole.join();
-      data.userIds = listUser.join();
-
-      // 抄送人
-      data.copyUserIds = this.form.f__csr;
-
-      //客户信息
-      data.fields = this.selectedClient.map(o => {
-        return o.customerMapId
-      }).join();
-
-
-
-      // 图片
-      // data.logoPic = this.form.f__listFengmian.join();
-      // data.carouselPictures = this.form.f__listLunbotu.join();
-      // data.dataPictures = this.form.f__listZiliaoku.join();
-      // data.parameterPictures = this.form.f__listXiangmuCanshu.join();
-      // data.sellingPointPictures = this.form.f__listXiangmuMaidian.join();
-      // data.houseTypePictures = this.form.f__listHuxingtu.join();
-      // data.posterPictures = this.form.f__listHaibao.join();
-      // data.commissionPictures = this.form.f__listYongjinXiangxi.join();
-
-      // 物业类型
-      data.propertyTypeIds = this.form.f__wylx.join();
-
-      this.xpost("projectInfo/saveOrUpdate", data).then(res => {
-        this.mxMessage(res).then(() => {
-          this.mxBack();
-        })
-      })
-
+      });
     },
     getChaosongrenList(id) {
       return new Promise((resolve, reject) => {
