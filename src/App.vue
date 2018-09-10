@@ -24,7 +24,7 @@
               </keep-alive>
               <router-view v-if="!$route.meta.keepAlive"></router-view>
               <div style="text-align:center;color:blue" v-if="menu.length==0">当前无权限</div>
-              <div style="height:130px"></div>
+              <!-- <div style="height:130px"></div> -->
               <!-- </transition> -->
             </div>
           </div>
