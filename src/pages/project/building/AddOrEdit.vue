@@ -57,9 +57,9 @@
             <span v-if="form.commissionType+''==='0'">元</span>
             <span v-else>%</span>
           </el-form-item>
-          <el-form-item label="楼盘状态">
+          <!-- <el-form-item label="楼盘状态">
             <c-select dict="lpzt" v-model="form.projectStatus" style="width:200px"></c-select>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="是否推荐">
             <c-select type="radio" v-model="form.ifRecommend" dict="bool"></c-select>
           </el-form-item>
@@ -152,6 +152,7 @@
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
     </div>
+    <div style="height:100px"></div>
   </div>
 </template>
 <script>
