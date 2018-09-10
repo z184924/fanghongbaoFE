@@ -165,24 +165,14 @@ export default {
   },
   data() {
     var areaValidate = (rule, value, callback) => {
-      // if (value === '') {
-      //   callback(new Error('请输入密码'));
-      // } else {
-      //   if (this.ruleForm2.checkPass !== '') {
-      //     this.$refs.ruleForm2.validateField('checkPass');
-      //   }
-      //   callback();
-      // }
       if (value) {
         if (value.city && value.area) {
           callback();
         } else {
           callback(new Error('不能为空'));
-          return false;
         }
       } else {
         callback(new Error('不能为空'));
-        return false;
       }
     };
     return {
