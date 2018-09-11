@@ -56,14 +56,6 @@
             </transition>
           </div>
         </div>
-        <!-- <div style="height:10px"></div>
-        <div>
-          <transition name="el-zoom-in-center">
-            <div v-if="selectedJiesuan.accountantId">
-              <c-fafang :accountant-id="selectedJiesuan.accountantId"></c-fafang>
-            </div>
-         </transition>
-        </div> -->
       </div>
     </transition>
   </div>
@@ -128,7 +120,7 @@ export default {
       let id = this.selectedRow[this.config.pk];
       if (id) {
         this.$confirm(`是否通过？`, "审核").then(() => {
-          this.xpost("serviceInfo/financeCheckInfo", {
+          this.xpost("serviceInfo/submitCheckInfo", {
             serviceId: id,
             recordIdState: state
           }).then(res => {

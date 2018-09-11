@@ -167,7 +167,7 @@ export default {
             let data = {};
             data[this.config.pk] = row[this.config.pk];
             data.recordIdState = 2;
-            this.xpost("serviceInfo/secretarySubmitInfo", data).then(res => {
+            this.xpost("serviceInfo/submitCheckInfo", data).then(res => {
               this.$refs.table.getData();
               this.mxMessage(res)
             })

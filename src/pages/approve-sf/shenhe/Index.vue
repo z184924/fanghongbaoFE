@@ -111,7 +111,7 @@ export default {
       let id = this.selectedRow[this.config.pk];
       if (id) {
         this.$confirm(`是否${name}？`, "审核").then(() => {
-          this.xpost("serviceInfo/checkerCheckInfo", {
+          this.xpost("serviceInfo/submitCheckInfo", {
             serviceId: id,
             recordIdState: state
           }).then(res => {
