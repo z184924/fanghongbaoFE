@@ -22,6 +22,7 @@ export default {
   props: {
     projectId: {},
     accountantId: {},
+    serviceId: {}
   },
   data() {
     let vue = this;
@@ -100,14 +101,17 @@ export default {
     },
     paramAdd() {
       return {
-        projectId: this.projectId
+        projectId: this.projectId,
+        serviceId: this.serviceId,
+
       }
     },
   },
   methods: {
     add() {
       this.form = {
-        accountantId: this.accountantId
+        accountantId: this.accountantId,
+
       };
       this.dialogTitle = "新增";
       this.isShowEdit = true;

@@ -38,7 +38,7 @@
       <div class="xc19__side">
         <transition name="el-zoom-in-center">
           <div v-if="selectedMingxi.accountantId && selectedRow.projectId">
-            <c-kehu :project-id="selectedRow.projectId" :accountant-id="selectedMingxi.accountantId"></c-kehu>
+            <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" :accountant-id="selectedMingxi.accountantId"></c-kehu>
           </div>
         </transition>
       </div>
@@ -99,7 +99,9 @@ export default {
   },
   methods: {
     add() {
-      this.form = {};
+      this.form = {
+        recordIdState: 0
+      };
       this.dialogTitle = "新增";
       this.isShowEdit = true;
     },
@@ -124,6 +126,7 @@ export default {
       let arrayDate = this.form.f__date.split("-");
       this.form.recordYear = arrayDate[0];
       this.form.recordMonth = arrayDate[1];
+      // this.form.recordIdState = 0;
       this.xpost(this.config.editUrl, this.form).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
