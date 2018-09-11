@@ -72,43 +72,43 @@
             </div>
           </el-collapse-transition>
 
-          <el-form-item label="专员（多选）">
+          <el-form-item label="专员（多选）" prop="commissionType">
             <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__zy=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="项目主管（单选）">
+          <el-form-item label="项目主管（单选）" prop="f__xmzg">
             <c-select v-model="form.f__xmzg" :dict="listXiangmuZhuguan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__xmzg=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="案场秘书（多选）">
+          <el-form-item label="案场秘书（多选）" prop="f__acms">
             <c-select type="multiple" v-model="form.f__acms" :dict="listAnchang" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__acms=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="项目经理（多选）">
+          <el-form-item label="项目经理（多选）" prop="f__xmjl">
             <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__xmjl=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="审核人（单选）">
+          <el-form-item label="审核人（单选）" prop="f__shr">
             <c-select v-model="form.f__shr" :dict="listShenheren" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__shr=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="营销总监（单选）">
+          <el-form-item label="营销总监（单选）" prop="f__yxzj">
             <c-select v-model="form.f__yxzj" :dict="listYingxiaoZongjian" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__yxzj=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="区域经理（单选）">
+          <el-form-item label="区域经理（单选）" prop="f__qyjl">
             <c-select v-model="form.f__qyjl" :dict="listQuyuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__qyjl=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="总经理（单选）">
+          <el-form-item label="总经理（单选）" prop="f__zjl">
             <c-select v-model="form.f__zjl" :dict="listZongjingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__zjl=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="财务（单选）">
+          <el-form-item label="财务（单选）" prop="f__cw">
             <c-select v-model="form.f__cw" :dict="listCaiwu" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__cw=''">清空</el-button>
           </el-form-item>
-          <el-form-item label="抄送人（多选）">
+          <el-form-item label="抄送人（多选）" prop="f__csr">
             <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__csr=''">清空</el-button>
           </el-form-item>
@@ -242,7 +242,6 @@ export default {
         ],
         f__qy: [
           { validator: areaValidate, message: '不能为空', trigger: 'change' }
-          // { required: true, message: '不能为空', trigger: 'change' }
         ],
         projectAddress: [
           { required: true, message: '不能为空', trigger: 'change' }
@@ -272,6 +271,38 @@ export default {
           { required: true, message: '不能为空', trigger: 'change' }
         ],
 
+        f__zy: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__xmzg: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__acms: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__xmjl: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__shr: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__yxzj: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__qyjl: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__zjl: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__cw: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        f__csr: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+
+
       },
       tableClient: [],
       selectedClient: [],
@@ -298,15 +329,8 @@ export default {
       this.selectedClient = o;
     },
     save() {
-
-
-
-
-
       this.$refs.form.validate(valid => {
         if (valid) {
-          // alert('submit!');
-
 
           // 复制form
           let data = clone(this.form);
