@@ -135,7 +135,9 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="齐定金额">
-                  <el-input v-model="form.homogeneityMoney"></el-input>元
+                  <!-- <el-input v-model="form.homogeneityMoney"></el-input> -->
+                  <span>{{form.homogeneityMoney}}</span>
+                  元
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -238,7 +240,7 @@
 
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
-            <file-box is-window v-model="form.checkData"></file-box>
+            <file-box :editable="false" is-window v-model="form.checkData"></file-box>
           </c-panel>
           <!-- <div>{{form}}</div> -->
 
