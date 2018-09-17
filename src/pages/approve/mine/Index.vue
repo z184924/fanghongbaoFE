@@ -11,6 +11,31 @@
       <el-form ref="form" :model="form" label-width="9em" label-position="right">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
+          <c-panel title="审核人审核信息" title-color="#2f2a7a">
+            <div class="xc18__container">
+              <div class="xc18__item">
+                <el-form-item label="审核人">
+                  <span>{{form.Name_shr}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="是否满足结佣条件">
+                  <span>{{mxBoolFormatter(form.isReadyMaid)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="审核资料是否通过">
+                  <span>{{mxBoolFormatter(form.isSubscription)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="客户备注">
+                  <span>{{form.Opinion_shr}}</span>
+                </el-form-item>
+              </div>
+
+            </div>
+          </c-panel>
           <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -61,31 +86,7 @@
 
             </div>
           </c-panel>
-          <c-panel title="审核人审核信息" title-color="#2f2a7a">
-            <div class="xc18__container">
-              <div class="xc18__item">
-                <el-form-item label="审核人">
-                  <span>{{form.Name_shr}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="是否满足结佣条件">
-                  <span>{{mxBoolFormatter(form.isReadyMaid)}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="审核资料是否通过">
-                  <span>{{mxBoolFormatter(form.isSubscription)}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="客户备注">
-                  <span>{{form.Opinion_shr}}</span>
-                </el-form-item>
-              </div>
 
-            </div>
-          </c-panel>
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
