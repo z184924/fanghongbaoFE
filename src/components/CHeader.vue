@@ -34,7 +34,7 @@
       <i class="ii i-zhuxiao"></i>
       <span style="padding:0 3px;">注销</span>
     </div>
-    <el-dialog :visible.sync="isShowChangePassword" title="修改密码" width="400px">
+    <el-dialog :visible.sync="isShowChangePassword" title="修改密码" v-drag width="400px">
       <div v-if="isShowChangePassword">
         <el-form ref="form" :model="form" label-width="5em">
           <el-form-item label="电话号">
@@ -96,7 +96,7 @@ export default {
       });
     },
     changePassword() {
-      console.log(this.mxLoginInfo);
+      // console.log(this.mxLoginInfo);
       this.isShowChangePassword = true;
     },
     doChangePassword() {
@@ -121,7 +121,9 @@ export default {
       }, 1000)
     },
     getValidNumber() {
-      this.xpost("user/getVerificationCode").then(res => {
+      this.xpost("user/getVerificationCode",{
+        phone:this.mxLoginInfo.phone
+      }).then(res => {
         console.log(res);
       })
       this.startDaojishi();

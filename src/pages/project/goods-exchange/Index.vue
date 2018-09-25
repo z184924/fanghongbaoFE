@@ -14,7 +14,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-      <el-form ref="form" :model="form" label-width="5em">
+      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
         <el-form-item label="是否邮寄">
           <c-select v-model="form.isPost" dict="bool" type="radio"></c-select>
         </el-form-item>
@@ -31,7 +31,7 @@
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
     <el-dialog :visible.sync="isShowDetail" v-drag title="详细" width="400px">
-      <table class="xc-table xc-table--border xc-table--center">
+      <table v-if="isShowDetail" class="xc-table xc-table--border xc-table--center">
         <tr>
           <td>物品名称</td>
           <td>{{detail.goodsName}}</td>

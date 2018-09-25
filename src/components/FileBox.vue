@@ -15,7 +15,7 @@
       </div>
     </div>
     <el-dialog append-to-body :visible.sync="isShowFullImg" fullscreen title="原图预览 (按下Esc关闭)">
-      <div class="xc13" :style="{height:mxWindowHeight-70 + 'px'}">
+      <div class="xc13" v-if="isShowFullImg" :style="{height:mxWindowHeight-70 + 'px'}">
         <img :src="activeSrc" alt="">
       </div>
     </el-dialog>

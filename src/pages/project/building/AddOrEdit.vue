@@ -72,45 +72,65 @@
             </div>
           </el-collapse-transition>
 
-          <el-form-item label="专员（多选）" prop="commissionType">
+          <el-form-item label="专员（多选）" prop="f__zy">
             <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__zy=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_zy" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="项目主管（单选）" prop="f__xmzg">
             <c-select v-model="form.f__xmzg" :dict="listXiangmuZhuguan" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__xmzg=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_xmzg" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="案场秘书（多选）" prop="f__acms">
             <c-select type="multiple" v-model="form.f__acms" :dict="listAnchang" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__acms=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_acms" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="项目经理（多选）" prop="f__xmjl">
             <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__xmjl=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_xmjl" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="审核人（单选）" prop="f__shr">
             <c-select v-model="form.f__shr" :dict="listShenheren" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__shr=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_shr" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="营销总监（单选）" prop="f__yxzj">
             <c-select v-model="form.f__yxzj" :dict="listYingxiaoZongjian" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__yxzj=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_yxzj" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="区域经理（单选）" prop="f__qyjl">
             <c-select v-model="form.f__qyjl" :dict="listQuyuJingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__qyjl=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_qyjl" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="总经理（单选）" prop="f__zjl">
             <c-select v-model="form.f__zjl" :dict="listZongjingli" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__zjl=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_zjl" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="财务（单选）" prop="f__cw">
             <c-select v-model="form.f__cw" :dict="listCaiwu" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__cw=''">清空</el-button>
+            <span>金额：</span>
+            <el-input v-model="form.f__je_cw" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="抄送人（多选）" prop="f__csr">
             <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
             <el-button type="text" @click="form.f__csr=''">清空</el-button>
+            <!-- <span>金额：</span> -->
+            <!-- <el-input v-model="form.f__je_csr" style="width:85px"></el-input> -->
           </el-form-item>
         </el-form>
       </div>
@@ -189,16 +209,16 @@ export default {
       listYingxiaoZongjian: [],
       listZongjingli: [],
       listCaiwu: [],
-      listRole: [
-        { roleId: 2, field: "f__zy", fieldList: "listZhuanyuan", multiple: true },
-        { roleId: 3, field: "f__xmzg", fieldList: "listXiangmuZhuguan", multiple: false },
-        { roleId: 10, field: "f__acms", fieldList: "listAnchang", multiple: true },
-        { roleId: 4, field: "f__xmjl", fieldList: "listXiangmuJingli", multiple: true },
-        { roleId: 8, field: "f__shr", fieldList: "listShenheren", multiple: false },
-        { roleId: 5, field: "f__qyjl", fieldList: "listQuyuJingli", multiple: false },
-        { roleId: 6, field: "f__yxzj", fieldList: "listYingxiaoZongjian", multiple: false },
-        { roleId: 7, field: "f__zjl", fieldList: "listZongjingli", multiple: false },
-        { roleId: 9, field: "f__cw", fieldList: "listCaiwu", multiple: false },
+      listRoleTable: [
+        { roleId: 2, field: "f__zy", je: "f__je_zy", fieldList: "listZhuanyuan", multiple: true },
+        { roleId: 3, field: "f__xmzg", je: "f__je_xmzg", fieldList: "listXiangmuZhuguan", multiple: false },
+        { roleId: 10, field: "f__acms", je: "f__je_acms", fieldList: "listAnchang", multiple: true },
+        { roleId: 4, field: "f__xmjl", je: "f__je_xmjl", fieldList: "listXiangmuJingli", multiple: true },
+        { roleId: 8, field: "f__shr", je: "f__je_shr", fieldList: "listShenheren", multiple: false },
+        { roleId: 5, field: "f__qyjl", je: "f__je_qyjl", fieldList: "listQuyuJingli", multiple: false },
+        { roleId: 6, field: "f__yxzj", je: "f__je_yxzj", fieldList: "listYingxiaoZongjian", multiple: false },
+        { roleId: 7, field: "f__zjl", je: "f__je_zjl", fieldList: "listZongjingli", multiple: false },
+        { roleId: 9, field: "f__cw", je: "f__je_cw", fieldList: "listCaiwu", multiple: false },
       ],
       form: {
         projectName: "",
@@ -227,6 +247,16 @@ export default {
         f__zjl: "",
         f__cw: "",
         f__csr: "",
+        f__je_zy: "",
+        f__je_xmzg: "",
+        f__je_acms: "",
+        f__je_xmjl: "",
+        f__je_shr: "",
+        f__je_yxzj: "",
+        f__je_qyjl: "",
+        f__je_zjl: "",
+        f__je_cw: "",
+        f__je_csr: "",
         // f__listFengmian: [],
         // f__listLunbotu: [],
         // f__listZiliaoku: [],
@@ -303,6 +333,38 @@ export default {
         ],
 
 
+        // f__je_zy: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_xmzg: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_acms: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_xmjl: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_shr: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_yxzj: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_qyjl: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_zjl: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_cw: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+        // f__je_csr: [
+        //   { required: true, message: '不能为空', trigger: 'change' }
+        // ],
+
+
       },
       tableClient: [],
       selectedClient: [],
@@ -364,9 +426,11 @@ export default {
           // 角色人员
           let listRole = [];
           let listUser = [];
-          this.listRole.forEach(o => {
+          let listMoney = [];
+          this.listRoleTable.forEach(o => {
             listUser.push(this.form[o.field]);
             listRole.push(o.roleId)
+            listMoney.push(this.form[o.je])
             // if (o.multiple) {
             //   this.form[o.field].forEach(oo => {
             //     listUser.push(oo);
@@ -381,6 +445,7 @@ export default {
           })
           data.roleIds = listRole.join();
           data.userIds = listUser.join();
+          data.moneys = listMoney.join();
 
           // 抄送人
           data.copyUserIds = this.form.f__csr;
@@ -410,6 +475,7 @@ export default {
               this.mxBack();
             })
           })
+          // console.log(data);
         } else {
           this.$message({
             type: "warning",
@@ -523,7 +589,7 @@ export default {
         });
       }
       // 获取用户
-      this.listRole.forEach(o => {
+      this.listRoleTable.forEach(o => {
         p4 = this.xpost("user/getUsersByRoleID", {
           roleId: o.roleId,
           projectId

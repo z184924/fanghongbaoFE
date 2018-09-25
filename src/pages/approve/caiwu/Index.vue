@@ -7,7 +7,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
-      <el-form ref="form" :model="form" label-width="9em" label-position="right">
+      <el-form ref="form" :rules="rules" :model="form2" label-width="9em" label-position="right" v-if="isShowEdit">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
@@ -80,12 +80,12 @@
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="是否付款">
+                <el-form-item label="是否付款" prop="payState">
                   <c-select v-model="form2.payState" dict="bool" type="radio"></c-select>
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="付款时间">
+                <el-form-item label="付款时间" prop="payTime">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker> -->
                   <c-date-picker v-model="form2.payTime"></c-date-picker>
                 </el-form-item>
@@ -97,7 +97,7 @@
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
-                <el-form-item label="电商是否到帐">
+                <el-form-item label="电商是否到账" prop="isOnline">
                   <c-select v-model="form2.isOnline" dict="bool" type="radio"></c-select>
                 </el-form-item>
               </div>
@@ -107,25 +107,25 @@
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="到账日期">
+                <el-form-item label="到账日期" prop="onlineDate">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.onlineDate"></el-date-picker> -->
                   <c-date-picker v-model="form2.onlineDate"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="服务奖金计提月">
+                <el-form-item label="服务奖金计提月" prop="serviceMonth">
                   <!-- <el-date-picker v-model="form2.serviceMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月"> -->
                   <!-- </el-date-picker> -->
                   <c-date-picker v-model="form2.serviceMonth"></c-date-picker>
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="是否发放留存">
+                <el-form-item label="是否发放留存" prop="keepState">
                   <c-select v-model="form2.keepState" dict="bool" type="radio"></c-select>
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="留存发放月">
+                <el-form-item label="留存发放月" prop="keepMonth">
                   <!-- <el-date-picker v-model="form2.keepMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月">
                   </el-date-picker> -->
                   <c-date-picker v-model="form2.keepMonth"></c-date-picker>
@@ -137,7 +137,7 @@
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="尾款奖励日期">
+                <el-form-item label="尾款奖励日期" prop="finalPaymentPriceDate">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" style="width:160px" v-model="form2.finalPaymentPriceDate"></el-date-picker> -->
                   <c-date-picker v-model="form2.finalPaymentPriceDate"></c-date-picker>
                 </el-form-item>
@@ -146,11 +146,18 @@
               <div class="xc18__item xc18__item--full">
                 <el-form-item label="客户备注">
                   <el-input v-model="form2.remarks" type="textarea" :rows="4"></el-input>
-                  <div style="text-align:right;padding-top:6px">
+
+                </el-form-item>
+              </div>
+              <div class="xc18__item xc18__item--full">
+                <el-form-item label="是否结佣" prop="customerStatusId">
+                  <div style="text-align:right">
                     <c-select v-model="form2.customerStatusId" :dict="listState" type="radio"></c-select>
                   </div>
                 </el-form-item>
+
               </div>
+
               <div class="xc22">
                 <div class="xc22__title">佣金记录</div>
                 <table class="xc-table xc-table--border">
@@ -179,7 +186,7 @@
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
     <el-dialog v-drag title="新增佣金记录" append-to-body :visible.sync="isShowAddYongjin" width="400px" top="60vh">
-      <table class="xc-table xc-table--border" style="width:100%">
+      <table v-if="isShowAddYongjin" class="xc-table xc-table--border" style="width:100%">
         <tr>
           <td style="width:8em">佣金金额（元）</td>
           <td>
@@ -247,7 +254,16 @@ export default {
         f__files: []
       },
       form2: {
-        friendPrize: 0
+        friendPrize: 0,
+        isOnline: "",
+        onlineDate: "",
+        serviceMonth: "",
+        keepState: "",
+        keepMonth: "",
+        finalPaymentPriceDate: "",
+        payState: "",
+        payTime: "",
+        customerStatusId: "",
       },
       selectedRow: {},
       listWuyeLeixing: [],
@@ -263,7 +279,36 @@ export default {
           label: "已结佣",
           value: 24
         },
-      ]
+      ],
+      rules: {
+        isOnline: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        onlineDate: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        serviceMonth: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        keepState: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        keepMonth: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        finalPaymentPriceDate: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        payState: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        payTime: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ],
+        customerStatusId: [
+          { required: true, message: '不能为空', trigger: 'change' }
+        ]
+      }
     }
   },
   methods: {
@@ -334,14 +379,28 @@ export default {
     //   })
     // },
     save() {
-      let data = clone(this.form2);
-      data.customerId = this.form.customerId;
-      this.xpost(this.config.editUrl, data).then(res => {
-        this.$refs.table.getData();
-        this.mxMessage(res).then(() => {
-          this.isShowEdit = false;
-        })
-      })
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          let data = clone(this.form2);
+          data.customerId = this.form.customerId;
+          this.xpost(this.config.editUrl, data).then(res => {
+            this.$refs.table.getData();
+            this.mxMessage(res).then(() => {
+              this.isShowEdit = false;
+            })
+          })
+        } else {
+          this.$message({
+            message:"请填写完整",
+            type:"warning"
+          })
+          console.log('error submit!!');
+          return false;
+        }
+      });
+
+
+
 
     },
     del() {

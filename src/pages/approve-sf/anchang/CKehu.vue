@@ -1,14 +1,14 @@
 <template>
   <div class="xc6 xc-shadow">
     <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
-      <div class="xc6__title" slot="left-control">客户明细</div>
+      <div class="xc6__title" slot="left-control">客户明细（{{name}}）</div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加客户</el-button>
       <!-- <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除客户</el-button>
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="800px">
-      <fixed-table ref="tableAdd" :multiple="true" :get-data-url="config.addUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
+      <fixed-table ref="tableAdd" v-if="isShowEdit" :multiple="true" :get-data-url="config.addUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
       </fixed-table>
 
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
@@ -20,6 +20,7 @@
 <script>
 export default {
   props: {
+    name: {},
     projectId: {},
     accountantId: {},
     serviceId: {}

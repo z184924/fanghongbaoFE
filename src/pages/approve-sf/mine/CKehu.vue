@@ -8,7 +8,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="800px">
-      <fixed-table ref="tableAdd" :multiple="true" :get-data-url="config.addUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
+      <fixed-table ref="tableAdd" v-if="isShowEdit" :multiple="true" :get-data-url="config.addUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
       </fixed-table>
 
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>

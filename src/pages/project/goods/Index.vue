@@ -12,7 +12,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="1000px" top="5vh">
-      <table class="xc-table xc-table--border">
+      <table v-if="isShowEdit" class="xc-table xc-table--border">
         <tr>
           <td style="width:5em">商品名称</td>
           <td colspan="3">

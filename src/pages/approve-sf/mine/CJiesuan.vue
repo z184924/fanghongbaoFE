@@ -8,8 +8,8 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-      <el-form ref="form" :model="form" label-width="5em">
-        
+      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
+
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
@@ -42,20 +42,24 @@ export default {
           label: "姓名",
           width: "auto",
         },
-        prize: {
-          label: "服务奖金",
+        serverValue: {
+          label: "服务费",
           width: "auto",
         },
         personalTax: {
           label: "个税",
           width: "auto",
         },
-        keepValue: {
-          label: "留存",
+        prize: {
+          label: "应发奖金",
           width: "auto",
         },
         realPrize: {
-          label: "实际服务奖金",
+          label: "实发奖金",
+          width: "auto",
+        },
+        keepValue: {
+          label: "留存",
           width: "auto",
         },
         remark: {

@@ -8,7 +8,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
-      <el-form ref="form" :model="form" label-width="9em" label-position="right">
+      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="9em" label-position="right">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
@@ -90,7 +90,7 @@
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
-                <el-form-item label="电商是否到帐">
+                <el-form-item label="电商是否到账">
                   <span>{{mxBoolFormatter(form.isOnline)}}</span>
                 </el-form-item>
               </div>

@@ -38,7 +38,7 @@
       <div class="xc19__side">
         <transition name="el-zoom-in-center">
           <div v-if="selectedMingxi.accountantId && selectedRow.projectId">
-            <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" :accountant-id="selectedMingxi.accountantId"></c-kehu>
+            <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" :accountant-id="selectedMingxi.accountantId" :name="selectedMingxi.userName"></c-kehu>
           </div>
         </transition>
       </div>

@@ -18,7 +18,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="600px">
-      <table class="xc-table xc-table--border">
+      <table v-if="isShowEdit" class="xc-table xc-table--border">
         <tr>
           <td style="width:6em;text-align:center">轮播图类型</td>
           <td>

@@ -8,7 +8,7 @@
 
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-      <el-form ref="form" :model="form" label-width="5em">
+      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
         <el-form-item label="商品名称">
           <el-input v-model="form.goodsName"></el-input>
         </el-form-item>

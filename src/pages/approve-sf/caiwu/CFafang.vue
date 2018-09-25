@@ -8,7 +8,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="300px">
-      <el-form ref="form" :model="form" label-width="5em">
+      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
         <el-form-item label="金额">
           <el-input-number style="width:100%" v-model="form.serviceValue"></el-input-number>
         </el-form-item>

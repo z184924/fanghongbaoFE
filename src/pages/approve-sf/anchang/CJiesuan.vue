@@ -14,10 +14,11 @@
         <tr class="xc-table__head">
           <td>结算对象</td>
           <td style="width:4em">姓名</td>
-          <td>服务奖金</td>
+          <td>服务费</td>
           <td>个税</td>
+          <td>应发奖金</td>
+          <td>实发奖金</td>
           <td>留存</td>
-          <td>实际服务奖金</td>
           <td>备注</td>
           <td>操作</td>
         </tr>
@@ -25,16 +26,19 @@
           <td>{{o.roleName}}</td>
           <td>{{o.userName}}</td>
           <td>
-            <el-input-number :controls="false" style="width:auto" v-model="o.prize"></el-input-number>
+            <el-input-number :controls="false" style="width:auto" v-model="o.serverValue"></el-input-number>
           </td>
           <td>
             <el-input-number :controls="false" style="width:auto" v-model="o.personalTax"></el-input-number>
           </td>
           <td>
-            <el-input-number :controls="false" style="width:auto" v-model="o.keepValue"></el-input-number>
+            <el-input-number :controls="false" style="width:auto" v-model="o.prize"></el-input-number>
           </td>
           <td>
             <el-input-number :controls="false" style="width:auto" v-model="o.realPrize"></el-input-number>
+          </td>
+          <td>
+            <el-input-number :controls="false" style="width:auto" v-model="o.keepValue"></el-input-number>
           </td>
           <td>
             <el-input v-model="o.remark"></el-input>

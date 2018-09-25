@@ -20,7 +20,7 @@
       </el-table-column>
     </fixed-table>
     <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="1000px" top="100px">
-      <table class="xc-table xc-table--border">
+      <table v-if="isShowEdit" class="xc-table xc-table--border">
         <tr>
           <td class="xc-text-center" style="width:7em">新闻标题</td>
           <td>
