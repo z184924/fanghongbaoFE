@@ -433,7 +433,8 @@ export default {
             listUser.push(this.form[o.field]);
             for (let i = 0; i < userCount; i++) {
               listRole.push(o.roleId)
-              listMoney.push(this.form[o.je])
+              let je = this.form[o.je] ? this.form[o.je] : 0;
+              listMoney.push(je)
             }
 
             // if (o.multiple) {
