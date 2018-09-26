@@ -247,16 +247,16 @@ export default {
         f__zjl: "",
         f__cw: "",
         f__csr: "",
-        f__je_zy: "",
-        f__je_xmzg: "",
-        f__je_acms: "",
-        f__je_xmjl: "",
-        f__je_shr: "",
-        f__je_yxzj: "",
-        f__je_qyjl: "",
-        f__je_zjl: "",
-        f__je_cw: "",
-        f__je_csr: "",
+        f__je_zy: 0,
+        f__je_xmzg: 0,
+        f__je_acms: 0,
+        f__je_xmjl: 0,
+        f__je_shr: 0,
+        f__je_yxzj: 0,
+        f__je_qyjl: 0,
+        f__je_zjl: 0,
+        f__je_cw: 0,
+        f__je_csr: 0,
         // f__listFengmian: [],
         // f__listLunbotu: [],
         // f__listZiliaoku: [],
@@ -432,9 +432,9 @@ export default {
             let userCount = listOfUserItem.length;
             listUser.push(this.form[o.field]);
             for (let i = 0; i < userCount; i++) {
-              listRole.push(o.roleId)
+              listRole.push(o.roleId);
               let je = this.form[o.je] ? this.form[o.je] : 0;
-              listMoney.push(je)
+              listMoney.push(je);
             }
 
             // if (o.multiple) {
@@ -608,16 +608,13 @@ export default {
           })
 
           // 角色人员
-
+          let users = [];
           res.rows.forEach(oo => {
             if (oo.isChecked === 1) {
-              //   if (o.multiple) {
-              //     this.form[o.field].push(oo.userId)
-              //   } else {
-              //     }
-              this.form[o.field] = oo.userId;
+              users.push(oo.userId)
             }
           })
+          this.form[o.field] = users.join();
         })
       })
 
@@ -634,8 +631,34 @@ export default {
           })
         })
       })
+
+      p7 = this.xpost("projectInfo/getServiceValueByProjectID", {
+        projectId,
+      }).then(res => {
+        // this.tableClient = res.rows;
+        // this.$nextTick(() => {
+        //   this.tableClient.forEach(o => {
+        //     if (o.ifchecked) {
+        //       this.$refs.tableClient.toggleRowSelection(o, true);
+        //     }
+        //   })
+        // })
+        console.log(res);
+        // this.f__je_zy = 66;
+        res.rows.forEach(o => {
+          this.listRoleTable.forEach(oo => {
+            if (o.roleId + "" == oo.roleId) {
+              // console.log(oo.je);
+              // console.log(o.money);
+              this.form[oo.je] = o.money;
+            }
+          })
+        })
+      })
+
+
       if (this.$route.params.type === "edit") {
-        promiseArray = [p1, p2, p3, p4, p5];
+        promiseArray = [p1, p2, p3, p4, p5, p7];
       } else {
         promiseArray = [p1, p4, p5, p6];
       }
