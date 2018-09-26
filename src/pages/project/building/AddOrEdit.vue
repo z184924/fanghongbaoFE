@@ -428,9 +428,14 @@ export default {
           let listUser = [];
           let listMoney = [];
           this.listRoleTable.forEach(o => {
+            let listOfUserItem = this.form[o.field].split(",");
+            let userCount = listOfUserItem.length;
             listUser.push(this.form[o.field]);
-            listRole.push(o.roleId)
-            listMoney.push(this.form[o.je])
+            for (let i = 0; i < userCount; i++) {
+              listRole.push(o.roleId)
+              listMoney.push(this.form[o.je])
+            }
+
             // if (o.multiple) {
             //   this.form[o.field].forEach(oo => {
             //     listUser.push(oo);
