@@ -437,6 +437,7 @@ li {
       box-shadow: #aaa 1px 1px 3px;
       border-radius: 5px;
       cursor: pointer;
+      transition: all 0.2s;
       &:hover {
         opacity: 0.8;
       }
