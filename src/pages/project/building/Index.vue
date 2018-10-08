@@ -4,7 +4,7 @@
       <span>城市·区域：</span>
       <area-picker :is-show-clear="false" v-model="selectedCityArea"></area-picker>
       <span style="padding-left:1em">物业类型：</span>
-      <c-select :dict="listWuyeLeixing" v-model="selectedWylx" style="width:120px"></c-select>
+      <c-select dict="wylx" v-model="selectedWylx" style="width:120px"></c-select>
       <span style="padding-left:1em">楼盘类型：</span>
       <c-select dict="lplx" v-model="selectedLplx" style="width:120px"></c-select>
       <span style="padding-left:1em">排序：</span>

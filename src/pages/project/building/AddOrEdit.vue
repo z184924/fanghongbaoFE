@@ -26,7 +26,7 @@
           </el-form-item>
           <el-form-item label="物业类型" prop="f__wylx">
             <el-checkbox-group v-model="form.f__wylx">
-              <el-checkbox border :label="o.value" v-for="(o,i) in listWuyeLeixing" :key="i">{{o.label}}</el-checkbox>
+              <el-checkbox border :label="o.CODE" v-for="(o,i) in $store.state.dict.wylx" :key="i">{{o.NAME}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="售价区间" prop="sellingSection">
@@ -526,146 +526,145 @@ export default {
     let promiseArray = [];
     this.loading = true;
 
-    // 物业类型
-    p1 = this.xpost("city/getPropertyTypes").then(res => {
-      // console.log(res);
-      this.listWuyeLeixing = res.map(o => {
-        return {
-          label: o.propertyType,
-          value: o.propertyTypeId,
+    // // 物业类型
+    // p1 = this.xpost("city/getPropertyTypes").then(res => {
+    //   // console.log(res);
+    //   this.listWuyeLeixing = res.map(o => {
+    //     return {
+    //       label: o.propertyType,
+    //       value: o.propertyTypeId,
+    //     }
+    // })
+
+    // 编辑：
+    let projectId = "";
+    if (this.$route.params.type === "edit") {
+      projectId = this.$route.params.id;
+      this.getChaosongrenList(projectId).then(res => {
+        this.listChaosongren = res.list;
+        this.form.f__csr = res.selected;
+      });
+      p2 = this.xpost("projectInfo/getPropertyTypesByProjectID", {
+        projectId
+      }).then(res => {
+        this.form.f__wylx = res.rows.map(o => {
+          return o.propertyTypeId
+        })
+        // console.log(res);
+      })
+      p3 = this.xpost("projectInfo/getFormJson", {
+        projectId
+      }).then(form => {
+
+        this.form = { ...this.form, ...clone(form) };
+        this.form.f__qy.city = this.form.cityId;
+        this.form.f__qy.area = this.form.areaId;
+        // console.log(this.form.commissionType);
+        if (this.form.commissionType + "" === "0") {
+          this.form.f__pthyyj = this.form.generalCommission;
+          this.form.f__viphyyj = this.form.vipCommission;
+        } else {
+          this.form.f__pthyyj = this.form.generalCommissionBL;
+          this.form.f__viphyyj = this.form.vipCommissionBL;
         }
+        // 推荐时间
+        if (this.form.ifRecommend + "" === "1") {
+          this.form.recommendTime = moment(this.form.recommendTime).format("YYYY-MM-DD");
+        } else {
+          // this.form.ifRecommend = 0;
+          this.form.recommendTime = "";
+        }
+
+        // 图片
+        // console.log(this.form);
+        // this.form.f__listFengmian = this.form.logoPic ? this.form.logoPic.split(",") : [];
+        // this.form.f__listLunbotu = this.form.carouselPictures ? this.form.carouselPictures.split(",") : [];
+        // this.form.f__listZiliaoku = this.form.dataPictures ? this.form.dataPictures.split(",") : [];
+        // this.form.f__listHuxingtu = this.form.houseTypePictures ? this.form.houseTypePictures.split(",") : [];
+        // this.form.f__listHaibao = this.form.posterPictures ? this.form.posterPictures.split(",") : [];
+        // this.form.f__listYongjinXiangxi = this.form.commissionPictures ? this.form.commissionPictures.split(",") : [];
+        // this.form.f__listXiangmuCanshu = this.form.parameterPictures ? this.form.parameterPictures.split(",") : [];
+        // this.form.f__listXiangmuMaidian = this.form.sellingPointPictures ? this.form.sellingPointPictures.split(",") : [];
+
       })
 
-      // 编辑：
-      let projectId = "";
-      if (this.$route.params.type === "edit") {
-        projectId = this.$route.params.id;
-        this.getChaosongrenList(projectId).then(res => {
-          this.listChaosongren = res.list;
-          this.form.f__csr = res.selected;
-        });
-        p2 = this.xpost("projectInfo/getPropertyTypesByProjectID", {
-          projectId
-        }).then(res => {
-          this.form.f__wylx = res.rows.map(o => {
-            return o.propertyTypeId
-          })
-          // console.log(res);
-        })
-        p3 = this.xpost("projectInfo/getFormJson", {
-          projectId
-        }).then(form => {
-
-          this.form = { ...this.form, ...clone(form) };
-          this.form.f__qy.city = this.form.cityId;
-          this.form.f__qy.area = this.form.areaId;
-          // console.log(this.form.commissionType);
-          if (this.form.commissionType + "" === "0") {
-            this.form.f__pthyyj = this.form.generalCommission;
-            this.form.f__viphyyj = this.form.vipCommission;
-          } else {
-            this.form.f__pthyyj = this.form.generalCommissionBL;
-            this.form.f__viphyyj = this.form.vipCommissionBL;
-          }
-          // 推荐时间
-          if (this.form.ifRecommend + "" === "1") {
-            this.form.recommendTime = moment(this.form.recommendTime).format("YYYY-MM-DD");
-          } else {
-            // this.form.ifRecommend = 0;
-            this.form.recommendTime = "";
-          }
-
-          // 图片
-          // console.log(this.form);
-          // this.form.f__listFengmian = this.form.logoPic ? this.form.logoPic.split(",") : [];
-          // this.form.f__listLunbotu = this.form.carouselPictures ? this.form.carouselPictures.split(",") : [];
-          // this.form.f__listZiliaoku = this.form.dataPictures ? this.form.dataPictures.split(",") : [];
-          // this.form.f__listHuxingtu = this.form.houseTypePictures ? this.form.houseTypePictures.split(",") : [];
-          // this.form.f__listHaibao = this.form.posterPictures ? this.form.posterPictures.split(",") : [];
-          // this.form.f__listYongjinXiangxi = this.form.commissionPictures ? this.form.commissionPictures.split(",") : [];
-          // this.form.f__listXiangmuCanshu = this.form.parameterPictures ? this.form.parameterPictures.split(",") : [];
-          // this.form.f__listXiangmuMaidian = this.form.sellingPointPictures ? this.form.sellingPointPictures.split(",") : [];
-
-        })
-
-      } else {
-        p6 = this.getChaosongrenList("").then(res => {
-          this.listChaosongren = res.list;
-          this.$set(this.form, "f__csr", "");
-        });
-      }
-      // 获取用户
-      this.listRoleTable.forEach(o => {
-        p4 = this.xpost("user/getUsersByRoleID", {
-          roleId: o.roleId,
-          projectId
-        }).then(res => {
-          this[o.fieldList] = res.rows.map(user => {
-            return {
-              label: user.userName,
-              value: user.userId
-            }
-          })
-
-          // 角色人员
-          let users = [];
-          res.rows.forEach(oo => {
-            if (oo.isChecked === 1) {
-              users.push(oo.userId)
-            }
-          })
-          this.form[o.field] = users.join();
-        })
-      })
-
-      // 客户信息
-      p5 = this.xpost("projectInfo/getProjectFieldByProjectID", {
-        projectId,
+    } else {
+      p6 = this.getChaosongrenList("").then(res => {
+        this.listChaosongren = res.list;
+        this.$set(this.form, "f__csr", "");
+      });
+    }
+    // 获取用户
+    this.listRoleTable.forEach(o => {
+      p4 = this.xpost("user/getUsersByRoleID", {
+        roleId: o.roleId,
+        projectId
       }).then(res => {
-        this.tableClient = res.rows;
-        this.$nextTick(() => {
-          this.tableClient.forEach(o => {
-            if (o.ifchecked) {
-              this.$refs.tableClient.toggleRowSelection(o, true);
-            }
-          })
+        this[o.fieldList] = res.rows.map(user => {
+          return {
+            label: user.userName,
+            value: user.userId
+          }
+        })
+
+        // 角色人员
+        let users = [];
+        res.rows.forEach(oo => {
+          if (oo.isChecked === 1) {
+            users.push(oo.userId)
+          }
+        })
+        this.form[o.field] = users.join();
+      })
+    })
+
+    // 客户信息
+    p5 = this.xpost("projectInfo/getProjectFieldByProjectID", {
+      projectId,
+    }).then(res => {
+      this.tableClient = res.rows;
+      this.$nextTick(() => {
+        this.tableClient.forEach(o => {
+          if (o.ifchecked) {
+            this.$refs.tableClient.toggleRowSelection(o, true);
+          }
         })
       })
+    })
 
-      p7 = this.xpost("projectInfo/getServiceValueByProjectID", {
-        projectId,
-      }).then(res => {
-        // this.tableClient = res.rows;
-        // this.$nextTick(() => {
-        //   this.tableClient.forEach(o => {
-        //     if (o.ifchecked) {
-        //       this.$refs.tableClient.toggleRowSelection(o, true);
-        //     }
-        //   })
-        // })
-        console.log(res);
-        // this.f__je_zy = 66;
-        res.rows.forEach(o => {
-          this.listRoleTable.forEach(oo => {
-            if (o.roleId + "" == oo.roleId) {
-              // console.log(oo.je);
-              // console.log(o.money);
-              this.form[oo.je] = o.money;
-            }
-          })
+    p7 = this.xpost("projectInfo/getServiceValueByProjectID", {
+      projectId,
+    }).then(res => {
+      // this.tableClient = res.rows;
+      // this.$nextTick(() => {
+      //   this.tableClient.forEach(o => {
+      //     if (o.ifchecked) {
+      //       this.$refs.tableClient.toggleRowSelection(o, true);
+      //     }
+      //   })
+      // })
+      console.log(res);
+      // this.f__je_zy = 66;
+      res.rows.forEach(o => {
+        this.listRoleTable.forEach(oo => {
+          if (o.roleId + "" == oo.roleId) {
+            // console.log(oo.je);
+            // console.log(o.money);
+            this.form[oo.je] = o.money;
+          }
         })
       })
+    })
 
 
-      if (this.$route.params.type === "edit") {
-        promiseArray = [p1, p2, p3, p4, p5, p7];
-      } else {
-        promiseArray = [p1, p4, p5, p6];
-      }
+    if (this.$route.params.type === "edit") {
+      promiseArray = [p2, p3, p4, p5, p7];
+    } else {
+      promiseArray = [p4, p5, p6];
+    }
 
-      Promise.all(promiseArray).then(() => {
-        this.loading = false;
-      })
+    Promise.all(promiseArray).then(() => {
+      this.loading = false;
     })
 
 

@@ -89,7 +89,7 @@ export default {
     },
     imgStyle() {
       return {
-        width: this.size + "px",
+        // width: this.size + "px",
         height: this.size + "px",
       }
     },
