@@ -152,7 +152,8 @@
       <file-box v-model="form.carouselPictures"></file-box>
     </c-panel>
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
-      <file-box v-model="form.dataPictures"></file-box>
+      <!-- <file-box v-model="form.dataPictures"></file-box> -->
+      <files-box></files-box>
     </c-panel>
     <c-panel title-color="rgb(45, 105, 50)" title="户型图" width="800px">
       <file-box v-model="form.houseTypePictures"></file-box>
@@ -178,10 +179,12 @@
 <script>
 // import uuid from "uuid"
 import AreaPicker from "@/components/AreaPicker"
+import FilesBox from "./com/FilesBox"
 
 export default {
   components: {
-    AreaPicker
+    AreaPicker,
+    FilesBox
   },
   data() {
     var areaValidate = (rule, value, callback) => {

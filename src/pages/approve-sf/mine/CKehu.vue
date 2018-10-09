@@ -170,6 +170,7 @@ export default {
   created() {
     this.xpost("serviceInfo/getCustomersByProjectID", {
       projectId: this.projectId,
+      serviceId: this.serviceId,
       page: 1,
       rows: 1000
     })
