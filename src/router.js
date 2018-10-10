@@ -9,7 +9,7 @@ import Index from "./pages/index/Index"
 
 // 项目管理
 import ProjectBuilding from "./pages/project/building/Index"
-import ProjectBuildingAddOrEdit from "./pages/project/building/AddOrEdit"
+import ProjectBuildingEdit from "./pages/project/building/Edit"
 
 import ProjectLunbotu from "./pages/project/lunbotu/Index"
 
@@ -81,9 +81,9 @@ export default new Router({
       }
     },
     {
-      path: "/project/building/add-or-edit/:type/:id", //add/edit
-      name: "ProjectBuildingAddOrEdit",
-      component: ProjectBuildingAddOrEdit,
+      path: "/project/building/edit/:type/:id", //add/edit
+      name: "ProjectBuildingEdit",
+      component: ProjectBuildingEdit,
     },
     {
       path: "/project/lunbotu",

@@ -24,6 +24,14 @@
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑楼盘</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除楼盘</el-button>
     </fixed-table>
+    <el-dialog :visible.sync="isShowAdd" title="新建楼盘" v-drag width="400px">
+      <el-form>
+        <el-form-item label="楼盘名称">
+          <el-input v-model="form.projectName"></el-input>
+        </el-form-item>
+      </el-form>
+      <el-button slot="footer" type="primary" @click="save">保存</el-button>
+    </el-dialog>
     <!-- <div>{{selectedWylx}}</div> -->
   </div>
 </template>
@@ -37,6 +45,8 @@ export default {
   data() {
     let vue = this;
     return {
+      isShowAdd: false,
+      form: {},
       listWuyeLeixing: [],
       selectedCityArea: {},
       selectedLplx: "",
@@ -146,13 +156,21 @@ export default {
       this.selectedOrderType = 1;
     },
     add() {
-      this.$router.push("building/add-or-edit/add/_")
+      // this.$router.push("building/add-or-edit/add/_")
+      this.isShowAdd = true;
+    },
+    save() {
+      this.xpost("projectInfo/saveOrUpdate", this.form).then(res => {
+        this.mxMessage(res).then(() => {
+          // this.mxBack();
+        })
+      })
     },
     edit() {
       if (this.isSelect) {
         this.$store.commit("setTemp", this.selectedRow);
         // console.log(this.selectedRow);
-        this.$router.push(`building/add-or-edit/edit/${this.selectedRow.projectId}`)
+        this.$router.push(`building/edit/edit/${this.selectedRow.projectId}`)
       } else {
         this.$message({
           type: "info",

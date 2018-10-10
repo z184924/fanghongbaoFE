@@ -104,7 +104,6 @@ export default {
     },
     del(o) {
       this.$confirm("是否删除？", "删除").then(() => {
-
         this.xpost("projectPictureData/saveOrUpdate", {
           dataId: o.dataId
         }).then(res => {
