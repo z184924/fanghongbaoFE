@@ -21,6 +21,7 @@
 export default {
   props: {
     projectId: {},
+    serviceId:{},
     accountantId: {},
   },
   data() {
