@@ -153,7 +153,7 @@
     </c-panel>
     <c-panel title-color="rgb(83, 45, 105)" title="资料库" width="800px">
       <!-- <file-box v-model="form.dataPictures"></file-box> -->
-      <files-box></files-box>
+      <files-box :project-id="$route.params.id" :data-list="form.dataPictures"></files-box>
     </c-panel>
     <c-panel title-color="rgb(45, 105, 50)" title="户型图" width="800px">
       <file-box v-model="form.houseTypePictures"></file-box>
