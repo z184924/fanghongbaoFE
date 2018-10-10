@@ -162,13 +162,17 @@
       <file-box v-model="form.posterPictures"></file-box>
     </c-panel>
     <c-panel title-color="rgb(104, 132, 23)" title="佣金详细" width="800px">
-      <file-box v-model="form.commissionPictures"></file-box>
+      <!-- <file-box v-model="form.commissionPictures"></file-box> -->
+      <!-- <span></span> -->
+      <c-ueditor v-model="form.commissionPictures"></c-ueditor>
     </c-panel>
     <c-panel title-color="rgb(124, 23, 23)" title="项目参数" width="800px">
-      <file-box v-model="form.parameterPictures" :multiple="false"></file-box>
+      <!-- <file-box v-model="form.parameterPictures" :multiple="false"></file-box> -->
+      <c-ueditor v-model="form.parameterPictures"></c-ueditor>
     </c-panel>
     <c-panel title-color="rgb(23, 95, 124)" title="项目卖点" width="800px">
-      <file-box v-model="form.sellingPointPictures" :multiple="false"></file-box>
+      <!-- <file-box v-model="form.sellingPointPictures" :multiple="false"></file-box> -->
+      <c-ueditor v-model="form.sellingPointPictures"></c-ueditor>
     </c-panel>
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
