@@ -81,23 +81,6 @@ export default {
     },
   },
   methods: {
-    remove(i) {
-      this.$confirm("是否删除该文件夹？", "删除", {
-        type: "warning"
-      }).then(() => {
-        let a = clone(this.list);
-        a.splice(i, 1);
-        this.$emit("input", a.join());
-      })
-    },
-    openFile(src) {
-      if (this.isWindow) {
-        window.open(this.$store.state.picBasePath + src + "");
-      } else {
-        this.activeSrc = this.$store.state.picBasePath + src + "";
-        this.isShowFullImg = true;
-      }
-    },
     add() {
       this.form.dataId = "";
       this.form.projectId = this.projectId;
@@ -137,9 +120,6 @@ export default {
 
 
 
-  },
-  created() {
-    // this.xpost("projectPictureData/getFormJson")
   }
 }
 </script>
