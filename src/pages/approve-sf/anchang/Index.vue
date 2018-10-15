@@ -46,8 +46,8 @@
   </div>
 </template>
 <script>
-import CKehu from "./CKehu"
-import CJiesuan from "./CJiesuan"
+import CKehu from "./CKehu";
+import CJiesuan from "./CJiesuan";
 export default {
   components: {
     CKehu,
@@ -73,7 +73,7 @@ export default {
         recordYear: {
           label: "日期",
           formatter(r, c, v) {
-            return `${r.recordYear}年${r.recordMonth}月`
+            return `${r.recordYear}年${r.recordMonth}月`;
           }
         },
         userName: {
@@ -84,7 +84,7 @@ export default {
           formatter(r, c, v) {
             return vue.mxTimeFormatter(v);
           }
-        },
+        }
       },
       form: {
         recordIdState: 0
@@ -94,8 +94,8 @@ export default {
       selectedMingxi: {},
       param: {
         recordIdStates: 0
-      },
-    }
+      }
+    };
   },
   methods: {
     add() {
@@ -110,7 +110,9 @@ export default {
       let id = a[this.config.pk];
       if (id) {
         let form = clone(this.selectedRow);
-        form.f__date = moment(`${form.recordYear}-${form.recordMonth}-1`).format("YYYY-MM");
+        form.f__date = moment(
+          `${form.recordYear}-${form.recordMonth}-1`
+        ).format("YYYY-MM");
         this.form = form;
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
@@ -119,7 +121,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -131,9 +133,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -146,15 +147,15 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     pass() {
@@ -169,21 +170,20 @@ export default {
             data.recordIdState = 2;
             this.xpost("serviceInfo/submitCheckInfo", data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     }
   },
 
   created() {
-
     this.xpost("projectInfo/getGridListJson", {
       orderType: 1,
       page: 1,
@@ -193,11 +193,11 @@ export default {
         return {
           label: o.projectName,
           value: o.projectId
-        }
-      })
-    })
+        };
+      });
+    });
   }
-}
+};
 </script>
 
 

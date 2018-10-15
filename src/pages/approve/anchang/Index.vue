@@ -280,7 +280,7 @@ export default {
           }
         },
         customerTel: {
-          label: "客户电话",
+          label: "客户电话"
         },
         projectName: {
           label: "楼盘名称",
@@ -288,13 +288,12 @@ export default {
         },
         userName: {
           label: "经纪人"
-        },
-
+        }
       },
       form: {},
       selectedRow: {},
-      listWuyeLeixing: [],
-    }
+      listWuyeLeixing: []
+    };
   },
   methods: {
     add() {
@@ -319,33 +318,47 @@ export default {
               } else {
                 return undefined;
               }
-            }
+            };
             // res.f__files = res.checkData;
 
             // date转换
-            res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : dateInit("cardDateInit");
-            res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : dateInit("subscribeDateInit");
-            res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : dateInit("dealDateInit");
-            res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : dateInit("_");
-            res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : dateInit("_");
-            res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : dateInit("_");
-            res.homogeneityDate = res.homogeneityDate ? this.mxDateFormatter(res.homogeneityDate) : dateInit("_");
+            res.cardDate = res.cardDate
+              ? this.mxDateFormatter(res.cardDate)
+              : dateInit("cardDateInit");
+            res.subscribeDate = res.subscribeDate
+              ? this.mxDateFormatter(res.subscribeDate)
+              : dateInit("subscribeDateInit");
+            res.dealDate = res.dealDate
+              ? this.mxDateFormatter(res.dealDate)
+              : dateInit("dealDateInit");
+            res.downPayDate = res.downPayDate
+              ? this.mxDateFormatter(res.downPayDate)
+              : dateInit("_");
+            res.initialDate = res.initialDate
+              ? this.mxDateFormatter(res.initialDate)
+              : dateInit("_");
+            res.netsignDate = res.netsignDate
+              ? this.mxDateFormatter(res.netsignDate)
+              : dateInit("_");
+            res.homogeneityDate = res.homogeneityDate
+              ? this.mxDateFormatter(res.homogeneityDate)
+              : dateInit("_");
             this.form = res;
-          })
-        })
+          });
+        });
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     pass() {
       this.$confirm("是否保存并通过？", "提示").then(() => {
         this.save(12);
-      })
+      });
     },
     save(customerState) {
       let data = clone(this.form);
@@ -357,9 +370,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -372,17 +384,17 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
   created() {
@@ -391,12 +403,11 @@ export default {
       this.listWuyeLeixing = res.map(o => {
         return {
           label: o.propertyType,
-          value: o.propertyTypeId,
-        }
-      })
-    })
-
+          value: o.propertyTypeId
+        };
+      });
+    });
   }
-}
+};
 </script>
 

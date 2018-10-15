@@ -168,11 +168,13 @@
     </c-panel>
     <c-panel title-color="rgb(124, 23, 23)" title="项目参数" width="800px">
       <!-- <file-box v-model="form.parameterPictures" :multiple="false"></file-box> -->
-      <c-ueditor v-model="form.parameterPictures"></c-ueditor>
+      <!-- <c-ueditor v-model="form.parameterPictures"></c-ueditor> -->
+      <input-box v-model="form.parameterPictures" :inputs="inputsJibenXinxi"></input-box>
     </c-panel>
     <c-panel title-color="rgb(23, 95, 124)" title="项目卖点" width="800px">
       <!-- <file-box v-model="form.sellingPointPictures" :multiple="false"></file-box> -->
-      <c-ueditor v-model="form.sellingPointPictures"></c-ueditor>
+      <!-- <c-ueditor v-model="form.sellingPointPictures"></c-ueditor> -->
+      <input-box v-model="form.sellingPointPictures" :inputs="inputsMaidian"></input-box>
     </c-panel>
     <div class="xc-text-center" style="padding-top:50px">
       <el-button size="medium" type="primary" @click="save" style="width:200px;height:50px">保存</el-button>
@@ -182,13 +184,15 @@
 </template>
 <script>
 // import uuid from "uuid"
-import AreaPicker from "@/components/AreaPicker"
-import FilesBox from "./com/FilesBox"
+import AreaPicker from "@/components/AreaPicker";
+import FilesBox from "./com/FilesBox";
+import InputBox from "./com/InputBox";
 
 export default {
   components: {
     AreaPicker,
-    FilesBox
+    FilesBox,
+    InputBox
   },
   data() {
     var areaValidate = (rule, value, callback) => {
@@ -196,10 +200,10 @@ export default {
         if (value.city && value.area) {
           callback();
         } else {
-          callback(new Error('不能为空'));
+          callback(new Error("不能为空"));
         }
       } else {
-        callback(new Error('不能为空'));
+        callback(new Error("不能为空"));
       }
     };
     return {
@@ -216,16 +220,97 @@ export default {
       listYingxiaoZongjian: [],
       listZongjingli: [],
       listCaiwu: [],
+
+      inputsJibenXinxi: [
+        { key: "kfgs", label: "开发公司" },
+        { key: "wygs", label: "物业公司" },
+        { key: "wylb", label: "物业类别" },
+        { key: "zdmj", label: "占地面积" },
+        { key: "jzmj", label: "建筑面积" },
+        { key: "hxmj", label: "户型面积" },
+        { key: "zxzk", label: "装修状况" },
+        { key: "jfsj", label: "交房时间" },
+        { key: "zhs", label: "总户数" },
+        { key: "rjl", label: "容积率" },
+        { key: "lhl", label: "绿化率" },
+        { key: "cws", label: "车位数" },
+        { key: "wyf", label: "物业费" },
+        { key: "jtpt", label: "交通配套" },
+        { key: "ylpt", label: "医疗配套" },
+        { key: "sypt", label: "商业配套" },
+        { key: "jypt", label: "教育配套" },
+      ],
+      inputsMaidian: [
+        { key: "lpmd", label: "楼盘卖点" },
+        { key: "mbkq", label: "目标客群" },
+        { key: "fhbzc", label: "房红包支持" },
+
+      ],
+
       listRoleTable: [
-        { roleId: 2, field: "f__zy", je: "f__je_zy", fieldList: "listZhuanyuan", multiple: true },
-        { roleId: 3, field: "f__xmzg", je: "f__je_xmzg", fieldList: "listXiangmuZhuguan", multiple: false },
-        { roleId: 10, field: "f__acms", je: "f__je_acms", fieldList: "listAnchang", multiple: true },
-        { roleId: 4, field: "f__xmjl", je: "f__je_xmjl", fieldList: "listXiangmuJingli", multiple: true },
-        { roleId: 8, field: "f__shr", je: "f__je_shr", fieldList: "listShenheren", multiple: false },
-        { roleId: 5, field: "f__qyjl", je: "f__je_qyjl", fieldList: "listQuyuJingli", multiple: false },
-        { roleId: 6, field: "f__yxzj", je: "f__je_yxzj", fieldList: "listYingxiaoZongjian", multiple: false },
-        { roleId: 7, field: "f__zjl", je: "f__je_zjl", fieldList: "listZongjingli", multiple: false },
-        { roleId: 9, field: "f__cw", je: "f__je_cw", fieldList: "listCaiwu", multiple: false },
+        {
+          roleId: 2,
+          field: "f__zy",
+          je: "f__je_zy",
+          fieldList: "listZhuanyuan",
+          multiple: true
+        },
+        {
+          roleId: 3,
+          field: "f__xmzg",
+          je: "f__je_xmzg",
+          fieldList: "listXiangmuZhuguan",
+          multiple: false
+        },
+        {
+          roleId: 10,
+          field: "f__acms",
+          je: "f__je_acms",
+          fieldList: "listAnchang",
+          multiple: true
+        },
+        {
+          roleId: 4,
+          field: "f__xmjl",
+          je: "f__je_xmjl",
+          fieldList: "listXiangmuJingli",
+          multiple: true
+        },
+        {
+          roleId: 8,
+          field: "f__shr",
+          je: "f__je_shr",
+          fieldList: "listShenheren",
+          multiple: false
+        },
+        {
+          roleId: 5,
+          field: "f__qyjl",
+          je: "f__je_qyjl",
+          fieldList: "listQuyuJingli",
+          multiple: false
+        },
+        {
+          roleId: 6,
+          field: "f__yxzj",
+          je: "f__je_yxzj",
+          fieldList: "listYingxiaoZongjian",
+          multiple: false
+        },
+        {
+          roleId: 7,
+          field: "f__zjl",
+          je: "f__je_zjl",
+          fieldList: "listZongjingli",
+          multiple: false
+        },
+        {
+          roleId: 9,
+          field: "f__cw",
+          je: "f__je_cw",
+          fieldList: "listCaiwu",
+          multiple: false
+        }
       ],
       form: {
         projectName: "",
@@ -263,7 +348,7 @@ export default {
         f__je_qyjl: 0,
         f__je_zjl: 0,
         f__je_cw: 0,
-        f__je_csr: 0,
+        f__je_csr: 0
         // f__listFengmian: [],
         // f__listLunbotu: [],
         // f__listZiliaoku: [],
@@ -275,70 +360,45 @@ export default {
       },
       rules: {
         projectName: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
         f__qy: [
-          { validator: areaValidate, message: '不能为空', trigger: 'change' }
+          { validator: areaValidate, message: "不能为空", trigger: "change" }
         ],
         projectAddress: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
         projectType: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
-        f__wylx: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
+        f__wylx: [{ required: true, message: "不能为空", trigger: "change" }],
         sellingSection: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
         sellingAverage: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
         projectMapXY: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
         commissionType: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
-        f__pthyyj: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
+        f__pthyyj: [{ required: true, message: "不能为空", trigger: "change" }],
         f__viphyyj: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
 
-        f__zy: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__xmzg: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__acms: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__xmjl: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__shr: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__yxzj: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__qyjl: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__zjl: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__cw: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        f__csr: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-
+        f__zy: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__xmzg: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__acms: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__xmjl: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__shr: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__yxzj: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__qyjl: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__zjl: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__cw: [{ required: true, message: "不能为空", trigger: "change" }],
+        f__csr: [{ required: true, message: "不能为空", trigger: "change" }]
 
         // f__je_zy: [
         //   { required: true, message: '不能为空', trigger: 'change' }
@@ -370,29 +430,26 @@ export default {
         // f__je_csr: [
         //   { required: true, message: '不能为空', trigger: 'change' }
         // ],
-
-
       },
       tableClient: [],
-      selectedClient: [],
-
-    }
+      selectedClient: []
+    };
   },
   methods: {
     pickLocation() {
-      window.open("http://api.map.baidu.com/lbsapi/getpoint/index.html")
+      window.open("http://api.map.baidu.com/lbsapi/getpoint/index.html");
     },
     pickLocationHelp() {
       const h = this.$createElement;
       this.$msgbox({
         title: "帮助",
-        message: h('p', [
-          h('p', '1.点击【选择坐标点...】按钮'),
-          h('p', '2.点击地图'),
-          h('p', '3.点击右上角的【复制】'),
-          h('p', '4.切换到本页面粘贴进输入框'),
-        ]),
-      })
+        message: h("p", [
+          h("p", "1.点击【选择坐标点...】按钮"),
+          h("p", "2.点击地图"),
+          h("p", "3.点击右上角的【复制】"),
+          h("p", "4.切换到本页面粘贴进输入框")
+        ])
+      });
     },
     tableClientSelect(o) {
       this.selectedClient = o;
@@ -400,7 +457,6 @@ export default {
     save() {
       this.$refs.form.validate(valid => {
         if (valid) {
-
           // 复制form
           let data = clone(this.form);
           for (const key in data) {
@@ -412,7 +468,7 @@ export default {
           data.areaId = this.form.f__qy.area;
 
           // 佣金
-          if (data.commissionType + '' === "0") {
+          if (data.commissionType + "" === "0") {
             data.generalCommission = this.form.f__pthyyj;
             data.vipCommission = this.form.f__viphyyj;
           } else {
@@ -421,14 +477,13 @@ export default {
           }
 
           // 推荐时间
-          if (data.ifRecommend + '' !== "1") {
+          if (data.ifRecommend + "" !== "1") {
             data.recommendTime = "";
           }
 
           // 用户
-          data.creator = "测试用户***"
+          data.creator = "测试用户***";
           data.createTime = moment().format("YYYY-MM-DD HH:mm:ss");
-
 
           // 角色人员
           let listRole = [];
@@ -455,7 +510,7 @@ export default {
             //     listRole.push(o.roleId)
             //   }
             // }
-          })
+          });
           data.roleIds = listRole.join();
           data.userIds = listUser.join();
           data.moneys = listMoney.join();
@@ -464,11 +519,11 @@ export default {
           data.copyUserIds = this.form.f__csr;
 
           //客户信息
-          data.fields = this.selectedClient.map(o => {
-            return o.customerMapId
-          }).join();
-
-
+          data.fields = this.selectedClient
+            .map(o => {
+              return o.customerMapId;
+            })
+            .join();
 
           // 图片
           // data.logoPic = this.form.f__listFengmian.join();
@@ -486,14 +541,14 @@ export default {
           this.xpost("projectInfo/saveOrUpdate", data).then(res => {
             this.mxMessage(res).then(() => {
               this.mxBack();
-            })
-          })
+            });
+          });
           // console.log(data);
         } else {
           this.$message({
             type: "warning",
             message: "请填写完整"
-          })
+          });
         }
       });
     },
@@ -507,18 +562,18 @@ export default {
             return {
               label: o.userName,
               value: o.userId
-            }
-          })
+            };
+          });
           let selected = [];
           res.rows.forEach(o => {
             if (o.isChecked) {
-              selected.push(o.userId)
+              selected.push(o.userId);
             }
-          })
+          });
           data.selected = selected.join();
           resolve(data);
-        })
-      })
+        });
+      });
     }
   },
   created() {
@@ -555,14 +610,13 @@ export default {
         projectId
       }).then(res => {
         this.form.f__wylx = res.rows.map(o => {
-          return o.propertyTypeId
-        })
+          return o.propertyTypeId;
+        });
         // console.log(res);
-      })
+      });
       p3 = this.xpost("projectInfo/getFormJson", {
         projectId
       }).then(form => {
-
         this.form = { ...this.form, ...clone(form) };
         this.form.f__qy.city = this.form.cityId;
         this.form.f__qy.area = this.form.areaId;
@@ -576,7 +630,9 @@ export default {
         }
         // 推荐时间
         if (this.form.ifRecommend + "" === "1") {
-          this.form.recommendTime = moment(this.form.recommendTime).format("YYYY-MM-DD");
+          this.form.recommendTime = moment(this.form.recommendTime).format(
+            "YYYY-MM-DD"
+          );
         } else {
           // this.form.ifRecommend = 0;
           this.form.recommendTime = "";
@@ -592,9 +648,7 @@ export default {
         // this.form.f__listYongjinXiangxi = this.form.commissionPictures ? this.form.commissionPictures.split(",") : [];
         // this.form.f__listXiangmuCanshu = this.form.parameterPictures ? this.form.parameterPictures.split(",") : [];
         // this.form.f__listXiangmuMaidian = this.form.sellingPointPictures ? this.form.sellingPointPictures.split(",") : [];
-
-      })
-
+      });
     } else {
       p6 = this.getChaosongrenList("").then(res => {
         this.listChaosongren = res.list;
@@ -611,23 +665,23 @@ export default {
           return {
             label: user.userName,
             value: user.userId
-          }
-        })
+          };
+        });
 
         // 角色人员
         let users = [];
         res.rows.forEach(oo => {
           if (oo.isChecked === 1) {
-            users.push(oo.userId)
+            users.push(oo.userId);
           }
-        })
+        });
         this.form[o.field] = users.join();
-      })
-    })
+      });
+    });
 
     // 客户信息
     p5 = this.xpost("projectInfo/getProjectFieldByProjectID", {
-      projectId,
+      projectId
     }).then(res => {
       this.tableClient = res.rows;
       this.$nextTick(() => {
@@ -635,12 +689,12 @@ export default {
           if (o.ifchecked) {
             this.$refs.tableClient.toggleRowSelection(o, true);
           }
-        })
-      })
-    })
+        });
+      });
+    });
 
     p7 = this.xpost("projectInfo/getServiceValueByProjectID", {
-      projectId,
+      projectId
     }).then(res => {
       // this.tableClient = res.rows;
       // this.$nextTick(() => {
@@ -659,10 +713,9 @@ export default {
             // console.log(o.money);
             this.form[oo.je] = o.money;
           }
-        })
-      })
-    })
-
+        });
+      });
+    });
 
     if (this.$route.params.type === "edit") {
       promiseArray = [p2, p3, p4, p5, p7];
@@ -672,10 +725,7 @@ export default {
 
     Promise.all(promiseArray).then(() => {
       this.loading = false;
-    })
-
-
-
+    });
   }
-}
+};
 </script>
