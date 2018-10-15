@@ -114,7 +114,7 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="齐定日期">
-            <span>{{form.homogeneityDate}}</span>
+            <span>{{mxDateFormatter(form.homogeneityDate)}}</span>
           </el-form-item>
         </div>
         <div class="xc18__item">

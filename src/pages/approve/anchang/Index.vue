@@ -123,7 +123,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="认购金额(元)">
-                  <el-input v-model="form.subscribedMoney"></el-input>
+                  <el-input-number v-model="form.subscribedMoney" style="width:100%"></el-input-number>
+                  <!-- <el-input v-model="form.subscribedMoney"></el-input> -->
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -134,25 +135,28 @@
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="齐定金额">
+                <el-form-item label="齐定金额(元)">
                   <!-- <el-input v-model="form.homogeneityMoney"></el-input> -->
-                  <span>{{form.homogeneityMoney}}</span>
-                  元
+                  <el-input-number v-model="form.homogeneityMoney" style="width:100%"></el-input-number>
+                  <!-- <span>{{form.homogeneityMoney}}</span>元 -->
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="应结佣金">
-                  <el-input v-model="form.sureBalance"></el-input>
+                  <el-input-number v-model="form.sureBalance" style="width:100%"></el-input-number>
+                  <!-- <el-input v-model="form.sureBalance"></el-input> -->
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="楼号">
-                  <span>{{form.buildingNum}}</span>
+                  <el-input v-model="form.buildingNum"></el-input>
+                  <!-- <span>{{form.buildingNum}}</span> -->
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="单元号">
-                  <span>{{form.unitNum}}</span>
+                  <el-input v-model="form.unitNum"></el-input>
+                  <!-- <span>{{form.unitNum}}</span> -->
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -184,12 +188,14 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="贷款金额(元)">
-                  <el-input v-model="form.loanMoney"></el-input>
+                  <el-input-number v-model="form.loanMoney" style="width:100%"></el-input-number>
+                  <!-- <el-input v-model="form.loanMoney"></el-input> -->
                 </el-form-item>
               </div>
               <div class="xc18__item">
                 <el-form-item label="首付金额(元)">
-                  <el-input v-model="form.downMoney"></el-input>
+                  <el-input-number v-model="form.downMoney" style="width:100%"></el-input-number>
+                  <!-- <el-input v-model="form.downMoney"></el-input> -->
                 </el-form-item>
               </div>
               <div class="xc18__item">
