@@ -1,11 +1,16 @@
 
 <template>
   <div>
-
     <div class="xc6 xc-shadow">
-      <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+      <fixed-table
+        ref="table"
+        :get-data-url="config.selectUrl"
+        :data-param="param"
+        :fields="fields"
+        v-model="selectedRow"
+      >
         <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
-        <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
+        <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>-->
         <el-button @click="submit(10)" type="primary" icon="el-icon-check" slot="right-control">通过</el-button>
         <el-button @click="submit(0)" type="primary" icon="el-icon-close" slot="right-control">驳回</el-button>
         <!-- <el-button @click="get" type="primary" icon="el-icon-close" slot="right-control">123</el-button> -->
@@ -30,7 +35,8 @@
           </div>
         </transition>
       </div>
-    </div> -->
+    </div>-->
+
     <div class="xc19">
       <div class="xc19__side xc19__side--long">
         <transition name="el-zoom-in-center">
@@ -43,7 +49,11 @@
       <div class="xc19__side">
         <transition name="el-zoom-in-center">
           <div v-if="selectedMingxi.accountantId && selectedRow.projectId">
-            <c-kehu :project-id="selectedRow.projectId" :accountant-id="selectedMingxi.accountantId" :name="selectedMingxi.userName"></c-kehu>
+            <c-kehu
+              :project-id="selectedRow.projectId"
+              :accountant-id="selectedMingxi.accountantId"
+              :name="selectedMingxi.userName"
+            ></c-kehu>
           </div>
         </transition>
       </div>
@@ -51,8 +61,8 @@
   </div>
 </template>
 <script>
-import CKehu from "./CKehu"
-import CJiesuan from "./CJiesuan"
+import CKehu from "./CKehu";
+import CJiesuan from "./CJiesuan";
 export default {
   components: {
     CKehu,
@@ -78,7 +88,7 @@ export default {
         recordYear: {
           label: "日期",
           formatter(r, c, v) {
-            return `${r.recordYear}年${r.recordMonth}月`
+            return `${r.recordYear}年${r.recordMonth}月`;
           }
         },
         userName: {
@@ -89,23 +99,23 @@ export default {
           formatter(r, c, v) {
             return vue.mxTimeFormatter(v);
           }
-        },
+        }
       },
       form: {
         recordIdState: 8
       },
       selectedRow: {},
       selectedKehu: {},
-      selectedMingxi:{},
+      selectedMingxi: {},
       param: {
         recordIdStates: 8
-      },
-    }
+      }
+    };
   },
   methods: {
     submit(state) {
       let name = "通过";
-      if (state + '' === '0') {
+      if (state + "" === "0") {
         name = "驳回";
       }
       let id = this.selectedRow[this.config.pk];
@@ -117,27 +127,25 @@ export default {
           }).then(res => {
             this.$refs.table.getData();
             this.mxMessage(res);
-          })
-        })
+          });
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     get() {
       let id = this.selectedRow[this.config.pk];
       this.xpost("serviceInfo/getServiceMoneyHistoryList", {
-        serviceId: id,
-      })
+        serviceId: id
+      });
     }
   },
 
-  created() {
-
-  }
-}
+  created() {}
+};
 </script>
 
 

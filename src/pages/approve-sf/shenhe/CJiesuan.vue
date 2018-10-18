@@ -11,42 +11,32 @@
     </div>
     <div class="xc21">
       <table class="xc-table xc-table--border xc-table--center">
-        <tr class="xc-table__head">
-          <td>结算对象</td>
-          <td style="width:4em">姓名</td>
-          <td>服务费</td>
-          <td>个税</td>
-          <td>应发奖金</td>
-          <td>实发奖金</td>
-          <td>留存</td>
-          <td>备注</td>
-          <td>操作</td>
-        </tr>
-        <tr v-for="(o,i) in table" :key="i">
-          <td>{{o.roleName}}</td>
-          <td>{{o.userName}}</td>
-          <td>
-            {{o.serverValue}}
-          </td>
-          <td>
-            {{o.personalTax}}
-          </td>
-          <td>
-            {{o.prize}}
-          </td>
-          <td>
-            {{o.realPrize}}
-          </td>
-          <td>
-            {{o.keepValue}}
-          </td>
-          <td>
-            {{o.remark}}
-          </td>
-          <td>
-            <el-button @click="showCustom(o)">客户</el-button>
-          </td>
-        </tr>
+        <tbody>
+          <tr class="xc-table__head">
+            <td>结算对象</td>
+            <td style="width:4em">姓名</td>
+            <td>服务费</td>
+            <td>个税</td>
+            <td>应发奖金</td>
+            <td>实发奖金</td>
+            <td>留存</td>
+            <td>备注</td>
+            <td>操作</td>
+          </tr>
+          <tr v-for="(o,i) in table" :key="i">
+            <td>{{o.roleName}}</td>
+            <td>{{o.userName}}</td>
+            <td>{{o.serverValue}}</td>
+            <td>{{o.personalTax}}</td>
+            <td>{{o.prize}}</td>
+            <td>{{o.realPrize}}</td>
+            <td>{{o.keepValue}}</td>
+            <td>{{o.remark}}</td>
+            <td>
+              <el-button @click="showCustom(o)">客户</el-button>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <!-- <div>{{table}}</div> -->
@@ -65,9 +55,9 @@ export default {
         { roleName: "_" },
         { roleName: "_" },
         { roleName: "_" },
-        { roleName: "_" },
+        { roleName: "_" }
       ]
-    }
+    };
   },
   watch: {
     serviceId() {
@@ -77,7 +67,14 @@ export default {
   methods: {
     save() {
       let checkEmpty = o => {
-        let fs = ["accountantId", "prize", "personalTax", "keepValue", "realPrize", "remark"];
+        let fs = [
+          "accountantId",
+          "prize",
+          "personalTax",
+          "keepValue",
+          "realPrize",
+          "remark"
+        ];
         let isEmpty = false;
         fs.forEach(f => {
           if (o[f] === undefined || o[f] === "") {
@@ -85,9 +82,9 @@ export default {
               isEmpty = true;
             }
           }
-        })
+        });
         return isEmpty;
-      }
+      };
       let aa = [];
       let isEmpty = false;
       this.table.forEach(o => {
@@ -102,20 +99,20 @@ export default {
         a.push(o.realPrize);
         a.push(o.remark ? o.remark : "-");
         aa.push(a.join());
-      })
+      });
       let s = aa.join("#");
       if (isEmpty) {
         this.$alert("请将明细填写完整。", "保存", {
           type: "warning"
-        })
+        });
       } else {
         this.xpost("serviceInfo/updateUserAccountant", {
           datas: s
         }).then(res => {
           this.mxMessage(res).then(() => {
             this.getData();
-          })
-        })
+          });
+        });
       }
     },
     getData() {
@@ -124,7 +121,7 @@ export default {
         serviceId: this.serviceId
       }).then(res => {
         this.table = clone(res.rows);
-      })
+      });
     },
     showCustom(o) {
       this.$emit("input", o);
@@ -133,6 +130,6 @@ export default {
   created() {
     this.getData();
   }
-}
+};
 </script>
 

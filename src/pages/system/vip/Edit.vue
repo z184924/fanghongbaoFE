@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
@@ -43,14 +49,14 @@
 export default {
   props: {
     userId: {
-      default: "",
+      default: ""
     },
     vipStart: {
-      default: 0,
+      default: 0
     },
     vipEnd: {
-      default: 0,
-    },
+      default: 0
+    }
   },
   data() {
     let vue = this;
@@ -98,19 +104,17 @@ export default {
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
-        },
+        }
       },
-      form: {
-
-      },
-      selectedRow: {},
-    }
+      form: {},
+      selectedRow: {}
+    };
   },
   computed: {
     param() {
       return {
         userId: this.userId
-      }
+      };
     }
   },
   methods: {
@@ -132,24 +136,25 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
       if (this.vipStart) {
-        this.form.parentVipStartTime = moment(this.vipStart).format("YYYY-MM-DD") + " 00:00:00";
+        this.form.parentVipStartTime =
+          moment(this.vipStart).format("YYYY-MM-DD") + " 00:00:00";
       }
       if (this.vipEnd) {
-        this.form.parentVipEndTime = moment(this.vipEnd).format("YYYY-MM-DD") + " 00:00:00";
+        this.form.parentVipEndTime =
+          moment(this.vipEnd).format("YYYY-MM-DD") + " 00:00:00";
       }
       this.form.userId = this.userId;
       this.xpost(this.config.editUrl, this.form).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -162,22 +167,22 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
   mounted() {
     console.log(this.$store.state.dict);
   }
-}
+};
 </script>
 

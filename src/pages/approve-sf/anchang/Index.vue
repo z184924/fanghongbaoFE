@@ -1,9 +1,14 @@
 
 <template>
   <div>
-
     <div class="xc6 xc-shadow">
-      <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+      <fixed-table
+        ref="table"
+        :get-data-url="config.selectUrl"
+        :data-param="param"
+        :fields="fields"
+        v-model="selectedRow"
+      >
         <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
         <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
         <el-button @click="pass" icon="el-icon-check" slot="right-control" type="primary">提交审核</el-button>
@@ -16,8 +21,13 @@
             <c-select :dict="listBuilding" v-model="form.projectId"></c-select>
           </el-form-item>
           <el-form-item label="日期">
-            <el-date-picker v-model="form.f__date" value-format="yyyy-MM" style="width:160px" type="month" placeholder="选择月">
-            </el-date-picker>
+            <el-date-picker
+              v-model="form.f__date"
+              value-format="yyyy-MM"
+              style="width:160px"
+              type="month"
+              placeholder="选择月"
+            ></el-date-picker>
           </el-form-item>
         </el-form>
         <!-- <div>{{form}}</div> -->
@@ -38,7 +48,12 @@
       <div class="xc19__side">
         <transition name="el-zoom-in-center">
           <div v-if="selectedMingxi.accountantId && selectedRow.projectId">
-            <c-kehu :project-id="selectedRow.projectId" :service-id="selectedRow.serviceId" :accountant-id="selectedMingxi.accountantId" :name="selectedMingxi.userName"></c-kehu>
+            <c-kehu
+              :project-id="selectedRow.projectId"
+              :service-id="selectedRow.serviceId"
+              :accountant-id="selectedMingxi.accountantId"
+              :name="selectedMingxi.userName"
+            ></c-kehu>
           </div>
         </transition>
       </div>

@@ -9,25 +9,20 @@
   </div>
 </template>
 <script>
-import CYqy from "./CYqy"
+import CYqy from "./CYqy";
 export default {
-  components:{
+  components: {
     CYqy
   },
   data() {
     let vue = this;
     return {
-
-      activeTab: "tab1",
-
-    }
+      activeTab: "tab1"
+    };
   },
-  methods: {
-  },
+  methods: {},
 
-  created() {
-
-  }
-}
+  created() {}
+};
 </script>
 

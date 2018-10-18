@@ -43,19 +43,22 @@
           </el-form-item>
           <!-- <el-form-item label="旧密码">
             <el-input type="password" v-model="form.oldPassword"></el-input>
-          </el-form-item> -->
+          </el-form-item>-->
           <el-form-item label="新密码">
             <el-input type="password" v-model="form.newPassword"></el-input>
           </el-form-item>
           <el-form-item label="验证码">
             <el-input v-model="form.validNumber" style="width:200px"></el-input>
-            <el-button style="width:90px" @click="getValidNumber" :disabled="daojishi>0">{{validButtonText}}</el-button>
+            <el-button
+              style="width:90px"
+              @click="getValidNumber"
+              :disabled="daojishi>0"
+            >{{validButtonText}}</el-button>
           </el-form-item>
         </el-form>
       </div>
       <el-button type="primary" @click="doChangePassword" slot="footer">确定</el-button>
     </el-dialog>
-
   </div>
 </template>
 <script>
@@ -67,12 +70,12 @@ export default {
       form: {},
       daojishi: 0,
       daojishiTimer: null
-    }
+    };
   },
   computed: {
     validButtonText() {
       if (this.daojishi > 0) {
-        return `剩余（${this.daojishi}）`
+        return `剩余（${this.daojishi}）`;
       } else {
         return "获取验证码";
       }
@@ -108,8 +111,8 @@ export default {
       this.xpost("findPwd", data).then(res => {
         this.mxMessage(res).then(() => {
           this.isShowChangePassword = false;
-        })
-      })
+        });
+      });
     },
     startDaojishi() {
       this.daojishi = 30;
@@ -118,14 +121,14 @@ export default {
         if (this.daojishi == 0) {
           clearInterval(this.daojishiTimer);
         }
-      }, 1000)
+      }, 1000);
     },
     getValidNumber() {
-      this.xpost("user/getVerificationCode",{
-        phone:this.mxLoginInfo.phone
+      this.xpost("user/getVerificationCode", {
+        phone: this.mxLoginInfo.phone
       }).then(res => {
         console.log(res);
-      })
+      });
       this.startDaojishi();
     }
   },

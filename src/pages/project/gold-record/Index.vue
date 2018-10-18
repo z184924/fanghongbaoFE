@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div slot="left-control">
         <span>用户名：</span>
         <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
@@ -9,7 +15,7 @@
       </div>
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
-      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
+      <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>-->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
@@ -45,7 +51,7 @@ export default {
         pk: "goodsId"
       },
       param: {
-        userName:""
+        userName: ""
       },
       dialogTitle: "编辑",
       isShowEdit: false,
@@ -67,14 +73,11 @@ export default {
           formatter(r, c, v) {
             return vue.mxTimeFormatter(v);
           }
-        },
-
+        }
       },
-      form: {
-
-      },
-      selectedRow: {},
-    }
+      form: {},
+      selectedRow: {}
+    };
   },
   methods: {
     add() {
@@ -92,7 +95,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -100,9 +103,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -115,23 +117,21 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
-  created() {
-
-  }
-}
+  created() {}
+};
 </script>
 
 

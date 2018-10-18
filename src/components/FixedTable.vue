@@ -11,14 +11,41 @@
       <el-button type="warning" @click="update" icon="el-icon-edit-outline" v-if="showUpdate">修改</el-button>
       <el-button type="danger" @click="del" icon="el-icon-delete" v-if="showDelete">删除</el-button>
       <slot name="right-control"></slot>
-      <el-button type="default" @click="getData" icon="el-icon-refresh" v-if="showRefresh" circle title="刷新数据"></el-button>
+      <el-button
+        type="default"
+        @click="getData"
+        icon="el-icon-refresh"
+        v-if="showRefresh"
+        circle
+        title="刷新数据"
+      ></el-button>
       <!-- {{rowData}} -->
     </div>
     <div style="height:8px;" v-if="showControl"></div>
-    <el-table ref="ft" :data="translateShowData" :row-style="rowStyle" :height="tableHeight" style="width: 100%" highlight-current-row @current-change="handleCurrentChange" @selection-change="handleSelectionChange" border :header-cell-style="headerStyle">
+    <el-table
+      ref="ft"
+      :data="translateShowData"
+      :row-style="rowStyle"
+      :height="tableHeight"
+      style="width: 100%"
+      highlight-current-row
+      @current-change="handleCurrentChange"
+      @selection-change="handleSelectionChange"
+      border=""
+      :header-cell-style="headerStyle"
+    >
       <slot name="col-first"></slot>
       <el-table-column type="selection" width="50" align="center" v-if="multiple"></el-table-column>
-      <el-table-column v-for="(value, key, index) in valueFields" :prop="key" :label="value.label" :key="index" :formatter="value.formatter" :width="value.width" :align="value.align" :class-name="value.class"></el-table-column>
+      <el-table-column
+        v-for="(value, key, index) in valueFields"
+        :prop="key"
+        :label="value.label"
+        :key="index"
+        :formatter="value.formatter"
+        :width="value.width"
+        :align="value.align"
+        :class-name="value.class"
+      ></el-table-column>
       <el-table-column v-if="fileInfo.hasFile" label="附件" width="">
         <template slot-scope="scope">
           <a :href="fileInfo.serverUrl" target="_blank"></a>
@@ -29,10 +56,16 @@
     </el-table>
     <div style="height:8px;"></div>
     <div style="text-align:right" v-if="showPage">
-      <el-pagination @size-change="sizeChange" @current-change="currentChange" :current-page.sync="page.current" :page-sizes="[10, 15, 20, 30, 50]" :page-size="page.size" layout="total, sizes, prev, pager, next, jumper" :total="page.total">
-      </el-pagination>
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page.sync="page.current"
+        :page-sizes="[10, 15, 20, 30, 50]"
+        :page-size="page.size"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="page.total"
+      ></el-pagination>
     </div>
-
     <!-- <fixed-table-form :fields="fields" :form-open-flag.sync="formOpenFlag" @updatedSuccess="getData" :saveOrUpdateDataUrl="saveOrUpdateDataUrl" :rowData="rowData" :getFormDataUrl="getFormDataUrl" :file-info="fileInfo"></fixed-table-form> -->
   </div>
 </template>
@@ -103,7 +136,7 @@ export default {
       default: null
     },
 
-    // 获取数据接口 
+    // 获取数据接口
     getDataUrl: {
       type: String,
       default: ""
@@ -161,7 +194,6 @@ export default {
       }
     },
 
-
     // 字段
     /*
       [key]:数据库对应字段
@@ -180,17 +212,16 @@ export default {
     */
     fields: {
       default() {
-        return {
-        };
+        return {};
       }
-    },
+    }
   },
   data() {
     return {
       loading: false,
       headerStyle: {
         backgroundColor: "#e9a695",
-        color: "#000",
+        color: "#000"
         // textAlign: "center"
       },
       page: {
@@ -250,15 +281,18 @@ export default {
               this.translateShowData.forEach((o, i) => {
                 this.selectedRows.forEach(row => {
                   if (row.itemId == o.itemId) {
-                    this.$refs.ft.toggleRowSelection(this.translateShowData[i], true);
+                    this.$refs.ft.toggleRowSelection(
+                      this.translateShowData[i],
+                      true
+                    );
                   }
-                })
+                });
               });
             }
           }
-        }, 1)
+        }, 1);
       },
-      deep: true,
+      deep: true
     },
     fields: {
       handler() {
@@ -286,10 +320,10 @@ export default {
     rowStyle(row) {
       let style = {};
       if (row.__bg != undefined) {
-        style.backgroundColor = __bg
+        style.backgroundColor = __bg;
       }
       if (row.__color != undefined) {
-        style.color = __color
+        style.color = __color;
       }
       return style;
     },
@@ -345,7 +379,7 @@ export default {
           .then(() => {
             this.deleteData();
           })
-          .catch(() => { });
+          .catch(() => {});
       }
     },
     currentChange(e) {
@@ -357,7 +391,6 @@ export default {
     },
     handleCurrentChange(row) {
       if (!this.multiple) {
-
         this.rowData = row;
         let r = this.clone(row);
         if (row == null) {
@@ -377,7 +410,7 @@ export default {
         this.loading = true;
         setTimeout(() => {
           this.loading = false;
-        }, 8000)
+        }, 8000);
         let param = this.clone(this.dataParam);
         if (this.showPage) {
           param.page = this.page.current;
@@ -389,21 +422,23 @@ export default {
           delete param[this.searchField];
         }
         // console.log(param)
-        this.xpost(this.getDataUrl, param).then(res => {
-          this.page.total = res.records;
-          if (this.map) {
-            this.dataList = res.rows.map(o => {
-              return this.map(o);
-            });
-          } else {
-            this.dataList = res.rows;
-          }
-          // console.log(res)
-          this.loading = false;
-          this.$emit("done", this.dataList);
-        }).catch(e => {
-          this.loading = false;
-        });
+        this.xpost(this.getDataUrl, param)
+          .then(res => {
+            this.page.total = res.records;
+            if (this.map) {
+              this.dataList = res.rows.map(o => {
+                return this.map(o);
+              });
+            } else {
+              this.dataList = res.rows;
+            }
+            // console.log(res)
+            this.loading = false;
+            this.$emit("done", this.dataList);
+          })
+          .catch(e => {
+            this.loading = false;
+          });
       }
     },
     deleteData() {

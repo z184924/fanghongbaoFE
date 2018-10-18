@@ -1,7 +1,12 @@
 
 <template>
   <div>
-    <transition @enter="veEnter" @leave="veLeave" @before-enter="veBeforeEnter" @after-enter="veAfterEnter">
+    <transition
+      @enter="veEnter"
+      @leave="veLeave"
+      @before-enter="veBeforeEnter"
+      @after-enter="veAfterEnter"
+    >
       <app-login v-if="!mxLoginInfo.username"></app-login>
       <div class="stage" v-else>
         <div class="stage--header">
@@ -32,7 +37,7 @@
         <div class="stage--footer">
           <b>房红包后台管理系统</b>
           <span>&nbsp;&nbsp;</span>
-          <span> Copyright © </span>
+          <span>Copyright ©</span>
           <span>&nbsp;房红包（北京）网络科技有限公司</span>
         </div>
       </div>
@@ -42,11 +47,11 @@
 
 <script>
 // import dict from "./dict.js"
-import localhostConfig from "../localhostConfig.js"
-import AppLogin from "./AppLogin"
-import CHeader from "@/components/CHeader"
-import CMenu from "@/components/CMenu"
-import Ve from "velocity-animate"
+import localhostConfig from "../localhostConfig.js";
+import AppLogin from "./AppLogin";
+import CHeader from "@/components/CHeader";
+import CMenu from "@/components/CMenu";
+import Ve from "velocity-animate";
 
 export default {
   components: {
@@ -58,7 +63,6 @@ export default {
     return {
       // userType: 0, //0等待 1登录 2业主 3供应商
       // bread: { b1: "", b2: "" }
-
     };
   },
   computed: {
@@ -74,14 +78,22 @@ export default {
       el.style.height = "90vh";
     },
     veEnter(el, done) {
-      Velocity(el, { opacity: 1, top: "0px", height: "100vh" }, { duration: 800, easing: "easeOutQuint", complete: done })
+      Velocity(
+        el,
+        { opacity: 1, top: "0px", height: "100vh" },
+        { duration: 800, easing: "easeOutQuint", complete: done }
+      );
     },
     veAfterEnter(el, done) {
       el.style.position = "unset";
     },
     veLeave(el, done) {
-      Velocity(el, { opacity: 0, top: "-30px" }, { duration: 0, complete: done })
-    },
+      Velocity(
+        el,
+        { opacity: 0, top: "-30px" },
+        { duration: 0, complete: done }
+      );
+    }
   },
   created() {
     if (window.location.port == "17011") {
@@ -90,17 +102,18 @@ export default {
     }
     window.onresize = () => {
       this.$store.commit("setWindowHeight", window.innerHeight);
-    }
+    };
 
     this.$store.commit("setWindowHeight", window.innerHeight);
     this.$store.commit("clearDict");
     this.$store.commit("setDict", JSON.parse(sessionStorage.getItem("dict")));
     this.$store.commit("setMenu", JSON.parse(sessionStorage.getItem("menu")));
-    this.$store.commit("login", JSON.parse(sessionStorage.getItem("loginInfo")));
-
-  },
-
-}
+    this.$store.commit(
+      "login",
+      JSON.parse(sessionStorage.getItem("loginInfo"))
+    );
+  }
+};
 </script>
 <style lang="scss">
 .stage {

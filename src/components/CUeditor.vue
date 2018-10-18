@@ -1,8 +1,13 @@
 <template>
-  <iframe :id="uuid" :src="`http://123.57.32.164:7002/?id=${uuid}`" frameborder="0" style="width:100%;height:400px"></iframe>
+  <iframe
+    :id="uuid"
+    :src="`http://123.57.32.164:7002/?id=${uuid}`"
+    frameborder="0"
+    style="width:100%;height:400px"
+  ></iframe>
 </template>
 <script>
-import uuid from "uuid"
+import uuid from "uuid";
 export default {
   props: {
     value: {}
@@ -17,8 +22,8 @@ export default {
   // },
   data() {
     return {
-      uuid: "",
-    }
+      uuid: ""
+    };
   },
   methods: {
     setContent() {
@@ -28,14 +33,16 @@ export default {
       this.$nextTick(() => {
         setTimeout(() => {
           let ifr = document.getElementById(this.uuid);
-          ifr.contentWindow.postMessage({
-            type: "get",
-            id: this.uuid,
-            text: this.value
-          }, "*");
-        }, 100)
-      })
-
+          ifr.contentWindow.postMessage(
+            {
+              type: "get",
+              id: this.uuid,
+              text: this.value
+            },
+            "*"
+          );
+        }, 100);
+      });
     }
   },
   created() {
@@ -47,10 +54,8 @@ export default {
       if (res.data.type === "ready" && res.data.id === this.uuid) {
         this.setContent();
       }
-    })
-
-
+    });
   }
-}
+};
 </script>
 

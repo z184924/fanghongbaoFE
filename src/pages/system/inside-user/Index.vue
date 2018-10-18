@@ -1,6 +1,12 @@
 <template>
   <div class="xc-shadow xc6">
-    <fixed-table ref="table" get-data-url="user/listPageUsersByType" :data-param="dataParam" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      get-data-url="user/listPageUsersByType"
+      :data-param="dataParam"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <span slot="left-control">
         <span>用户类型：</span>
         <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:120px"></c-select>
@@ -13,7 +19,6 @@
         <el-button type="default" icon="el-icon-edit" @click="edit">编辑用户</el-button>
       </span>
     </fixed-table>
-
     <!-- dialog -->
     <el-dialog v-drag :visible.sync="isShowAdd" width="400px" title="新增内部用户">
       <el-form ref="formAdd" :model="formAdd" label-width="6em" :rules="rules">
@@ -33,7 +38,6 @@
       <el-button type="default" slot="footer" @click="isShowAdd=false">取消</el-button>
       <el-button type="primary" slot="footer" @click="doAdd">保存</el-button>
     </el-dialog>
-
     <el-dialog v-drag :visible.sync="isShowEdit" width="400px" title="编辑内部用户">
       <el-form ref="formEdit" :model="formEdit" label-width="6em" :rules="rules">
         <el-form-item label="账号" prop="account">
@@ -66,21 +70,21 @@ export default {
       searchInsiderList: [
         {
           label: "全部",
-          value: "",
+          value: ""
         },
         {
           label: "内部用户",
-          value: "1",
+          value: "1"
         },
         {
           label: "外部用户",
-          value: "0",
-        },
+          value: "0"
+        }
       ],
       selectedRow: {},
       dataParam: {
         isInsider: "",
-        userName: "",
+        userName: ""
       },
       fields: {
         phone: {
@@ -120,7 +124,7 @@ export default {
         roleName: {
           label: "角色名称",
           type: "string"
-        },
+        }
       },
 
       // dialog
@@ -128,25 +132,16 @@ export default {
       isShowEdit: false,
       roleList: [],
       rules: {
-        account: [
-          { required: true, message: '请填写账号', trigger: 'blur' }
-        ],
-        userName: [
-          { required: true, message: '请填写姓名', trigger: 'blur' }
-        ],
-        phone: [
-          { required: true, message: '请填写手机号', trigger: 'blur' }
-        ],
-        role: [
-          { required: true, message: '请选择角色', trigger: 'blur' }
-        ],
+        account: [{ required: true, message: "请填写账号", trigger: "blur" }],
+        userName: [{ required: true, message: "请填写姓名", trigger: "blur" }],
+        phone: [{ required: true, message: "请填写手机号", trigger: "blur" }],
+        role: [{ required: true, message: "请选择角色", trigger: "blur" }]
       },
 
       // 新增
       formAdd: {},
-      formEdit: {},
-
-    }
+      formEdit: {}
+    };
   },
   methods: {
     add() {
@@ -159,13 +154,13 @@ export default {
             account: this.formAdd.account,
             userName: this.formAdd.userName,
             phone: this.formAdd.phone,
-            roleId: this.formAdd.role,
+            roleId: this.formAdd.role
           }).then(res => {
             this.mxMessage(res).then(() => {
               this.isShowAdd = false;
               this.refreshTable();
-            })
-          })
+            });
+          });
         } else {
           return false;
         }
@@ -176,26 +171,25 @@ export default {
     edit() {
       if (this.selectedRow.userId) {
         if (this.selectedRow.isInsider == 1) {
-
           this.isShowEdit = true;
           this.$nextTick(() => {
             this.formEdit.role = this.selectedRow.roleId + "";
             this.formEdit.userName = this.selectedRow.userName + "";
             this.formEdit.phone = this.selectedRow.phone + "";
             this.formEdit.account = this.selectedRow.account + "";
-          })
+          });
         } else {
           this.$message({
             message: "只能编辑内部用户",
             type: "info"
-          })
+          });
         }
         // console.log(this.formEdit);
       } else {
         this.$message({
           message: "请选择一行数据",
           type: "info"
-        })
+        });
       }
     },
     doEdit() {
@@ -206,13 +200,13 @@ export default {
             // account: this.formEdit.account,
             userName: this.formEdit.userName,
             phone: this.formEdit.phone,
-            roleId: this.formEdit.role,
+            roleId: this.formEdit.role
           }).then(res => {
             this.mxMessage(res).then(() => {
               this.isShowEdit = false;
               this.refreshTable();
-            })
-          })
+            });
+          });
         } else {
           return false;
         }
@@ -222,7 +216,6 @@ export default {
       this.dataParam = {};
     },
 
-
     // table
     refreshTable() {
       this.$refs.table.getData();
@@ -230,25 +223,23 @@ export default {
   },
   created() {
     this.$nextTick(() => {
-
       this.xpost("role/getRoles").then(res => {
         let list = res.rows.map(o => {
           return {
             label: o.roleName,
-            value: o.roleId + "",
-          }
-        })
+            value: o.roleId + ""
+          };
+        });
         let l = [];
         list.forEach(o => {
           if (o.label != "经纪人") {
             l.push(o);
           }
-        })
+        });
         this.roleList = l;
-
-      })
+      });
       this.refreshTable();
-    })
+    });
   }
-}
+};
 </script>

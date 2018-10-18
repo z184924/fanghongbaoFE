@@ -1,6 +1,6 @@
 <template>
   <el-radio-group v-model="selectedValue" v-if="type==='radio'">
-    <el-radio border :label="o.value" v-for="(o,i) in list" :key="i">{{o.label}}</el-radio>
+    <el-radio :border="true" :label="o.value" v-for="(o,i) in list" :key="i">{{o.label}}</el-radio>
   </el-radio-group>
   <el-select v-model="selectedValue" :multiple="multiple" style="width:100%" v-else>
     <el-option v-for="o in list" :key="o.value" :value="o.value" :label="o.label"></el-option>
@@ -11,11 +11,11 @@ export default {
   props: {
     n: {},
     dict: {
-      default: null,//传入字符串时，在dict.js中匹配数组，传入数组时直接使用该数组
+      default: null //传入字符串时，在dict.js中匹配数组，传入数组时直接使用该数组
     },
     type: {
       type: String,
-      default: "",
+      default: ""
     },
     value: {
       type: String | Number,
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       // selectedValue: null
-    }
+    };
   },
   // watch: {
   //   selectedValue: {
@@ -58,7 +58,7 @@ export default {
         } else {
           let v = "";
           if (this.value !== undefined && this.value !== null) {
-            v = this.value + ""
+            v = this.value + "";
           }
           this.$emit("input", v);
           return v;
@@ -90,7 +90,7 @@ export default {
             return {
               label: o.NAME + "",
               value: o.CODE + ""
-            }
+            };
           });
           return a;
         } else if (kindOf(this.dict) === "array") {
@@ -99,14 +99,14 @@ export default {
             o.value = o.value + "";
             o.label = o.label + "";
             if (kindOf(o) === "object") {
-              a.push(o)
+              a.push(o);
             } else {
               a.push({
                 label: o + "",
                 value: o + ""
-              })
+              });
             }
-          })
+          });
           return a;
         } else {
           return [];
@@ -147,8 +147,6 @@ export default {
   },
   created() {
     this.setValue();
-
   }
-
-}
+};
 </script>

@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div slot="left-control">
         <span>姓名：</span>
         <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
@@ -26,16 +32,20 @@
         <el-form-item label="兑换条件">
           <el-input v-model="form.conditions"></el-input>
         </el-form-item>
-      </el-form> -->
-      <c-edit v-if="isShowEdit" :user-id="selectedRow.userId" :vip-start="selectedRow.vipStartTime" :vip-end="selectedRow.vipEndTime"></c-edit>
-
+      </el-form>-->
+      <c-edit
+        v-if="isShowEdit"
+        :user-id="selectedRow.userId"
+        :vip-start="selectedRow.vipStartTime"
+        :vip-end="selectedRow.vipEndTime"
+      ></c-edit>
       <!-- <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save" slot="footer">保存</el-button> -->
+      <el-button type="primary" @click="save" slot="footer">保存</el-button>-->
     </el-dialog>
   </div>
 </template>
 <script>
-import CEdit from "./Edit"
+import CEdit from "./Edit";
 export default {
   components: {
     CEdit
@@ -82,14 +92,12 @@ export default {
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
-        },
+        }
       },
-      form: {
-
-      },
+      form: {},
       param: {},
-      selectedRow: {},
-    }
+      selectedRow: {}
+    };
   },
   methods: {
     add() {
@@ -108,7 +116,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -116,9 +124,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -131,22 +138,22 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
   mounted() {
     console.log(this.$store.state.dict);
   }
-}
+};
 </script>
 

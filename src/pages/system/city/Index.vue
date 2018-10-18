@@ -17,12 +17,18 @@
         </div>
       </c-panel>
       <div class="xc7__btns">
-
-        <el-button type="success" @click="doSave(selectedWyy,1)" :disabled="selectedWyy.length===0">保存已选 →</el-button>
+        <el-button
+          type="success"
+          @click="doSave(selectedWyy,1)"
+          :disabled="selectedWyy.length===0"
+        >保存已选 →</el-button>
         <div style="height:8px;"></div>
-        <el-button type="danger" @click="doSave(selectedYyy,0)" :disabled="selectedYyy.length===0">← 删除已选</el-button>
+        <el-button
+          type="danger"
+          @click="doSave(selectedYyy,0)"
+          :disabled="selectedYyy.length===0"
+        >← 删除已选</el-button>
       </div>
-
       <c-panel title="已运营城市" style="width:360px;margin:0 10px" title-color="#3a6">
         <div class="xc9">
           <span class="xc9__label">搜索：</span>
@@ -53,8 +59,8 @@ export default {
       listWyy: [],
       listYyy: [],
       timerSearchWyy: -1,
-      timerSearchYyy: -1,
-    }
+      timerSearchYyy: -1
+    };
   },
   watch: {
     searchTextWyy() {
@@ -62,7 +68,7 @@ export default {
     },
     searchTextYyy() {
       this.searchYyy(500);
-    },
+    }
   },
   methods: {
     clearWyy() {
@@ -77,15 +83,14 @@ export default {
         isDo: state
       }).then(res => {
         this.mxMessage(res).then(() => {
-          this.selectedWyy=[];
-          this.selectedYyy=[];
+          this.selectedWyy = [];
+          this.selectedYyy = [];
           this.searchWyy(0);
           this.searchYyy(0);
-        })
-      })
+        });
+      });
     },
     searchWyy(delay = 10) {
-
       clearTimeout(this.timerSearchWyy);
       this.timerSearchWyy = setTimeout(() => {
         this.xpost("city/getNoBusinessCitys", {
@@ -95,10 +100,10 @@ export default {
             return {
               label: o.cityName,
               value: o.cityId
-            }
-          })
-        })
-      }, delay)
+            };
+          });
+        });
+      }, delay);
     },
     searchYyy(delay = 0) {
       clearTimeout(this.timerSearchYyy);
@@ -110,20 +115,19 @@ export default {
             return {
               label: o.cityName,
               value: o.cityId
-            }
+            };
           });
-        })
-      }, delay)
-    },
+        });
+      }, delay);
+    }
   },
   created() {
     this.searchWyy();
     this.searchYyy();
     this.listYyy.forEach(o => {
-      this.selectedWyy.push(o)
-    })
-
+      this.selectedWyy.push(o);
+    });
   }
-}
+};
 </script>
 

@@ -26,7 +26,12 @@
           </el-form-item>
           <el-form-item label="物业类型" prop="f__wylx">
             <el-checkbox-group v-model="form.f__wylx">
-              <el-checkbox border :label="o.CODE" v-for="(o,i) in $store.state.dict.wylx" :key="i">{{o.NAME}}</el-checkbox>
+              <el-checkbox
+                border=""
+                :label="o.CODE"
+                v-for="(o,i) in $store.state.dict.wylx"
+                :key="i"
+              >{{o.NAME}}</el-checkbox>
             </el-checkbox-group>
           </el-form-item>
           <el-form-item label="售价区间" prop="sellingSection">
@@ -40,7 +45,11 @@
             <el-input v-model="form.projectAddress"></el-input>
           </el-form-item>
           <el-form-item label="百度坐标" prop="projectMapXY">
-            <el-input v-model="form.projectMapXY" style="width:60%" placeholder="0.0000000,0.0000000"></el-input>
+            <el-input
+              v-model="form.projectMapXY"
+              style="width:60%"
+              placeholder="0.0000000,0.0000000"
+            ></el-input>
             <el-button type="primary" @click="pickLocation">选择坐标点…</el-button>
             <el-button type="text" @click="pickLocationHelp">如何使用？</el-button>
           </el-form-item>
@@ -48,18 +57,37 @@
             <c-select dict="yjbl" v-model="form.commissionType" style="width:200px"></c-select>
           </el-form-item>
           <el-form-item :label="form.commissionType+''==='0'?'普通会员佣金':'普通会员佣金比例'" prop="f__pthyyj">
-            <el-input v-model="form.f__pthyyj" style="width:200px"></el-input>
+            <el-input v-model="form.f__pthyyj" style="width:160px"></el-input>
             <span v-if="form.commissionType+''==='0'">元</span>
             <span v-else>%</span>
+            <span style="padding-left:4em" v-if="form.commissionType+''==='0'">普通会员最大佣金：</span>
+            <el-input-number
+              v-if="form.commissionType+''==='0'"
+              :controls="false"
+              v-model="form.generalCommissionMax"
+              style="width:160px"
+            ></el-input-number>
+            <span v-if="form.commissionType+''==='0'">元</span>
           </el-form-item>
-          <el-form-item :label="form.commissionType+''==='0'?'VIP会员佣金':'VIP会员佣金比例'" prop="f__viphyyj">
-            <el-input v-model="form.f__viphyyj" style="width:200px"></el-input>
+          <el-form-item
+            :label="form.commissionType+''==='0'?'VIP会员佣金':'VIP会员佣金比例'"
+            prop="f__viphyyj"
+          >
+            <el-input v-model="form.f__viphyyj" style="width:160px"></el-input>
             <span v-if="form.commissionType+''==='0'">元</span>
             <span v-else>%</span>
+            <span style="padding-left:4em" v-if="form.commissionType+''==='0'">VIP会员最大佣金：</span>
+            <el-input-number
+              v-if="form.commissionType+''==='0'"
+              :controls="false"
+              v-model="form.vipCommissionMax"
+              style="width:160px"
+            ></el-input-number>
+            <span v-if="form.commissionType+''==='0'">元</span>
           </el-form-item>
           <!-- <el-form-item label="楼盘状态">
             <c-select dict="lpzt" v-model="form.projectStatus" style="width:200px"></c-select>
-          </el-form-item> -->
+          </el-form-item>-->
           <el-form-item label="是否推荐">
             <c-select type="radio" v-model="form.ifRecommend" dict="bool"></c-select>
           </el-form-item>
@@ -71,9 +99,13 @@
               </el-form-item>
             </div>
           </el-collapse-transition>
-
           <el-form-item label="专员（多选）" prop="f__zy">
-            <c-select type="multiple" v-model="form.f__zy" :dict="listZhuanyuan" style="width:400px"></c-select>
+            <c-select
+              type="multiple"
+              v-model="form.f__zy"
+              :dict="listZhuanyuan"
+              style="width:400px"
+            ></c-select>
             <el-button type="text" @click="form.f__zy=''">清空</el-button>
             <span>金额：</span>
             <el-input v-model="form.f__je_zy" style="width:85px"></el-input>
@@ -85,13 +117,23 @@
             <el-input v-model="form.f__je_xmzg" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="案场秘书（多选）" prop="f__acms">
-            <c-select type="multiple" v-model="form.f__acms" :dict="listAnchang" style="width:400px"></c-select>
+            <c-select
+              type="multiple"
+              v-model="form.f__acms"
+              :dict="listAnchang"
+              style="width:400px"
+            ></c-select>
             <el-button type="text" @click="form.f__acms=''">清空</el-button>
             <span>金额：</span>
             <el-input v-model="form.f__je_acms" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="项目经理（多选）" prop="f__xmjl">
-            <c-select type="multiple" v-model="form.f__xmjl" :dict="listXiangmuJingli" style="width:400px"></c-select>
+            <c-select
+              type="multiple"
+              v-model="form.f__xmjl"
+              :dict="listXiangmuJingli"
+              style="width:400px"
+            ></c-select>
             <el-button type="text" @click="form.f__xmjl=''">清空</el-button>
             <span>金额：</span>
             <el-input v-model="form.f__je_xmjl" style="width:85px"></el-input>
@@ -127,7 +169,12 @@
             <el-input v-model="form.f__je_cw" style="width:85px"></el-input>
           </el-form-item>
           <el-form-item label="抄送人（多选）" prop="f__csr">
-            <c-select type="multiple" v-model="form.f__csr" :dict="listChaosongren" style="width:400px"></c-select>
+            <c-select
+              type="multiple"
+              v-model="form.f__csr"
+              :dict="listChaosongren"
+              style="width:400px"
+            ></c-select>
             <el-button type="text" @click="form.f__csr=''">清空</el-button>
             <!-- <span>金额：</span> -->
             <!-- <el-input v-model="form.f__je_csr" style="width:85px"></el-input> -->
@@ -137,14 +184,16 @@
     </c-panel>
     <!-- <div>{{form}}</div> -->
     <c-panel title-color="#3c7c17" title="客户展示信息字段" width="800px">
-      <el-table ref="tableClient" :data="tableClient" border @selection-change="tableClientSelect">
-        <el-table-column type="selection" width="55" align="center">
-        </el-table-column>
-        <el-table-column prop="fieldNotes" label="【字段】">
-        </el-table-column>
+      <el-table
+        ref="tableClient"
+        :data="tableClient"
+        border=""
+        @selection-change="tableClientSelect"
+      >
+        <el-table-column type="selection" width="55" align="center"></el-table-column>
+        <el-table-column prop="fieldNotes" label="【字段】"></el-table-column>
       </el-table>
     </c-panel>
-
     <c-panel title-color="#7c2b17" title="封面图" width="800px">
       <file-box v-model="form.logoPic" :multiple="false"></file-box>
     </c-panel>
@@ -238,13 +287,12 @@ export default {
         { key: "jtpt", label: "交通配套" },
         { key: "ylpt", label: "医疗配套" },
         { key: "sypt", label: "商业配套" },
-        { key: "jypt", label: "教育配套" },
+        { key: "jypt", label: "教育配套" }
       ],
       inputsMaidian: [
         { key: "lpmd", label: "楼盘卖点" },
         { key: "mbkq", label: "目标客群" },
-        { key: "fhbzc", label: "房红包支持" },
-
+        { key: "fhbzc", label: "房红包支持" }
       ],
 
       listRoleTable: [

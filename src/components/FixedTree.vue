@@ -1,14 +1,44 @@
 <template>
   <div>
-    <el-tree v-if="multiSelect" ref="tree" :default-expand-all="expandAll" :expand-on-click-node="false" :node-key="fieldId" :data="tree" @check-change="handleCheckChange" :props="treeProps" show-checkbox :render-content="renderContent">
-      <span class="custom-tree-node" slot-scope="{ node, data }" :title="node.label"> {{ node.label }} </span>
+    <el-tree
+      v-if="multiSelect"
+      ref="tree"
+      :default-expand-all="expandAll"
+      :expand-on-click-node="false"
+      :node-key="fieldId"
+      :data="tree"
+      @check-change="handleCheckChange"
+      :props="treeProps"
+      show-checkbox
+      :render-content="renderContent"
+    >
+      <span
+        class="custom-tree-node"
+        slot-scope="{ node, data }"
+        :title="node.label"
+      >{{ node.label }}</span>
     </el-tree>
-    <el-tree v-else ref="tree" :default-expand-all="expandAll" :expand-on-click-node="false" highlight-current :node-key="fieldId" :data="tree" @node-click="nodeClick" :props="treeProps" :show-checkbox="multiSelect" :render-content="renderContent">
-      <span class="custom-tree-node" slot-scope="{ node, data }" :title="node.label"> {{ node.label }} </span>
+    <el-tree
+      v-else
+      ref="tree"
+      :default-expand-all="expandAll"
+      :expand-on-click-node="false"
+      highlight-current
+      :node-key="fieldId"
+      :data="tree"
+      @node-click="nodeClick"
+      :props="treeProps"
+      :show-checkbox="multiSelect"
+      :render-content="renderContent"
+    >
+      <span
+        class="custom-tree-node"
+        slot-scope="{ node, data }"
+        :title="node.label"
+      >{{ node.label }}</span>
     </el-tree>
     <!-- {{value}} -->
   </div>
-
 </template>
 <script>
 /*
@@ -33,23 +63,23 @@ export default {
     // 各类field对应的字段
     fieldId: {
       type: String,
-      default: "id",
+      default: "id"
     },
     fieldPid: {
       type: String,
-      default: "pid",
+      default: "pid"
     },
     fieldName: {
       type: String,
-      default: "name",
+      default: "name"
     },
     fieldLevel: {
       type: String,
-      default: "level",
+      default: "level"
     },
     fieldLevelCode: {
       type: String,
-      default: "levelCode",
+      default: "levelCode"
     },
     renderContent: {
       type: Function,
@@ -64,7 +94,7 @@ export default {
 
     // 根节点id对应的数据
     topId: {
-      default: 0,
+      default: 0
     },
     list: {
       default() {
@@ -81,14 +111,14 @@ export default {
   },
   data() {
     return {
-      activeNode: {},
-    }
+      activeNode: {}
+    };
   },
   computed: {
     treeProps() {
       return {
-        label: this.fieldName,
-      }
+        label: this.fieldName
+      };
     },
     tree() {
       return this.getChildrenMenu(this.topId, null);
@@ -108,8 +138,8 @@ export default {
         this.$nextTick(() => {
           setTimeout(e => {
             this.$emit("input", this.$refs.tree.getCheckedNodes());
-          }, 500)
-        })
+          }, 500);
+        });
       },
       deep: true
     }
@@ -127,7 +157,10 @@ export default {
           $.extend(newItem, item);
           $.extend(p, parent);
           newItem.parent = p;
-          newItem.children = this.getChildrenMenu(newItem[this.fieldId], newItem);
+          newItem.children = this.getChildrenMenu(
+            newItem[this.fieldId],
+            newItem
+          );
           menu.push(newItem);
         }
       });
@@ -142,12 +175,10 @@ export default {
       this.$emit("input", this.$refs.tree.getCheckedNodes());
       // console.log(this.$refs.tree.getCheckedNodes());
     }
-
-
   },
   created() {
     // this.getDataTree();
   }
-}
+};
 </script>
 

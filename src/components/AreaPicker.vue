@@ -1,7 +1,12 @@
 <template>
   <span>
     <c-select :dict="cityArray" v-model="selectedCity" style="width:120px"></c-select>
-    <c-select :dict="areaArray" v-model="selectedArea" style="width:150px" v-if="areaArray.length>0"></c-select>
+    <c-select
+      :dict="areaArray"
+      v-model="selectedArea"
+      style="width:150px"
+      v-if="areaArray.length>0"
+    ></c-select>
     <el-button v-if="isShowClear" type="text" @click="clear" style="padding:0 6px">清空</el-button>
     <!-- <div>{{selectedArea}}</div> -->
   </span>
@@ -20,8 +25,8 @@ export default {
       selectedCity: "",
 
       areaArray: [],
-      selectedArea: "",
-    }
+      selectedArea: ""
+    };
   },
   watch: {
     value: {
@@ -33,7 +38,7 @@ export default {
         }
       },
       deep: true,
-      immediate: true,
+      immediate: true
     },
     selectedCity: {
       handler() {
@@ -46,8 +51,8 @@ export default {
         // console.log(this.selectedCity);
         this.$emit("input", {
           city: this.selectedCity,
-          area: this.selectedArea,
-        })
+          area: this.selectedArea
+        });
       },
       deep: true
     }
@@ -60,11 +65,11 @@ export default {
         this.areaArray = res.map(o => {
           return {
             label: o.areaName,
-            value: o.areaId,
-          }
-        })
+            value: o.areaId
+          };
+        });
         // console.log(res);
-      })
+      });
     },
     clear() {
       this.selectedCity = "";
@@ -76,11 +81,11 @@ export default {
       this.cityArray = res.map(o => {
         return {
           label: o.cityName,
-          value: o.cityId,
-        }
-      })
+          value: o.cityId
+        };
+      });
       // console.log(res);
-    })
+    });
   }
-}
+};
 </script>

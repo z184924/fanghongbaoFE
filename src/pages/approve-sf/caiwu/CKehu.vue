@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div class="xc6__title" slot="left-control">客户明细</div>
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加客户</el-button> -->
       <!-- <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
@@ -8,9 +14,15 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="800px">
-      <fixed-table ref="tableAdd" v-if="isShowEdit" :multiple="true" :get-data-url="config.addUrl" :data-param="paramAdd" :fields="fieldsAdd" v-model="selectedRowAdd">
-      </fixed-table>
-
+      <fixed-table
+        ref="tableAdd"
+        v-if="isShowEdit"
+        :multiple="true"
+        :get-data-url="config.addUrl"
+        :data-param="paramAdd"
+        :fields="fieldsAdd"
+        v-model="selectedRowAdd"
+      ></fixed-table>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
@@ -21,7 +33,7 @@
 export default {
   props: {
     projectId: {},
-    accountantId: {},
+    accountantId: {}
   },
   data() {
     let vue = this;
@@ -54,7 +66,7 @@ export default {
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
-        },
+        }
       },
       fieldsAdd: {
         customerName: {
@@ -74,14 +86,12 @@ export default {
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
-        },
+        }
       },
-      form: {
-
-      },
+      form: {},
       selectedRow: {},
-      selectedRowAdd: {},
-    }
+      selectedRowAdd: {}
+    };
   },
   watch: {
     selectedRow: {
@@ -96,13 +106,13 @@ export default {
     param() {
       return {
         accountantId: this.accountantId
-      }
+      };
     },
     paramAdd() {
       return {
         projectId: this.projectId
-      }
-    },
+      };
+    }
   },
   methods: {
     add() {
@@ -113,7 +123,7 @@ export default {
       this.isShowEdit = true;
       this.$nextTick(() => {
         this.$refs.tableAdd.getData();
-      })
+      });
     },
     edit() {
       let a = this.selectedRow;
@@ -126,20 +136,21 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
-      this.form.customerIds = this.selectedRowAdd.map(o => {
-        return o.customerId
-      }).join();
+      this.form.customerIds = this.selectedRowAdd
+        .map(o => {
+          return o.customerId;
+        })
+        .join();
       this.xpost(this.config.editUrl, this.form).then(res => {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -152,17 +163,17 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
   beforeDestroy() {
     this.$emit("input", {});
@@ -173,10 +184,9 @@ export default {
       serviceId: this.serviceId,
       page: 1,
       rows: 1000
-    })
+    });
     this.$emit("input", {});
-
   }
-}
+};
 </script>
 

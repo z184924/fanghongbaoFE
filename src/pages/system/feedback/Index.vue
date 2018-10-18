@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" get-data-url="projectFeedback/getGridListJson" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      get-data-url="projectFeedback/getGridListJson"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div slot="left-control">
         <span>用户名：</span>
         <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
@@ -49,7 +55,7 @@ export default {
       fields: {
         userName: {
           label: "用户",
-          width: "120px",
+          width: "120px"
         },
         content: {
           label: "内容",
@@ -69,7 +75,7 @@ export default {
         }
       },
       param: {
-        userName:""
+        userName: ""
       },
       selectedRow: {},
       isShowInsert: false,
@@ -78,8 +84,8 @@ export default {
 
       isShowDetail: false,
       detailContent: "",
-      DetailListFile: "",
-    }
+      DetailListFile: ""
+    };
   },
   methods: {
     add() {
@@ -95,8 +101,8 @@ export default {
           this.content = "";
           this.listFile = "";
           this.$refs.table.getData();
-        })
-      })
+        });
+      });
     },
     detail() {
       if (this.selectedRow.feedbackId) {
@@ -107,14 +113,13 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
-    del() { },
+    del() {}
   },
-  created() {
-  }
-}
+  created() {}
+};
 </script>
 
 

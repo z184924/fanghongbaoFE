@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div slot="left-control">
         <span>用户名：</span>
         <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
@@ -63,15 +69,13 @@ export default {
           }
         },
         conditions: {
-          label: "兑换条件",
-        },
+          label: "兑换条件"
+        }
       },
-      form: {
-
-      },
-      param:{},
-      selectedRow: {},
-    }
+      form: {},
+      param: {},
+      selectedRow: {}
+    };
   },
   methods: {
     add() {
@@ -90,7 +94,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -98,8 +102,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -112,22 +116,20 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
-  created() {
-
-  }
-}
+  created() {}
+};
 </script>
 

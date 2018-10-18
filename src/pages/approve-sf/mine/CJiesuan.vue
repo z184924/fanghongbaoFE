@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div class="xc6__title" slot="left-control">结算明细</div>
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <!-- <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
@@ -8,9 +14,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
-      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
-
-      </el-form>
+      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em"></el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
@@ -36,43 +40,41 @@ export default {
       fields: {
         roleName: {
           label: "结算对象",
-          width: "auto",
+          width: "auto"
         },
         userName: {
           label: "姓名",
-          width: "auto",
+          width: "auto"
         },
         serverValue: {
           label: "服务费",
-          width: "auto",
+          width: "auto"
         },
         personalTax: {
           label: "个税",
-          width: "auto",
+          width: "auto"
         },
         prize: {
           label: "应发奖金",
-          width: "auto",
+          width: "auto"
         },
         realPrize: {
           label: "实发奖金",
-          width: "auto",
+          width: "auto"
         },
         keepValue: {
           label: "留存",
-          width: "auto",
+          width: "auto"
         },
         remark: {
           label: "备注",
-          width: "auto",
-        },
+          width: "auto"
+        }
       },
-      form: {
+      form: {},
 
-      },
-
-      selectedRow: {},
-    }
+      selectedRow: {}
+    };
   },
   watch: {
     selectedRow: {
@@ -87,7 +89,7 @@ export default {
     param() {
       return {
         serviceId: this.serviceId
-      }
+      };
     }
   },
   methods: {
@@ -107,7 +109,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -115,9 +117,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -130,17 +131,17 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
   beforeDestroy() {
     this.$emit("input", {});
@@ -148,6 +149,6 @@ export default {
   created() {
     this.$emit("input", {});
   }
-}
+};
 </script>
 

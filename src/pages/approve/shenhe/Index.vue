@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="tableParam"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">完善</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
@@ -32,7 +38,6 @@
                   <el-input v-model="form2.checkOpinion"></el-input>
                 </el-form-item>
               </div>
-
             </div>
           </c-panel>
           <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
@@ -72,12 +77,9 @@
                   <span>{{form.friendPrize}}</span>
                 </el-form-item>
               </div>
-
             </div>
           </c-panel>
-
           <!-- <div>{{form2}}</div> -->
-
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
@@ -88,7 +90,7 @@
   </div>
 </template>
 <script>
-import CDetail from "../_com/Detail"
+import CDetail from "../_com/Detail";
 export default {
   components: {
     CDetail
@@ -119,7 +121,7 @@ export default {
           }
         },
         customerTel: {
-          label: "客户电话",
+          label: "客户电话"
         },
         projectName: {
           label: "楼盘名称",
@@ -127,16 +129,15 @@ export default {
         },
         userName: {
           label: "经纪人"
-        },
-
+        }
       },
       form: {
         f__files: []
       },
       form2: {},
       selectedRow: {},
-      listWuyeLeixing: [],
-    }
+      listWuyeLeixing: []
+    };
   },
   methods: {
     add() {
@@ -154,27 +155,39 @@ export default {
           res.f__files = res.checkData ? res.checkData.split(",") : [];
 
           // date转换
-          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : undefined;
-          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : undefined;
-          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : undefined;
-          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : undefined;
-          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : undefined;
-          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
+          res.cardDate = res.cardDate
+            ? this.mxDateFormatter(res.cardDate)
+            : undefined;
+          res.subscribeDate = res.subscribeDate
+            ? this.mxDateFormatter(res.subscribeDate)
+            : undefined;
+          res.dealDate = res.dealDate
+            ? this.mxDateFormatter(res.dealDate)
+            : undefined;
+          res.downPayDate = res.downPayDate
+            ? this.mxDateFormatter(res.downPayDate)
+            : undefined;
+          res.initialDate = res.initialDate
+            ? this.mxDateFormatter(res.initialDate)
+            : undefined;
+          res.netsignDate = res.netsignDate
+            ? this.mxDateFormatter(res.netsignDate)
+            : undefined;
           this.form = res;
-        })
+        });
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     pass(text, state) {
       this.$confirm(`是否${text}？`, "提示").then(() => {
         this.save(state);
-      })
+      });
     },
     save(customerState) {
       let data = clone(this.form2);
@@ -184,9 +197,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -199,17 +211,17 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
   created() {
@@ -218,12 +230,12 @@ export default {
       this.listWuyeLeixing = res.map(o => {
         return {
           NAME: o.propertyType,
-          CODE: o.propertyTypeId,
-        }
-      })
-    })
+          CODE: o.propertyTypeId
+        };
+      });
+    });
     // console.log(this.mxLoginInfo);
   }
-}
+};
 </script>
 

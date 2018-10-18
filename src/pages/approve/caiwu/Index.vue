@@ -1,13 +1,26 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="tableParam"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">完善</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
-      <el-form ref="form" :rules="rules" :model="form2" label-width="9em" label-position="right" v-if="isShowEdit">
+      <el-form
+        ref="form"
+        :rules="rules"
+        :model="form2"
+        label-width="9em"
+        label-position="right"
+        v-if="isShowEdit"
+      >
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
@@ -32,7 +45,6 @@
                   <span>{{form.Opinion_shr}}</span>
                 </el-form-item>
               </div>
-
             </div>
           </c-panel>
           <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
@@ -71,7 +83,13 @@
                 <el-form-item label="盟友奖励金额">
                   <div>
                     <span>{{form2.friendPrize}}元</span>
-                    <el-tooltip v-if="form.isTimeOut!=0" class="item" effect="dark" content="推荐超过一年，不再给予红包奖励" placement="top">
+                    <el-tooltip
+                      v-if="form.isTimeOut!=0"
+                      class="item"
+                      effect="dark"
+                      content="推荐超过一年，不再给予红包奖励"
+                      placement="top"
+                    >
                       <span class="el-icon-warning" style="color:red">不可编辑</span>
                     </el-tooltip>
                     <br>
@@ -90,10 +108,8 @@
                   <c-date-picker v-model="form2.payTime"></c-date-picker>
                 </el-form-item>
               </div>
-
             </div>
           </c-panel>
-
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -127,7 +143,7 @@
               <div class="xc18__item">
                 <el-form-item label="留存发放月" prop="keepMonth">
                   <!-- <el-date-picker v-model="form2.keepMonth" style="width:160px" type="month" value-format="yyyy-MM" placeholder="选择月">
-                  </el-date-picker> -->
+                  </el-date-picker>-->
                   <c-date-picker v-model="form2.keepMonth"></c-date-picker>
                 </el-form-item>
               </div>
@@ -142,11 +158,9 @@
                   <c-date-picker v-model="form2.finalPaymentPriceDate"></c-date-picker>
                 </el-form-item>
               </div>
-
               <div class="xc18__item xc18__item--full">
                 <el-form-item label="客户备注">
                   <el-input v-model="form2.remarks" type="textarea" :rows="4"></el-input>
-
                 </el-form-item>
               </div>
               <div class="xc18__item xc18__item--full">
@@ -155,52 +169,59 @@
                     <c-select v-model="form2.customerStatusId" :dict="listState" type="radio"></c-select>
                   </div>
                 </el-form-item>
-
               </div>
-
               <div class="xc22">
                 <div class="xc22__title">佣金记录</div>
                 <table class="xc-table xc-table--border">
-                  <tr class="xc-table__head">
-                    <td>序号</td>
-                    <td>佣金金额</td>
-                    <td>付款时间</td>
-                  </tr>
-                  <tr v-for="(o,i) in listYongjin" :key="i">
-                    <td>{{i+1}}</td>
-                    <td>{{o.commissionValue}}元</td>
-                    <td>{{mxDateFormatter(o.commissionDate)}}</td>
-                  </tr>
+                  <tbody>
+                    <tr class="xc-table__head">
+                      <td>序号</td>
+                      <td>佣金金额</td>
+                      <td>付款时间</td>
+                    </tr>
+                    <tr v-for="(o,i) in listYongjin" :key="i">
+                      <td>{{i+1}}</td>
+                      <td>{{o.commissionValue}}元</td>
+                      <td>{{mxDateFormatter(o.commissionDate)}}</td>
+                    </tr>
+                  </tbody>
                 </table>
                 <div style="height:10px"></div>
                 <el-button icon="el-icon-plus" @click="isShowAddYongjin=true">新增佣金记录...</el-button>
               </div>
-
             </div>
           </c-panel>
           <!-- <div>{{selectedRow}}</div> -->
-
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
       <el-button type="primary" @click="save" slot="footer">保存</el-button>
     </el-dialog>
-    <el-dialog v-drag title="新增佣金记录" append-to-body :visible.sync="isShowAddYongjin" width="400px" top="60vh">
+    <el-dialog
+      v-drag
+      title="新增佣金记录"
+      append-to-body
+      :visible.sync="isShowAddYongjin"
+      width="400px"
+      top="60vh"
+    >
       <table v-if="isShowAddYongjin" class="xc-table xc-table--border" style="width:100%">
-        <tr>
-          <td style="width:8em">佣金金额（元）</td>
-          <td>
-            <el-input v-model="yongjin.commissionValue"></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td>付款时间</td>
-          <td>
-            <!-- <el-date-picker v-model="yongjin.commissionDate" value-format="yyyy-MM-dd" style="width:100%">
-            </el-date-picker> -->
-            <c-date-picker v-model="yongjin.commissionDate"></c-date-picker>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td style="width:8em">佣金金额（元）</td>
+            <td>
+              <el-input v-model="yongjin.commissionValue"></el-input>
+            </td>
+          </tr>
+          <tr>
+            <td>付款时间</td>
+            <td>
+              <!-- <el-date-picker v-model="yongjin.commissionDate" value-format="yyyy-MM-dd" style="width:100%">
+              </el-date-picker>-->
+              <c-date-picker v-model="yongjin.commissionDate"></c-date-picker>
+            </td>
+          </tr>
+        </tbody>
       </table>
       <el-button slot="footer" @click="isShowAddYongjin=false">关闭</el-button>
       <el-button slot="footer" type="primary" @click="addYongjin">保存</el-button>
@@ -208,7 +229,7 @@
   </div>
 </template>
 <script>
-import CDetail from "../_com/Detail"
+import CDetail from "../_com/Detail";
 export default {
   components: {
     CDetail
@@ -239,7 +260,7 @@ export default {
           }
         },
         customerTel: {
-          label: "客户电话",
+          label: "客户电话"
         },
         projectName: {
           label: "楼盘名称",
@@ -247,8 +268,7 @@ export default {
         },
         userName: {
           label: "经纪人"
-        },
-
+        }
       },
       form: {
         f__files: []
@@ -263,7 +283,7 @@ export default {
         finalPaymentPriceDate: "",
         payState: "",
         payTime: "",
-        customerStatusId: "",
+        customerStatusId: ""
       },
       selectedRow: {},
       listWuyeLeixing: [],
@@ -278,38 +298,28 @@ export default {
         {
           label: "已结佣",
           value: 24
-        },
+        }
       ],
       rules: {
-        isOnline: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
+        isOnline: [{ required: true, message: "不能为空", trigger: "change" }],
         onlineDate: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
         serviceMonth: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
-        keepState: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        keepMonth: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
+        keepState: [{ required: true, message: "不能为空", trigger: "change" }],
+        keepMonth: [{ required: true, message: "不能为空", trigger: "change" }],
         finalPaymentPriceDate: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ],
-        payState: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
-        payTime: [
-          { required: true, message: '不能为空', trigger: 'change' }
-        ],
+        payState: [{ required: true, message: "不能为空", trigger: "change" }],
+        payTime: [{ required: true, message: "不能为空", trigger: "change" }],
         customerStatusId: [
-          { required: true, message: '不能为空', trigger: 'change' }
+          { required: true, message: "不能为空", trigger: "change" }
         ]
       }
-    }
+    };
   },
   methods: {
     add() {
@@ -319,7 +329,6 @@ export default {
     },
     addYongjin() {
       if (this.yongjin.commissionValue && this.yongjin.commissionDate) {
-
         let id = this.selectedRow[this.config.pk];
         this.xpost("projectCustomer/saveCommission", {
           customerId: id,
@@ -329,13 +338,13 @@ export default {
           this.mxMessage(res).then(() => {
             this.isShowAddYongjin = false;
             this.edit();
-          })
-        })
+          });
+        });
       } else {
         this.$message({
           type: "info",
           message: "请填写完整"
-        })
+        });
       }
     },
     edit() {
@@ -351,26 +360,37 @@ export default {
           res.f__files = res.checkData ? res.checkData.split(",") : [];
 
           // date转换
-          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : undefined;
-          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : undefined;
-          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : undefined;
-          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : undefined;
-          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : undefined;
-          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
+          res.cardDate = res.cardDate
+            ? this.mxDateFormatter(res.cardDate)
+            : undefined;
+          res.subscribeDate = res.subscribeDate
+            ? this.mxDateFormatter(res.subscribeDate)
+            : undefined;
+          res.dealDate = res.dealDate
+            ? this.mxDateFormatter(res.dealDate)
+            : undefined;
+          res.downPayDate = res.downPayDate
+            ? this.mxDateFormatter(res.downPayDate)
+            : undefined;
+          res.initialDate = res.initialDate
+            ? this.mxDateFormatter(res.initialDate)
+            : undefined;
+          res.netsignDate = res.netsignDate
+            ? this.mxDateFormatter(res.netsignDate)
+            : undefined;
           this.form = res;
-        })
+        });
         // 佣金列表
         this.xpost("projectCustomer/getCommission", {
           customerId: id
         }).then(res => {
           this.listYongjin = res.rows;
-        })
-
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     // pass(text, state) {
@@ -379,7 +399,7 @@ export default {
     //   })
     // },
     save() {
-      this.$refs.form.validate((valid) => {
+      this.$refs.form.validate(valid => {
         if (valid) {
           let data = clone(this.form2);
           data.customerId = this.form.customerId;
@@ -387,21 +407,17 @@ export default {
             this.$refs.table.getData();
             this.mxMessage(res).then(() => {
               this.isShowEdit = false;
-            })
-          })
+            });
+          });
         } else {
           this.$message({
-            message:"请填写完整",
-            type:"warning"
-          })
-          console.log('error submit!!');
+            message: "请填写完整",
+            type: "warning"
+          });
+          console.log("error submit!!");
           return false;
         }
       });
-
-
-
-
     },
     del() {
       let row = this.selectedRow;
@@ -414,17 +430,17 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
   created() {
@@ -433,14 +449,13 @@ export default {
       this.listWuyeLeixing = res.map(o => {
         return {
           NAME: o.propertyType,
-          CODE: o.propertyTypeId,
-        }
-      })
-    })
-
+          CODE: o.propertyTypeId
+        };
+      });
+    });
 
     // console.log(this.mxLoginInfo);
   }
-}
+};
 </script>
 

@@ -2,15 +2,20 @@
   <div>
     <el-form label-width="7em">
       <el-form-item v-for="(o,i) in inputList" :key="i" :label="o.label">
-        <el-input type="textarea" autosize placeholder="请输入内容" v-model="o.value" @input="change($event,i)">
-        </el-input>
+        <el-input
+          type="textarea"
+          autosize
+          placeholder="请输入内容"
+          v-model="o.value"
+          @input="change($event,i)"
+        ></el-input>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
 import j from "json5";
-import clone from "clone"
+import clone from "clone";
 export default {
   props: {
     /*
@@ -31,8 +36,8 @@ export default {
       handler() {
         this.setValue();
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   methods: {
     buildEmitJson() {
@@ -47,7 +52,7 @@ export default {
       let v = {};
       try {
         v = j.parse(this.value);
-      } catch (error) { }
+      } catch (error) {}
       this.inputList = clone(this.inputs);
       this.inputList.forEach((o, i) => {
         this.$set(this.inputList[i], "value", v[o.key]);

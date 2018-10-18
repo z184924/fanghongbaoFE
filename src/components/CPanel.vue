@@ -18,17 +18,17 @@ export default {
   props: {
     title: {
       type: String,
-      default: "",
+      default: ""
     },
     titleColor: {
       type: String,
-      default: "rgb(199, 73, 54)",
+      default: "rgb(199, 73, 54)"
     },
     width: {
       type: String,
-      default: "auto",
-    },
+      default: "auto"
+    }
   }
-}
+};
 </script>
 

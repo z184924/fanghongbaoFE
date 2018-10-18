@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div slot="left-control">
         <span>用户名：</span>
         <!-- <c-select dict="bool" v-model="selectedSfyx" style="width:100px"></c-select> -->
@@ -23,7 +29,7 @@
         </el-form-item>
         <el-form-item label="邮寄日期">
           <!-- <el-date-picker style="width:100%" v-model="form.postDate" value-format="yyyy-MM-dd">
-          </el-date-picker> -->
+          </el-date-picker>-->
           <c-date-picker v-model="form.postDate"></c-date-picker>
         </el-form-item>
       </el-form>
@@ -32,46 +38,46 @@
     </el-dialog>
     <el-dialog :visible.sync="isShowDetail" v-drag title="详细" width="400px">
       <table v-if="isShowDetail" class="xc-table xc-table--border xc-table--center">
-        <tr>
-          <td>物品名称</td>
-          <td>{{detail.goodsName}}</td>
-        </tr>
-        <tr>
-          <td>消耗金币</td>
-          <td>{{detail.goldValue}}</td>
-        </tr>
-        <tr>
-          <td>兑换条件</td>
-          <td>{{detail.conditions}}</td>
-        </tr>
-        <tr>
-          <td>兑换时间</td>
-          <td>{{mxDateFormatter(detail.exchangeDate)}}</td>
-        </tr>
-        <tr>
-          <td>收件人</td>
-          <td>{{detail.recivedMan}}</td>
-        </tr>
-        <tr>
-          <td>收件地址</td>
-          <td>{{detail.recivedAdress}}</td>
-        </tr>
-        <tr>
-          <td>联系电话</td>
-          <td>{{detail.phone}}</td>
-        </tr>
-        <tr>
-          <td>邮寄人</td>
-          <td>{{detail.postMan}}</td>
-        </tr>
-        <tr>
-          <td>邮寄时间</td>
-          <td>{{mxDateFormatter(detail.postDate)}}</td>
-        </tr>
-
+        <tbody>
+          <tr>
+            <td>物品名称</td>
+            <td>{{detail.goodsName}}</td>
+          </tr>
+          <tr>
+            <td>消耗金币</td>
+            <td>{{detail.goldValue}}</td>
+          </tr>
+          <tr>
+            <td>兑换条件</td>
+            <td>{{detail.conditions}}</td>
+          </tr>
+          <tr>
+            <td>兑换时间</td>
+            <td>{{mxDateFormatter(detail.exchangeDate)}}</td>
+          </tr>
+          <tr>
+            <td>收件人</td>
+            <td>{{detail.recivedMan}}</td>
+          </tr>
+          <tr>
+            <td>收件地址</td>
+            <td>{{detail.recivedAdress}}</td>
+          </tr>
+          <tr>
+            <td>联系电话</td>
+            <td>{{detail.phone}}</td>
+          </tr>
+          <tr>
+            <td>邮寄人</td>
+            <td>{{detail.postMan}}</td>
+          </tr>
+          <tr>
+            <td>邮寄时间</td>
+            <td>{{mxDateFormatter(detail.postDate)}}</td>
+          </tr>
+        </tbody>
       </table>
     </el-dialog>
-
   </div>
 </template>
 <script>
@@ -120,7 +126,7 @@ export default {
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
-        },
+        }
         // goodsName: {
         //   label: "商品名称"
         // },
@@ -143,11 +149,9 @@ export default {
       param: {
         userName: ""
       },
-      form: {
-
-      },
-      selectedRow: {},
-    }
+      form: {},
+      selectedRow: {}
+    };
   },
   methods: {
     add() {
@@ -159,14 +163,16 @@ export default {
       let a = this.selectedRow;
       if (a[this.config.pk]) {
         this.form = this.selectedRow;
-        this.form.postDate = this.form.postDate ? moment(this.form.postDate).format("YYYY-MM-DD") : "";
+        this.form.postDate = this.form.postDate
+          ? moment(this.form.postDate).format("YYYY-MM-DD")
+          : "";
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     showDetail() {
@@ -175,12 +181,10 @@ export default {
         this.form = this.selectedRow;
         this.isShowDetail = true;
         this.xpost("goodsExchange/getFormJson", {
-          exchangeId: id,
+          exchangeId: id
         }).then(res => {
           this.detail = res;
-        })
-
-
+        });
 
         // this.form.postDate = this.form.postDate ? moment(this.form.postDate).format("YYYY-MM-DD") : "";
         // this.dialogTitle = "编辑";
@@ -188,7 +192,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -196,9 +200,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -211,22 +214,20 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
-  created() {
-
-  }
-}
+  created() {}
+};
 </script>
 

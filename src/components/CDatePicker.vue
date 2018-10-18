@@ -1,6 +1,5 @@
 <template>
-  <el-date-picker style="width:100%" v-model="dateValue" value-format="yyyy-MM-dd">
-  </el-date-picker>
+  <el-date-picker style="width:100%" v-model="dateValue" value-format="yyyy-MM-dd"></el-date-picker>
 </template>
 <script>
 export default {
@@ -23,9 +22,9 @@ export default {
       }
     }
   },
-  created(){
+  created() {
     // console.log(this.value);
   }
-}
+};
 </script>
 

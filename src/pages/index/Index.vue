@@ -1,7 +1,6 @@
 <template>
   <div id="map" class="xc24" :style="{height:mxWindowHeight-130 + 'px'}">
     <!-- <span style="color:#eef0f3;font-size:100px;text-shadow:#777 -2px -2px 0px">房 红 包</span> -->
-
   </div>
 </template>
 <script>
@@ -9,8 +8,8 @@ export default {
   data() {
     return {
       visible: false,
-      map: null,
-    }
+      map: null
+    };
   },
   computed: {
     mock() {
@@ -21,19 +20,20 @@ export default {
           "116.410234,39.927552",
           "116.403694,39.926002"
         ]
-      }
+      };
     }
   },
   methods: {
     showMap() {
       // LKh2EAb4elVPG9sURp3g6lyRTriXg2Q3
       this.map = new BMap.Map("map");
-      // 创建地图实例  
+      // 创建地图实例
       let point = new BMap.Point(116.404, 39.915);
-      // 创建点坐标  
+      // 创建点坐标
       this.map.centerAndZoom(point, 15);
     },
     drawPoints() {
+      this.xpost("projectInfo/getProjectXY").then(res => {});
       let points = this.mock.points;
       points.forEach(o => {
         let p = o.split(",");
@@ -41,21 +41,21 @@ export default {
         let marker = new BMap.Marker(point);
         marker.addEventListener("click", e => {
           let opts = {
-            width: 250,     // 信息窗口宽度    
-            height: 100,     // 信息窗口高度    
-            title: "Hello"  // 信息窗口标题   
-          }
-          let infoWindow = new BMap.InfoWindow("World", opts);  // 创建信息窗口对象    
+            width: 250, // 信息窗口宽度
+            height: 100, // 信息窗口高度
+            title: "Hello" // 信息窗口标题
+          };
+          let infoWindow = new BMap.InfoWindow("World", opts); // 创建信息窗口对象
           this.map.openInfoWindow(infoWindow, point);
-        })
+        });
         this.map.addOverlay(marker);
-      })
+      });
     }
   },
   mounted() {
     this.showMap();
     this.drawPoints();
   }
-}
+};
 </script>
 

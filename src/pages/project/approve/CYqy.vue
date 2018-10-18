@@ -1,11 +1,17 @@
 <template>
   <div>
-    <fixed-table v-if="activeTab==='tab1'" ref="table" :get-data-url="config.selectUrl" :fields="fields" v-model="selectedRow" :data-param="param">
+    <fixed-table
+      v-if="activeTab==='tab1'"
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :fields="fields"
+      v-model="selectedRow"
+      :data-param="param"
+    >
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
     </fixed-table>
-
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="400px">
       <el-form ref="form" v-if="isShowEdit" :model="form" label-width="5em">
@@ -58,20 +64,17 @@ export default {
           }
         },
         conditions: {
-          label: "兑换条件",
-        },
-
+          label: "兑换条件"
+        }
       },
       activeTab: "tab1",
-      form: {
-
-      },
+      form: {},
       selectedRow: {},
       param: {
         customerStatusIds: 10,
         ifReception: 1
       }
-    }
+    };
   },
   methods: {
     add() {
@@ -89,7 +92,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -97,9 +100,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -112,22 +114,20 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
-  created() {
-
-  }
-}
+  created() {}
+};
 </script>
 

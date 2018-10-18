@@ -12,13 +12,28 @@
       <span style="padding-left:1em"></span>
       <el-button type="text" @click="clearSearch">清空搜索条件</el-button>
     </div>
-    <fixed-table ref="table" get-data-url="projectInfo/getGridListJson" :data-param="tableParam" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      get-data-url="projectInfo/getGridListJson"
+      :data-param="tableParam"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <span v-if="selectedRow.projectId" slot="right-control" style="margin-right:12px;">
-        <el-button type="warning" v-if="selectedRow.projectStatus==1" @click="changeState(2)" icon="el-icon-close">下架</el-button>
+        <el-button
+          type="warning"
+          v-if="selectedRow.projectStatus==1"
+          @click="changeState(2)"
+          icon="el-icon-close"
+        >下架</el-button>
         <el-button type="warning" v-else @click="changeState(1)" icon="el-icon-star-on">上架</el-button>
-        <el-button type="warning" v-if="selectedRow.ifRecommend==1" @click="tuijian" icon="el-icon-close">取消推荐</el-button>
+        <el-button
+          type="warning"
+          v-if="selectedRow.ifRecommend==1"
+          @click="tuijian"
+          icon="el-icon-close"
+        >取消推荐</el-button>
         <el-button type="warning" v-else @click="tuijian" icon="el-icon-star-on">推荐楼盘</el-button>
-
       </span>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加楼盘</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑楼盘</el-button>
@@ -37,7 +52,7 @@
 </template>
 <script>
 import Vue from "vue";
-import AreaPicker from "@/components/AreaPicker"
+import AreaPicker from "@/components/AreaPicker";
 export default {
   components: {
     AreaPicker
@@ -52,46 +67,46 @@ export default {
       selectedLplx: "",
       selectedWylx: "",
       listOrderType: [
-        // 
+        //
         {
           label: "创建时间降序",
-          value: 1,
+          value: 1
         },
         {
           label: "售价降序",
-          value: 2,
+          value: 2
         },
         {
           label: "售价升序",
-          value: 3,
-        },
-        // 
+          value: 3
+        }
+        //
       ],
       selectedOrderType: 1,
       fields: {
         projectName: {
           label: "楼盘名称",
           width: "200px",
-          type: "string",
+          type: "string"
         },
         sellingAverage: {
           label: "平均售价",
-          type: "string",
+          type: "string"
         },
         projectAddress: {
           label: "地址",
           width: "260px",
           type: "string",
-          class: "xc15",
+          class: "xc15"
         },
         ptyj: {
           label: "普通会员佣金",
           type: "string",
           formatter(v) {
-            if (v.commissionType + '' === '0') {
-              return v.generalCommission + "元"
+            if (v.commissionType + "" === "0") {
+              return v.generalCommission + "元";
             } else {
-              return v.generalCommissionBL + "%"
+              return v.generalCommissionBL + "%";
             }
           }
         },
@@ -99,10 +114,10 @@ export default {
           label: "VIP佣金",
           type: "string",
           formatter(v) {
-            if (v.commissionType + '' === '0') {
-              return v.vipCommission + "元"
+            if (v.commissionType + "" === "0") {
+              return v.vipCommission + "元";
             } else {
-              return v.vipCommissionBL + "%"
+              return v.vipCommissionBL + "%";
             }
           }
         },
@@ -125,10 +140,10 @@ export default {
           formatter(r, c, v) {
             return vue.mxTimeFormatter(v);
           }
-        },
+        }
       },
-      selectedRow: {},
-    }
+      selectedRow: {}
+    };
   },
   computed: {
     isSelect() {
@@ -144,8 +159,8 @@ export default {
         cityId: this.selectedCityArea.city,
         areaId: this.selectedCityArea.area,
         projectType: this.selectedLplx,
-        orderType: this.selectedOrderType,
-      }
+        orderType: this.selectedOrderType
+      };
     }
   },
   methods: {
@@ -163,19 +178,19 @@ export default {
       this.xpost("projectInfo/saveOrUpdate", this.form).then(res => {
         this.mxMessage(res).then(() => {
           // this.mxBack();
-        })
-      })
+        });
+      });
     },
     edit() {
       if (this.isSelect) {
         this.$store.commit("setTemp", this.selectedRow);
         // console.log(this.selectedRow);
-        this.$router.push(`building/edit/edit/${this.selectedRow.projectId}`)
+        this.$router.push(`building/edit/edit/${this.selectedRow.projectId}`);
       } else {
         this.$message({
           type: "info",
           message: "请先选择楼盘"
-        })
+        });
       }
     },
     del() {
@@ -189,13 +204,13 @@ export default {
             this.mxMessage(res).then(() => {
               this.$refs.table.getData();
             });
-          })
+          });
         });
       } else {
         this.$message({
           type: "info",
           message: "请先选择楼盘"
-        })
+        });
       }
     },
     changeState(state) {
@@ -206,16 +221,16 @@ export default {
         this.mxMessage(res).then(() => {
           this.$refs.table.getData();
         });
-      })
+      });
     },
     tuijian() {
       this.xpost("projectInfo/editIfRecommend", {
-        projectId: this.selectedRow.projectId,
+        projectId: this.selectedRow.projectId
       }).then(res => {
         this.mxMessage(res).then(() => {
           this.$refs.table.getData();
         });
-      })
+      });
     }
   },
   created() {
@@ -225,10 +240,10 @@ export default {
       this.listWuyeLeixing = res.map(o => {
         return {
           label: o.propertyType,
-          value: o.propertyTypeId,
-        }
-      })
-    })
+          value: o.propertyTypeId
+        };
+      });
+    });
   }
-}
+};
 </script>

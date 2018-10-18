@@ -47,8 +47,8 @@ export default {
             setMenu(o.children, o.menuId);
             menu.push(o);
           }
-        })
-      }
+        });
+      };
       setMenu(menu, 0);
       return menu;
     }
@@ -62,30 +62,30 @@ export default {
         if (ap[1] === am[1] && ap[2] === am[2]) {
           exist = true;
         }
-      })
+      });
       return exist;
     },
     ico(name) {
       if (name.indexOf("首页") >= 0) {
-        return "i-shouye"
+        return "i-shouye";
       }
       if (name.indexOf("项目管理") >= 0) {
-        return "i-xiangmu"
+        return "i-xiangmu";
       }
       if (name.indexOf("审核管理") >= 0) {
-        return "i-shenpi"
+        return "i-shenpi";
       }
       if (name.indexOf("消息管理") >= 0) {
-        return "i-xiaoxi"
+        return "i-xiaoxi";
       }
       if (name.indexOf("系统管理") >= 0) {
-        return "i-guanli"
+        return "i-guanli";
       }
     }
   },
   created() {
     // console.log(this.$store.state.menu);
   }
-}
+};
 </script>
 

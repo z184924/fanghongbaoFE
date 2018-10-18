@@ -4,10 +4,24 @@
       <div class="xc2__box">
         <!-- <transition-group name="el-zoom-in-center"> -->
         <div v-for="(o,i) in list" :key="i" class="xc2__img-box" :style="imgStyle">
-          <img :src="$store.state.smallPicBasePath+o" alt="" :style="imgStyle" class="xc2__img" @click="openImg(o)">
+          <img
+            :src="$store.state.smallPicBasePath+o"
+            alt=""
+            :style="imgStyle"
+            class="xc2__img"
+            @click="openImg(o)"
+          >
           <div v-if="editable" class="xc2__close" @click="remove(i)">×</div>
         </div>
-        <el-upload v-if="editable" class="avatar-uploader" :multiple="multiple" :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+        <el-upload
+          v-if="editable"
+          class="avatar-uploader"
+          :multiple="multiple"
+          :action="action"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+        >
           <i v-if="multiple || list.length===0" class="el-icon-plus avatar-uploader-icon"></i>
           <i v-else class="el-icon-refresh avatar-uploader-icon"></i>
         </el-upload>
@@ -22,24 +36,24 @@
   </div>
 </template>
 <script>
-import uuid from "uuid"
+import uuid from "uuid";
 export default {
   props: {
     title: {
       type: String,
-      default: "",
+      default: ""
     },
     multiple: {
       type: Boolean,
-      default: true,
+      default: true
     },
     isWindow: {
       type: Boolean,
-      default: false,
+      default: false
     },
     editable: {
       type: Boolean,
-      default: true,
+      default: true
     },
     size: {
       type: Number,
@@ -50,7 +64,7 @@ export default {
       default() {
         return "";
       }
-    },
+    }
   },
   data() {
     return {
@@ -60,20 +74,20 @@ export default {
       isShowAdd: false,
       activeSrc: "",
       form: {
-        title: "",
-      },
-    }
+        title: ""
+      }
+    };
   },
   computed: {
     list() {
       let a = [];
       if (this.value) {
-        let list = this.value.split(',');
+        let list = this.value.split(",");
         list.forEach(o => {
           if (o) {
-            a.push(o)
+            a.push(o);
           }
-        })
+        });
       }
       return a;
     },
@@ -90,18 +104,18 @@ export default {
     imgStyle() {
       return {
         // width: this.size + "px",
-        height: this.size + "px",
-      }
+        height: this.size + "px"
+      };
     },
     addStyle() {
       return {
         width: this.size + "px",
         height: this.size + "px",
-        fontSize: this.size * 0.4 + "px",
-      }
+        fontSize: this.size * 0.4 + "px"
+      };
     },
     dialogWidth() {
-      return "200px"
+      return "200px";
     }
   },
   methods: {
@@ -112,7 +126,7 @@ export default {
         let a = clone(this.list);
         a.splice(i, 1);
         this.$emit("input", a.join());
-      })
+      });
     },
     openImg(src) {
       if (this.isWindow) {
@@ -126,7 +140,7 @@ export default {
       this.isShowAdd = true;
     },
     handleAvatarSuccess(res) {
-      if (res.state === 'success') {
+      if (res.state === "success") {
         let a = clone(this.list);
         if (!this.multiple) {
           a = [];
@@ -138,7 +152,6 @@ export default {
           this.uploadingCount = 0;
         }
         // 成功
-
       }
     },
     beforeAvatarUpload(a) {
@@ -146,8 +159,8 @@ export default {
         this.$msgbox({
           type: "error",
           title: "上传出错",
-          message: "请上传图片。",
-        })
+          message: "请上传图片。"
+        });
         return false;
       } else {
         this.uploadingCount++;
@@ -155,10 +168,9 @@ export default {
           this.uploadingCount = 0;
         }, 30000);
       }
-    },
-
-  },
-}
+    }
+  }
+};
 </script>
 
 

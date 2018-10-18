@@ -1,8 +1,11 @@
 <template>
   <div class="stage" id="app" v-cloak>
-    <div v-if="mxDevMode" style="position:fixed;left:0;bottom:0;width:400px;height:90px;z-index:9999;background-color:#333;color:#fff;padding:8px 15px">
+    <div
+      v-if="mxDevMode"
+      style="position:fixed;left:0;bottom:0;width:400px;height:90px;z-index:9999;background-color:#333;color:#fff;padding:8px 15px"
+    >
       <div style="color:#ffd448;font-size:20px;">★当前为开发模式★</div>
-      <div> 服务器地址：{{localhostConfigBasePath}}</div>
+      <div>服务器地址：{{localhostConfigBasePath}}</div>
       <div style="color:#aaa">修改 localhostConfig.js 变更后台测试地址</div>
     </div>
     <div class="back_box">
@@ -28,7 +31,15 @@
             <span class="ii i-yonghu" style="font-size:24px"></span>
           </div>
           <div class="input_text">
-            <input v-model="username" @keyup.enter="changeEnter" id="loginname" name="loginname" type="text" class="itt" v-focus>
+            <input
+              v-model="username"
+              @keyup.enter="changeEnter"
+              id="loginname"
+              name="loginname"
+              type="text"
+              class="itt"
+              v-focus
+            >
           </div>
         </div>
         <div class="input_box">
@@ -36,7 +47,15 @@
             <span class="ii i-mima" style="font-size:24px"></span>
           </div>
           <div class="input_text">
-            <input id="password" ref="password" name="password" v-model="password" @keyup.enter="login" type="password" class="itt">
+            <input
+              id="password"
+              ref="password"
+              name="password"
+              v-model="password"
+              @keyup.enter="login"
+              type="password"
+              class="itt"
+            >
           </div>
         </div>
         <div class="remember_box">
@@ -46,7 +65,7 @@
           </div>
         </div>
         <div class="btn_box">
-          <button class="btn_login" @click="login"> 登&nbsp;&nbsp;录</button>
+          <button class="btn_login" @click="login">登&nbsp;&nbsp;录</button>
         </div>
       </div>
       <div class="qr_mode" v-show="!isUserMode">
@@ -59,11 +78,10 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
-import localhostConfig from "../localhostConfig.js"
+import localhostConfig from "../localhostConfig.js";
 
 export default {
   data() {
@@ -74,7 +92,7 @@ export default {
       username: "",
       password: "",
       loading: false,
-      localhostConfigBasePath: localhostConfig.basePath,
+      localhostConfigBasePath: localhostConfig.basePath
     };
   },
   watch: {
@@ -88,7 +106,7 @@ export default {
         this.username = localStorage.getItem("username");
         this.password = localStorage.getItem("password");
       }
-    },
+    }
   },
   created() {
     if (localStorage.getItem("isRemember") == "1") {
@@ -96,10 +114,8 @@ export default {
     }
   },
   methods: {
-
     //提交登录信息
     login() {
-
       this.loading = true;
       if (this.isRemember) {
         localStorage.setItem("username", this.username);
@@ -108,116 +124,111 @@ export default {
       this.xpost("pcLogin", {
         account: this.username,
         password: this.password
-      }).then(res => {
-        this.$store.commit("login", {
-          // username: res.user.account,
-          // nickname: res.user.userName,
-          // phone: res.user.phone,
-          // userId: res.user.userId,
-          token: res.token,
-          // moreInfo: res.user,
-        });
+      })
+        .then(
+          res => {
+            this.$store.commit("login", {
+              // username: res.user.account,
+              // nickname: res.user.userName,
+              // phone: res.user.phone,
+              // userId: res.user.userId,
+              token: res.token
+              // moreInfo: res.user,
+            });
 
+            this.$store.commit("clearDict");
+            // 获取字典
+            this.$store.commit("setDict", this.DICT);
 
+            // 获取字典数据
+            let p1 = this.xpost("dictdetail/findAllData").then(d => {
+              this.$store.commit("setDict", d);
+            });
 
-        this.$store.commit("clearDict");
-        // 获取字典
-        this.$store.commit("setDict", this.DICT);
+            // 获取物业类型
+            let p2 = this.xpost("city/getPropertyTypes").then(d => {
+              let list = d.map(o => {
+                return {
+                  NAME: o.propertyType,
+                  CODE: o.propertyTypeId
+                };
+              });
+              let dict = {
+                wylx: list
+              };
+              this.$store.commit("setDict", dict);
+            });
 
-        // 获取字典数据
-        let p1 = this.xpost("dictdetail/findAllData").then(d => {
-          this.$store.commit("setDict", d);
-        })
+            // 获取角色
+            let p3 = this.xpost("role/getRoles").then(d => {
+              let list = d.rows.map(o => {
+                return {
+                  NAME: o.roleName,
+                  CODE: o.roleId
+                };
+              });
+              let dict = {
+                roles: list
+              };
+              this.$store.commit("setDict", dict);
+            });
 
-        // 获取物业类型
-        let p2 = this.xpost("city/getPropertyTypes").then(d => {
-          let list = d.map(o => {
-            return {
-              NAME: o.propertyType,
-              CODE: o.propertyTypeId,
-            }
-          })
-          let dict = {
-            "wylx": list
+            // VIP规则
+            let p4 = this.xpost("payOrderRequest/getVipRule").then(d => {
+              let list = d.rows.map(o => {
+                return {
+                  NAME: o.vipName,
+                  CODE: parseInt(o.vipId)
+                };
+              });
+              let dict = {
+                vipRule: list
+              };
+              this.$store.commit("setDict", dict);
+            });
+
+            let p5 = this.xpost("role/getUserMenu").then(res => {
+              this.$store.commit("setMenu", res.rows);
+            });
+
+            Promise.all([p1, p2, p3, p4, p5])
+              .then(resAll => {
+                this.$store.commit("login", {
+                  username: res.user.account,
+                  nickname: res.user.userName,
+                  phone: res.user.phone,
+                  userId: res.user.userId,
+                  token: res.token,
+                  moreInfo: res.user
+                });
+                this.loading = false;
+              })
+              .catch(res => {
+                console.log(res);
+                this.$message({
+                  message: "加载字典出错",
+                  type: "error"
+                });
+                this.loading = false;
+              });
+
+            //登录成功
+            // console.log(res);
+          },
+          rej => {
+            console.log(rej);
+            this.loading = false;
           }
-          this.$store.commit("setDict", dict);
-        })
-
-        // 获取角色
-        let p3 = this.xpost("role/getRoles").then(d => {
-          let list = d.rows.map(o => {
-            return {
-              NAME: o.roleName,
-              CODE: o.roleId,
-            }
-          })
-          let dict = {
-            "roles": list
-          }
-          this.$store.commit("setDict", dict);
-        })
-
-        // VIP规则
-        let p4 = this.xpost("payOrderRequest/getVipRule").then(d => {
-          let list = d.rows.map(o => {
-            return {
-              NAME: o.vipName,
-              CODE: parseInt(o.vipId),
-            }
-          })
-          let dict = {
-            "vipRule": list
-          }
-          this.$store.commit("setDict", dict);
-        })
-
-
-        let p5 = this.xpost("role/getUserMenu").then(res => {
-          this.$store.commit("setMenu", res.rows);
-        });
-
-
-        Promise.all([p1, p2, p3, p4, p5]).then(resAll => {
-          this.$store.commit("login", {
-            username: res.user.account,
-            nickname: res.user.userName,
-            phone: res.user.phone,
-            userId: res.user.userId,
-            token: res.token,
-            moreInfo: res.user,
-          });
+        )
+        .catch(() => {
           this.loading = false;
-        }).catch(res => {
-          console.log(res);
-          this.$message({
-            message: "加载字典出错",
-            type: "error"
-          })
-          this.loading = false;
-        })
-
-
-
-
-
-
-        //登录成功
-        // console.log(res);
-
-      }, rej => {
-        console.log(rej);
-        this.loading = false;
-      }).catch(() => {
-        this.loading = false;
-      });
+        });
 
       // this.loginTest();//*********************************免登录
-
-
     },
-    changeEnter: function () {
+    changeEnter: function() {
       this.$refs.password.focus();
-    },
+    }
   }
 };
 </script>

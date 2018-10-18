@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="tableParam"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">完善</el-button>
       <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
@@ -52,7 +58,6 @@
                 </el-form-item>
               </div>
             </div>
-
           </c-panel>
           <c-panel title="客户信息" title-color="#2a447a">
             <div class="xc18__container xc18__container--p3">
@@ -106,7 +111,6 @@
                 <el-form-item label="排卡日期">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form.cardDate"></el-date-picker> -->
                   <c-date-picker v-model="form.cardDate"></c-date-picker>
-
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -243,13 +247,11 @@
               </div>
             </div>
           </c-panel>
-
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
             <file-box :editable="false" is-window v-model="form.checkData"></file-box>
           </c-panel>
           <!-- <div>{{form}}</div> -->
-
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>

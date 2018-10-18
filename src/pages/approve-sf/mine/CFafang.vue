@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="param" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="param"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <div class="xc6__title" slot="left-control">发放记录</div>
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <!-- <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button> -->
@@ -14,9 +20,8 @@
         </el-form-item>
         <el-form-item label="日期">
           <!-- <el-date-picker style="width:100%" v-model="form.serviceDate" value-format="yyyy-MM-dd">
-          </el-date-picker> -->
+          </el-date-picker>-->
           <c-date-picker v-model="form.serviceDate"></c-date-picker>
-
         </el-form-item>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
@@ -44,7 +49,7 @@ export default {
       fields: {
         serviceValue: {
           label: "金额",
-          width: "auto",
+          width: "auto"
         },
         serviceDate: {
           label: "日期",
@@ -52,19 +57,17 @@ export default {
           formatter(r, c, v) {
             return vue.mxDateFormatter(v);
           }
-        },
+        }
       },
-      form: {
-
-      },
-      selectedRow: {},
-    }
+      form: {},
+      selectedRow: {}
+    };
   },
   computed: {
     param() {
       return {
         accountantId: this.accountantId
-      }
+      };
     }
   },
   methods: {
@@ -86,7 +89,7 @@ export default {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     save() {
@@ -95,9 +98,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -110,22 +112,20 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
-  created() {
-
-  }
-}
+  created() {}
+};
 </script>
 

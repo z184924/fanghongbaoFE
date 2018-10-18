@@ -1,6 +1,12 @@
 <template>
   <div class="xc6 xc-shadow">
-    <fixed-table ref="table" :get-data-url="config.selectUrl" :data-param="tableParam" :fields="fields" v-model="selectedRow">
+    <fixed-table
+      ref="table"
+      :get-data-url="config.selectUrl"
+      :data-param="tableParam"
+      :fields="fields"
+      v-model="selectedRow"
+    >
       <!-- <el-button @click="add" icon="el-icon-plus" slot="right-control">添加</el-button> -->
       <el-button @click="edit" icon="el-icon-document" slot="right-control">详细</el-button>
       <!-- <el-button @click="print" icon="el-icon-document" slot="right-control">打印</el-button> -->
@@ -33,7 +39,6 @@
                   <span>{{form.Opinion_shr}}</span>
                 </el-form-item>
               </div>
-
             </div>
           </c-panel>
           <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
@@ -83,10 +88,8 @@
                   <span>{{mxDateFormatter(form.payTime)}}</span>
                 </el-form-item>
               </div>
-
             </div>
           </c-panel>
-
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -129,7 +132,6 @@
                   <span>{{mxDateFormatter(form.finalPaymentPriceDate)}}</span>
                 </el-form-item>
               </div>
-
               <div class="xc18__item xc18__item--full">
                 <el-form-item label="客户备注">
                   <span>{{form.remarks}}</span>
@@ -141,25 +143,25 @@
               <div class="xc22">
                 <div class="xc22__title">佣金记录</div>
                 <table class="xc-table xc-table--border">
-                  <tr class="xc-table__head">
-                    <td>序号</td>
-                    <td>佣金金额</td>
-                    <td>付款时间</td>
-                  </tr>
-                  <tr v-for="(o,i) in listYongjin" :key="i">
-                    <td>{{i+1}}</td>
-                    <td>{{o.commissionValue}}元</td>
-                    <td>{{mxDateFormatter(o.commissionDate)}}</td>
-                  </tr>
+                  <tbody>
+                    <tr class="xc-table__head">
+                      <td>序号</td>
+                      <td>佣金金额</td>
+                      <td>付款时间</td>
+                    </tr>
+                    <tr v-for="(o,i) in listYongjin" :key="i">
+                      <td>{{i+1}}</td>
+                      <td>{{o.commissionValue}}元</td>
+                      <td>{{mxDateFormatter(o.commissionDate)}}</td>
+                    </tr>
+                  </tbody>
                 </table>
                 <!-- <div style="height:10px"></div> -->
                 <!-- <el-button icon="el-icon-plus" @click="isShowAddYongjin=true">新增佣金记录...</el-button> -->
               </div>
-
             </div>
           </c-panel>
           <!-- <div>{{form2}}</div> -->
-
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
@@ -168,7 +170,7 @@
   </div>
 </template>
 <script>
-import CDetail from "../_com/Detail"
+import CDetail from "../_com/Detail";
 export default {
   components: {
     CDetail
@@ -200,7 +202,7 @@ export default {
           }
         },
         customerTel: {
-          label: "客户电话",
+          label: "客户电话"
         },
         projectName: {
           label: "楼盘名称",
@@ -208,8 +210,7 @@ export default {
         },
         userName: {
           label: "经纪人"
-        },
-
+        }
       },
       form: {
         f__files: []
@@ -225,9 +226,9 @@ export default {
         {
           label: "已结佣",
           value: 24
-        },
+        }
       ]
-    }
+    };
   },
   filters: {
     state(v) {
@@ -259,12 +260,24 @@ export default {
           res.f__files = res.checkData ? res.checkData.split(",") : [];
 
           // date转换
-          res.cardDate = res.cardDate ? this.mxDateFormatter(res.cardDate) : undefined;
-          res.subscribeDate = res.subscribeDate ? this.mxDateFormatter(res.subscribeDate) : undefined;
-          res.dealDate = res.dealDate ? this.mxDateFormatter(res.dealDate) : undefined;
-          res.downPayDate = res.downPayDate ? this.mxDateFormatter(res.downPayDate) : undefined;
-          res.initialDate = res.initialDate ? this.mxDateFormatter(res.initialDate) : undefined;
-          res.netsignDate = res.netsignDate ? this.mxDateFormatter(res.netsignDate) : undefined;
+          res.cardDate = res.cardDate
+            ? this.mxDateFormatter(res.cardDate)
+            : undefined;
+          res.subscribeDate = res.subscribeDate
+            ? this.mxDateFormatter(res.subscribeDate)
+            : undefined;
+          res.dealDate = res.dealDate
+            ? this.mxDateFormatter(res.dealDate)
+            : undefined;
+          res.downPayDate = res.downPayDate
+            ? this.mxDateFormatter(res.downPayDate)
+            : undefined;
+          res.initialDate = res.initialDate
+            ? this.mxDateFormatter(res.initialDate)
+            : undefined;
+          res.netsignDate = res.netsignDate
+            ? this.mxDateFormatter(res.netsignDate)
+            : undefined;
           this.form = res;
 
           // 佣金列表
@@ -272,15 +285,15 @@ export default {
             customerId: id
           }).then(res => {
             this.listYongjin = res.rows;
-          })
-        })
+          });
+        });
         this.dialogTitle = "详细";
         this.isShowEdit = true;
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
     },
     // pass(text, state) {
@@ -295,9 +308,8 @@ export default {
         this.$refs.table.getData();
         this.mxMessage(res).then(() => {
           this.isShowEdit = false;
-        })
-      })
-
+        });
+      });
     },
     del() {
       let row = this.selectedRow;
@@ -310,17 +322,17 @@ export default {
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
               this.$refs.table.getData();
-              this.mxMessage(res)
-            })
+              this.mxMessage(res);
+            });
           }
-        })
+        });
       } else {
         this.$message({
           type: "info",
           message: "请选择一行数据"
-        })
+        });
       }
-    },
+    }
   },
 
   created() {
@@ -329,12 +341,12 @@ export default {
       this.listWuyeLeixing = res.map(o => {
         return {
           NAME: o.propertyType,
-          CODE: o.propertyTypeId,
-        }
-      })
-    })
+          CODE: o.propertyTypeId
+        };
+      });
+    });
     // console.log(this.mxLoginInfo);
   }
-}
+};
 </script>
 

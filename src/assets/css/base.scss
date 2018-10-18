@@ -1,11 +1,11 @@
-$color-test:#e9a695;
-$primary-color-1:#c75336;
-$primary-color-2:#be947b;
-$primary-color-3:#c99a6e;
-$primary-color-4:#c76e45;
-$primary-color-5:#fff6f6;
-$primary-color-6:#ffefef;
-$primary-color-7:#fad2c6;
+$color-test: #e9a695;
+$primary-color-1: #c75336;
+$primary-color-2: #be947b;
+$primary-color-3: #c99a6e;
+$primary-color-4: #c76e45;
+$primary-color-5: #fff6f6;
+$primary-color-6: #ffefef;
+$primary-color-7: #fad2c6;
 @import url("https://at.alicdn.com/t/font_695612_s5xt1nqtv1c.css");
 
 html,
@@ -16,7 +16,8 @@ body {
   font-size: 14px;
   color: #000;
   background-color: rgb(238, 240, 243);
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
+    Microsoft YaHei, SimSun, sans-serif;
   overflow: hidden;
 }
 
@@ -28,7 +29,7 @@ a:focus {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .25s;
+  transition: opacity 0.25s;
 }
 
 .fade-enter,
@@ -112,42 +113,42 @@ body .ii {
   width: 100%;
   border-collapse: collapse;
 
-  &>tr>td {
+  & > tbody tr > td {
     padding: 8px;
     transition: all 0.15s; // vertical-align: top;
   }
 
-  &--align-top>tr>td {
+  &--align-top > tbody > tr > td {
     vertical-align: top;
   }
 
-  &--mini>tr>td {
+  &--mini > tbody > tr > td {
     padding: 3px;
   }
 
-  &--border>tr>td {
+  &--border > tbody > tr > td {
     border: solid 1px #eee;
   }
 
-  &--border-black>tr>td {
+  &--border-black > tbody > tr > td {
     border: solid 1px #333;
   }
 
-  &--center>tr>td {
+  &--center > tbody > tr > td {
     text-align: center;
   }
 
-  &__head>td {
-    background-color: #E9A695;
+  &__head > td {
+    background-color: #e9a695;
     font-weight: bold;
     white-space: nowrap;
   }
 
-  &--hover>tr:not(.xc-table__head):hover td {
+  &--hover > tr:not(.xc-table__head):hover td {
     background: $primary-color-7;
   }
 
-  &--hover>tr:not(.xc-table__head).active td {
+  &--hover > tr:not(.xc-table__head).active td {
     background: $primary-color-4;
     color: #f6f6f6;
   }
@@ -217,7 +218,7 @@ li {
 #stage {
   .el-dialog__header {
     background: $primary-color-5;
-    transition: all .2s;
+    transition: all 0.2s;
     padding: 8px 20px;
     height: 40px;
   }
@@ -268,12 +269,12 @@ li {
     background: $primary-color-7; // color: #fff;
   }
 
-  .el-tree-node__content>.el-tree-node__expand-icon {
+  .el-tree-node__content > .el-tree-node__expand-icon {
     padding: 6px 12px;
   }
 
   .el-table--enable-row-transition .el-table__body td {
-    transition: all .2s;
+    transition: all 0.2s;
   }
 
   .el-dialog {
@@ -319,10 +320,10 @@ li {
     background: $primary-color-5;
   }
 
-  ol>li>ol,
-  ol>li>ul,
-  ul>li>ol,
-  ul>li>ul {
+  ol > li > ol,
+  ol > li > ul,
+  ul > li > ol,
+  ul > li > ul {
     margin: 0;
   }
 
@@ -482,8 +483,6 @@ li {
     &__box {
       display: flex;
       flex-wrap: wrap;
-
-
     }
 
     &__title {
@@ -501,12 +500,9 @@ li {
       border-radius: 5px;
       cursor: pointer;
       transition: all 0.2s;
-      &--folder{
-      box-shadow: none;
-
+      &--folder {
+        box-shadow: none;
       }
-
-
     }
 
     &__img-title {
@@ -550,7 +546,6 @@ li {
   }
 
   .xc3 {
-
     // width: 800px;
     // margin: auto;
     &__title {
@@ -564,11 +559,10 @@ li {
 
     &__minibtn {
       position: fixed;
-      ;
     }
   }
 
-  $panel-header-height:40px;
+  $panel-header-height: 40px;
 
   .xc4 {
     border-radius: 5px;
@@ -605,7 +599,7 @@ li {
   }
 
   .xc5 {
-    margin-right: 5px
+    margin-right: 5px;
   }
 
   .xc6 {
@@ -668,7 +662,6 @@ li {
   }
 
   .xc10 {
-
     .el-icon-delete,
     & span {
       color: red;
@@ -700,7 +693,7 @@ li {
 
       &:not(.x-no-user):hover {
         background: #be4a3a;
-        transform: scale(1.015)
+        transform: scale(1.015);
       }
 
       &.x-no-user {
