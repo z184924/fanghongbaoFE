@@ -28,27 +28,33 @@ export default {
       // LKh2EAb4elVPG9sURp3g6lyRTriXg2Q3
       this.map = new BMap.Map("map");
       // 创建地图实例
-      let point = new BMap.Point(116.404, 39.915);
+      let point = new BMap.Point(116.483032,39.894567);
       // 创建点坐标
-      this.map.centerAndZoom(point, 15);
+      this.map.centerAndZoom(point, 8);
+      this.map.enableScrollWheelZoom();
     },
     drawPoints() {
-      this.xpost("projectInfo/getProjectXY").then(res => {});
-      let points = this.mock.points;
-      points.forEach(o => {
-        let p = o.split(",");
-        let point = new BMap.Point(p[0], p[1]);
-        let marker = new BMap.Marker(point);
-        marker.addEventListener("click", e => {
-          let opts = {
-            width: 250, // 信息窗口宽度
-            height: 100, // 信息窗口高度
-            title: "Hello" // 信息窗口标题
-          };
-          let infoWindow = new BMap.InfoWindow("World", opts); // 创建信息窗口对象
-          this.map.openInfoWindow(infoWindow, point);
+      this.xpost("projectInfo/getProjectXY").then(res => {
+        res.rows.forEach(o => {
+          let p = o.projectMapXY.split(",");
+          let point = new BMap.Point(p[0], p[1]);
+          let marker = new BMap.Marker(point);
+          marker.addEventListener("click", e => {
+            let opts = {
+              width: 250, // 信息窗口宽度
+              height: 100, // 信息窗口高度
+              title: o.projectName // 信息窗口标题
+            };
+            let infoWindow = new BMap.InfoWindow(
+              `<hr>地址：${o.cityName} · ${o.areaName} · ${
+                o.projectAddress
+              }<br>价格：${o.sellingSection}`,
+              opts
+            ); // 创建信息窗口对象
+            this.map.openInfoWindow(infoWindow, point);
+          });
+          this.map.addOverlay(marker);
         });
-        this.map.addOverlay(marker);
       });
     }
   },

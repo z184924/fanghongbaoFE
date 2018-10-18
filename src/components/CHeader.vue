@@ -11,13 +11,13 @@
       <span style="padding:0 3px;">{{mxLoginInfo.nickname}}</span>
     </div>
     <div class="xc1__control" title="消息" @click="mxDevAlert">
-      <el-badge :value="63" :max="99" class="">
+      <el-badge :value="0" :max="99" class="">
         <i class="ii i-xiaoxi"></i>
         <span style="padding:0 3px;">消息</span>
       </el-badge>
     </div>
     <div class="xc1__control" title="提醒" @click="mxDevAlert">
-      <el-badge :value="5" :max="99" class="">
+      <el-badge :value="0" :max="99" class="">
         <i class="ii i-tixing"></i>
         <span style="padding:0 3px;">提醒</span>
       </el-badge>

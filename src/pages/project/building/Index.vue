@@ -137,6 +137,7 @@ export default {
         },
         recommendTime: {
           label: "推荐时间",
+          width: "160px",
           formatter(r, c, v) {
             return vue.mxTimeFormatter(v);
           }
