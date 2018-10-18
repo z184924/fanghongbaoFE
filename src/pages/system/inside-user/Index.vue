@@ -15,6 +15,12 @@
         <el-button type="text" @click="clearSearch">清空</el-button>
       </span>
       <span slot="right-control" style="margin-right:1em">
+        <el-button
+          type="default"
+          icon="el-icon-setting"
+          @click="setDirector"
+          :disabled="selectedRow.roleName!=='拓展经纪人'"
+        >{{setDirectorLabel}}</el-button>
         <el-button type="default" icon="el-icon-plus" @click="add">新增内部用户</el-button>
         <el-button type="default" icon="el-icon-edit" @click="edit">编辑用户</el-button>
       </span>
@@ -58,6 +64,13 @@
       <el-button type="primary" slot="footer" @click="doEdit">保存</el-button>
       <!-- <div>{{formEdit}}</div> -->
     </el-dialog>
+    <el-dialog v-drag :visible.sync="isShowDirector" width="200px" title="设置拓展主管">
+      <div v-if="isShowDirector">
+        <c-select :dict="listDirector" v-model="selectedDirector"></c-select>
+      </div>
+      <el-button type="primary" slot="footer" @click="saveDirector">保存</el-button>
+    </el-dialog>
+    <div>{{exchangedDirectorState}}</div>
     <!-- <div>{{selectedRow}}</div> -->
   </div>
 </template>
@@ -86,6 +99,9 @@ export default {
         isInsider: "",
         userName: ""
       },
+      // formDirector:[],
+      listDirector: [],
+      selectedDirector: "",
       fields: {
         phone: {
           label: "手机号",
@@ -130,6 +146,7 @@ export default {
       // dialog
       isShowAdd: false,
       isShowEdit: false,
+      isShowDirector: false,
       roleList: [],
       rules: {
         account: [{ required: true, message: "请填写账号", trigger: "blur" }],
@@ -143,7 +160,62 @@ export default {
       formEdit: {}
     };
   },
+  computed: {
+    exchangedDirectorState() {
+      let a = this.selectedRow.isSetDirector;
+      if (a === 1) {
+        return 0;
+      } else {
+        return 1;
+      }
+    },
+    setDirectorLabel() {
+      let a = this.selectedRow.isSetDirector;
+      if (a === 1) {
+        return "取消拓展主管";
+      } else {
+        return "设置拓展主管";
+      }
+    }
+  },
   methods: {
+    setDirector() {
+      if (this.exchangedDirectorState === 1) {
+        this.xpost("user/getDirectorList").then(res => {
+          this.listDirector = res.rows.map(o => {
+            return {
+              value: o.userId,
+              label: o.userName
+            };
+          });
+          this.isShowDirector = true;
+        });
+      } else {
+        this.saveDirector();
+      }
+    },
+    saveDirector() {
+      let save = () => {
+        this.xpost("user/setDirector", {
+          jUserId: this.selectedRow.userId,
+          tUserId: this.selectedDirector,
+          stype: this.exchangedDirectorState
+        }).then(res => {
+          this.mxMessage(res).then(() => {
+            this.selectedDirector = "";
+            this.isShowDirector = false;
+            this.$refs.table.getData();
+          });
+        });
+      };
+      if (this.exchangedDirectorState === 0) {
+        this.$confirm(`是否取消 [ ${this.selectedRow.userName} ] 的拓展主管？`, "取消拓展主管").then(() => {
+          save();
+        });
+      } else {
+        save();
+      }
+    },
     add() {
       this.isShowAdd = true;
     },
