@@ -70,7 +70,7 @@
       </div>
       <el-button type="primary" slot="footer" @click="saveDirector">保存</el-button>
     </el-dialog>
-    <div>{{exchangedDirectorState}}</div>
+    <!-- <div>{{exchangedDirectorState}}</div> -->
     <!-- <div>{{selectedRow}}</div> -->
   </div>
 </template>
@@ -209,7 +209,10 @@ export default {
         });
       };
       if (this.exchangedDirectorState === 0) {
-        this.$confirm(`是否取消 [ ${this.selectedRow.userName} ] 的拓展主管？`, "取消拓展主管").then(() => {
+        this.$confirm(
+          `是否取消 [ ${this.selectedRow.userName} ] 的拓展主管？`,
+          "取消拓展主管"
+        ).then(() => {
           save();
         });
       } else {

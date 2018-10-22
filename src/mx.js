@@ -1,18 +1,17 @@
-import FixedTree from "@/components/FixedTree"
-import FixedTable from "@/components/FixedTable"
-import FileBox from "@/components/FileBox"
-import CSelect from "@/components/CSelect"
-import CPanel from "@/components/CPanel"
-import AreaLabel from "@/components/AreaLabel"
-import CUeditor from "@/components/CUeditor"
-import CDatePicker from "@/components/CDatePicker"
+import FixedTree from "@/components/FixedTree";
+import FixedTable from "@/components/FixedTable";
+import FileBox from "@/components/FileBox";
+import CSelect from "@/components/CSelect";
+import CPanel from "@/components/CPanel";
+import AreaLabel from "@/components/AreaLabel";
+import CUeditor from "@/components/CUeditor";
+import CDatePicker from "@/components/CDatePicker";
 
 // import request from "request"
-import axios from "axios"
-import json5 from "json5"
-import qs from "qs"
-import clone from "clone"
-
+import axios from "axios";
+import json5 from "json5";
+import qs from "qs";
+import clone from "clone";
 
 var myMixin = {
   components: {
@@ -33,7 +32,7 @@ var myMixin = {
             o[key] = o[key] + "";
           }
         }
-        return o
+        return o;
       } else if (kindOf(o) === "number") {
         return o + "";
       } else {
@@ -68,10 +67,8 @@ var myMixin = {
           } else {
             throw new Error("");
           }
-        })
+        });
       });
-
-
     },
     mxDeepClone(obj) {
       let str = JSON.stringify(obj);
@@ -82,27 +79,27 @@ var myMixin = {
       if (v) {
         return moment(v).format("YYYY-MM-DD");
       } else {
-        return ""
+        return "";
       }
     },
     mxTimeFormatter(v) {
       if (v) {
         return moment(v).format("YYYY-MM-DD HH:mm:ss");
       } else {
-        return ""
+        return "";
       }
     },
     mxMonthFormatter(v) {
       if (v) {
         return moment(v).format("YYYY-MM");
       } else {
-        return ""
+        return "";
       }
     },
     mxBoolFormatter(v, trueText = this.YES, falseText = this.NO) {
-      if (v + '' === '0') {
+      if (v + "" === "0") {
         return falseText;
-      } else if (v + '' === '1') {
+      } else if (v + "" === "1") {
         return trueText;
       } else {
         return "";
@@ -129,7 +126,7 @@ var myMixin = {
           nodeName = item[field];
           node = i;
         }
-      })
+      });
       return list;
     },
     mxDictToString(v = "", dict) {
@@ -147,7 +144,7 @@ var myMixin = {
             names.push(item.NAME);
           }
         });
-      })
+      });
       return names.join("、");
     },
     mxUeditorText(html) {
@@ -163,58 +160,60 @@ var myMixin = {
       }
       let url = this.mxApi(api);
       return new Promise((resolve, reject) => {
-        axios.request({
-          url,
-          method: "post",
-          data: qs.stringify(data)
-        }).then(res => {
-          // console.log(res);
-          if (res.status === 200) {
-            if (res.data.state === "errorToken") {
-              // console.log(res);
-              this.$store.commit("logout");
-              reject();
-            } else if (res.data.state === "error") {
-              this.$message({
-                message: res.data.message,
-                type: "error"
-              });
-              reject();
-            } else {
-              try {
-                let str = json5.stringify(res.data);
-                if (str.indexOf("您访问的页面出现异常") >= 0) {
-                  reject("s");
-                } else {
-                  resolve(res.data);
-                }
-              } catch (error) {
+        axios
+          .request({
+            url,
+            method: "post",
+            data: qs.stringify(data)
+          })
+          .then(res => {
+            // console.log(res);
+            if (res.status === 200) {
+              if (res.data.state === "errorToken") {
+                // console.log(res);
+                this.$store.commit("logout");
+                reject();
+              } else if (res.data.state === "error") {
                 this.$message({
-                  message: "服务器应用程序异常（500）",
+                  message: res.data.message,
                   type: "error"
                 });
                 reject();
+              } else {
+                try {
+                  let str = json5.stringify(res.data);
+                  if (str.indexOf("您访问的页面出现异常") >= 0) {
+                    reject("s");
+                  } else {
+                    resolve(res.data);
+                  }
+                } catch (error) {
+                  this.$message({
+                    message: "服务器应用程序异常（500）",
+                    type: "error"
+                  });
+                  reject();
+                }
               }
+            } else {
+              this.$message({
+                message: `请求失败。（错误代码：${res.status}，错误信息：${
+                  res.statusText
+                }）`,
+                type: "error"
+              });
+              reject();
             }
-          } else {
+          })
+          .catch(err => {
             this.$message({
-              message: `请求失败。（错误代码：${res.status}，错误信息：${res.statusText}）`,
+              message: `${api}访问出错。(${err})`,
               type: "error"
             });
-            reject();
-          }
-        }).catch(err => {
-          this.$message({
-            message: `${api}访问出错。(${err})`,
-            type: "error"
+            reject("s");
+            // console.log(err);
           });
-          reject("s");
-          // console.log(err);
-        })
       });
-
-
-
     },
     // xpost(api, data = {}) {
     //   // headers:{'Content-Type':'multipart/form-data'}
@@ -329,7 +328,7 @@ var myMixin = {
         title: "提示",
         message: "开发中……",
         type: "info"
-      })
+      });
     }
   },
 
@@ -350,7 +349,6 @@ var myMixin = {
       return this.$store.state.windowHeight;
     },
 
-
     // const
     YES() {
       return "★ 是";
@@ -360,26 +358,28 @@ var myMixin = {
     },
     DICT() {
       return {
-        bool: [{
+        bool: [
+          {
             NAME: this.YES,
             CODE: 1
           },
           {
             NAME: this.NO,
             CODE: 0
-          },
+          }
         ],
-        goldType: [{
+        goldType: [
+          {
             NAME: "获取金币",
             CODE: 1
           },
           {
             NAME: "消耗",
             CODE: -1
-          },
+          }
         ]
-      }
-    },
-  },
+      };
+    }
+  }
 };
 export default myMixin;
