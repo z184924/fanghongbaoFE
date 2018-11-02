@@ -168,6 +168,7 @@ export default {
             let data = {};
             data[this.config.pk] = row[this.config.pk];
             this.xpost(this.config.deleteUrl, data).then(res => {
+              this.$emit("save");
               this.$refs.table.getData();
               this.mxMessage(res);
             });
