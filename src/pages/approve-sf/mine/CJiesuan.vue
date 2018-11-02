@@ -69,6 +69,10 @@ export default {
         remark: {
           label: "备注",
           width: "auto"
+        },
+        count: {
+          label: "客户个数",
+          width: "auto"
         }
       },
       form: {},

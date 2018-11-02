@@ -21,6 +21,7 @@
             <td>实发奖金</td>
             <td>留存</td>
             <td>备注</td>
+            <td>客户个数</td>
             <td>操作</td>
           </tr>
           <tr v-for="(o,i) in table" :key="i">
@@ -32,6 +33,7 @@
             <td>{{o.realPrize}}</td>
             <td>{{o.keepValue}}</td>
             <td>{{o.remark}}</td>
+            <td>{{o.count}}</td>
             <td>
               <el-button @click="showCustom(o)">客户</el-button>
             </td>
