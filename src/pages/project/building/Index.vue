@@ -178,6 +178,8 @@ export default {
     save() {
       this.xpost("projectInfo/saveOrUpdate", this.form).then(res => {
         this.mxMessage(res).then(() => {
+          this.isShowAdd = false;
+          this.$refs.table.getData();
           // this.mxBack();
         });
       });

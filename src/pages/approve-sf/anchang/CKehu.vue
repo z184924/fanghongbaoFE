@@ -55,7 +55,7 @@ export default {
         customerName: {
           label: "客户"
         },
-        buildingNum: {
+        houseNum: {
           label: "房号"
         },
         dealDate: {
@@ -75,7 +75,7 @@ export default {
         customerName: {
           label: "客户"
         },
-        buildingNum: {
+        houseNum: {
           label: "房号"
         },
         dealDate: {
