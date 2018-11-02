@@ -52,6 +52,7 @@
             <c-kehu
               :project-id="selectedRow.projectId"
               :accountant-id="selectedMingxi.accountantId"
+              :user-id="selectedMingxi.userId"
               :name="selectedMingxi.userName"
             ></c-kehu>
           </div>

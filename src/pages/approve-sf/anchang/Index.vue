@@ -30,7 +30,7 @@
             ></el-date-picker>
           </el-form-item>
         </el-form>
-        <!-- <div>{{form}}</div> -->
+        <div>{{selectedMingxi}}</div>
         <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
         <el-button type="primary" @click="save" slot="footer">保存</el-button>
       </el-dialog>
@@ -40,7 +40,7 @@
       <div class="xc19__side xc19__side--long">
         <transition name="el-zoom-in-center">
           <div v-if="selectedRow.projectId">
-            <c-jiesuan :service-id="selectedRow.serviceId" v-model="selectedMingxi"></c-jiesuan>
+            <c-jiesuan ref="jiesuan" :service-id="selectedRow.serviceId" v-model="selectedMingxi"></c-jiesuan>
           </div>
         </transition>
       </div>
@@ -51,8 +51,10 @@
             <c-kehu
               :project-id="selectedRow.projectId"
               :service-id="selectedRow.serviceId"
+              :user-id="selectedMingxi.userId"
               :accountant-id="selectedMingxi.accountantId"
               :name="selectedMingxi.userName"
+              @save="kehuSaved"
             ></c-kehu>
           </div>
         </transition>
@@ -195,6 +197,10 @@ export default {
           message: "请选择一行数据"
         });
       }
+    },
+    kehuSaved(){
+      this.$refs.jiesuan.getData();
+      // console.log(this.$refs.jiesuan);
     }
   },
 

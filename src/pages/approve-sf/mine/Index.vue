@@ -50,6 +50,7 @@
               <div v-if="selectedMingxi.accountantId">
                 <c-kehu
                   :project-id="selectedRow.projectId"
+                  :user-id="selectedMingxi.userId"
                   :accountant-id="selectedMingxi.accountantId"
                   :service-id="selectedRow.serviceId"
                 ></c-kehu>

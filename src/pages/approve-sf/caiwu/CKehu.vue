@@ -33,7 +33,8 @@
 export default {
   props: {
     projectId: {},
-    accountantId: {}
+    accountantId: {},
+    userId: {}
   },
   data() {
     let vue = this;
@@ -53,7 +54,7 @@ export default {
           label: "客户"
         },
         buildingNum: {
-          label: "楼层"
+          label: "房号"
         },
         dealDate: {
           label: "成交日期",
@@ -73,7 +74,7 @@ export default {
           label: "客户"
         },
         buildingNum: {
-          label: "楼层"
+          label: "房号"
         },
         dealDate: {
           label: "成交日期",
@@ -110,7 +111,8 @@ export default {
     },
     paramAdd() {
       return {
-        projectId: this.projectId
+        projectId: this.projectId,
+        userId: this.userId
       };
     }
   },
@@ -179,12 +181,6 @@ export default {
     this.$emit("input", {});
   },
   created() {
-    this.xpost("serviceInfo/getCustomersByProjectID", {
-      projectId: this.projectId,
-      serviceId: this.serviceId,
-      page: 1,
-      rows: 1000
-    });
     this.$emit("input", {});
   }
 };

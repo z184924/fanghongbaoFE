@@ -14,67 +14,73 @@
     <div class="xc-title--logo">
       <img src="./assets/img/logo.png" alt="">
     </div>
-    <div class="xc-title">房红包后台管理系统</div>
+    <div class="xc-title">房红包科技</div>
+    <div class="xc-title-en">HOUSE GIFT TECHNOLOGY</div>
     <div class="login_box" v-loading="loading">
-      <div class="login_in_header"></div>
-      <div class="qr_box">
-        <div class="qr_out">
-          <div class="qr" @click="isUserMode=!isUserMode">
-            <img src="./assets/img/qr.png" alt="" v-if="isUserMode">
-            <img src="./assets/img/lock.png" alt="" v-if="!isUserMode">
-          </div>
-        </div>
+      <div class="xc-box-left">
+
       </div>
-      <div class="login_mode" v-show="isUserMode">
-        <div class="input_box">
-          <div class="input_ico">
-            <span class="ii i-yonghu" style="font-size:24px"></span>
-          </div>
-          <div class="input_text">
-            <input
-              v-model="username"
-              @keyup.enter="changeEnter"
-              id="loginname"
-              name="loginname"
-              type="text"
-              class="itt"
-              v-focus
-            >
+      <div class="xc-box-right">
+        <div class="login_in_header"></div>
+        <div class="qr_box">
+          <div class="qr_out">
+            <div class="qr" @click="isUserMode=!isUserMode">
+              <img src="./assets/img/qr.png" alt="" v-if="isUserMode">
+              <img src="./assets/img/lock.png" alt="" v-if="!isUserMode">
+            </div>
           </div>
         </div>
-        <div class="input_box">
-          <div class="input_ico">
-            <span class="ii i-mima" style="font-size:24px"></span>
+        <div class="login_mode" v-show="isUserMode">
+          <div class="input_box">
+            <div class="input_ico">
+              <span class="ii i-yonghu" style="font-size:24px"></span>
+            </div>
+            <div class="input_text">
+              <input
+                v-model="username"
+                @keyup.enter="changeEnter"
+                id="loginname"
+                name="loginname"
+                type="text"
+                class="itt"
+                v-focus
+              >
+            </div>
           </div>
-          <div class="input_text">
-            <input
-              id="password"
-              ref="password"
-              name="password"
-              v-model="password"
-              @keyup.enter="login"
-              type="password"
-              class="itt"
-            >
+          <div class="input_box">
+            <div class="input_ico">
+              <span class="ii i-mima" style="font-size:24px"></span>
+            </div>
+            <div class="input_text">
+              <input
+                id="password"
+                ref="password"
+                name="password"
+                v-model="password"
+                @keyup.enter="login"
+                type="password"
+                class="itt"
+              >
+            </div>
+          </div>
+          <div class="remember_box">
+            <input type="checkbox" name="" id="saveid" class="remember" v-model="isRemember">
+            <div class="rtb">
+              <label for="remember" class="rmember_text">记住密码</label>
+            </div>
+          </div>
+          <div class="btn_box">
+            <button class="btn_login" @click="login">登&nbsp;&nbsp;录</button>
           </div>
         </div>
-        <div class="remember_box">
-          <input type="checkbox" name="" id="saveid" class="remember" v-model="isRemember">
-          <div class="rtb">
-            <label for="remember" class="rmember_text">记住密码</label>
+        <div class="qr_mode" v-show="!isUserMode">
+          <div>
+            <img src="./assets/img/appQR.png" alt="">
           </div>
-        </div>
-        <div class="btn_box">
-          <button class="btn_login" @click="login">登&nbsp;&nbsp;录</button>
-        </div>
-      </div>
-      <div class="qr_mode" v-show="!isUserMode">
-        <div>
-          <img src="./assets/img/appQR.png" alt="">
-        </div>
-        <hr>
-        <div class="xc-text-center qr_text">
-          <a style="color:#fff;" href="">下载APP</a>
+          <hr>
+          <div class="xc-text-center qr_text">
+            <a style="color:#fff;" href="">下载APP</a>
+          </div>
         </div>
       </div>
     </div>
@@ -268,12 +274,16 @@ img {
   border-radius: 10px;
   background: rgba(60, 64, 119, 0.39);
   position: absolute;
+  display: flex;
   margin: auto;
   padding: 40px;
   top: 0;
   bottom: 0;
   right: 360px;
   overflow: hidden;
+}
+.xc-box-left{
+  
 }
 .login_in_header {
   height: 60px;
@@ -414,13 +424,13 @@ img {
   width: 100%;
 }
 
-$logoWidth: 70px;
+$logoWidth: 70;
 .xc-title {
   color: #f1f1f1;
   text-shadow: #555 3px 3px 3px;
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
-  line-height: $logoWidth;
+  line-height: 50px;
   position: fixed;
   top: 80px;
   left: 120px;
@@ -429,12 +439,23 @@ $logoWidth: 70px;
     position: fixed;
     top: 80px;
     left: 30px;
-    width: $logoWidth;
-    height: $logoWidth;
+    width: 70px;
+    height: 70px;
     & img {
       width: 100%;
       height: 100%;
     }
   }
+}
+.xc-title-en {
+  color: #d4d4d4;
+  text-shadow: #555 3px 3px 3px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  line-height: 16px;
+  position: fixed;
+  top: 135px;
+  left: 120px;
 }
 </style>

@@ -21,19 +21,21 @@
             <td>实发奖金</td>
             <td>留存</td>
             <td>备注</td>
+            <td>客户个数</td>
             <td>操作</td>
           </tr>
           <tr v-for="(o,i) in table" :key="i">
             <td>{{o.roleName}}</td>
             <td>{{o.userName}}</td>
             <td>
-              <el-input-number :controls="false" style="width:auto" v-model="o.serverValue"></el-input-number>
+              <!-- <el-input-number :controls="false" style="width:auto" v-model="o.serverValue"></el-input-number> -->
+              <span>{{o.serverValue}}</span>
             </td>
             <td>
               <el-input-number :controls="false" style="width:auto" v-model="o.personalTax"></el-input-number>
             </td>
             <td>
-              <el-input-number :controls="false" style="width:auto" v-model="o.prize"></el-input-number>
+              <el-input-number :controls="false" style="width:auto" v-model="o.surePrize"></el-input-number>
             </td>
             <td>
               <el-input-number :controls="false" style="width:auto" v-model="o.realPrize"></el-input-number>
@@ -43,6 +45,9 @@
             </td>
             <td>
               <el-input v-model="o.remark"></el-input>
+            </td>
+            <td>
+              <span>{{o.count}}</span>
             </td>
             <td>
               <el-button @click="showCustom(o)">客户</el-button>
@@ -81,10 +86,10 @@ export default {
       let checkEmpty = o => {
         let fs = [
           "accountantId",
-          "prize",
           "personalTax",
-          "keepValue",
+          "surePrize",
           "realPrize",
+          "keepValue",
           "remark"
         ];
         let isEmpty = false;
@@ -105,10 +110,10 @@ export default {
         }
         let a = [];
         a.push(o.accountantId);
-        a.push(o.prize);
         a.push(o.personalTax);
-        a.push(o.keepValue);
+        a.push(o.surePrize);
         a.push(o.realPrize);
+        a.push(o.keepValue);
         a.push(o.remark ? o.remark : "-");
         aa.push(a.join());
       });
