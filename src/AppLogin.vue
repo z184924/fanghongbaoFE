@@ -9,17 +9,25 @@
       <div style="color:#aaa">修改 localhostConfig.js 变更后台测试地址</div>
     </div>
     <div class="back_box">
-      <img src="./assets/img/bg.jpg" alt="">
+      <img src="./assets/img/bg.png" alt="">
     </div>
     <div class="xc-title--logo">
-      <img src="./assets/img/logo.png" alt="">
+      <img src="./assets/img/logo_with_text.png" alt="">
     </div>
-    <div class="xc-title">房红包科技</div>
-    <div class="xc-title-en">HOUSE GIFT TECHNOLOGY</div>
+    <!-- <div class="xc-title">房红包科技</div>
+    <div class="xc-title-en">HOUSE GIFT TECHNOLOGY</div>-->
     <div class="login_box" v-loading="loading">
       <div class="xc-box-left">
-
+        <div class="login-logo">
+          <img src="./assets/img/logo.png" class="login-logo-img" alt="">
+        </div>
+        <div class="login-logo-text">
+          <img src="./assets/img/logo_text.png" class="login-logo-text-img" alt="">
+        </div>
       </div>
+      <div class="login-gap"></div>
+      <div class="login-line"></div>
+      <div class="login-gap"></div>
       <div class="xc-box-right">
         <div class="login_in_header"></div>
         <div class="qr_box">
@@ -33,7 +41,7 @@
         <div class="login_mode" v-show="isUserMode">
           <div class="input_box">
             <div class="input_ico">
-              <span class="ii i-yonghu" style="font-size:24px"></span>
+              <span class="ii i-yonghu"></span>
             </div>
             <div class="input_text">
               <input
@@ -49,7 +57,7 @@
           </div>
           <div class="input_box">
             <div class="input_ico">
-              <span class="ii i-mima" style="font-size:24px"></span>
+              <span class="ii i-mima"></span>
             </div>
             <div class="input_text">
               <input
@@ -70,7 +78,7 @@
             </div>
           </div>
           <div class="btn_box">
-            <button class="btn_login" @click="login">登&nbsp;&nbsp;录</button>
+            <button class="btn_login" @click="login">登&nbsp;&nbsp;入</button>
           </div>
         </div>
         <div class="qr_mode" v-show="!isUserMode">
@@ -269,10 +277,10 @@ img {
   height: 100%;
 }
 .login_box {
-  width: 400px;
+  width: 600px;
   height: 380px;
-  border-radius: 10px;
-  background: rgba(60, 64, 119, 0.39);
+  border-radius: 20px;
+  background: rgba(218, 226, 243, 0.562);
   position: absolute;
   display: flex;
   margin: auto;
@@ -282,15 +290,44 @@ img {
   right: 360px;
   overflow: hidden;
 }
-.xc-box-left{
-  
+.login-gap {
+  flex: 20px 0 0;
+}
+.login-line {
+  flex: 2px 0 0;
+  background: #444;
+}
+.login-logo {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  // height: 150px;
+}
+.login-logo-text {
+  text-align: center;
+  // height: 150px;
+}
+.login-logo-text-img {
+  width: 150px;
+  height: 70px;
+}
+.login-logo-img {
+  width: 180px;
+  height: 180px;
+}
+
+.xc-box-left {
+  flex: 180px 0 0;
+}
+.xc-box-right {
+  flex: 1;
 }
 .login_in_header {
   height: 60px;
 }
 .input_box {
   width: 100%;
-  height: 40px;
+  height: 50px;
   background-color: rgba(255, 255, 255, 0.658);
   border-radius: 6px;
   display: flex;
@@ -302,25 +339,30 @@ img {
   background-color: rgba(255, 255, 255, 0.8);
 }
 .input_ico {
-  min-width: 40px;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
-  font-size: 20px;
-  color: rgb(4, 0, 58);
+  font-size: 30px;
+  color: #d4241e;
+}
+.ii {
+  font-size: inherit;
 }
 .input_text {
   flex: auto 1 1;
   padding-left: 6px;
+  overflow: hidden;
 }
 .itt {
   background: none;
   border: none;
   width: 100%;
-  height: 40px;
+  // height: 50px;
+  height: 100%;
   vertical-align: middle;
-  font-size: 20px;
+  font-size: 30px;
   outline: none;
 }
 .itt:focus,
@@ -328,7 +370,7 @@ img {
   border: none;
 }
 .remember_box {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 .rtb {
   position: relative;
@@ -338,9 +380,10 @@ img {
 }
 .rmember_text {
   position: absolute;
-  color: #f1f1f1;
+  color: #747474;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: bold;
 }
 .btn_box {
   margin-bottom: 10px;
@@ -351,14 +394,16 @@ img {
 }
 .btn_login {
   width: 100%;
-  height: 46px;
+  height: 50px;
   border-radius: 6px;
-  background-color: rgba(4, 54, 24, 0.8);
-  color: #f6f6f6;
+  background-color: rgb(178, 190, 214);
+  color: #141414;
   border: none;
   outline: none;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight:bold;
   transition: linear all 0.1s;
+  cursor: pointer;
 }
 .btn_login_mini {
   width: 100%;
@@ -372,10 +417,7 @@ img {
   transition: linear all 0.1s;
 }
 .btn_login:hover {
-  background-color: rgba(4, 54, 24, 0.9);
-}
-.btn_login_mini:hover {
-  background-color: rgba(172, 109, 27, 0.9);
+  background-color: rgb(122, 145, 190);
 }
 .qr_box {
   position: absolute;
@@ -437,10 +479,10 @@ $logoWidth: 70;
   &--logo {
     text-shadow: #555 3px 3px 3px;
     position: fixed;
-    top: 80px;
-    left: 30px;
-    width: 70px;
-    height: 70px;
+    top: 40px;
+    left: 50px;
+    // width: 70px;
+    // height: 70px;
     & img {
       width: 100%;
       height: 100%;
