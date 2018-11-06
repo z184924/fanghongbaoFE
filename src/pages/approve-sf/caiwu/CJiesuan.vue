@@ -54,7 +54,7 @@ export default {
           label: "个税",
           width: "auto"
         },
-        prize: {
+        surePrize: {
           label: "应发奖金",
           width: "auto"
         },

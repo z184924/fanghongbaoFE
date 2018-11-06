@@ -29,7 +29,7 @@
             <td>{{o.userName}}</td>
             <td>{{o.serverValue}}</td>
             <td>{{o.personalTax}}</td>
-            <td>{{o.prize}}</td>
+            <td>{{o.surePrize}}</td>
             <td>{{o.realPrize}}</td>
             <td>{{o.keepValue}}</td>
             <td>{{o.remark}}</td>
@@ -70,8 +70,8 @@ export default {
     save() {
       let checkEmpty = o => {
         let fs = [
-          "accountantId",
-          "prize",
+          // "accountantId",
+          "surePrize",
           "personalTax",
           "keepValue",
           "realPrize",
@@ -95,7 +95,7 @@ export default {
         }
         let a = [];
         a.push(o.accountantId);
-        a.push(o.prize);
+        a.push(o.surePrize);
         a.push(o.personalTax);
         a.push(o.keepValue);
         a.push(o.realPrize);

@@ -85,7 +85,7 @@ export default {
     save() {
       let checkEmpty = o => {
         let fs = [
-          "accountantId",
+          // "accountantId",
           "personalTax",
           "surePrize",
           "realPrize",
