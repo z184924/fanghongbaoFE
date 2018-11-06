@@ -16,7 +16,7 @@
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
       <el-form ref="form" v-if="isShowEdit" :model="form" label-width="9em" label-position="right">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
-          <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
+          <c-detail :form="form"></c-detail>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -75,7 +75,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span>{{form.friendPrize}}元</span>
+                  <span>{{fc(form.friendPrize)}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -99,7 +99,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="到账金额">
-                  <span>{{form.onlineMoney}}元</span>
+                  <span>{{fc(form.onlineMoney)}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -124,7 +124,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="尾款金额">
-                  <span>{{form.finalPayment}}元</span>
+                  <span>{{fc(form.finalPayment)}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -151,7 +151,7 @@
                     </tr>
                     <tr v-for="(o,i) in listYongjin" :key="i">
                       <td>{{i+1}}</td>
-                      <td>{{o.commissionValue}}元</td>
+                      <td>{{fc(o.commissionValue)}}元</td>
                       <td>{{mxDateFormatter(o.commissionDate)}}</td>
                     </tr>
                   </tbody>
@@ -217,7 +217,6 @@ export default {
       },
       form2: {},
       selectedRow: {},
-      listWuyeLeixing: [],
       listState: [
         {
           label: "部分结佣",
@@ -333,19 +332,6 @@ export default {
         });
       }
     }
-  },
-
-  created() {
-    this.xpost("city/getPropertyTypes").then(res => {
-      // console.log(res);
-      this.listWuyeLeixing = res.map(o => {
-        return {
-          NAME: o.propertyType,
-          CODE: o.propertyTypeId
-        };
-      });
-    });
-    // console.log(this.mxLoginInfo);
   }
 };
 </script>

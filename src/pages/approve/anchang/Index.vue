@@ -181,7 +181,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="成交总价">
-                  <span>{{form.dealTotalPrice}}元</span>
+                  <span>{{fc(form.dealTotalPrice)}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">

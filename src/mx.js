@@ -11,7 +11,6 @@ import CDatePicker from "@/components/CDatePicker";
 import axios from "axios";
 import json5 from "json5";
 import qs from "qs";
-import clone from "clone";
 
 var myMixin = {
   components: {
@@ -25,6 +24,9 @@ var myMixin = {
     CDatePicker
   },
   methods: {
+    fc(obj) {
+      return fc(obj);
+    },
     mxStringify(o) {
       if (kindOf(o) === "object") {
         for (const key in o) {

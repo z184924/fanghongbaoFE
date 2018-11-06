@@ -15,7 +15,7 @@
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
       <el-form ref="form" v-if="isShowEdit" :model="form" label-width="9em" label-position="right">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
-          <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
+          <c-detail :form="form"></c-detail>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
             <div class="xc18__container xc18__container--p3">
               <div class="xc18__item">
@@ -135,8 +135,7 @@ export default {
         f__files: []
       },
       form2: {},
-      selectedRow: {},
-      listWuyeLeixing: []
+      selectedRow: {}
     };
   },
   methods: {
@@ -222,19 +221,6 @@ export default {
         });
       }
     }
-  },
-
-  created() {
-    this.xpost("city/getPropertyTypes").then(res => {
-      // console.log(res);
-      this.listWuyeLeixing = res.map(o => {
-        return {
-          NAME: o.propertyType,
-          CODE: o.propertyTypeId
-        };
-      });
-    });
-    // console.log(this.mxLoginInfo);
   }
 };
 </script>

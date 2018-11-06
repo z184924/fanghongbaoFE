@@ -22,7 +22,7 @@
         v-if="isShowEdit"
       >
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
-          <c-detail :form="form" :list-yewu-leixing="listWuyeLeixing"></c-detail>
+          <c-detail :form="form"></c-detail>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -82,7 +82,7 @@
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
                   <div>
-                    <span>{{form2.friendPrize}}元</span>
+                    <span>{{fc(form2.friendPrize)}}元</span>
                     <el-tooltip
                       v-if="form.isTimeOut!=0"
                       class="item"
@@ -178,11 +178,20 @@
                       <td>序号</td>
                       <td>佣金金额</td>
                       <td>付款时间</td>
+                      <td>操作</td>
                     </tr>
                     <tr v-for="(o,i) in listYongjin" :key="i">
                       <td>{{i+1}}</td>
-                      <td>{{o.commissionValue}}元</td>
+                      <td>{{fc(o.commissionValue)}}元</td>
                       <td>{{mxDateFormatter(o.commissionDate)}}</td>
+                      <td>
+                        <el-button
+                          type="danger"
+                          icon="el-icon-delete"
+                          @click="deleteCommission(o)"
+                          size="mini"
+                        >删除</el-button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -286,7 +295,6 @@ export default {
         customerStatusId: ""
       },
       selectedRow: {},
-      listWuyeLeixing: [],
       isShowAddYongjin: false,
       yongjin: {},
       listYongjin: [],
@@ -399,22 +407,52 @@ export default {
     //   })
     // },
     save() {
+      // 判断佣金是否相等
+      let checkYongjinEquivalence = () => {
+        let yingfu = parseInt(this.form.sureBalance);
+        let shifu = 0;
+        this.listYongjin.forEach(o => {
+          let shifuSingle = parseInt(o.commissionValue);
+          shifu += shifuSingle;
+        });
+        // console.log(shifu);
+        if (yingfu <= shifu) {
+          return true;
+        } else {
+          this.$alert(`佣金应付 [ ${fc(yingfu)}元 ] ，实付 [ ${fc(shifu)}元 ]，尚未结清，无法保存。`, {
+            // message: "佣金尚未结清，无法保存。",
+            type: "warning"
+          });
+          return false;
+        }
+      };
+      // console.log(this.form2.customerStatusId);
+      // console.log(checkYongjinEquivalence());
+
       this.$refs.form.validate(valid => {
         if (valid) {
           let data = clone(this.form2);
           data.customerId = this.form.customerId;
-          this.xpost(this.config.editUrl, data).then(res => {
-            this.$refs.table.getData();
-            this.mxMessage(res).then(() => {
-              this.isShowEdit = false;
-            });
-          });
+          let yongjinValid = true;
+          if (this.form2.customerStatusId + "" === "24") {
+            yongjinValid = checkYongjinEquivalence();
+            // console.log(yongjinValid);
+          }
+          if (yongjinValid) {
+            // this.xpost(this.config.editUrl, data).then(res => {
+            //   this.$refs.table.getData();
+            //   this.mxMessage(res).then(() => {
+            //     this.isShowEdit = false;
+            //   });
+            // });
+          }
+          // console.log(this.form.sureBalance);
         } else {
           this.$message({
             message: "请填写完整",
             type: "warning"
           });
-          console.log("error submit!!");
+          // console.log("error submit!!");
           return false;
         }
       });
@@ -440,21 +478,23 @@ export default {
           message: "请选择一行数据"
         });
       }
+    },
+    deleteCommission(o) {
+      console.log(o);
+      this.$confirm(`确定删除佣金 [ ${fc(o.commissionValue)}元 ]？`, "删除").then(
+        () => {
+          let id = o.commissionId;
+          this.xpost("projectCustomer/deleteCustomerCommission", {
+            commissionId: id
+          }).then(res => {
+            this.mxMessage(res).then(() => {
+              this.edit();
+            });
+            // console.log(res);
+          });
+        }
+      );
     }
-  },
-
-  created() {
-    this.xpost("city/getPropertyTypes").then(res => {
-      // console.log(res);
-      this.listWuyeLeixing = res.map(o => {
-        return {
-          NAME: o.propertyType,
-          CODE: o.propertyTypeId
-        };
-      });
-    });
-
-    // console.log(this.mxLoginInfo);
   }
 };
 </script>

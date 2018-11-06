@@ -98,7 +98,7 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="排卡金额">
-            <span>{{form.cardMoney}}元</span>
+            <span>{{fc(form.cardMoney)}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -108,7 +108,7 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="认购金额">
-            <span>{{form.subscribedMoney }}元</span>
+            <span>{{fc(form.subscribedMoney) }}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -118,12 +118,12 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="齐定金额">
-            <span>{{form.homogeneityMoney}}元</span>
+            <span>{{fc(form.homogeneityMoney)}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
           <el-form-item label="应结佣金">
-            <span>{{form.sureBalance}}</span>
+            <span>{{fc(form.sureBalance)}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -148,12 +148,12 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="成交单价">
-            <span>{{form.dealSinglePrice}}元</span>
+            <span>{{fc(form.dealSinglePrice)}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
           <el-form-item label="成交总价">
-            <span>{{form.dealTotalPrice}}元</span>
+            <span>{{fc(form.dealTotalPrice)}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -163,12 +163,12 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="贷款金额">
-            <span>{{form.loanMoney}}元</span>
+            <span>{{fc(form.loanMoney)}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
           <el-form-item label="首付金额">
-            <span>{{form.downMoney}}元</span>
+            <span>{{fc(form.downMoney)}}元</span>
           </el-form-item>
         </div>
         <div class="xc18__item">
@@ -224,15 +224,7 @@ export default {
   props: {
     form: {
       default: {}
-    },
-    listWuyeLeixing: {
-      default() {
-        return [];
-      }
     }
-  },
-  mounted() {
-    console.log(this.listWuyeLeixing);
   }
 };
 </script>
