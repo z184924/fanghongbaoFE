@@ -144,12 +144,6 @@ export default {
           message: "请选择一行数据"
         });
       }
-    },
-    get() {
-      let id = this.selectedRow[this.config.pk];
-      this.xpost("serviceInfo/getServiceMoneyHistoryList", {
-        serviceId: id
-      });
     }
   },
 
