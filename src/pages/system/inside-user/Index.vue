@@ -12,17 +12,25 @@
         <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:120px"></c-select>
         <span style="padding-left:1em">用户名：</span>
         <el-input style="width:120px" v-model="dataParam.userName"></el-input>
+        <span style="padding-left:1em">角色：</span>
+        <c-select :dict="roleList" v-model="dataParam.roleId" style="width:120px"></c-select>
         <el-button type="text" @click="clearSearch">清空</el-button>
       </span>
       <span slot="right-control" style="margin-right:1em">
+        <el-button
+          type="default"
+          icon="el-icon-info"
+          @click="openMengyou"
+          :disabled="selectedRow.count+''=='0'"
+        >查看盟友</el-button>
         <el-button
           type="default"
           icon="el-icon-setting"
           @click="setDirector"
           :disabled="selectedRow.roleName!=='拓展经纪人'"
         >{{setDirectorLabel}}</el-button>
-        <el-button type="default" icon="el-icon-plus" @click="add">新增内部用户</el-button>
-        <el-button type="default" icon="el-icon-edit" @click="edit">编辑用户</el-button>
+        <el-button type="default" icon="el-icon-plus" @click="add">新增</el-button>
+        <el-button type="default" icon="el-icon-edit" @click="edit">编辑</el-button>
       </span>
     </fixed-table>
     <!-- dialog -->
@@ -42,7 +50,7 @@
         </el-form-item>
       </el-form>
       <el-button type="default" slot="footer" @click="isShowAdd=false">取消</el-button>
-      <el-button type="primary" slot="footer" @click="doAdd">保存</el-button>
+      <el-button type="primary" slot="footer" @click="doAdd" :disabled="!formAdd.role">保存</el-button>
     </el-dialog>
     <el-dialog v-drag :visible.sync="isShowEdit" width="400px" title="编辑内部用户">
       <el-form ref="formEdit" :model="formEdit" label-width="6em" :rules="rules">
@@ -61,7 +69,7 @@
         </el-form-item>
       </el-form>
       <el-button type="default" slot="footer" @click="isShowEdit=false">取消</el-button>
-      <el-button type="primary" slot="footer" @click="doEdit">保存</el-button>
+      <el-button type="primary" slot="footer" @click="doEdit" :disabled="!formEdit.role">保存</el-button>
       <!-- <div>{{formEdit}}</div> -->
     </el-dialog>
     <el-dialog v-drag :visible.sync="isShowDirector" width="200px" title="设置拓展主管">
@@ -70,15 +78,24 @@
       </div>
       <el-button type="primary" slot="footer" @click="saveDirector">保存</el-button>
     </el-dialog>
+    <el-dialog v-drag :visible.sync="isShowMengyou" width="80%" title="盟友">
+      <c-mengyou v-if="isShowMengyou" :user-id="selectedRow.userId"></c-mengyou>
+    </el-dialog>
+
     <!-- <div>{{exchangedDirectorState}}</div> -->
     <!-- <div>{{selectedRow}}</div> -->
   </div>
 </template>
 <script>
+import CMengyou from "./Mengyou";
 export default {
+  components: {
+    CMengyou
+  },
   data() {
     let vue = this;
     return {
+      isShowMengyou: false,
       // 表格
       searchInsiderList: [
         {
@@ -97,7 +114,8 @@ export default {
       selectedRow: {},
       dataParam: {
         isInsider: "",
-        userName: ""
+        userName: "",
+        roleId: ""
       },
       // formDirector:[],
       listDirector: [],
@@ -140,6 +158,11 @@ export default {
         roleName: {
           label: "角色名称",
           type: "string"
+        },
+        count: {
+          label: "盟友个数",
+          type: "string",
+          width: "90px"
         }
       },
 
@@ -294,6 +317,9 @@ export default {
     // table
     refreshTable() {
       this.$refs.table.getData();
+    },
+    openMengyou(){
+      this.isShowMengyou=true;
     }
   },
   created() {
@@ -304,6 +330,10 @@ export default {
             label: o.roleName,
             value: o.roleId + ""
           };
+        });
+        list.unshift({
+          label: "全部",
+          value: ""
         });
         let l = [];
         list.forEach(o => {
