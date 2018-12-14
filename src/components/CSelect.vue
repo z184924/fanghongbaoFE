@@ -1,8 +1,15 @@
 <template>
-  <el-radio-group v-model="selectedValue" v-if="type==='radio'">
+  <el-radio-group :disabled="disabled" v-model="selectedValue" v-if="type==='radio'">
     <el-radio :border="true" :label="o.value" v-for="(o,i) in list" :key="i">{{o.label}}</el-radio>
   </el-radio-group>
-  <el-select v-model="selectedValue" :multiple="multiple" style="width:100%" v-else>
+  <el-select
+    v-model="selectedValue"
+    :filterable="searchable"
+    :multiple="multiple"
+    style="width:100%"
+    v-else
+    :disabled="disabled"
+  >
     <el-option v-for="o in list" :key="o.value" :value="o.value" :label="o.label"></el-option>
   </el-select>
 </template>
@@ -22,6 +29,14 @@ export default {
       default() {
         return "";
       }
+    },
+    searchable: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

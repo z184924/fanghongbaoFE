@@ -11,6 +11,7 @@ import moment from "moment";
 import clone from "clone";
 import kindOf from "kind-of";
 import fc from "format-currency";
+import is from "is";
 
 /************************************************* */
 
@@ -43,6 +44,8 @@ window.moment = moment;
 window.clone = clone;
 window.kindOf = kindOf;
 window.fc = fc;
+window.is = is;
+
 
 Vue.directive("drag", {
   bind(el) {

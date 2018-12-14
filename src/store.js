@@ -2,7 +2,21 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
+const moduleStat = {
+  namespaced: true,
+  state: {
+    searchData: {},
+  },
+  mutations: {
+    setSearchData(state, obj) {
+      state.searchData = obj;
+    }
+  }
+}
 export default new Vuex.Store({
+  modules: {
+    stat: moduleStat
+  },
   state: {
     // 正式环境，修改测试环境请更改localhostConfig.js，并保证端口为17011
     basePath: "http://123.57.32.164:8080/",
@@ -18,6 +32,7 @@ export default new Vuex.Store({
     temp: null,
     bread: {},
     menu: [],
+
   },
   mutations: {
     login(state, info) {

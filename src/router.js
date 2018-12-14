@@ -40,7 +40,9 @@ import SystemFeedback from "./pages/system/feedback/Index"
 
 import SystemGold from "./pages/system/gold/Index"
 
-import SystenInformation from "./pages/system/information/Index"
+import SystemInformation from "./pages/system/information/Index"
+
+import SystemStat from "./pages/system/stat/Index"
 
 // 审核管理
 import SystemApproveAnchang from "./pages/approve/anchang/Index"
@@ -162,8 +164,13 @@ export default new Router({
     },
     {
       path: "/system/information/:type",
-      name: "SystenInformation",
-      component: SystenInformation,
+      name: "SystemInformation",
+      component: SystemInformation,
+    },
+    {
+      path: "/system/stat",
+      name: "SystemStat",
+      component: SystemStat,
     },
 
 

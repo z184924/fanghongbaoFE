@@ -9,20 +9,20 @@
       <div style="color:#aaa">修改 localhostConfig.js 变更后台测试地址</div>
     </div>
     <div class="back_box">
-      <img src="./assets/img/bg.png" alt="">
+      <img src="./assets/img/bg.png" alt>
     </div>
     <div class="xc-title--logo">
-      <img src="./assets/img/logo_with_text.png" alt="">
+      <img src="./assets/img/logo_with_text.png" alt>
     </div>
     <!-- <div class="xc-title">房红包科技</div>
     <div class="xc-title-en">HOUSE GIFT TECHNOLOGY</div>-->
     <div class="login_box" v-loading="loading">
       <div class="xc-box-left">
         <div class="login-logo">
-          <img src="./assets/img/logo.png" class="login-logo-img" alt="">
+          <img src="./assets/img/logo.png" class="login-logo-img" alt>
         </div>
         <div class="login-logo-text">
-          <img src="./assets/img/logo_text.png" class="login-logo-text-img" alt="">
+          <img src="./assets/img/logo_text.png" class="login-logo-text-img" alt>
         </div>
       </div>
       <div class="login-gap"></div>
@@ -33,8 +33,8 @@
         <div class="qr_box">
           <div class="qr_out">
             <div class="qr" @click="isUserMode=!isUserMode">
-              <img src="./assets/img/qr.png" alt="" v-if="isUserMode">
-              <img src="./assets/img/lock.png" alt="" v-if="!isUserMode">
+              <img src="./assets/img/qr.png" alt v-if="isUserMode">
+              <img src="./assets/img/lock.png" alt v-if="!isUserMode">
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="remember_box">
-            <input type="checkbox" name="" id="saveid" class="remember" v-model="isRemember">
+            <input type="checkbox" name id="saveid" class="remember" v-model="isRemember">
             <div class="rtb">
               <label for="remember" class="rmember_text">记住密码</label>
             </div>
@@ -83,11 +83,11 @@
         </div>
         <div class="qr_mode" v-show="!isUserMode">
           <div>
-            <img src="./assets/img/appQR.png" alt="">
+            <img src="./assets/img/appQR.png" alt>
           </div>
           <hr>
           <div class="xc-text-center qr_text">
-            <a style="color:#fff;" href="">下载APP</a>
+            <a style="color:#fff;" href>下载APP</a>
           </div>
         </div>
       </div>
@@ -137,7 +137,8 @@ export default {
       }
       this.xpost("pcLogin", {
         account: this.username,
-        password: this.password
+        password: this.password,
+        flag:"pc"
       })
         .then(
           res => {
@@ -401,7 +402,7 @@ img {
   border: none;
   outline: none;
   font-size: 24px;
-  font-weight:bold;
+  font-weight: bold;
   transition: linear all 0.1s;
   cursor: pointer;
 }
