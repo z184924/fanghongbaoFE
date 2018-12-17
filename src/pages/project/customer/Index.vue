@@ -184,6 +184,9 @@
 <script>
 import CDetail from "../../approve/_com/Detail";
 export default {
+  components:{
+    CDetail
+  },
   data() {
     let vue = this;
     return {
@@ -317,7 +320,7 @@ export default {
           this.isShowDetail = true;
           // 佣金列表
           this.xpost("projectCustomer/getCommission", {
-            customerId: id
+            customerId: this.selectedRow.customerId
           }).then(res => {
             this.listYongjin = res.rows;
           });

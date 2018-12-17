@@ -19,14 +19,57 @@
       :fields="fields"
       v-model="selectedRow"
     >
+      <el-table-column slot="col" width="150" label="楼盘状态" align="center">
+        <template slot-scope="scope">
+          <!-- <img class="xc16 xc-shadow" :src="$store.state.smallPicBasePath + scope.row.picURL" alt> -->
+          <span :style="{color:mxProjectStatusColor(scope.row.projectStatus)}">{{mxProjectStatusFormatter(scope.row.projectStatus)}}</span>
+        </template>
+      </el-table-column>
       <span v-if="selectedRow.projectId" slot="right-control" style="margin-right:12px;">
-        <el-button
+        <!-- <el-button
           type="warning"
           v-if="selectedRow.projectStatus==1"
           @click="changeState(2)"
           icon="el-icon-close"
         >下架</el-button>
-        <el-button type="warning" v-else @click="changeState(1)" icon="el-icon-star-on">上架</el-button>
+        <el-button type="warning" v-else @click="changeState(1)" icon="el-icon-star-on">上架</el-button>-->
+        <el-dropdown>
+          <el-button type="warning">
+            更改楼盘状态
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <div class="xc32">
+              <div class="xc32__item">
+                <el-button
+                  class="xc32__btn"
+                  type="primary"
+                  @click="changeState(0)"
+                  icon="el-icon-star-on"
+                >待售</el-button>
+              </div>
+              <div class="xc32__item">
+                <el-button
+                  class="xc32__btn"
+                  type="primary"
+                  @click="changeState(1)"
+                  icon="el-icon-star-on"
+                >销售中</el-button>
+              </div>
+              <div class="xc32__item">
+                <el-button
+                  class="xc32__btn"
+                  type="primary"
+                  @click="changeState(2)"
+                  icon="el-icon-star-on"
+                >下架</el-button>
+              </div>
+            </div>
+            <!-- <el-dropdown-item @click="changeState(0)">代售</el-dropdown-item>
+            <el-dropdown-item @click="changeState(1)">销售中</el-dropdown-item>
+            <el-dropdown-item @click="changeState(2)">下架</el-dropdown-item>-->
+          </el-dropdown-menu>
+        </el-dropdown>
         <el-button
           type="warning"
           v-if="selectedRow.ifRecommend==1"
@@ -94,13 +137,22 @@ export default {
           width: "200px",
           type: "string"
         },
+        areaName: {
+          label: "区域",
+          width: "180px",
+          formatter(r, c, v) {
+            // console.log(r);
+            return `${r.cityName} · ${r.areaName}`;
+          }
+        },
         sellingAverage: {
           label: "平均售价",
+          width: "90px",
           type: "string"
         },
         projectAddress: {
           label: "地址",
-          width: "260px",
+          width: "200px",
           type: "string",
           class: "xc15"
         },
@@ -126,13 +178,13 @@ export default {
             }
           }
         },
-        projectStatus: {
-          label: "是否上架",
-          width: "80px",
-          formatter(r, c, v) {
-            return vue.mxBoolFormatter(v);
-          }
-        },
+        // projectStatus: {
+        //   label: "楼盘状态",
+        //   width: "100px",
+        //   formatter(r, c, v) {
+        //     return vue.mxProjectStatusFormatter(v);
+        //   }
+        // },
         ifRecommend: {
           label: "是否推荐",
           width: "80px",
@@ -181,8 +233,8 @@ export default {
       this.isShowAdd = true;
     },
     save() {
-      this.form.cityId=this.projectCityArea.city;
-      this.form.areaId=this.projectCityArea.area;
+      this.form.cityId = this.projectCityArea.city;
+      this.form.areaId = this.projectCityArea.area;
       this.xpost("projectInfo/saveOrUpdate", this.form).then(res => {
         this.mxMessage(res).then(() => {
           this.isShowAdd = false;

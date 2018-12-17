@@ -77,6 +77,28 @@ var myMixin = {
       let a = JSON.parse(str);
       return a;
     },
+    mxProjectStatusFormatter(v) {
+      if (v + "" == "0") {
+        return "待售";
+      } else if (v + "" == "1") {
+        return "销售中";
+      } else if (v + "" == "2") {
+        return "下架";
+      } else {
+        return "";
+      }
+    },
+    mxProjectStatusColor(v) {
+      if (v + "" == "0") {
+        return "#979797";
+      } else if (v + "" == "1") {
+        return "#06a713";
+      } else if (v + "" == "2") {
+        return "#f41515";
+      } else {
+        return "#eee";
+      }
+    },
     mxDateFormatter(v) {
       if (v) {
         return moment(v).format("YYYY-MM-DD");
@@ -116,6 +138,7 @@ var myMixin = {
         return "";
       }
     },
+
     mxTableMerge(list, field) {
       let node = 0;
       let nodeName = "---";
@@ -360,8 +383,7 @@ var myMixin = {
     },
     DICT() {
       return {
-        bool: [
-          {
+        bool: [{
             NAME: this.YES,
             CODE: 1
           },
@@ -370,8 +392,7 @@ var myMixin = {
             CODE: 0
           }
         ],
-        goldType: [
-          {
+        goldType: [{
             NAME: "获取金币",
             CODE: 1
           },

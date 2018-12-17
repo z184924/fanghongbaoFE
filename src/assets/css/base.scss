@@ -1,4 +1,4 @@
-$color-test: #e9a695;
+$color-test: #06a713;
 $primary-color-1: #c75336;
 $primary-color-2: #be947b;
 $primary-color-3: #c99a6e;
@@ -920,7 +920,7 @@ li {
 
     &__body {
       height: 260px;
-      overflow-y: auto; 
+      overflow-y: auto;
     }
   }
 
@@ -951,9 +951,9 @@ li {
       display: flex;
       align-items: center;
       height: 40px;
-      background:$primary-color-7;
-      font-size:20px;
-      margin-bottom:0.3em;
+      background: $primary-color-7;
+      font-size: 20px;
+      margin-bottom: 0.3em;
     }
 
     &__user {
@@ -968,8 +968,20 @@ li {
 
     &__arrow {
       flex: 0 0 10%;
-      text-align:right;
-      padding-right:0.3em;
+      text-align: right;
+      padding-right: 0.3em;
+    }
+  }
+
+  .xc32 {
+    padding: 0 10px;
+
+    &__item {
+      margin-bottom: 6px;
+    }
+
+    &__btn {
+      width: 120px;
     }
   }
 }
