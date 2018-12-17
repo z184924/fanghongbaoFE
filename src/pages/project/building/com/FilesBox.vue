@@ -12,7 +12,9 @@
             @click="edit(o)"
           >
           <div class="xc2__img-title" :title="o.dataTitle" @click="edit(o)">{{o.dataTitle}}</div>
-          <div v-if="editable" class="xc2__close" @click="del(o)">×</div>
+          <div v-if="editable" class="xc2__close" @click="del(o)">
+            <span class="el-icon-close"></span>
+          </div>
         </div>
         <!-- <el-upload v-if="editable" class="avatar-uploader" :multiple="multiple" :action="action" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
           <i v-if="multiple || list.length===0" class="el-icon-plus avatar-uploader-icon"></i>

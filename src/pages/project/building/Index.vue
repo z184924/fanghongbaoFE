@@ -41,11 +41,15 @@
     </fixed-table>
     <el-dialog :visible.sync="isShowAdd" title="新建楼盘" v-drag width="400px">
       <el-form>
-        <el-form-item label="楼盘名称">
-          <el-input v-model="form.projectName"></el-input>
+        <el-form-item label="楼盘名称：">
+          <el-input v-model="form.projectName" style="width:350px"></el-input>
+        </el-form-item>
+        <el-form-item label="区域：">
+          <area-picker :is-show-clear="false" v-model="projectCityArea"></area-picker>
+          <!-- {{projectCityArea}} -->
         </el-form-item>
       </el-form>
-      <el-button slot="footer" type="primary" @click="save">保存</el-button>
+      <el-button slot="footer" type="primary" @click="save" :disabled="!projectCityArea.area">保存</el-button>
     </el-dialog>
     <!-- <div>{{selectedWylx}}</div> -->
   </div>
@@ -66,6 +70,7 @@ export default {
       selectedCityArea: {},
       selectedLplx: "",
       selectedWylx: "",
+      projectCityArea: {},
       listOrderType: [
         //
         {
@@ -176,6 +181,8 @@ export default {
       this.isShowAdd = true;
     },
     save() {
+      this.form.cityId=this.projectCityArea.city;
+      this.form.areaId=this.projectCityArea.area;
       this.xpost("projectInfo/saveOrUpdate", this.form).then(res => {
         this.mxMessage(res).then(() => {
           this.isShowAdd = false;

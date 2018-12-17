@@ -11,7 +11,9 @@
             class="xc2__img"
             @click="openImg(o)"
           >
-          <div v-if="editable" class="xc2__close" @click="remove(i)">×</div>
+          <div v-if="editable" class="xc2__close" @click="remove(i)">
+            <span class="el-icon-close"></span>
+          </div>
         </div>
         <el-upload
           v-if="editable"
