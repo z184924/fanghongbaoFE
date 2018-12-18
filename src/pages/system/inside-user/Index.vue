@@ -31,6 +31,8 @@
         >{{setDirectorLabel}}</el-button>
         <el-button type="default" icon="el-icon-plus" @click="add">新增</el-button>
         <el-button type="default" icon="el-icon-edit" @click="edit">编辑</el-button>
+        <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
+        <el-button type="default" icon="el-icon-delete" class="xc10" @click="del">删除</el-button>
       </span>
     </fixed-table>
     <!-- dialog -->
@@ -278,7 +280,11 @@ export default {
           this.isShowEdit = true;
           this.$nextTick(() => {
             this.$set(this.formEdit, "role", this.selectedRow.roleId + "");
-            this.$set(this.formEdit, "userName", this.selectedRow.userName + "");
+            this.$set(
+              this.formEdit,
+              "userName",
+              this.selectedRow.userName + ""
+            );
             this.$set(this.formEdit, "phone", this.selectedRow.phone + "");
             this.$set(this.formEdit, "account", this.selectedRow.account + "");
             // this.formEdit.role = this.selectedRow.roleId + "";
@@ -321,6 +327,27 @@ export default {
           return false;
         }
       });
+    },
+    del() {
+      let row = this.selectedRow;
+      if (this.selectedRow.userId) {
+        this.$confirm(`是否删除 [ ${this.selectedRow.userName} ] ？`, "删除", {
+          type: "warning"
+        }).then(() => {
+          let data = {};
+          data.userId = row.userId;
+          this.xpost("user/deleteUser", data).then(res => {
+            this.mxMessage(res).then(() => {
+              this.refreshTable();
+            });
+          });
+        });
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        });
+      }
     },
     clearSearch() {
       this.dataParam = {};
