@@ -35,7 +35,7 @@
     </fixed-table>
     <!-- dialog -->
     <el-dialog v-drag :visible.sync="isShowAdd" width="400px" title="新增内部用户">
-      <el-form ref="formAdd" :model="formAdd" label-width="6em" :rules="rules">
+      <el-form ref="formAdd" :model="formAdd" label-width="6em" :rules="rulesAdd">
         <el-form-item label="账号" prop="account">
           <el-input v-model="formAdd.account"></el-input>
         </el-form-item>
@@ -53,7 +53,7 @@
       <el-button type="primary" slot="footer" @click="doAdd" :disabled="!formAdd.role">保存</el-button>
     </el-dialog>
     <el-dialog v-drag :visible.sync="isShowEdit" width="400px" title="编辑内部用户">
-      <el-form ref="formEdit" :model="formEdit" label-width="6em" :rules="rules">
+      <el-form ref="formEdit" :model="formEdit" label-width="6em" :rules="rulesEdit">
         <el-form-item label="账号" prop="account">
           <!-- <el-input v-model="formEdit.account"></el-input> -->
           <span>{{formEdit.account}}</span>
@@ -171,7 +171,13 @@ export default {
       isShowEdit: false,
       isShowDirector: false,
       roleList: [],
-      rules: {
+      rulesAdd: {
+        account: [{ required: true, message: "请填写账号", trigger: "blur" }],
+        userName: [{ required: true, message: "请填写姓名", trigger: "blur" }],
+        phone: [{ required: true, message: "请填写手机号", trigger: "blur" }],
+        role: [{ required: true, message: "请选择角色", trigger: "blur" }]
+      },
+      rulesEdit: {
         account: [{ required: true, message: "请填写账号", trigger: "blur" }],
         userName: [{ required: true, message: "请填写姓名", trigger: "blur" }],
         phone: [{ required: true, message: "请填写手机号", trigger: "blur" }],
@@ -271,10 +277,14 @@ export default {
         if (this.selectedRow.isInsider == 1) {
           this.isShowEdit = true;
           this.$nextTick(() => {
-            this.formEdit.role = this.selectedRow.roleId + "";
-            this.formEdit.userName = this.selectedRow.userName + "";
-            this.formEdit.phone = this.selectedRow.phone + "";
-            this.formEdit.account = this.selectedRow.account + "";
+            this.$set(this.formEdit, "role", this.selectedRow.roleId + "");
+            this.$set(this.formEdit, "userName", this.selectedRow.userName + "");
+            this.$set(this.formEdit, "phone", this.selectedRow.phone + "");
+            this.$set(this.formEdit, "account", this.selectedRow.account + "");
+            // this.formEdit.role = this.selectedRow.roleId + "";
+            // this.formEdit.userName = this.selectedRow.userName + "";
+            // this.formEdit.phone = this.selectedRow.phone + "";
+            // this.formEdit.account = this.selectedRow.account + "";
           });
         } else {
           this.$message({
@@ -291,6 +301,8 @@ export default {
       }
     },
     doEdit() {
+      console.log(this.formEdit);
+      this.$forceUpdate();
       this.$refs.formEdit.validate(valid => {
         if (valid) {
           this.xpost("user/updateInnerUser", {
@@ -318,8 +330,8 @@ export default {
     refreshTable() {
       this.$refs.table.getData();
     },
-    openMengyou(){
-      this.isShowMengyou=true;
+    openMengyou() {
+      this.isShowMengyou = true;
     }
   },
   created() {
