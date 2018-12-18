@@ -437,16 +437,16 @@ export default {
           { required: true, message: "不能为空", trigger: "change" }
         ],
 
-        f__zy: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__xmzg: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__acms: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__xmjl: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__shr: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__yxzj: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__qyjl: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__zjl: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__cw: [{ required: true, message: "不能为空", trigger: "change" }],
-        f__csr: [{ required: true, message: "不能为空", trigger: "change" }]
+        // f__zy: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__xmzg: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__acms: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__xmjl: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__shr: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__yxzj: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__qyjl: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__zjl: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__cw: [{ required: true, message: "不能为空", trigger: "change" }],
+        // f__csr: [{ required: true, message: "不能为空", trigger: "change" }]
 
         // f__je_zy: [
         //   { required: true, message: '不能为空', trigger: 'change' }
