@@ -28,6 +28,9 @@
       >
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-detail :form="form"></c-detail>
+          <c-panel title="银行卡" title-color="#a75c06">
+            <file-box :editable="false" is-window v-model="form.bankcardPic"></file-box>
+          </c-panel>
           <c-panel title="审核人审核信息" title-color="#2f2a7a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -152,18 +155,18 @@
                 </el-form-item>
               </div>
               <div class="xc22">
-                <div class="xc22__title">佣金记录</div>
+                <div class="xc22__title">记录</div>
                 <table class="xc-table xc-table--border">
                   <tbody>
                     <tr class="xc-table__head">
                       <td>序号</td>
-                      <td>佣金金额</td>
-                      <td>付款时间</td>
+                      <td>名称</td>
+                      <td>时间</td>
                     </tr>
                     <tr v-for="(o,i) in listYongjin" :key="i">
                       <td>{{i+1}}</td>
-                      <td>{{fc(o.commissionValue)}}元</td>
-                      <td>{{mxDateFormatter(o.commissionDate)}}</td>
+                      <td>{{o.name}}</td>
+                      <td>{{mxDateFormatter(o.checkDate)}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -176,7 +179,7 @@
         </div>
       </el-form>
       <el-button type="default" @click="isShowDetail=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save()" slot="footer">保存</el-button>
+      <!-- <el-button type="primary" @click="save()" slot="footer">保存</el-button> -->
     </el-dialog>
     <!-- <div>{{selectedRow}}</div> -->
   </div>
@@ -184,7 +187,7 @@
 <script>
 import CDetail from "../../approve/_com/Detail";
 export default {
-  components:{
+  components: {
     CDetail
   },
   data() {
@@ -316,14 +319,11 @@ export default {
         this.xpost("projectCustomer/getCustomerAllInfo", {
           customerId: this.selectedRow.customerId
         }).then(res => {
-          this.form = res;
+          res.checkData = res.IdNumPics;
           this.isShowDetail = true;
+          this.listYongjin = res.customerStateRecord;
+          this.form = res;
           // 佣金列表
-          this.xpost("projectCustomer/getCommission", {
-            customerId: this.selectedRow.customerId
-          }).then(res => {
-            this.listYongjin = res.rows;
-          });
         });
       } else {
         this.$message({

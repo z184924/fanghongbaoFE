@@ -22,7 +22,9 @@
       <el-table-column slot="col" width="150" label="楼盘状态" align="center">
         <template slot-scope="scope">
           <!-- <img class="xc16 xc-shadow" :src="$store.state.smallPicBasePath + scope.row.picURL" alt> -->
-          <span :style="{color:mxProjectStatusColor(scope.row.projectStatus)}">{{mxProjectStatusFormatter(scope.row.projectStatus)}}</span>
+          <span
+            :style="{color:mxProjectStatusColor(scope.row.projectStatus)}"
+          >{{mxProjectStatusFormatter(scope.row.projectStatus)}}</span>
         </template>
       </el-table-column>
       <span v-if="selectedRow.projectId" slot="right-control" style="margin-right:12px;">
@@ -33,43 +35,6 @@
           icon="el-icon-close"
         >下架</el-button>
         <el-button type="warning" v-else @click="changeState(1)" icon="el-icon-star-on">上架</el-button>-->
-        <el-dropdown>
-          <el-button type="warning">
-            更改楼盘状态
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <div class="xc32">
-              <div class="xc32__item">
-                <el-button
-                  class="xc32__btn"
-                  type="primary"
-                  @click="changeState(0)"
-                  icon="el-icon-star-on"
-                >待售</el-button>
-              </div>
-              <div class="xc32__item">
-                <el-button
-                  class="xc32__btn"
-                  type="primary"
-                  @click="changeState(1)"
-                  icon="el-icon-star-on"
-                >销售中</el-button>
-              </div>
-              <div class="xc32__item">
-                <el-button
-                  class="xc32__btn"
-                  type="primary"
-                  @click="changeState(2)"
-                  icon="el-icon-star-on"
-                >下架</el-button>
-              </div>
-            </div>
-            <!-- <el-dropdown-item @click="changeState(0)">代售</el-dropdown-item>
-            <el-dropdown-item @click="changeState(1)">销售中</el-dropdown-item>
-            <el-dropdown-item @click="changeState(2)">下架</el-dropdown-item>-->
-          </el-dropdown-menu>
-        </el-dropdown>
         <el-button
           type="warning"
           v-if="selectedRow.ifRecommend==1"
@@ -78,14 +43,51 @@
         >取消推荐</el-button>
         <el-button type="warning" v-else @click="tuijian" icon="el-icon-star-on">推荐楼盘</el-button>
       </span>
+      <el-dropdown slot="right-control" style="margin-right:0.8em">
+        <el-button type="default">
+          更改楼盘状态
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <div class="xc32">
+            <div class="xc32__item">
+              <el-button
+                class="xc32__btn"
+                type="primary"
+                @click="changeState(0)"
+                icon="el-icon-star-on"
+              >待售</el-button>
+            </div>
+            <div class="xc32__item">
+              <el-button
+                class="xc32__btn"
+                type="primary"
+                @click="changeState(1)"
+                icon="el-icon-star-on"
+              >销售中</el-button>
+            </div>
+            <div class="xc32__item">
+              <el-button
+                class="xc32__btn"
+                type="primary"
+                @click="changeState(2)"
+                icon="el-icon-star-on"
+              >下架</el-button>
+            </div>
+          </div>
+          <!-- <el-dropdown-item @click="changeState(0)">代售</el-dropdown-item>
+            <el-dropdown-item @click="changeState(1)">销售中</el-dropdown-item>
+          <el-dropdown-item @click="changeState(2)">下架</el-dropdown-item>-->
+        </el-dropdown-menu>
+      </el-dropdown>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">添加楼盘</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑楼盘</el-button>
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除楼盘</el-button>
     </fixed-table>
-    <el-dialog :visible.sync="isShowAdd" title="新建楼盘" v-drag width="400px">
-      <el-form>
+    <el-dialog :visible.sync="isShowAdd" title="新建楼盘" v-drag width="450px">
+      <el-form label-width="6em">
         <el-form-item label="楼盘名称：">
-          <el-input v-model="form.projectName" style="width:350px"></el-input>
+          <el-input v-model="form.projectName" style="width:260px"></el-input>
         </el-form-item>
         <el-form-item label="区域：">
           <area-picker :is-show-clear="false" v-model="projectCityArea"></area-picker>
@@ -276,14 +278,21 @@ export default {
       }
     },
     changeState(state) {
-      this.xpost("projectInfo/editProjectStatus", {
-        projectId: this.selectedRow.projectId,
-        projectStatus: state
-      }).then(res => {
-        this.mxMessage(res).then(() => {
-          this.$refs.table.getData();
+      if (this.isSelect) {
+        this.xpost("projectInfo/editProjectStatus", {
+          projectId: this.selectedRow.projectId,
+          projectStatus: state
+        }).then(res => {
+          this.mxMessage(res).then(() => {
+            this.$refs.table.getData();
+          });
         });
-      });
+      } else {
+        this.$message({
+          type: "info",
+          message: "请先选择楼盘"
+        });
+      }
     },
     tuijian() {
       this.xpost("projectInfo/editIfRecommend", {

@@ -44,6 +44,7 @@
         </div>
       </div>
     </c-panel>
+
     <c-panel title="客户信息" title-color="#2a447a">
       <div class="xc18__container xc18__container--p3">
         <div class="xc18__item">
@@ -213,7 +214,8 @@
         </div>
       </div>
     </c-panel>
-    <c-panel title="上传审核资料" title-color="#3d7a2a">
+ 
+    <c-panel title="审核资料" title-color="#3d7a2a">
       <div>交款通知单、身份证正反面、收据、POS机小条</div>
       <file-box is-window v-model="form.checkData" :editable="false"></file-box>
     </c-panel>

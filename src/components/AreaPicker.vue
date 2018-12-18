@@ -30,11 +30,10 @@ export default {
   },
   watch: {
     value: {
-      handler() {
+      handler(v1, v2) {
         if (this.value) {
           this.selectedCity = this.value.city;
           this.selectedArea = this.value.area;
-          this.getListArea();
         }
       },
       deep: true,
@@ -68,6 +67,17 @@ export default {
             value: o.areaId
           };
         });
+        if (this.selectedArea) {
+          let exist = false;
+          this.areaArray.forEach(o => {
+            if (this.selectedArea == o.value) {
+              exist = true;
+            }
+          });
+          if (!exist) {
+            this.selectedArea = "";
+          }
+        }
         // console.log(res);
       });
     },
