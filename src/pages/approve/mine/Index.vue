@@ -186,7 +186,7 @@ export default {
         pk: "customerId"
       },
       tableParam: {
-        customerStatusIds: 10
+        customerStatusIds: 12
       },
       dialogTitle: "详细",
       isShowEdit: false,
