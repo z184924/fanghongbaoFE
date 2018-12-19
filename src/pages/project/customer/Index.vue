@@ -227,7 +227,7 @@ export default {
         },
         customerStatusName: {
           label: "客户状态",
-          width: "80px"
+          width: "180px"
         },
         projectName: {
           label: "项目名称"

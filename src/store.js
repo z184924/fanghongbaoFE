@@ -32,7 +32,6 @@ export default new Vuex.Store({
     temp: null,
     bread: {},
     menu: [],
-
   },
   mutations: {
     login(state, info) {

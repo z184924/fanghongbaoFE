@@ -1,25 +1,27 @@
 <template>
   <div class="fixed-table">
     <!-- 头部按钮组 -->
-    <div class="control" v-if="showControl">
-      <slot name="left-control"></slot>
-      <el-input style="flex:200px 0 0" v-model="searchText" v-if="showSearch"></el-input>
-      <div style="flex:10px 0 0"></div>
-      <el-button type="success" @click="getData" v-if="showSearch" icon="el-icon-search">搜索</el-button>
-      <div class="gap-full"></div>
-      <el-button type="primary" @click="insert" icon="el-icon-plus" v-if="showInsert">新增</el-button>
-      <el-button type="warning" @click="update" icon="el-icon-edit-outline" v-if="showUpdate">修改</el-button>
-      <el-button type="danger" @click="del" icon="el-icon-delete" v-if="showDelete">删除</el-button>
-      <slot name="right-control"></slot>
-      <el-button
-        type="default"
-        @click="getData"
-        icon="el-icon-refresh"
-        v-if="showRefresh"
-        circle
-        title="刷新数据"
-      ></el-button>
-      <!-- {{rowData}} -->
+    <div class="control-box" ref="controlBox">
+      <div class="control" ref="control" v-if="showControl">
+        <slot name="left-control"></slot>
+        <el-input style="flex:200px 0 0" v-model="searchText" v-if="showSearch"></el-input>
+        <div style="flex:0 0 60px"></div>
+        <el-button type="success" @click="getData" v-if="showSearch" icon="el-icon-search">搜索</el-button>
+        <div class="gap-full"></div>
+        <el-button type="primary" @click="insert" icon="el-icon-plus" v-if="showInsert">新增</el-button>
+        <el-button type="warning" @click="update" icon="el-icon-edit-outline" v-if="showUpdate">修改</el-button>
+        <el-button type="danger" @click="del" icon="el-icon-delete" v-if="showDelete">删除</el-button>
+        <slot name="right-control"></slot>
+        <el-button
+          type="default"
+          @click="getData"
+          icon="el-icon-refresh"
+          v-if="showRefresh"
+          circle
+          title="刷新数据"
+        ></el-button>
+        <!-- {{rowData}} -->
+      </div>
     </div>
     <div style="height:8px;" v-if="showControl"></div>
     <el-table
@@ -31,7 +33,7 @@
       highlight-current-row
       @current-change="handleCurrentChange"
       @selection-change="handleSelectionChange"
-      border=""
+      border
       :header-cell-style="headerStyle"
     >
       <slot name="col-first"></slot>
@@ -46,7 +48,7 @@
         :align="value.align"
         :class-name="value.class"
       ></el-table-column>
-      <el-table-column v-if="fileInfo.hasFile" label="附件" width="">
+      <el-table-column v-if="fileInfo.hasFile" label="附件" width>
         <template slot-scope="scope">
           <a :href="fileInfo.serverUrl" target="_blank"></a>
           <!-- <file-view :serverUrl="fileInfo.serverUrl"></file-view> -->
@@ -484,11 +486,17 @@ export default {
 .gap-full {
   flex: 100% 1 1;
 }
+.control-box {
+  // min-width:1200px;
+  overflow-x: auto;
+}
 .control {
   display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
   // flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   & > * {
     white-space: nowrap;
   }

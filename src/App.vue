@@ -100,6 +100,7 @@ export default {
       this.$store.commit("setDevMode");
       this.$store.commit("changeBasePath", localhostConfig.basePath);
     }
+
     window.onresize = () => {
       this.$store.commit("setWindowHeight", window.innerHeight);
     };

@@ -21,7 +21,7 @@
           type="default"
           icon="el-icon-info"
           @click="openMengyou"
-          :disabled="selectedRow.count+''=='0'"
+          :disabled="selectedRow.count+''=='0' || !selectedRow.userId"
         >查看盟友</el-button>
         <el-button
           type="default"
@@ -31,6 +31,7 @@
         >{{setDirectorLabel}}</el-button>
         <el-button type="default" icon="el-icon-plus" @click="add">新增</el-button>
         <el-button type="default" icon="el-icon-edit" @click="edit">编辑</el-button>
+        <el-button type="default" icon="el-icon-warning" @click="leave">离职</el-button>
         <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
         <el-button type="default" icon="el-icon-delete" class="xc10" @click="del">删除</el-button>
       </span>
@@ -299,6 +300,34 @@ export default {
           });
         }
         // console.log(this.formEdit);
+      } else {
+        this.$message({
+          message: "请选择一行数据",
+          type: "info"
+        });
+      }
+    },
+    leave() {
+      if (this.selectedRow.userId) {
+        console.log(this.selectedRow);
+        this.$confirm(
+          `是否将 ${this.selectedRow.userName}(${
+            this.selectedRow.roleName
+          }) 设置离职？   内部用户离职，将角色改为经纪人；如果为拓展经纪人离职，则删除其盟友关系。`,
+          "离职",
+          {
+            type: "warning"
+          }
+        ).then(() => {
+          this.xpost("user/userLeave", {
+            userId: this.selectedRow.userId,
+            roleId: this.selectedRow.roleId
+          }).then(res => {
+            this.mxMessage(res).then(() => {
+              this.refreshTable();
+            });
+          });
+        });
       } else {
         this.$message({
           message: "请选择一行数据",
