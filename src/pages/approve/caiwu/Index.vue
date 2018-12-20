@@ -110,6 +110,30 @@
               </div>
             </div>
           </c-panel>
+          <c-panel title="二级盟友推荐人信息" title-color="#2a7a76">
+            <div class="xc18__container">
+              <div class="xc18__item">
+                <el-form-item label="姓名">
+                  <span>{{formErjiMengyou.userName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="楼盘">
+                  <span>{{formErjiMengyou.projectName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="电话">
+                  <span>{{formErjiMengyou.phone}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="金额">
+                  <span>{{formErjiMengyou.erFriendPrize}}</span>
+                </el-form-item>
+              </div>
+            </div>
+          </c-panel>
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -294,6 +318,7 @@ export default {
         payTime: "",
         customerStatusId: ""
       },
+      formErjiMengyou: {},
       selectedRow: {},
       isShowAddYongjin: false,
       yongjin: {},
@@ -394,6 +419,11 @@ export default {
         }).then(res => {
           this.listYongjin = res.rows;
         });
+        this.xpost("projectCustomer/getCustomerSpecialInfos", {
+          customerId: id
+        }).then(res => {
+          this.formErjiMengyou = res;
+        });
       } else {
         this.$message({
           type: "info",
@@ -419,10 +449,15 @@ export default {
         if (yingfu <= shifu) {
           return true;
         } else {
-          this.$alert(`佣金应付 [ ${fc(yingfu)}元 ] ，实付 [ ${fc(shifu)}元 ]，尚未结清，无法保存。`, {
-            // message: "佣金尚未结清，无法保存。",
-            type: "warning"
-          });
+          this.$alert(
+            `佣金应付 [ ${fc(yingfu)}元 ] ，实付 [ ${fc(
+              shifu
+            )}元 ]，尚未结清，无法保存。`,
+            {
+              // message: "佣金尚未结清，无法保存。",
+              type: "warning"
+            }
+          );
           return false;
         }
       };
@@ -481,19 +516,20 @@ export default {
     },
     deleteCommission(o) {
       console.log(o);
-      this.$confirm(`确定删除佣金 [ ${fc(o.commissionValue)}元 ]？`, "删除").then(
-        () => {
-          let id = o.commissionId;
-          this.xpost("projectCustomer/deleteCustomerCommission", {
-            commissionId: id
-          }).then(res => {
-            this.mxMessage(res).then(() => {
-              this.edit();
-            });
-            // console.log(res);
+      this.$confirm(
+        `确定删除佣金 [ ${fc(o.commissionValue)}元 ]？`,
+        "删除"
+      ).then(() => {
+        let id = o.commissionId;
+        this.xpost("projectCustomer/deleteCustomerCommission", {
+          commissionId: id
+        }).then(res => {
+          this.mxMessage(res).then(() => {
+            this.edit();
           });
-        }
-      );
+          // console.log(res);
+        });
+      });
     }
   }
 };

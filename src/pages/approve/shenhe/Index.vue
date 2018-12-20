@@ -74,7 +74,31 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span>{{form.friendPrize}}</span>
+                  <span>{{fc(form.friendPrize)}}</span>
+                </el-form-item>
+              </div>
+            </div>
+          </c-panel>
+          <c-panel title="二级盟友推荐人信息" title-color="#2a7a76">
+            <div class="xc18__container">
+              <div class="xc18__item">
+                <el-form-item label="姓名">
+                  <span>{{formErjiMengyou.userName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="楼盘">
+                  <span>{{formErjiMengyou.projectName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="电话">
+                  <span>{{formErjiMengyou.phone}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="金额">
+                  <span>{{fc(formErjiMengyou.erFriendPrize)}}</span>
                 </el-form-item>
               </div>
             </div>
@@ -135,6 +159,7 @@ export default {
         f__files: []
       },
       form2: {},
+      formErjiMengyou: {},
       selectedRow: {}
     };
   },
@@ -176,6 +201,11 @@ export default {
         });
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
+        this.xpost("projectCustomer/getCustomerSpecialInfos", {
+          customerId: id
+        }).then(res => {
+          this.formErjiMengyou = res;
+        });
       } else {
         this.$message({
           type: "info",
