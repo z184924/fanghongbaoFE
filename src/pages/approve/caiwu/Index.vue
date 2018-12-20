@@ -439,12 +439,12 @@ export default {
             // console.log(yongjinValid);
           }
           if (yongjinValid) {
-            // this.xpost(this.config.editUrl, data).then(res => {
-            //   this.$refs.table.getData();
-            //   this.mxMessage(res).then(() => {
-            //     this.isShowEdit = false;
-            //   });
-            // });
+            this.xpost(this.config.editUrl, data).then(res => {
+              this.$refs.table.getData();
+              this.mxMessage(res).then(() => {
+                this.isShowEdit = false;
+              });
+            });
           }
           // console.log(this.form.sureBalance);
         } else {
