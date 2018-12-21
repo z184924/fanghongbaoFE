@@ -90,6 +90,45 @@
               </div>
             </div>
           </c-panel>
+          <c-panel title="二级盟友推荐人信息" title-color="#2a7a76">
+            <div class="xc18__container">
+              <div class="xc18__item">
+                <el-form-item label="手机号">
+                  <span>{{formErjiMengyou.phone}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友推荐人">
+                  <span>{{formErjiMengyou.userName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="身份证">
+                  <span>{{formErjiMengyou.IdNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="会员银行卡">
+                  <span>{{formErjiMengyou.bankcardNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="银行开户行">
+                  <span>{{formErjiMengyou.bankName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="开户支行">
+                  <span>{{formErjiMengyou.bankBranchName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友奖励金额">
+                  <span>{{fc(formErjiMengyou.erFriendPrize)}}元</span>
+                </el-form-item>
+              </div>
+            </div>
+          </c-panel>
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -216,6 +255,7 @@ export default {
         f__files: []
       },
       form2: {},
+      formErjiMengyou: {},
       selectedRow: {},
       listState: [
         {
@@ -284,6 +324,11 @@ export default {
             customerId: id
           }).then(res => {
             this.listYongjin = res.rows;
+          });
+          this.xpost("projectCustomer/getCustomerSpecialInfos", {
+            customerId: id
+          }).then(res => {
+            this.formErjiMengyou = res;
           });
         });
         this.dialogTitle = "详细";
