@@ -82,23 +82,38 @@
           <c-panel title="二级盟友推荐人信息" title-color="#2a7a76">
             <div class="xc18__container">
               <div class="xc18__item">
-                <el-form-item label="姓名">
-                  <span>{{formErjiMengyou.userName}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="楼盘">
-                  <span>{{formErjiMengyou.projectName}}</span>
-                </el-form-item>
-              </div>
-              <div class="xc18__item">
-                <el-form-item label="电话">
+                <el-form-item label="手机号">
                   <span>{{formErjiMengyou.phone}}</span>
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="金额">
-                  <span>{{fc(formErjiMengyou.erFriendPrize)}}</span>
+                <el-form-item label="盟友推荐人">
+                  <span>{{formErjiMengyou.userName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="身份证">
+                  <span>{{formErjiMengyou.IdNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="会员银行卡">
+                  <span>{{formErjiMengyou.bankcardNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="银行开户行">
+                  <span>{{formErjiMengyou.bankName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="开户支行">
+                  <span>{{formErjiMengyou.bankBranchName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友奖励金额">
+                  <span>{{formErjiMengyou.erFriendPrize}}</span>
                 </el-form-item>
               </div>
             </div>
