@@ -148,12 +148,12 @@
                   <span>{{fc(form2.erFriendPrize)}}元</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item" v-if="form2.erFriendPrize+''!=='0'">
+              <div class="xc18__item" v-if="fc(form2.erFriendPrize)+''!=='0.00'">
                 <el-form-item label="是否付款" prop="erPayState">
                   <c-select v-model="form2.erPayState" dict="bool" type="radio"></c-select>
                 </el-form-item>
               </div>
-              <div class="xc18__item" v-if="form2.erFriendPrize+''!=='0'">
+              <div class="xc18__item" v-if="fc(form2.erFriendPrize)+''!=='0.00'">
                 <el-form-item label="付款时间" prop="erPayTime">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker> -->
                   <c-date-picker v-model="form2.erPayTime"></c-date-picker>
