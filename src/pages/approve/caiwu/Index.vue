@@ -144,8 +144,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <el-input-number v-model="form2.erFriendPrize" style="width:160px"></el-input-number>元
-                  <!-- <span>{{fc(formErjiMengyou.friendPrize)}}元</span> -->
+                  <!--<el-input-number v-model="form2.erFriendPrize" style="width:160px"></el-input-number>元-->
+                  <span>{{fc(form2.erFriendPrize)}}元</span>
                 </el-form-item>
               </div>
               <div class="xc18__item" v-if="form2.erFriendPrize+''!=='0'">
