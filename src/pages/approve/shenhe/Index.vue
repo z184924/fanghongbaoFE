@@ -113,7 +113,7 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span>{{fc(formErjiMengyou.erFriendPrize)}}</span>
+                  <span>{{fc(formErjiMengyou.friendPrize)}}</span>
                 </el-form-item>
               </div>
             </div>

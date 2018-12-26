@@ -82,7 +82,7 @@
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
                   <div>
-                    <span>{{fc(form2.friendPrize)}}元</span>
+                    <span>{{fc(form.friendPrize)}}元</span>
                     <el-tooltip
                       v-if="form.isTimeOut!=0"
                       class="item"
@@ -144,7 +144,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="盟友奖励金额">
-                  <span>{{fc(formErjiMengyou.erFriendPrize)}}元</span>
+                  <el-input-number v-model="form2.erFriendPrize" style="width:160px"></el-input-number>元
+                  <!-- <span>{{fc(formErjiMengyou.friendPrize)}}元</span> -->
                 </el-form-item>
               </div>
             </div>
@@ -427,6 +428,7 @@ export default {
             ? this.mxDateFormatter(res.netsignDate)
             : undefined;
           this.form = res;
+          this.form2.erFriendPrize=res.erFriendPrize;
         });
         // 佣金列表
         this.xpost("projectCustomer/getCommission", {
