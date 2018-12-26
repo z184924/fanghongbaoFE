@@ -97,12 +97,12 @@
                   </div>
                 </el-form-item>
               </div>
-              <div class="xc18__item" v-if="form2.friendPrize+''!=='0'">
+              <div class="xc18__item" v-if="form.friendPrize+''!=='0'">
                 <el-form-item label="是否付款" prop="payState">
                   <c-select v-model="form2.payState" dict="bool" type="radio"></c-select>
                 </el-form-item>
               </div>
-              <div class="xc18__item" v-if="form2.friendPrize+''!=='0'">
+              <div class="xc18__item" v-if="form.friendPrize+''!=='0'">
                 <el-form-item label="付款时间" prop="payTime">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker> -->
                   <c-date-picker v-model="form2.payTime"></c-date-picker>
@@ -146,6 +146,17 @@
                 <el-form-item label="盟友奖励金额">
                   <el-input-number v-model="form2.erFriendPrize" style="width:160px"></el-input-number>元
                   <!-- <span>{{fc(formErjiMengyou.friendPrize)}}元</span> -->
+                </el-form-item>
+              </div>
+              <div class="xc18__item" v-if="form2.erFriendPrize+''!=='0'">
+                <el-form-item label="是否付款" prop="erPayState">
+                  <c-select v-model="form2.erPayState" dict="bool" type="radio"></c-select>
+                </el-form-item>
+              </div>
+              <div class="xc18__item" v-if="form2.erFriendPrize+''!=='0'">
+                <el-form-item label="付款时间" prop="erPayTime">
+                  <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker> -->
+                  <c-date-picker v-model="form2.erPayTime"></c-date-picker>
                 </el-form-item>
               </div>
             </div>
@@ -332,6 +343,9 @@ export default {
         finalPaymentPriceDate: "",
         payState: "",
         payTime: "",
+        erFriendPrize:0,
+        erPayTime:"",
+        erPayState:"",
         customerStatusId: ""
       },
       formErjiMengyou: {},
