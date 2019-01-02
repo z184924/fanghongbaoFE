@@ -11,6 +11,7 @@ import CDatePicker from "@/components/CDatePicker";
 import axios from "axios";
 import json5 from "json5";
 import qs from "qs";
+import is from "is"
 
 var myMixin = {
   components: {
@@ -192,33 +193,35 @@ var myMixin = {
             data: qs.stringify(data)
           })
           .then(res => {
-            // console.log(res);
             if (res.status === 200) {
-              if (res.data.state === "errorToken") {
-                // console.log(res);
-                this.$store.commit("logout");
-                reject();
-              } else if (res.data.state === "error") {
-                this.$message({
-                  message: res.data.message,
-                  type: "error"
-                });
-                reject();
-              } else {
-                try {
-                  let str = json5.stringify(res.data);
-                  if (str.indexOf("您访问的页面出现异常") >= 0) {
-                    reject("s");
-                  } else {
-                    resolve(res.data);
-                  }
-                } catch (error) {
+              if (res.data) {
+                if (res.data.state === "errorToken") {
+                  this.$store.commit("logout");
+                  reject();
+                } else if (res.data.state === "error") {
                   this.$message({
-                    message: "服务器应用程序异常（500）",
+                    message: res.data.message,
                     type: "error"
                   });
                   reject();
+                } else {
+                  try {
+                    let str = json5.stringify(res.data);
+                    if (str.indexOf("您访问的页面出现异常") >= 0) {
+                      reject("s");
+                    } else {
+                      resolve(res.data);
+                    }
+                  } catch (error) {
+                    this.$message({
+                      message: "服务器应用程序异常（500）",
+                      type: "error"
+                    });
+                    reject();
+                  }
                 }
+              }else{
+                //返回空值
               }
             } else {
               this.$message({

@@ -219,7 +219,7 @@ export default {
         this.xpost("projectCustomer/getCustomerSpecialInfos", {
           customerId: id
         }).then(res => {
-          this.formErjiMengyou = res;
+          this.formErjiMengyou = res || {};
         });
       } else {
         this.$message({
