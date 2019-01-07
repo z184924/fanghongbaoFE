@@ -97,12 +97,14 @@
                   </div>
                 </el-form-item>
               </div>
-              <div class="xc18__item" v-if="form.friendPrize+''!=='0'">
+              <div class="xc18__item" v-if="fc(form.friendPrize)+''!=='0.00'">
+              <!-- <div class="xc18__item" v-if="form.friendPrize+''!=='0'"> -->
                 <el-form-item label="是否付款" prop="payState">
                   <c-select v-model="form2.payState" dict="bool" type="radio"></c-select>
                 </el-form-item>
               </div>
-              <div class="xc18__item" v-if="form.friendPrize+''!=='0'">
+              <div class="xc18__item" v-if="fc(form.friendPrize)+''!=='0.00'">
+              <!-- <div class="xc18__item" v-if="form.friendPrize+''!=='0'"> -->
                 <el-form-item label="付款时间" prop="payTime">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker> -->
                   <c-date-picker v-model="form2.payTime"></c-date-picker>

@@ -127,6 +127,16 @@
                   <span>{{fc(formErjiMengyou.friendPrize)}}元</span>
                 </el-form-item>
               </div>
+              <div class="xc18__item">
+                <el-form-item label="是否付款">
+                  <span>{{mxBoolFormatter(formErjiMengyou.erPayState)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="付款时间">
+                  <span>{{mxDateFormatter(formErjiMengyou.erPayTime)}}</span>
+                </el-form-item>
+              </div>
             </div>
           </c-panel>
           <c-panel title="财务审核信息" title-color="#417a2a">
