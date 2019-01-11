@@ -46,6 +46,9 @@ import SystemInformation from "./pages/system/information/Index"
 
 import SystemStat from "./pages/system/stat/Index"
 
+import SystemNotice from "./pages/system/notice/Index"
+
+
 // 审核管理
 import SystemApproveAnchang from "./pages/approve/anchang/Index"
 
@@ -178,6 +181,11 @@ export default new Router({
       path: "/system/stat",
       name: "SystemStat",
       component: SystemStat,
+    },
+    {
+      path: "/system/notice",
+      name: "SystemNotice",
+      component: SystemNotice,
     },
 
 
