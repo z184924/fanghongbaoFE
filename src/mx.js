@@ -220,7 +220,7 @@ var myMixin = {
                     reject();
                   }
                 }
-              }else{
+              } else {
                 //返回空值
               }
             } else {

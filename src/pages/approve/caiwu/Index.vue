@@ -444,6 +444,7 @@ export default {
             ? this.mxDateFormatter(res.netsignDate)
             : undefined;
           this.form = res;
+          this.form2.friendPrize=res.friendPrize;
           this.form2.erFriendPrize=res.erFriendPrize;
         });
         // 佣金列表
