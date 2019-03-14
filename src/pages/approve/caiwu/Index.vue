@@ -336,19 +336,19 @@ export default {
         f__files: []
       },
       form2: {
-        friendPrize: 0,
-        isOnline: "",
-        onlineDate: "",
-        serviceMonth: "",
-        keepState: "",
-        keepMonth: "",
-        finalPaymentPriceDate: "",
-        payState: "",
-        payTime: "",
-        erFriendPrize:0,
-        erPayTime:"",
-        erPayState:"",
-        customerStatusId: ""
+        // friendPrize: 0,
+        // isOnline: "",
+        // onlineDate: "",
+        // serviceMonth: "",
+        // keepState: "",
+        // keepMonth: "",
+        // finalPaymentPriceDate: "",
+        // payState: "",
+        // payTime: "",
+        // erFriendPrize:0,
+        // erPayTime:"",
+        // erPayState:"",
+        // customerStatusId: ""
       },
       formErjiMengyou: {},
       selectedRow: {},
@@ -512,6 +512,7 @@ export default {
               this.$refs.table.getData();
               this.mxMessage(res).then(() => {
                 this.isShowEdit = false;
+                this.form2={};
               });
             });
           }
