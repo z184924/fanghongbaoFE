@@ -54,7 +54,14 @@
         </tbody>
       </table>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save" slot="footer">保存</el-button>
+      <el-button type="primary" @click="save()" :loading="loading" slot="footer">保存</el-button>
+      <el-button
+        type="warning"
+        @click="save(1)"
+        :loading="loading"
+        slot="footer"
+        icon="el-icon-success"
+      >发布</el-button>
     </el-dialog>
     <el-dialog :visible.sync="isShowView" v-drag :title="`查看消息`" width="1200px">
       <h1 style="text-align:center">{{selectedRow.informationTitle}}</h1>
@@ -81,6 +88,7 @@ export default {
         deleteUrl: "information/delete",
         pk: "informationId"
       },
+      loading: false,
       isShowTable: true,
       isShowView: false,
       listBuilding: [],
@@ -208,13 +216,28 @@ export default {
         });
       }
     },
-    save() {
-      this.xpost(this.config.editUrl, this.form).then(res => {
-        this.$refs.table.getData();
-        this.mxMessage(res).then(() => {
-          this.isShowEdit = false;
+    save(type) {
+      this.loading = true;
+      if (type) {
+        this.form.type = type;
+      }
+      console.log(this.form);
+      this.xpost(this.config.editUrl, this.form)
+        .then(
+          res => {
+            this.$refs.table.getData();
+            this.mxMessage(res).then(() => {
+              this.loading = false;
+              this.isShowEdit = false;
+            });
+          },
+          () => {
+            this.loading = false;
+          }
+        )
+        .catch(() => {
+          this.loading = false;
         });
-      });
     },
     del() {
       let row = this.selectedRow;

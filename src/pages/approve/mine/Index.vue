@@ -142,6 +142,20 @@
               </div>
             </div>
           </c-panel>
+          <c-panel title="审批记录" title-color="#978419">
+           <table class="xc33">
+             <tr>
+               <td class="xc33__title">环节名称</td>
+               <td class="xc33__title">审批时间</td>
+               <td class="xc33__title">备注</td>
+             </tr>
+             <tr v-for="(o,i) in form.customerStateRecord" :key="i">
+               <td class="xc33__short">{{o.name}}</td>
+               <td class="xc33__short">{{mxTimeFormatter(o.checkDate)}}</td>
+               <td class="xc33__fixed">{{o.checkOpinion}}</td>
+             </tr>
+           </table>
+          </c-panel>
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
               <div class="xc18__item">
@@ -217,7 +231,7 @@
         </div>
       </el-form>
       <el-button type="default" @click="isShowEdit=false" slot="footer">关闭</el-button>
-      <el-button type="primary" @click="save()" slot="footer">保存</el-button>
+      <!-- <el-button type="primary" @click="save()" slot="footer">保存</el-button> -->
     </el-dialog>
   </div>
 </template>

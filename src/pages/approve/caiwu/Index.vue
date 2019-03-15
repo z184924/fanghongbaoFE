@@ -98,13 +98,13 @@
                 </el-form-item>
               </div>
               <div class="xc18__item" v-if="fc(form.friendPrize)+''!=='0.00'">
-              <!-- <div class="xc18__item" v-if="form.friendPrize+''!=='0'"> -->
+                <!-- <div class="xc18__item" v-if="form.friendPrize+''!=='0'"> -->
                 <el-form-item label="是否付款" prop="payState">
                   <c-select v-model="form2.payState" dict="bool" type="radio"></c-select>
                 </el-form-item>
               </div>
               <div class="xc18__item" v-if="fc(form.friendPrize)+''!=='0.00'">
-              <!-- <div class="xc18__item" v-if="form.friendPrize+''!=='0'"> -->
+                <!-- <div class="xc18__item" v-if="form.friendPrize+''!=='0'"> -->
                 <el-form-item label="付款时间" prop="payTime">
                   <!-- <el-date-picker value-format="yyyy-MM-dd" v-model="form2.payTime" style="width:100%"></el-date-picker> -->
                   <c-date-picker v-model="form2.payTime"></c-date-picker>
@@ -162,6 +162,20 @@
                 </el-form-item>
               </div>
             </div>
+          </c-panel>
+          <c-panel title="审批记录" title-color="#978419">
+            <table class="xc33">
+              <tr>
+                <td class="xc33__title">环节名称</td>
+                <td class="xc33__title">审批时间</td>
+                <td class="xc33__title">备注</td>
+              </tr>
+              <tr v-for="(o,i) in form.customerStateRecord" :key="i">
+                <td class="xc33__short">{{o.name}}</td>
+                <td class="xc33__short">{{mxTimeFormatter(o.checkDate)}}</td>
+                <td class="xc33__fixed">{{o.checkOpinion}}</td>
+              </tr>
+            </table>
           </c-panel>
           <c-panel title="财务审核信息" title-color="#417a2a">
             <div class="xc18__container">
@@ -272,7 +286,8 @@
           <tr>
             <td style="width:8em">佣金金额（元）</td>
             <td>
-              <el-input v-model="yongjin.commissionValue"></el-input>
+              <el-input-number v-model="yongjin.commissionValue" style="width:100%"></el-input-number>
+              <!-- <el-input v-model="yongjin.commissionValue"></el-input> -->
             </td>
           </tr>
           <tr>
@@ -444,8 +459,8 @@ export default {
             ? this.mxDateFormatter(res.netsignDate)
             : undefined;
           this.form = res;
-          this.form2.friendPrize=res.friendPrize;
-          this.form2.erFriendPrize=res.erFriendPrize;
+          this.form2.friendPrize = res.friendPrize;
+          this.form2.erFriendPrize = res.erFriendPrize;
         });
         // 佣金列表
         this.xpost("projectCustomer/getCommission", {
@@ -512,7 +527,7 @@ export default {
               this.$refs.table.getData();
               this.mxMessage(res).then(() => {
                 this.isShowEdit = false;
-                this.form2={};
+                this.form2 = {};
               });
             });
           }

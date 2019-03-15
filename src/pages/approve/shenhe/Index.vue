@@ -40,6 +40,20 @@
               </div>
             </div>
           </c-panel>
+          <c-panel title="审批记录" title-color="#978419">
+            <table class="xc33">
+              <tr>
+                <td class="xc33__title">环节名称</td>
+                <td class="xc33__title">审批时间</td>
+                <td class="xc33__title">备注</td>
+              </tr>
+              <tr v-for="(o,i) in form.customerStateRecord" :key="i">
+                <td class="xc33__short">{{o.name}}</td>
+                <td class="xc33__short">{{mxTimeFormatter(o.checkDate)}}</td>
+                <td class="xc33__fixed">{{o.checkOpinion}}</td>
+              </tr>
+            </table>
+          </c-panel>
           <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
             <div class="xc18__container">
               <div class="xc18__item">

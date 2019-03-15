@@ -247,6 +247,20 @@
               </div>
             </div>
           </c-panel>
+          <c-panel title="审批记录" title-color="#978419">
+           <table class="xc33">
+             <tr>
+               <td class="xc33__title">环节名称</td>
+               <td class="xc33__title">审批时间</td>
+               <td class="xc33__title">备注</td>
+             </tr>
+             <tr v-for="(o,i) in form.customerStateRecord" :key="i">
+               <td class="xc33__short">{{o.name}}</td>
+               <td class="xc33__short">{{mxTimeFormatter(o.checkDate)}}</td>
+               <td class="xc33__fixed">{{o.checkOpinion}}</td>
+             </tr>
+           </table>
+          </c-panel>
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
             <file-box :editable="false" is-window v-model="form.checkData"></file-box>

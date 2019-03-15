@@ -1,4 +1,4 @@
-$color-test: #2a7a76;
+$color-test: #978419;
 $primary-color-1: #c75336;
 $primary-color-2: #be947b;
 $primary-color-3: #c99a6e;
@@ -982,6 +982,30 @@ li {
 
     &__btn {
       width: 120px;
+    }
+  }
+
+  .xc33 {
+    border-collapse: collapse;
+    width: 100%;
+
+    & td {
+      border: solid 1px #ccc;
+      padding: 0.8em 1em
+    }
+
+    &__short {
+      width: 1px;
+      white-space: nowrap;
+    }
+
+    // &__fixed{
+
+    // }
+    &__title {
+      font-weight: bold;
+      padding: 1.5em 1em;
+      background: #fcf5ca;
     }
   }
 }

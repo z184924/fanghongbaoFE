@@ -1,21 +1,23 @@
 <template>
   <el-menu :default-active="routePath" :unique-opened="true" router class="xc-shadow xc5">
-    <el-submenu :index="o.menuUrl" v-for="(o,i) in menu" :key="i" v-if="o.children.length>0">
-      <template slot="title">
+    <div v-for="(o,i) in menu" :key="i">
+      <el-submenu :index="o.menuUrl" v-if="o.children.length>0">
+        <template slot="title">
+          <i class="ii" :class="ico(o.menuName)"></i>
+          <span>{{o.menuName}}</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item :index="oo.menuUrl" v-for="(oo,ii) in o.children" :key="ii">
+            <i class="el-icon-arrow-right"></i>
+            <span>{{oo.menuName}}</span>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-menu-item :index="o.menuUrl" v-else>
         <i class="ii" :class="ico(o.menuName)"></i>
         <span>{{o.menuName}}</span>
-      </template>
-      <el-menu-item-group>
-        <el-menu-item :index="oo.menuUrl" v-for="(oo,ii) in o.children" :key="ii">
-          <i class="el-icon-arrow-right"></i>
-          <span>{{oo.menuName}}</span>
-        </el-menu-item>
-      </el-menu-item-group>
-    </el-submenu>
-    <el-menu-item :index="o.menuUrl" v-else>
-      <i class="ii" :class="ico(o.menuName)"></i>
-      <span>{{o.menuName}}</span>
-    </el-menu-item>
+      </el-menu-item>
+    </div>
   </el-menu>
 </template>
 <script>
