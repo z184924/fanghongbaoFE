@@ -20,6 +20,8 @@
         slot="right-control"
         v-if="selectedRow.newsId"
       >{{this.selectedRow.isTop===0 ? '置顶' : '取消置顶'}}</el-button>
+      <el-button @click="publish(1)" type="warning" v-if="selectedRow.newsId" icon="el-icon-success" slot="right-control">发布</el-button>
+      <el-button @click="publish(0)" type="warning" v-if="selectedRow.newsId" icon="el-icon-error" slot="right-control">取消发布</el-button>
       <div slot="right-control" style="padding:0 1em"></div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">新增</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
@@ -192,6 +194,16 @@ export default {
         this.mxMessage(res).then(() => {
           this.$refs.table.getData();
           this.isShowEdit = false;
+        });
+      });
+    },
+    publish(flag) {
+      this.xpost("projectNews/publishProjectNews", {
+        isPublish: flag,
+        newsId: this.form.newsId,
+      }).then(res => {
+        this.mxMessage(res).then(() => {
+          this.$refs.table.getData();
         });
       });
     },

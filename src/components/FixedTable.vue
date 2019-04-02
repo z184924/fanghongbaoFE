@@ -49,7 +49,7 @@
         :class-name="value.class"
       ></el-table-column>
       <el-table-column v-if="fileInfo.hasFile" label="附件" width>
-        <template slot-scope="scope">
+        <template>
           <a :href="fileInfo.serverUrl" target="_blank"></a>
           <!-- <file-view :serverUrl="fileInfo.serverUrl"></file-view> -->
         </template>
