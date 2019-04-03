@@ -20,8 +20,16 @@
         slot="right-control"
         v-if="selectedRow.newsId"
       >{{this.selectedRow.isTop===0 ? '置顶' : '取消置顶'}}</el-button>
-      <el-button @click="publish(1)" type="warning" v-if="selectedRow.newsId" icon="el-icon-success" slot="right-control">发布</el-button>
-      <el-button @click="publish(0)" type="warning" v-if="selectedRow.newsId" icon="el-icon-error" slot="right-control">取消发布</el-button>
+
+      <el-button
+        type="warning"
+        @click="publish"
+        :icon="selectedRow.isPublish===0 ? 'el-icon-success' : 'el-icon-error'"
+        slot="right-control"
+        v-if="selectedRow.newsId"
+      >{{this.selectedRow.isPublish===0 ? '发布' : '取消发布'}}</el-button>
+      <!-- <el-button @click="publish(1)" type="warning" v-if="selectedRow.newsId" icon="el-icon-success" slot="right-control">发布</el-button>
+      <el-button @click="publish(0)" type="warning" v-if="selectedRow.newsId" icon="el-icon-error" slot="right-control">取消发布</el-button>-->
       <div slot="right-control" style="padding:0 1em"></div>
       <el-button @click="add" icon="el-icon-plus" slot="right-control">新增</el-button>
       <el-button @click="edit" icon="el-icon-edit" slot="right-control">编辑</el-button>
@@ -29,11 +37,7 @@
       <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button>
       <el-table-column slot="col-first" width="150" label="图片" align="center">
         <template slot-scope="scope">
-          <img
-            class="xc16 xc-shadow"
-            :src="$store.state.smallPicBasePath + scope.row.newsPic"
-            alt=""
-          >
+          <img class="xc16 xc-shadow" :src="$store.state.smallPicBasePath + scope.row.newsPic" alt>
         </template>
       </el-table-column>
     </fixed-table>
@@ -108,6 +112,13 @@ export default {
             return vue.mxBoolFormatter(v);
           }
         },
+        isPublish: {
+          label: "是否发布",
+          width: "100px",
+          formatter(r, c, v) {
+            return vue.mxBoolFormatter(v);
+          }
+        },
         createTime: {
           label: "上传时间",
           width: "240px",
@@ -145,6 +156,27 @@ export default {
           this.mxMessage(res).then(() => {
             this.$refs.table.getData();
             this.isShowEdit = false;
+          });
+        });
+      } else {
+        this.$message({
+          type: "info",
+          message: "请选择一行数据"
+        });
+      }
+    },
+    publish() {
+      if (this.selectedRow.newsId) {
+        let savedIsPublish = 0;
+        if (this.selectedRow.isPublish + "" === "0") {
+          savedIsPublish = 1;
+        }
+        this.xpost("projectNews/publishProjectNews", {
+          newsId: this.selectedRow.newsId,
+          isPublish: savedIsPublish
+        }).then(res => {
+          this.mxMessage(res).then(() => {
+            this.$refs.table.getData();
           });
         });
       } else {
@@ -197,16 +229,16 @@ export default {
         });
       });
     },
-    publish(flag) {
-      this.xpost("projectNews/publishProjectNews", {
-        isPublish: flag,
-        newsId: this.form.newsId,
-      }).then(res => {
-        this.mxMessage(res).then(() => {
-          this.$refs.table.getData();
-        });
-      });
-    },
+    // publish(flag) {
+    //   this.xpost("projectNews/publishProjectNews", {
+    //     isPublish: flag,
+    //     newsId: this.form.newsId,
+    //   }).then(res => {
+    //     this.mxMessage(res).then(() => {
+    //       this.$refs.table.getData();
+    //     });
+    //   });
+    // },
     del() {
       if (this.selectedRow.newsId) {
         this.$confirm("是否删除？", "删除", {
