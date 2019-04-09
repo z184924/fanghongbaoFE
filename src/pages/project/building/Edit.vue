@@ -39,7 +39,7 @@
           </el-form-item>
           <el-form-item label="平均售价" prop="sellingAverage">
             <el-input v-model="form.sellingAverage" style="width:200px"></el-input>
-            <span>元</span>
+            <span>元 / 平米</span>
           </el-form-item>
           <el-form-item label="地址" prop="projectAddress">
             <el-input v-model="form.projectAddress"></el-input>

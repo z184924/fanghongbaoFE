@@ -247,19 +247,120 @@
               </div>
             </div>
           </c-panel>
+          <c-panel title="盟友推荐人信息" title-color="#7a2a6d">
+            <div class="xc18__container">
+              <div class="xc18__item">
+                <el-form-item label="手机号">
+                  <span>{{form.tphone}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友推荐人">
+                  <span>{{form.tuserName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="身份证">
+                  <span>{{form.tIdNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="会员银行卡">
+                  <span>{{form.tbankcardNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="银行开户行">
+                  <span>{{form.tbankName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="开户支行">
+                  <span>{{form.tbankBranchName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友奖励金额">
+                  <!-- <span>**{{form.friendPrize}}**</span> -->
+                  <span>{{fc(form.friendPrize)}}元</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="是否付款">
+                  <span>{{mxBoolFormatter(form.payState)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="付款时间">
+                  <span>{{mxDateFormatter(form.payTime)}}</span>
+                </el-form-item>
+              </div>
+            </div>
+          </c-panel>
+          <c-panel title="二级盟友推荐人信息" title-color="#2a7a76">
+            <div class="xc18__container">
+              <div class="xc18__item">
+                <el-form-item label="手机号">
+                  <span>{{formErjiMengyou.phone}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友推荐人">
+                  <span>{{formErjiMengyou.userName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="身份证">
+                  <span>{{formErjiMengyou.IdNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="会员银行卡">
+                  <span>{{formErjiMengyou.bankcardNum}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="银行开户行">
+                  <span>{{formErjiMengyou.bankName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="开户支行">
+                  <span>{{formErjiMengyou.bankBranchName}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="盟友奖励金额">
+                  <!-- <span>**{{formErjiMengyou.friendPrize}}**</span> -->
+
+                  <span>{{fc(formErjiMengyou.friendPrize)}}元</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="是否付款">
+                  <span>{{mxBoolFormatter(formErjiMengyou.erPayState)}}</span>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="付款时间">
+                  <span>{{mxDateFormatter(formErjiMengyou.erPayTime)}}</span>
+                </el-form-item>
+              </div>
+            </div>
+          </c-panel>
           <c-panel title="审批记录" title-color="#978419">
-           <table class="xc33">
-             <tr>
-               <td class="xc33__title">环节名称</td>
-               <td class="xc33__title">审批时间</td>
-               <td class="xc33__title">备注</td>
-             </tr>
-             <tr v-for="(o,i) in form.customerStateRecord" :key="i">
-               <td class="xc33__short">{{o.name}}</td>
-               <td class="xc33__short">{{mxTimeFormatter(o.checkDate)}}</td>
-               <td class="xc33__fixed">{{o.checkOpinion}}</td>
-             </tr>
-           </table>
+            <table class="xc33">
+              <tr>
+                <td class="xc33__title">环节名称</td>
+                <td class="xc33__title">审批时间</td>
+                <td class="xc33__title">备注</td>
+              </tr>
+              <tr v-for="(o,i) in form.customerStateRecord" :key="i">
+                <td class="xc33__short">{{o.name}}</td>
+                <td class="xc33__short">{{mxTimeFormatter(o.checkDate)}}</td>
+                <td class="xc33__fixed">{{o.checkOpinion}}</td>
+              </tr>
+            </table>
           </c-panel>
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
@@ -313,6 +414,7 @@ export default {
         }
       },
       form: {},
+      formErjiMengyou: {},
       selectedRow: {},
       listWuyeLeixing: []
     };
@@ -367,6 +469,11 @@ export default {
               : dateInit("_");
             this.form = res;
           });
+        });
+        this.xpost("projectCustomer/getCustomerSpecialInfos", {
+          customerId: id
+        }).then(res1 => {
+          this.formErjiMengyou = res1 || {};
         });
         this.dialogTitle = "编辑";
         this.isShowEdit = true;
