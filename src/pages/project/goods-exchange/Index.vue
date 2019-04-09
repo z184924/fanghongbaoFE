@@ -40,39 +40,39 @@
       <table v-if="isShowDetail" class="xc-table xc-table--border xc-table--center">
         <tbody>
           <tr>
-            <td>物品名称</td>
+            <td class="xc-one-line">物品名称</td>
             <td>{{detail.goodsName}}</td>
           </tr>
           <tr>
-            <td>消耗金币</td>
+            <td class="xc-one-line">消耗金币</td>
             <td>{{detail.goldValue}}</td>
           </tr>
           <tr>
-            <td>兑换条件</td>
+            <td class="xc-one-line">兑换条件</td>
             <td>{{detail.conditions}}</td>
           </tr>
           <tr>
-            <td>兑换时间</td>
+            <td class="xc-one-line">兑换时间</td>
             <td>{{mxDateFormatter(detail.exchangeDate)}}</td>
           </tr>
           <tr>
-            <td>收件人</td>
+            <td class="xc-one-line">收件人</td>
             <td>{{detail.recivedMan}}</td>
           </tr>
           <tr>
-            <td>收件地址</td>
+            <td class="xc-one-line">收件地址</td>
             <td>{{detail.recivedAdress}}</td>
           </tr>
           <tr>
-            <td>联系电话</td>
+            <td class="xc-one-line">联系电话</td>
             <td>{{detail.phone}}</td>
           </tr>
           <tr>
-            <td>邮寄人</td>
+            <td class="xc-one-line">邮寄人</td>
             <td>{{detail.postMan}}</td>
           </tr>
           <tr>
-            <td>邮寄时间</td>
+            <td class="xc-one-line">邮寄时间</td>
             <td>{{mxDateFormatter(detail.postDate)}}</td>
           </tr>
         </tbody>

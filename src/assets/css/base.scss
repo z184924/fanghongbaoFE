@@ -991,7 +991,8 @@ li {
 
     & td {
       border: solid 1px #ccc;
-      padding: 0.8em 1em
+      padding: 0.6em 1em;
+      font-size: 14px;
     }
 
     &__short {
@@ -1007,5 +1008,14 @@ li {
       padding: 1.5em 1em;
       background: #fcf5ca;
     }
+  }
+
+  .xc34 {
+    margin-bottom: 1em;
+  }
+
+  .xc35 {
+    margin-right: 1em;
+    text-align: right;
   }
 }

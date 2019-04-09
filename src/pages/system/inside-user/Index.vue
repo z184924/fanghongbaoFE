@@ -7,34 +7,38 @@
       :fields="fields"
       v-model="selectedRow"
     >
-      <span slot="left-control">
-        <span>用户类型：</span>
-        <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:120px"></c-select>
-        <span style="padding-left:1em">用户名：</span>
-        <el-input style="width:120px" v-model="dataParam.userName"></el-input>
-        <span style="padding-left:1em">角色：</span>
-        <c-select :dict="roleList" v-model="dataParam.roleId" style="width:120px"></c-select>
-        <el-button type="text" @click="clearSearch">清空</el-button>
-      </span>
-      <span slot="right-control" style="margin-right:1em">
-        <el-button
-          type="default"
-          icon="el-icon-info"
-          @click="openMengyou"
-          :disabled="selectedRow.count+''=='0' || !selectedRow.userId"
-        >查看盟友</el-button>
-        <el-button
-          type="default"
-          icon="el-icon-setting"
-          @click="setDirector"
-          :disabled="selectedRow.roleName!=='拓展经纪人'"
-        >{{setDirectorLabel}}</el-button>
-        <el-button type="default" icon="el-icon-plus" @click="add">新增</el-button>
-        <el-button type="default" icon="el-icon-edit" @click="edit">编辑</el-button>
-        <el-button type="default" icon="el-icon-warning" @click="leave">离职</el-button>
-        <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
-        <el-button type="default" icon="el-icon-delete" class="xc10" @click="del">删除</el-button>
-      </span>
+      <div slot="left-control" style="flex:1 0 0%">
+        <div class="xc34">
+          <span>用户类型：</span>
+          <c-select :dict="searchInsiderList" v-model="dataParam.isInsider" style="width:120px"></c-select>
+          <span style="padding-left:1em">用户名：</span>
+          <el-input style="width:120px" v-model="dataParam.userName"></el-input>
+          <span style="padding-left:1em">手机号：</span>
+          <el-input style="width:120px" v-model="dataParam.phone"></el-input>
+          <span style="padding-left:1em">角色：</span>
+          <c-select :dict="roleList" v-model="dataParam.roleId" style="width:120px"></c-select>
+          <el-button type="text" @click="clearSearch">清空</el-button>
+        </div>
+        <div class="xc35">
+          <el-button
+            type="default"
+            icon="el-icon-info"
+            @click="openMengyou"
+            :disabled="selectedRow.count+''=='0' || !selectedRow.userId"
+          >查看盟友</el-button>
+          <el-button
+            type="default"
+            icon="el-icon-setting"
+            @click="setDirector"
+            :disabled="selectedRow.roleName!=='拓展经纪人'"
+          >{{setDirectorLabel}}</el-button>
+          <el-button type="default" icon="el-icon-plus" @click="add">新增</el-button>
+          <el-button type="default" icon="el-icon-edit" @click="edit">编辑</el-button>
+          <el-button type="default" icon="el-icon-warning" @click="leave">离职</el-button>
+          <!-- <el-button @click="del" icon="el-icon-delete" slot="right-control" class="xc10">删除</el-button> -->
+          <el-button type="default" icon="el-icon-delete" class="xc10" @click="del">删除</el-button>
+        </div>
+      </div>
     </fixed-table>
     <!-- dialog -->
     <el-dialog v-drag :visible.sync="isShowAdd" width="400px" title="新增内部用户">
@@ -116,9 +120,9 @@ export default {
       ],
       selectedRow: {},
       dataParam: {
-        isInsider: "",
-        userName: "",
-        roleId: ""
+        // isInsider: "",
+        // userName: "",
+        // roleId: ""
       },
       // formDirector:[],
       listDirector: [],

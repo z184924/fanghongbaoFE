@@ -1,17 +1,21 @@
 <template>
-  <div class="fixed-table">
+  <div class="fixed-table" v-loading="loading">
     <!-- 头部按钮组 -->
     <div class="control-box" ref="controlBox">
       <div class="control" ref="control" v-if="showControl">
         <slot name="left-control"></slot>
         <el-input style="flex:200px 0 0" v-model="searchText" v-if="showSearch"></el-input>
-        <div style="flex:0 0 60px"></div>
+        <!-- <div style="flex:0 0 60px"></div> -->
         <el-button type="success" @click="getData" v-if="showSearch" icon="el-icon-search">搜索</el-button>
-        <div class="gap-full"></div>
+        <div class="gap-full" v-if="hasRightControl"></div>
         <el-button type="primary" @click="insert" icon="el-icon-plus" v-if="showInsert">新增</el-button>
         <el-button type="warning" @click="update" icon="el-icon-edit-outline" v-if="showUpdate">修改</el-button>
         <el-button type="danger" @click="del" icon="el-icon-delete" v-if="showDelete">删除</el-button>
         <slot name="right-control"></slot>
+
+        <!-- {{rowData}} -->
+      </div>
+      <div class="control-refresh">
         <el-button
           type="default"
           @click="getData"
@@ -20,7 +24,6 @@
           circle
           title="刷新数据"
         ></el-button>
-        <!-- {{rowData}} -->
       </div>
     </div>
     <div style="height:8px;" v-if="showControl"></div>
@@ -236,7 +239,8 @@ export default {
       formOpenFlag: false,
       rowData: {},
       oldRowData: null,
-      primaryKey: null
+      primaryKey: null,
+      searchTimer: null
     };
   },
   computed: {
@@ -266,12 +270,22 @@ export default {
         }
       }
       return list;
+    },
+    hasRightControl() {
+      if (this.$slots["right-control"]) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   watch: {
     dataParam: {
       handler() {
-        this.getData();
+        clearTimeout(this.searchTimer);
+        this.searchTimer = setTimeout(() => {
+          this.getData();
+        }, 300);
       },
       deep: true
     },
@@ -468,6 +482,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$slots);
     this.getData();
     for (let field in this.fields) {
       if (this.fields[field].primaryKey) {
@@ -488,18 +503,30 @@ export default {
 }
 .control-box {
   // min-width:1200px;
-  overflow-x: auto;
+  display: flex;
+  padding:0 0.5em;
 }
 .control {
   display: flex;
+  flex: 1 0 0%;
   width: 100%;
   flex-wrap: nowrap;
   // flex-wrap: wrap;
   align-items: center;
+  overflow-x: auto;
+
+  // padding-bottom: 0.6em;
   // justify-content: center;
   & > * {
     white-space: nowrap;
   }
+}
+.control-refresh {
+  flex: 0 0 auto;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin-left:1em;
 }
 </style>
 <style>
