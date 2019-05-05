@@ -25,7 +25,7 @@
     </fixed-table>
     <!-- <div>{{form}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" width="800px">
-      <table class="xc-table xc-table--border">
+      <table class="xc-table xc-table--border" v-if="isShowEdit">
         <tbody>
           <tr>
             <td style="width:3em">标题</td>
@@ -48,7 +48,7 @@
           <tr>
             <td>内容</td>
             <td>
-              <c-ueditor v-if="isShowEdit" v-model="form.informationContent"></c-ueditor>
+              <c-ueditor v-model="form.informationContent"></c-ueditor>
             </td>
           </tr>
         </tbody>
