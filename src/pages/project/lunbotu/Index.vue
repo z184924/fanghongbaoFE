@@ -27,7 +27,7 @@
       </el-table-column>
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
-    <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="600px">
+    <el-dialog :visible.sync="isShowEdit" v-drag title="修改" width="1200px">
       <table v-if="isShowEdit" class="xc-table xc-table--border">
         <tbody>
           <tr>
@@ -44,6 +44,12 @@
             <td style="text-align:center">图片文件</td>
             <td colspan="3">
               <file-box v-model="lbtListFile" :multiple="false"></file-box>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:center">内容</td>
+            <td colspan="3">
+              <c-ueditor v-model="content"></c-ueditor>
             </td>
           </tr>
         </tbody>
@@ -82,6 +88,7 @@ export default {
       selectedRow: {},
 
       lbtListFile: "",
+      content:"",
       lbtType: null,
       lbtSort: 0,
       carouselPictureId: ""
@@ -90,6 +97,7 @@ export default {
   methods: {
     add() {
       this.lbtListFile = "";
+      this.content = "";
       this.lbtType = null;
       this.lbtSort = 0;
       this.carouselPictureId = "";
@@ -99,6 +107,7 @@ export default {
       let a = this.selectedRow;
       if (a.carouselPictureId) {
         this.lbtListFile = a.picURL;
+        this.content = a.content;
         this.lbtType = a.picType;
         this.lbtSort = a.picSort;
         this.carouselPictureId = a.carouselPictureId;
@@ -116,6 +125,7 @@ export default {
       this.xpost("projectCarouselPicture/saveOrUpdate", {
         carouselPictureId: this.carouselPictureId,
         picURL: this.lbtListFile,
+        content: this.content,
         picType: this.lbtType,
         picSort: this.lbtSort
       }).then(res => {

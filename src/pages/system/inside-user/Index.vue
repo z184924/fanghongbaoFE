@@ -17,6 +17,13 @@
           <el-input style="width:120px" v-model="dataParam.phone"></el-input>
           <span style="padding-left:1em">角色：</span>
           <c-select :dict="roleList" v-model="dataParam.roleId" style="width:120px"></c-select>
+          <span style="padding-left:1em">楼盘：</span>
+          <c-select
+            :disabled="dataParam.isInsider!='1'"
+            :dict="listBuilding"
+            v-model="dataParam.projectId"
+            style="width:150px"
+          ></c-select>
           <el-button type="text" @click="clearSearch">清空</el-button>
         </div>
         <div class="xc35">
@@ -103,6 +110,8 @@ export default {
     let vue = this;
     return {
       isShowMengyou: false,
+      listBuilding: [],
+
       // 表格
       searchInsiderList: [
         {
@@ -120,7 +129,8 @@ export default {
       ],
       selectedRow: {},
       dataParam: {
-        // isInsider: "",
+        projectId: "",
+        isInsider: "1",
         // userName: "",
         // roleId: ""
       },
@@ -196,6 +206,7 @@ export default {
       formEdit: {}
     };
   },
+
   computed: {
     exchangedDirectorState() {
       let a = this.selectedRow.isSetDirector;
@@ -211,6 +222,14 @@ export default {
         return "取消拓展主管";
       } else {
         return "设置拓展主管";
+      }
+    }
+  },
+  watch: {
+    "dataParam.isInsider"() {
+      console.log(this.dataParam.isInsider);
+      if (this.dataParam.isInsider != "1") {
+        this.dataParam.projectId = "";
       }
     }
   },
@@ -414,6 +433,23 @@ export default {
           }
         });
         this.roleList = l;
+      });
+      this.xpost("projectInfo/getGridListJson", {
+        orderType: 1,
+        page: 1,
+        rows: 10000
+      }).then(res => {
+        console.log(res);
+        this.listBuilding = res.rows.map(o => {
+          return {
+            label: o.projectName,
+            value: o.projectId
+          };
+        });
+        this.listBuilding.unshift({
+          label: "全部",
+          value: ""
+        });
       });
       this.refreshTable();
     });
