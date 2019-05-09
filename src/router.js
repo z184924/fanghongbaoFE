@@ -48,6 +48,8 @@ import SystemStat from "./pages/system/stat/Index"
 
 import SystemNotice from "./pages/system/notice/Index"
 
+import SystemInstall from "./pages/system/install/Index"
+
 
 // 审核管理
 import SystemApproveAnchang from "./pages/approve/anchang/Index"
@@ -186,6 +188,11 @@ export default new Router({
       path: "/system/notice",
       name: "SystemNotice",
       component: SystemNotice,
+    },
+    {
+      path: "/system/install",
+      name: "SystemInstall",
+      component: SystemInstall,
     },
 
 

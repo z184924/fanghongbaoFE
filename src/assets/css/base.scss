@@ -1018,4 +1018,11 @@ li {
     margin-right: 1em;
     text-align: right;
   }
+  .xc36{
+    padding:1em;
+    &__control{
+      text-align:right;
+      margin-bottom:1em;
+    }
+  }
 }

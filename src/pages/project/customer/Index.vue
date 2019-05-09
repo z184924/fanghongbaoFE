@@ -162,11 +162,13 @@
                       <td>序号</td>
                       <td>名称</td>
                       <td>时间</td>
+                      <td>备注</td>
                     </tr>
                     <tr v-for="(o,i) in listYongjin" :key="i">
                       <td>{{i+1}}</td>
                       <td>{{o.name}}</td>
-                      <td>{{mxDateFormatter(o.checkDate)}}</td>
+                      <td>{{mxTimeFormatter(o.checkDate)}}</td>
+                      <td>{{o.checkOpinion}}</td>
                     </tr>
                   </tbody>
                 </table>
