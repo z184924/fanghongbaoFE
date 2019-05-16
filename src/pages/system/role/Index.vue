@@ -21,7 +21,7 @@
             <td>电话</td>
             <td>注册时间</td>
             <td>是否内部用户</td>
-            <td>是否VIP</td>
+            <!-- <td>是否VIP</td> -->
           </tr>
           <tr v-for="(o,i) in users" :key="i">
             <td>{{o.account}}</td>
@@ -29,7 +29,7 @@
             <td>{{o.phone}}</td>
             <td>{{mxDateFormatter(o.registerTime)}}</td>
             <td>{{boolToString(o.isInsider)}}</td>
-            <td>{{boolToString(o.isVIP)}}</td>
+            <!-- <td>{{boolToString(o.isVIP)}}</td> -->
           </tr>
         </tbody>
       </table>

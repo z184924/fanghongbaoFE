@@ -16,7 +16,7 @@
         <tbody>
           <tr class="xc-table__head">
             <td rowspan="2">序号</td>
-            <td colspan="17">案场助理</td>
+            <td colspan="16">案场助理</td>
             <td colspan="26">案场财务</td>
             <td colspan="5">公司统计</td>
             <td colspan="16">公司财务</td>
@@ -29,7 +29,7 @@
             <td>会员银行卡</td>
             <td>银行开户行</td>
             <td>会员公司</td>
-            <td>vip起止时间（驻场/非驻场）</td>
+            <!-- <td>vip起止时间（驻场/非驻场）</td> -->
             <td>盟友推荐人</td>
             <td>客户姓名</td>
             <td>客户手机1</td>
@@ -96,7 +96,7 @@
             <td>{{o.bankcardNum}}</td>
             <td>{{o.bankName}}</td>
             <td></td>
-            <td>{{mxDateFormatter(o.vipStartTime)}}至{{mxDateFormatter(o.vipEndTime)}}</td>
+            <!-- <td>{{mxDateFormatter(o.vipStartTime)}}至{{mxDateFormatter(o.vipEndTime)}}</td> -->
             <td>{{o.tUserName}}</td>
             <td>{{o.customerName}}</td>
             <td>{{o.customerTel}}</td>

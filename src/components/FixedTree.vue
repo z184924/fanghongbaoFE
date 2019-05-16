@@ -14,7 +14,7 @@
     >
       <span
         class="custom-tree-node"
-        slot-scope="{ node, data }"
+        slot-scope="{ node }"
         :title="node.label"
       >{{ node.label }}</span>
     </el-tree>
@@ -33,7 +33,7 @@
     >
       <span
         class="custom-tree-node"
-        slot-scope="{ node, data }"
+        slot-scope="{ node }"
         :title="node.label"
       >{{ node.label }}</span>
     </el-tree>

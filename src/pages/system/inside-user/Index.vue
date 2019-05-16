@@ -158,13 +158,13 @@ export default {
             return vue.mxBoolFormatter(v);
           }
         },
-        isVIP: {
-          label: "是否VIP",
-          type: "string",
-          formatter(r, c, v) {
-            return vue.mxBoolFormatter(v);
-          }
-        },
+        // isVIP: {
+        //   label: "是否VIP",
+        //   type: "string",
+        //   formatter(r, c, v) {
+        //     return vue.mxBoolFormatter(v);
+        //   }
+        // },
         registerTime: {
           label: "注册时间",
           type: "string",

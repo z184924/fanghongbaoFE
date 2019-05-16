@@ -19,7 +19,7 @@
       :fields="fields"
       v-model="selectedRow"
     >
-      <el-table-column slot="col" width="150" label="楼盘状态" align="center">
+      <el-table-column slot="col" width="120" label="楼盘状态" align="center">
         <template slot-scope="scope">
           <!-- <img class="xc16 xc-shadow" :src="$store.state.smallPicBasePath + scope.row.picURL" alt> -->
           <span
@@ -136,12 +136,12 @@ export default {
       fields: {
         projectName: {
           label: "楼盘名称",
-          width: "200px",
+          width: "180px",
           type: "string"
         },
         areaName: {
           label: "区域",
-          width: "180px",
+          width: "150px",
           formatter(r, c, v) {
             // console.log(r);
             return `${r.cityName} · ${r.areaName}`;
@@ -154,13 +154,15 @@ export default {
         },
         projectAddress: {
           label: "地址",
-          width: "200px",
+          // width: "200px",
+          title:"sdf",
           type: "string",
           class: "xc15"
         },
         ptyj: {
           label: "普通会员佣金",
           type: "string",
+          width:"120px",
           formatter(v) {
             if (v.commissionType + "" === "0") {
               return v.generalCommission + "元";
@@ -169,17 +171,17 @@ export default {
             }
           }
         },
-        vipyj: {
-          label: "VIP佣金",
-          type: "string",
-          formatter(v) {
-            if (v.commissionType + "" === "0") {
-              return v.vipCommission + "元";
-            } else {
-              return v.vipCommissionBL + "%";
-            }
-          }
-        },
+        // vipyj: {
+        //   label: "VIP佣金",
+        //   type: "string",
+        //   formatter(v) {
+        //     if (v.commissionType + "" === "0") {
+        //       return v.vipCommission + "元";
+        //     } else {
+        //       return v.vipCommissionBL + "%";
+        //     }
+        //   }
+        // },
         // projectStatus: {
         //   label: "楼盘状态",
         //   width: "100px",

@@ -32,16 +32,16 @@
             <span>{{form.bankBranchName}}</span>
           </el-form-item>
         </div>
-        <div class="xc18__item">
+        <!-- <div class="xc18__item">
           <el-form-item label="VIP开始时间">
             <span>{{mxTimeFormatter(form.vipStartTime)}}</span>
           </el-form-item>
-        </div>
-        <div class="xc18__item">
+        </div>-->
+        <!-- <div class="xc18__item">
           <el-form-item label="VIP结束时间">
             <span>{{mxTimeFormatter(form.vipEndTime)}}</span>
           </el-form-item>
-        </div>
+        </div>-->
       </div>
     </c-panel>
 
@@ -212,9 +212,40 @@
             <span>{{form.netSignNum}}</span>
           </el-form-item>
         </div>
+        <!-- 20190516新增字段 -->
+        <div class="xc18__item">
+          <el-form-item label="地下室号">
+            <span>{{form.basementNum}}</span>
+          </el-form-item>
+        </div>
+        <div class="xc18__item">
+          <el-form-item label="地下室面积">
+            <span>{{form.basementArea}}</span>
+          </el-form-item>
+        </div>
+        <div class="xc18__item">
+          <el-form-item label="地下室成交单价">
+            <span>{{form.basementPrice}}</span>
+          </el-form-item>
+        </div>
+        <div class="xc18__item">
+          <el-form-item label="地下室成交总价">
+            <span>{{form.basementTotalPrice}}</span>
+          </el-form-item>
+        </div>
+        <div class="xc18__item">
+          <el-form-item label="车位编号">
+            <span>{{form.parkingNum}}</span>
+          </el-form-item>
+        </div>
+        <div class="xc18__item">
+          <el-form-item label="车位签约总价">
+            <span>{{form.parkingPrice}}</span>
+          </el-form-item>
+        </div>
       </div>
     </c-panel>
- 
+
     <c-panel title="审核资料" title-color="#3d7a2a">
       <div>交款通知单、身份证正反面、收据、POS机小条</div>
       <file-box is-window v-model="form.checkData" :editable="false"></file-box>

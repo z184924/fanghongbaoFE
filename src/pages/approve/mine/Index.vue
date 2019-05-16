@@ -34,7 +34,7 @@
                   <span>{{mxBoolFormatter(form.isSubscription)}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item">
+              <div class="xc18__item xc18__item--full">
                 <el-form-item label="客户备注">
                   <span>{{form.Opinion_shr}}</span>
                 </el-form-item>

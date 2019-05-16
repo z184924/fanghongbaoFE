@@ -69,7 +69,7 @@
             ></el-input-number>
             <span v-if="form.commissionType+''==='0'">元</span>
           </el-form-item>
-          <el-form-item
+          <!-- <el-form-item
             :label="form.commissionType+''==='0'?'VIP会员佣金':'VIP会员佣金比例'"
             prop="f__viphyyj"
           >
@@ -84,7 +84,7 @@
               style="width:160px"
             ></el-input-number>
             <span v-if="form.commissionType+''==='0'">元</span>
-          </el-form-item>
+          </el-form-item> -->
           <!-- <el-form-item label="楼盘状态">
             <c-select dict="lpzt" v-model="form.projectStatus" style="width:200px"></c-select>
           </el-form-item>-->

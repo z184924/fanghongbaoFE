@@ -13,7 +13,7 @@
     </fixed-table>
     <!-- <div>{{selectedRow}}</div> -->
     <el-dialog :visible.sync="isShowEdit" v-drag :title="dialogTitle" top="50px" width="1100px">
-      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="7em" label-position="right">
+      <el-form ref="form" v-if="isShowEdit" :model="form" label-width="8em" label-position="right">
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-panel title="会员信息">
             <div class="xc18__container">
@@ -47,16 +47,16 @@
                   <span>{{form.bankBranchName}}</span>
                 </el-form-item>
               </div>
-              <div class="xc18__item">
+              <!-- <div class="xc18__item">
                 <el-form-item label="VIP开始时间">
                   <span>{{mxTimeFormatter(form.vipStartTime)}}</span>
                 </el-form-item>
-              </div>
-              <div class="xc18__item">
+              </div>-->
+              <!-- <div class="xc18__item">
                 <el-form-item label="VIP结束时间">
                   <span>{{mxTimeFormatter(form.vipEndTime)}}</span>
                 </el-form-item>
-              </div>
+              </div>-->
             </div>
           </c-panel>
           <c-panel title="客户信息" title-color="#2a447a">
@@ -243,6 +243,37 @@
               <div class="xc18__item">
                 <el-form-item label="网签编号">
                   <el-input v-model="form.netSignNum"></el-input>
+                </el-form-item>
+              </div>
+              <!-- 20190516新增字段 -->
+              <div class="xc18__item">
+                <el-form-item label="地下室号">
+                  <el-input v-model="form.basementNum"></el-input>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="地下室面积">
+                  <el-input v-model="form.basementArea"></el-input>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="地下室成交单价">
+                  <el-input v-model="form.basementPrice"></el-input>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="地下室成交总价">
+                  <el-input v-model="form.basementTotalPrice"></el-input>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="车位编号">
+                  <el-input v-model="form.parkingNum"></el-input>
+                </el-form-item>
+              </div>
+              <div class="xc18__item">
+                <el-form-item label="车位签约总价">
+                  <el-input v-model="form.parkingPrice"></el-input>
                 </el-form-item>
               </div>
             </div>

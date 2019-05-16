@@ -50,6 +50,7 @@
         :width="value.width"
         :align="value.align"
         :class-name="value.class"
+        :title="value.title"
       ></el-table-column>
       <el-table-column v-if="fileInfo.hasFile" label="附件" width>
         <template>
