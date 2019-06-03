@@ -12,14 +12,6 @@ export default {
   props: {
     value: {}
   },
-  // watch: {
-  //   value: {
-  //     handler(a ,b) {
-  //       this.setContent();
-  //     },
-  //     deep: true,
-  //   }
-  // },
   data() {
     return {
       uuid: ""
