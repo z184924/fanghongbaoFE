@@ -63,7 +63,8 @@
             <div class="xc18__container xc18__container--p3">
               <div class="xc18__item">
                 <el-form-item label="客户姓名">
-                  <span>{{form.customerName}}</span>
+                  <!-- <span>{{form.customerName}}</span> -->
+                  <el-input v-model="form.customerName"></el-input>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -78,7 +79,8 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="身份证">
-                  <span>{{form.customerIdNum}}</span>
+                  <!-- <span>{{form.customerIdNum}}</span> -->
+                  <el-input v-model="form.customerIdNum"></el-input>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -147,7 +149,7 @@
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="应结佣金">
+                <el-form-item label="应结佣金(元)">
                   <el-input-number v-model="form.sureBalance" style="width:100%"></el-input-number>
                   <!-- <el-input v-model="form.sureBalance"></el-input> -->
                 </el-form-item>
@@ -166,12 +168,14 @@
               </div>
               <div class="xc18__item">
                 <el-form-item label="房号">
-                  <span>{{form.houseNum}}</span>
+                  <!-- <span>{{form.houseNum}}</span> -->
+                  <el-input v-model="form.houseNum"></el-input>
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="面积">
-                  <span>{{form.houseArea}}平</span>
+                <el-form-item label="面积(平)">
+                  <!-- <span>{{form.houseArea}}平</span> -->
+                  <el-input v-model="form.houseArea"></el-input>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -181,8 +185,10 @@
                 </el-form-item>
               </div>
               <div class="xc18__item">
-                <el-form-item label="成交总价">
-                  <span>{{fc(form.dealTotalPrice)}}元</span>
+                <el-form-item label="成交总价(元)">
+                  <!-- <span>{{fc(form.dealTotalPrice)}}元</span> -->
+                  <!-- <el-input v-model="form.dealTotalPrice"></el-input> -->
+                  <el-input-number v-model="form.dealTotalPrice" style="width:100%"></el-input-number>
                 </el-form-item>
               </div>
               <div class="xc18__item">
@@ -396,7 +402,7 @@
           </c-panel>
           <c-panel title="上传审核资料" title-color="#3d7a2a">
             <div>交款通知单、身份证正反面、收据、POS机小条</div>
-            <file-box :editable="false" is-window v-model="form.checkData"></file-box>
+            <file-box :editable="true" is-window v-model="form.checkData"></file-box>
           </c-panel>
           <!-- <div>{{form}}</div> -->
         </div>
