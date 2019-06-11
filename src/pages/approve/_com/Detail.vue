@@ -84,7 +84,8 @@
         </div>
         <div class="xc18__item">
           <el-form-item label="产品类型">
-            <span>{{mxDictToString(form.propertyTypeId,"wylx") }}</span>
+            <!-- <span>{{mxDictToString(form.propertyTypeId,"wylx") }}</span> -->
+            <span>{{form.propertyTypeId }}</span>
           </el-form-item>
         </div>
         <div class="xc18__item">

@@ -99,7 +99,8 @@
               <div class="xc18__item">
                 <el-form-item label="产品类型">
                   <!-- <el-input v-model="form.propertyTypeId"></el-input> -->
-                  <c-select v-model="form.propertyTypeId" dict="wylx"></c-select>
+                  <!-- <c-select v-model="form.propertyTypeId" dict="wylx"></c-select> -->
+                  <el-input v-model="form.propertyTypeId"></el-input>
                 </el-form-item>
               </div>
               <div class="xc18__item">

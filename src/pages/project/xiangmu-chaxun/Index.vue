@@ -105,7 +105,8 @@
             <td>{{o.customerAdress}}</td>
             <td>{{mxBoolFormatter(o.isLocalPerson,'本地','外地')}}</td>
             <td>{{o.projectName}}</td>
-            <td>{{mxDictToString(o.propertyTypeId,'wylx')}}</td>
+            <!-- <td>{{mxDictToString(o.propertyTypeId,'wylx')}}</td> -->
+            <td>{{o.propertyTypeId}}</td>
             <td>{{o.jdr}}</td>
             <td>{{mxDateFormatter(o.cardDate)}}</td>
             <td>{{o.cardMoney}}</td>
