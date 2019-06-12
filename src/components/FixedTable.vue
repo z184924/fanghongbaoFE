@@ -225,6 +225,7 @@ export default {
   data() {
     return {
       loading: false,
+      loadingTimer: null,
       headerStyle: {
         backgroundColor: "#e9a695",
         color: "#000"
@@ -425,7 +426,8 @@ export default {
       // console.log(11111);
       if (!this.loading) {
         this.loading = true;
-        setTimeout(() => {
+        clearTimeout(this.loadingTimer);
+        this.loadingTimer = setTimeout(() => {
           this.loading = false;
         }, 8000);
         let param = this.clone(this.dataParam);
@@ -451,10 +453,12 @@ export default {
             }
             // console.log(res)
             this.loading = false;
+            clearTimeout(this.loadingTimer);
             this.$emit("done", this.dataList);
           })
           .catch(e => {
             this.loading = false;
+            clearTimeout(this.loadingTimer);
           });
       }
     },
@@ -505,7 +509,7 @@ export default {
 .control-box {
   // min-width:1200px;
   display: flex;
-  padding:0 0.5em;
+  padding: 0 0.5em;
 }
 .control {
   display: flex;
@@ -524,10 +528,10 @@ export default {
 }
 .control-refresh {
   flex: 0 0 auto;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-left:1em;
+  margin-left: 1em;
 }
 </style>
 <style>

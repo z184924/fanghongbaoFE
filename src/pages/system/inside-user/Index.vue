@@ -158,6 +158,11 @@ export default {
             return vue.mxBoolFormatter(v);
           }
         },
+        tUserName: {
+          label: "推荐人",
+          type: "string",
+        },
+        
         // isVIP: {
         //   label: "是否VIP",
         //   type: "string",
