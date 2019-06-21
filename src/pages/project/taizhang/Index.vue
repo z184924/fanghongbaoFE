@@ -9,6 +9,7 @@
       <!-- <el-input v-model="param.customerName" style="width:150px"></el-input> -->
       <c-select v-model="param.customerStatusId" dict="khzt" style="width:150px"></c-select>
       <el-button type="text" @click="param={}" style="padding-right:2em">清空</el-button>
+      <el-button type="primary" @click="excel" style="padding-right:2em" v-if="isShowExcel">导出Ecxel</el-button>
       <el-button type="default" @click="getData" icon="el-icon-refresh" circle title="刷新数据"></el-button>
     </div>
     <div class="xc23__table">
@@ -167,7 +168,7 @@
         @size-change="sizeChange"
         @current-change="getData"
         :current-page.sync="page.current"
-        :page-sizes="[20, 30, 50, 100, 200]"
+        :page-sizes="[15, 30, 50, 100, 200]"
         :page-size="page.size"
         layout="total, sizes, prev, pager, next, jumper"
         :total="page.total"
@@ -183,12 +184,22 @@ export default {
       page: {
         current: 1,
         total: 0,
-        size: 30
+        size: 15
       },
       listBuilding: [],
       list: [],
       param: {}
     };
+  },
+  computed: {
+    isShowExcel() {
+      let roleId = this.$store.state.loginInfo.moreInfo.roleId + "";
+      if (roleId == "100" || roleId == "101") {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   watch: {
     param: {
@@ -211,6 +222,20 @@ export default {
         this.list = res.rows;
         this.activateRow(-1);
       });
+    },
+    excel() {
+      console.log(this.param);
+      if (!this.param.customerName) {
+        this.param.customerName = "";
+      }
+      // this.xpost("projectData/exportExcel?customerName=&projectId=&customerStatusId=&page=&rows=")
+      window.open(
+        `${this.mxApi("projectData/exportExcel")}?customerName=${
+          this.param.customerName
+        }&projectId=${this.param.projectId}&customerStatusId=${
+          this.param.customerStatusId
+        }`
+      );
     },
     sizeChange(e) {
       this.page.size = e;
