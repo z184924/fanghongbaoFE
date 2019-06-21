@@ -6,33 +6,33 @@
     <div class="xc28__body">
       <table class="xc30">
         <tr>
-          <td class="xc30__td">
+          <td class="xc30__td" :class="{'xc30__zero':result.report==0}">
             <div class="xc30__first-title">{{result.report}}&nbsp;组</div>
             <div class="xc30__second-title">报备</div>
           </td>
-          <td class="xc30__td">
+          <td class="xc30__td" :class="{'xc30__zero':result.visit==0}">
             <div class="xc30__first-title">{{result.visit}}&nbsp;组</div>
             <div class="xc30__second-title">到访</div>
           </td>
-          <td class="xc30__td">
+          <td class="xc30__td" :class="{'xc30__zero':result.card==0}">
             <div class="xc30__first-title">{{result.card}}&nbsp;组</div>
             <div class="xc30__second-title">排卡</div>
           </td>
-          <td class="xc30__td">
+          <td class="xc30__td" :class="{'xc30__zero':result.subscript==0}">
             <div class="xc30__first-title">{{result.subscript}}&nbsp;组</div>
             <div class="xc30__second-title">认购</div>
           </td>
         </tr>
         <tr>
-          <td class="xc30__td">
+          <td class="xc30__td" :class="{'xc30__zero':result.sign==0}">
             <div class="xc30__first-title">{{result.sign}}&nbsp;组</div>
             <div class="xc30__second-title">签约</div>
           </td>
-          <td class="xc30__td">
+          <td class="xc30__td" :class="{'xc30__zero':result.maid==0}">
             <div class="xc30__first-title">{{result.maid}}&nbsp;组</div>
             <div class="xc30__second-title">结佣</div>
           </td>
-          <td class="xc30__td">
+          <td class="xc30__td" :class="{'xc30__zero':result.invalid==0}">
             <div class="xc30__first-title">{{result.invalid}}&nbsp;组</div>
             <div class="xc30__second-title">无效</div>
           </td>

@@ -145,7 +145,7 @@ export default {
     }
   },
   created() {
-    this.searchData.startDate = moment().subtract(3,"M").format("YYYY-MM-DD");
+    this.searchData.startDate = moment().subtract(1,"M").format("YYYY-MM-DD");
     this.searchData.endDate = moment().format("YYYY-MM-DD");
 
     this.xpost("projectPcData/getSelectCityData").then(res => {
