@@ -229,13 +229,21 @@ export default {
         this.param.customerName = "";
       }
       // this.xpost("projectData/exportExcel?customerName=&projectId=&customerStatusId=&page=&rows=")
-      window.open(
-        `${this.mxApi("projectData/exportExcel")}?customerName=${
-          this.param.customerName
-        }&projectId=${this.param.projectId}&customerStatusId=${
-          this.param.customerStatusId
-        }&token=${this.mxLoginInfo.token}`
-      );
+      this.xpost("projectData/exportExcel", {
+        customerName: this.param.customerName,
+        projectId: this.param.projectId,
+        customerStatusId: this.param.customerStatusId
+      }).then(res => {
+        console.log(res);
+        window.open(res.filePath);
+      });
+      // window.open(
+      //   `${this.mxApi("projectData/exportExcel")}?customerName=${
+      //     this.param.customerName
+      //   }&projectId=${this.param.projectId}&customerStatusId=${
+      //     this.param.customerStatusId
+      //   }&token=${this.mxLoginInfo.token}`
+      // );
     },
     sizeChange(e) {
       this.page.size = e;

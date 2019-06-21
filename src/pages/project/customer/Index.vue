@@ -28,6 +28,9 @@
       >
         <div class="xc18" :style="{height:mxWindowHeight-205 + 'px'}">
           <c-detail :form="form"></c-detail>
+          <c-panel title="身份证" title-color="#978419">
+            <file-box :editable="false" is-window v-model="form.IdNumPics"></file-box>
+          </c-panel>
           <c-panel title="银行卡" title-color="#a75c06">
             <file-box :editable="false" is-window v-model="form.bankcardPic"></file-box>
           </c-panel>
@@ -321,7 +324,7 @@ export default {
         this.xpost("projectCustomer/getCustomerAllInfo", {
           customerId: this.selectedRow.customerId
         }).then(res => {
-          res.checkData = res.IdNumPics;
+          // res.checkData = res.IdNumPics;
           this.isShowDetail = true;
           this.listYongjin = res.customerStateRecord;
           this.form = res;

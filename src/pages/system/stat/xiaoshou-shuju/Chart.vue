@@ -12,10 +12,12 @@
   </div>
 </template>
 <script>
+import echarts from "echarts";
 import uuid from "uuid";
 export default {
   data() {
     return {
+      list: [],
       chartType: 1,
       id: "",
       loading: false
@@ -33,6 +35,50 @@ export default {
     }
   },
   methods: {
+    draw() {
+      let axisData = this.list.map(o => {
+        return o.Name;
+      });
+      let seriesBefore = this.list.map(o => {
+        return o.Before;
+      });
+      let seriesCurrent = this.list.map(o => {
+        return o.Current;
+      });
+      let option = {
+        grid: {
+          top: 10,
+          bottom: 30
+        },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow"
+          }
+        },
+        xAxis: {
+          type: "category",
+          data: axisData
+        },
+        yAxis: {
+          type: "value"
+        },
+        series: [
+          {
+            data: seriesBefore,
+            type: "bar",
+            name: "历史"
+          },
+          {
+            data: seriesCurrent,
+            type: "bar",
+            name: "当前"
+          }
+        ]
+      };
+      let myChart = echarts.init(document.getElementById(this.id));
+      myChart.setOption(option);
+    },
     getData() {
       this.loading = true;
       let search = this.$store.state.stat.searchData;
@@ -45,6 +91,9 @@ export default {
         dataType: this.chartType
       };
       this.xpost("projectPcData/getListSailData", param).then(res => {
+        this.list = res.rows;
+        console.log(res);
+        this.draw();
         this.loading = false;
       });
     }

@@ -139,12 +139,13 @@ export default {
     autoSelect() {
       this.searchData.selectedCity = "caf1321d3a2e464cb411560392d014f8";
       setTimeout(() => {
-        this.searchData.selectedArea = "bc6e9077949a426bbb1009b511b66ba5";
+        // bc6e9077949a426bbb1009b511b66ba5
+        this.searchData.selectedArea = "";
       }, 500);
     }
   },
   created() {
-    this.searchData.startDate = moment().format("YYYY-MM-DD");
+    this.searchData.startDate = moment().subtract(3,"M").format("YYYY-MM-DD");
     this.searchData.endDate = moment().format("YYYY-MM-DD");
 
     this.xpost("projectPcData/getSelectCityData").then(res => {

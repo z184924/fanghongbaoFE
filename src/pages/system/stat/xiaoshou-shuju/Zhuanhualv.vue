@@ -5,9 +5,9 @@
     </div>
     <div class="xc28__body">
       <div class="xc31">
-        <div class="xc31__item">
-          <div class="xc31__user"></div>
-          <div class="xc31__data"></div>
+        <div class="xc31__item" v-for="(o,i) in list" :key="i">
+          <div class="xc31__user">{{o.Name}}</div>
+          <div class="xc31__data">{{o.Num}}%</div>
           <div class="xc31__arrow">
             <span class="el-icon-arrow-right"></span>
           </div>
@@ -20,7 +20,8 @@
 export default {
   data() {
     return {
-      loading: false
+      loading: false,
+      list:[],
     };
   },
   watch: {
@@ -43,6 +44,7 @@ export default {
         endDate: search.endDate
       };
       this.xpost("projectPcData/getDataStaticChange", param).then(res => {
+        this.list = res.rows;
         this.loading = false;
       });
     }
