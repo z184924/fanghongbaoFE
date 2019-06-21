@@ -234,8 +234,8 @@ export default {
         projectName: {
           label: "项目名称"
         },
-        checkDate: {
-          label: "检查时间",
+        tjDate: {
+          label: "推荐时间",
           width: "180px",
           formatter(r, c, v) {
             return vue.mxTimeFormatter(v);

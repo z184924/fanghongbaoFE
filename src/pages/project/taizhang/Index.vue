@@ -224,7 +224,7 @@ export default {
       });
     },
     excel() {
-      console.log(this.param);
+      console.log(this.$store.state.loginInfo);
       if (!this.param.customerName) {
         this.param.customerName = "";
       }
@@ -234,7 +234,7 @@ export default {
           this.param.customerName
         }&projectId=${this.param.projectId}&customerStatusId=${
           this.param.customerStatusId
-        }`
+        }&token=${this.mxLoginInfo.token}`
       );
     },
     sizeChange(e) {
